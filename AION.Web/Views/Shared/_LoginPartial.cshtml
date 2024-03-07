@@ -1,0 +1,33 @@
+﻿
+@model AION.Web.Models.Shared.LoginPartialModel
+
+@if (Request.IsAuthenticated)
+{
+    var user = Model.UserIdentity;
+
+    string firstNameInitial = Model.UserIdentity?.FirstName?.Substring(0, 1);
+    string lastNameInitial = Model.UserIdentity?.LastName?.Substring(0, 1);
+
+    string initials = firstNameInitial + lastNameInitial;
+
+    var initial = initials?.Length > 1 ? initials : "UN";
+
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle rounded-circle bg-dark mr-5" href="#" id="navbarDropdown"
+               role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="text-white">@initial.ToUpper()</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div>
+                    @Model.UserIdentity.Email
+                    @Html.ActionLink("Sign out", "SignOut", "Account")
+                </div>
+            </div>
+        </li>
+    </ul>
+}
+else
+{
+    <div>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</div>
+}

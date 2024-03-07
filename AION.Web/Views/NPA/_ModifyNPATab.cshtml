@@ -1,0 +1,93 @@
+﻿@using AION.Web.Extensions
+
+@model AION.Web.Models.NPAViewModel
+@{
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+    if (Model.PermissionMapping.IsViewOnly)
+    {
+        isenabled = false;
+    }
+    else
+    {
+        isenabled = Model.PermissionMapping.Modify_NPA;
+    }
+}
+
+<h4 class="form-section"><i class="fa fa-magnifying-glass"></i> Search NPAs</h4>
+
+<div class="form-group row">
+    <div class="col-md-2 mt-3">
+        <div class="form-group">
+            <label for="SelectedUserTypeFilter">Type:</label>
+            <div class="input-group">
+                @Html.DropDownListFor(m => m.NPATypeSelectList, Model.NPATypeSelectList, "", new { @class = "remviewonly form-select form-control border-cyan" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 mt-3">
+        <div class="form-group">
+            <label for="SelectedUserSearchFilter">Reviewer:</label>
+            <div class="input-group">
+                @Html.DropDownListFor(m => m.AllReviewersSelectList, Model.AllReviewersSelectList, "", new { @class = "remviewonly form-select form-control border-cyan" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 mt-3">
+        <div class="form-group">
+            <label for="SelectedUser">Name:</label>
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.SearchString, new { placeholder = "Search NPA Name", @class = "remviewonly form-control border-cyan" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 mt-3">
+        <div class="form-group">
+            <label for="StartDate">Start Date</label>
+            <div class="input-group">
+                @Html.EditorFor(model => model.SearchStartDate, 
+                    new { htmlAttributes = new { @id = "searchstartdatesel", @class = "form-control border-cyan datepicker start-date", Value = DateTime.Now.ToShortDateString() } })
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <span class="fa fa-calendar-o"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 mt-3">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="EndDate">End Date</label>
+                <div class="input-group">
+                    @Html.EditorFor(model => model.SearchEndDate, 
+                        new { htmlAttributes = new { @id = "searchenddatesel", @class = "form-control border-cyan datepicker end-date", Value = DateTime.Now.AddDays(28).ToShortDateString() } })
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <span class="fa fa-calendar-o"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-actions">
+    <button type="button" class="btn btn-poppy searchbutton" id="Searchbutton">Search</button>
+</div>
+
+<h4 class="form-section mt-3"><i class="fa fa-calendar-xmark"></i> NPAs</h4>
+
+<div class="row">
+    <div class="col-md-10">
+        <button class="btn btn-poppy button setviewonly mb-4 @disabledcls" id="deleteButton" type="button" @disablebtn>Delete</button>
+
+        <div id="divModifyNPAList">
+            @Html.Partial("_ModifySearchList", Model)
+        </div>
+    </div>
+</div>

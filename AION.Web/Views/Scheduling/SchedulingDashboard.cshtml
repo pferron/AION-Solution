@@ -1,0 +1,184 @@
+﻿@model AION.Web.Models.SchedDashboardViewModel
+
+@{
+    ViewBag.Title = "Scheduling Dashboard";
+}
+
+@section style
+{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/fixedHeader.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/colReorder.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/sweetalert.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/custom/multiselect-dual.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/custom/dashboard.css">
+}
+
+@section scripts
+    {
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.fixedHeader.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.colReorder.min.js"></script>
+
+    <script src="~/app-assets/vendors/js/tables/datatable/moment.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datetime-moment.js"></script>
+
+    <script src="/app-assets/vendors/js/extensions/sweetalert.min.js"></script>
+
+    <script src="/app-assets/js/scripts/pages/dashboard.js"></script>
+    <script src="/app-assets/js/scripts/pages/bulk-estimation.js"></script>
+    <script src="/app-assets/js/scripts/custom/dashboard-filter.js"></script>
+    <script src="/app-assets/js/scripts/custom/select-lists.js"></script>
+
+    @*multiselect-dual*@
+    <script src="/app-assets/vendors/js/multiselect/multiselect-dual.js"></script>
+    <script src="~/app-assets/js/scripts/custom/multiselect-dual.js"></script>
+}
+
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+@Html.Hidden("StatusMessage", Model.StatusMessage)
+@Html.Hidden("DashboardType", "scheduling")
+@Html.Hidden("ResetList", "th0,th1,th2,th3,th14,th4,th5,th6,th7,th8,th9,th10,th11,th12,th13,th15,th16")
+@Html.Hidden("SortableList", Html.Raw(Model.SortableList))
+
+<div class="row">
+    <div class="card col-md-12">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                @using (Html.BeginForm("SchedulingDashboard", "Scheduling", FormMethod.Post, new { @id = "SchedulingDashboard", @class = "form form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.SavedFilterList, new { @id = "SavedFilterList" })
+                    @Html.HiddenFor(m => m.LoggedInUserEmail, new { @id = "LoggedInUserEmail" })
+                    @Html.Partial("_DashboardFilterModal")
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card overflow" id="sectionSchedulingDashboard">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                <table class="table table-striped table-bordered table-hover fixed-header" id="projects">
+                    <thead>
+                        <tr>
+                            <th data-field="th0" class="th0 text-nowrap text-center" data-sortable="true">On Time</th>
+                            <th data-field="th1" class="th1 text-nowrap text-center" data-sortable="true">Project #</th>
+                            <th data-field="th2" class="th2 text-nowrap text-center" data-sortable="true">Project Name</th>
+                            <th data-field="th3" class="th3 text-nowrap text-center" data-sortable="true">Project Type</th>
+                            <th data-field="th4" class="th4 text-nowrap text-center" data-sortable="true">Meeting Type</th>
+                            <th data-field="th5" class="th5 text-center" data-sortable="true">RTAP</th>
+                            <th data-field="th6" class="th6 text-center" data-sortable="true">Status</th>
+                            <th data-field="th7" class="th7 text-center" data-sortable="true">Paid</th>
+                            <th data-field="th8" class="th8 text-nowrap text-center" data-sortable="true">App Received</th>
+                            <th data-field="th9" class="th9 text-center" data-sortable="true">PROD</th>
+                            <th data-field="th10" class="th10 text-nowrap text-center" data-sortable="true">Review Start</th>
+                            <th data-field="th11" class="th11 text-nowrap text-center" data-sortable="true">Acceptance Deadline</th>
+                            <th data-field="th12" class="th12 text-center" data-sortable="true">Facilitator</th>
+                            <th data-field="th13" class="th13 text-nowrap text-center" data-sortable="true">Team Score</th>
+                            <th data-field="th14" class="th14 text-nowrap text-center" data-sortable="true">PM Name</th>
+                            <th data-field="th15" class="th15 text-nowrap text-center" data-sortable="true">PM Phone</th>
+                            <th data-field="th16" class="th16 text-nowrap text-center" data-sortable="true">PM Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ foreach (AION.Web.Models.SchedulingDashBoardDetails project in Model.Projects)
+                            {
+                                string SchedulingActionName = "SchedulePreliminaryMeeting";
+
+                                switch (project.Base.AccelaPropertyType)
+                                {
+                                    case AION.BL.PropertyTypeEnums.Express:
+                                        SchedulingActionName = "ScheduleExpressMeeting";
+                                        break;
+                                    case AION.BL.PropertyTypeEnums.Commercial:
+                                    case AION.BL.PropertyTypeEnums.Mega_Multi_Family:
+                                    case AION.BL.PropertyTypeEnums.Special_Projects_Team:
+                                    case AION.BL.PropertyTypeEnums.Townhomes:
+                                    case AION.BL.PropertyTypeEnums.FIFO_Small_Commercial:
+                                    case AION.BL.PropertyTypeEnums.FIFO_Single_Family_Homes:
+                                    case AION.BL.PropertyTypeEnums.FIFO_Master_Plans:
+                                    case AION.BL.PropertyTypeEnums.FIFO_Addition_Renovation_Single_Family_Home:
+                                    case AION.BL.PropertyTypeEnums.County_Fire_Shop_Drawings:
+                                        SchedulingActionName = "SchedulePlanReview";
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                string MeetingTypeDesc = project.Base.MeetingTypeEnum.ToString();
+
+                                if (project.Base.IsProjectPreliminary) { SchedulingActionName = "SchedulePreliminaryMeeting"; }
+                                if (project.Base.IsFacilitatorMeeting) { SchedulingActionName = "ScheduleMeeting"; }
+
+                                string url = string.Empty;
+                                if (SchedulingActionName == "ScheduleMeeting")
+                                {
+                                    url = Url.Action(SchedulingActionName, "Scheduling", new { ProjectId = project.Base.AccelaProjectRefId, MeetingTypeDesc = MeetingTypeDesc, RecIdTxt = project.Base.RecIdTxt });
+                                }
+                                else
+                                {
+                                    url = Url.Action(SchedulingActionName, "Scheduling", new { ProjectId = project.Base.AccelaProjectRefId, RecIdTxt = project.Base.RecIdTxt });
+                                }
+
+                                <tr>
+                                    <td class="text-center">@project.OnTime</td>
+                                    <td class="text-center">
+                                        <a href="@url">
+                                            @project.Base.AccelaProjectRefId
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        @{ //permission denied
+                                            if (project.Base.IsFacilitatorMeeting && !Model.PermissionMapping.Schdul_Mtng)
+                                            {
+                                                url = "#";
+                                            }
+                                        }
+                                        <a href="@url">
+                                            @project.Base.ProjectName
+                                        </a>
+                                    </td>
+                                    <td class="text-center">@((int)project.Base.AccelaPropertyType > 0 ?  project.Base.AccelaPropertyType.ToStringValue(): "") </td>
+                                    <td class="text-center">@project.MeetingTypeDesc</td>
+                                    <td class="text-center">@(project.Base.IsProjectRTAP ? "Y" : "N") </td>
+                                    <td class="text-center">@(!string.IsNullOrEmpty(project.MeetingTypeDesc) && project.MeetingTypeDesc != "Preliminary Meeting" ? project.MeetingStatus : project.Status)</td>
+                                    <td class="text-center">
+                                        @{
+                                            string ispaid = "";
+                                            if (project.Base.IsPaidStatus.HasValue && project.Base.IsPaidStatus.Value == true)
+                                            {
+                                                ispaid = "Yes";
+                                            }
+                                            else
+                                            {
+                                                ispaid = "No";
+                                            }
+                                        }
+                                        @ispaid
+                                    </td>
+                                    <td class="text-center">@project.Base.AccelaProjectCreatedDate.Value.ToString("MM/dd/yyyy")</td>
+                                    <td class="text-center">@project.PROD</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center">@project.FacilitatorName</td>
+                                    <td class="text-center">@project.Base.TeamGradeTxt</td>
+                                    <td class="text-center">@project.Base.PMName</td>
+                                    <td class="text-center">@project.Base.PMPhone</td>
+                                    <td class="text-center">@project.Base.PMEmail</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

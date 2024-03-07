@@ -1,0 +1,28 @@
+﻿/****** Object:  StoredProcedure [AION].[usp_select_aion_reserve_express_reservation_get_list_bydate]    Script Date: 8/21/2020 8:55:31 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [AION].[usp_select_aion_reserve_express_reservation_get_list_bydate]
+@FROM_DT DATETIME,
+@TO_DT DATETIME
+AS
+
+
+BEGIN
+SELECT rer. [RESERVE_EXPRESS_RESERVATION_ID]
+      ,rer.[RESERVE_EXPRESS_DT]
+      ,rer.[START_TM]
+      ,rer.[END_TM]
+      ,rer.[MEETING_ROOM_REF_ID]
+      ,red.BUSINESS_REF_ID
+	  ,red.PLAN_REVIEWER_ID
+  FROM [AION].[RESERVE_EXPRESS_RESERVATION] rer
+  INNER JOIN
+   [AION].[RESERVE_EXPRESS_DEPARTMENT] red
+  ON rer.RESERVE_EXPRESS_RESERVATION_ID=red.RESERVE_EXPRESS_RESERVATION_ID
+  WHERE CAST(rer.[RESERVE_EXPRESS_DT] AS DATE) >= CAST(@FROM_DT AS DATE) AND CAST(rer.RESERVE_EXPRESS_DT AS DATE) <= CAST(@TO_DT AS DATE)
+END
+RETURN
+

@@ -1,0 +1,17 @@
+# AccelaCitizens.Model.PublicUserModel
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Active** | **string** | Indicates whether or not the user is active. | [optional] 
+**Contacts** | [**List&lt;PeopleModel&gt;**](PeopleModel.md) |  | [optional] 
+**Email** | **string** | The citizen user&#39;s email address. | [optional] 
+**Id** | **long?** | The citizen id assigned by the Civic Platform server. | [optional] 
+**LoginName** | **string** | The citizen user&#39;s login name. | [optional] 
+**MobilePhone** | **string** | The citizen user&#39;s 10-digit cell phone number. | [optional] 
+**ReceiveSMS** | **string** | Indicates whether or not the user prefers to receive SMS messages. | [optional] 
+**RegisterDate** | **DateTime?** | The citizen user&#39;s registration date. | [optional] 
+**Role** | **string** | The citizen user&#39;s role | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+

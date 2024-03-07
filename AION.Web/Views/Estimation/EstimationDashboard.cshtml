@@ -1,0 +1,274 @@
+﻿@model AION.Web.Models.EstimationDashboardViewModel
+
+@{
+    ViewBag.Title = "Estimation Dashboard";
+}
+
+@section style
+{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/fixedHeader.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/colReorder.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/custom/multiselect-dual.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/custom/dashboard.css">
+}
+
+@section scripts
+ {
+    @*datatables*@
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.fixedHeader.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.colReorder.min.js"></script>
+
+    <script src="/app-assets/js/scripts/pages/dashboard.js"></script>
+    <script src="/app-assets/js/scripts/pages/bulk-estimation.js"></script>
+    <script src="/app-assets/js/scripts/custom/dashboard-filter.js"></script>
+    <script src="/app-assets/js/scripts/custom/select-lists.js"></script>
+    <script src="/app-assets/js/scripts/custom/register-selected-item-changed-event.js"></script>
+
+    <script src="~/app-assets/vendors/js/tables/datatable/moment.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datetime-moment.js"></script>
+
+    @*multiselect-dual*@
+    <script src="/app-assets/vendors/js/multiselect/multiselect-dual.js"></script>
+    <script src="/app-assets/js/scripts/custom/multiselect-dual.js"></script>
+
+    @*checkboxes*@
+    <script src="/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+    <script src="/app-assets/js/scripts/forms/checkbox-radio.js"></script>
+
+    @*tooltips*@
+    <script src="/app-assets/js/scripts/tooltip/tooltip.js"></script>
+}
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+@Html.Hidden("StatusMessage", Model.StatusMessage)
+@Html.Hidden("DashboardType", "estimation")
+@Html.Hidden("ResetList", "th0,th1,th2,th3,th14,th4,th5,th6,th7,th8,th9,th10,th11,th12,th13,th15,th16,th17,th18,th19,th20,th21,th22,th23")
+@Html.Hidden("SortableList", Html.Raw(Model.SortableList))
+
+<div class="row">
+    <div class="card col-md-12">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                @using (Html.BeginForm("EstimationDashboard", "Estimation", FormMethod.Post, new { @id = "EstimationDashboard", @class = "form form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.SavedFilterList, new { @id = "SavedFilterList" })
+                    @Html.HiddenFor(m => m.LoggedInUserEmail, new { @id = "LoggedInUserEmail" })
+                    @Html.Partial("_DashboardFilterModal")
+
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card overflow" id="sectionEstimationDashboard">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                <table class="table table-striped table-bordered table-hover fixed-header" id="projects">
+                    <thead>
+                        <tr>
+                            <th data-field="th0" class="th0 text-center"></th>
+                            <th data-field="th1" class="th1 text-nowrap text-center">Project #</th>
+                            <th data-field="th2" class="th2 text-nowrap text-center">Project Name</th>
+                            <th data-field="th3" class="th3 text-center">Jurisdiction</th>
+                            <th data-field="th4" class="th4 text-nowrap text-center">Project Type</th>
+                            <th data-field="th5" class="th5 text-center">RTAP</th>
+                            <th data-field="th6" class="th6 text-center">B</th>
+                            <th data-field="th7" class="th7 text-center">E</th>
+                            <th data-field="th8" class="th8 text-center">M</th>
+                            <th data-field="th9" class="th9 text-center">P</th>
+                            <th data-field="th10" class="th10 text-center">F</th>
+                            <th data-field="th11" class="th11 text-center">Z</th>
+                            <th data-field="th12" class="th12 text-center">EHS</th>
+                            <th data-field="th13" class="th13 text-center">BF</th>
+                            <th data-field="th14" class="th14 text-nowrap text-center">Project Cost</th>
+                            <th data-field="th15" class="th15 text-center">Total<br /> Sheets</th>
+                            <th data-field="th16" class="th16 text-center">Facilitator</th>
+                            <th data-field="th17" class="th17 text-nowrap text-center">Team Score</th>
+                            <th data-field="th18" class="th18 text-nowrap text-center">Overall Scope</th>
+                            <th data-field="th19" class="th19 text-nowrap text-center">Electrical Scope</th>
+                            <th data-field="th20" class="th20 text-nowrap text-center">Mechanical Scope</th>
+                            <th data-field="th21" class="th21 text-nowrap text-center">Plumbing Scope</th>
+                            <th data-field="th22" class="th22 text-nowrap text-center">Civil Scope</th>
+                            <th data-field="th23" class="th23 text-nowrap text-center">Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ foreach (var project in Model.EstimationDashboardListItems)
+                            {
+                                //use this to set the tds to warning class
+                                string tdwarningcls = "";
+                                //if the project type is "na" mark it
+                                string projecttypewarning = project.ProjectType == "NA" ? "warning-icon" : "";
+
+                                <tr data-id="@project.AccelaProjectId">
+                                    <td class="@tdwarningcls text-center skin skin-square">
+                                        @if (Model.PermissionMapping.Access_Estimation)
+                                        {
+                                            if (project.IsPreliminary)
+                                            {
+                                                <fieldset>
+                                                    <label>
+                                                        <input type="checkbox" data-id="@project.AccelaProjectId" disabled data-bs-toggle="tooltip" data-placement="right" title="Preliminary" />
+                                                    </label>
+                                                </fieldset>
+                                            }
+                                            else
+                                            {
+                                                <fieldset>
+                                                    <label>
+                                                        <input type="checkbox" class="bulk-project" data-id="@project.AccelaProjectId" />
+                                                    </label>
+                                                </fieldset>
+                                            }
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @{
+                                            if (Model.PermissionMapping.Access_Estimation)
+                                            {
+                                                if (project.IsPreliminary)
+                                                {
+                                                    <a href="@Url.Action("PreliminaryEstimation", "Estimation", new { projectid = project.AccelaProjectId, recidtxt = project.RecIdTxt })"> @project.AccelaProjectId</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("EstimationMain", "Estimation", new { projectid = project.AccelaProjectId, recidtxt = project.RecIdTxt })"> @project.AccelaProjectId</a>
+                                                }
+                                            }
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls">@project.ProjectName </td>
+                                    <td class="@tdwarningcls text-center">@project.Jurisdiction </td>
+                                    <td class="@projecttypewarning text-center">@project.ProjectType </td>
+                                    <td class="@tdwarningcls text-center">@project.RTAP </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.B))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.BTooltip" data-trigger="hover" class="btn">
+                                                @project.B
+                                            </button>
+                                        }
+                                    </td>
+                                    <td button="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.E))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.ETooltip" data-trigger="hover" class="btn">
+                                                @project.E
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.M))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.MTooltip" data-trigger="hover" class="btn">
+                                                @project.M
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.P))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.PTooltip" data-trigger="hover" class="btn">
+                                                @project.P
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.F))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.FTooltip" data-trigger="hover" class="btn">
+                                                @project.F
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.Z))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.ZTooltip" data-trigger="hover" class="btn">
+                                                @project.Z
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.EHS))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.EHSTooltip" data-trigger="hover" class="btn">
+                                                @project.EHS
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.BF))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.BFTooltip" data-trigger="hover" class="btn">
+                                                @project.BF
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-right">@project.ProjectCost </td>
+                                    <td class="@tdwarningcls text-center">@project.AccelaNumberofSheets</td>
+                                    <td class="@tdwarningcls text-center">
+                                        @project.Facilitator
+                                    </td>
+                                    <td class="@tdwarningcls text-center">@project.TeamScore</td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.OverallScope))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.OverallScopeTooltip" data-trigger="hover" class="btn">
+                                                @project.OverallScope
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.ElectricalScope))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.ElectricalScopeTooltip" data-trigger="hover" class="btn">
+                                                @project.ElectricalScope
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.MechanicalScope))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.MechanicalScopeTooltip" data-trigger="hover" class="btn">
+                                                @project.MechanicalScope
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.PlumbingScope))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.PlumbingScopeTooltip" data-trigger="hover" class="btn">
+                                                @project.PlumbingScope
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">
+                                        @if (!string.IsNullOrWhiteSpace(project.CivilScope))
+                                        {
+                                            <button data-toggle="tooltip" data-original-title="@project.CivilScopeTooltip" data-trigger="hover" class="btn">
+                                                @project.CivilScope
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="@tdwarningcls text-center">@project.LastUpdate</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Html.Partial("_BulkEstimationModal")

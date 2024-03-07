@@ -1,0 +1,166 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@using AION.Manager.Models
+
+@model AION.Web.Models.AdminViewModel
+
+@{
+    bool isreadonly = Model.IsReadOnly;
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+}
+
+
+<h4 class="form-section"><i class="fa fa-magnifying-glass"></i> Search User</h4>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>By Type:</label>form-select
+            @Html.DropDownListFor(m => Model.UserManagementViewModel.SelectedUserTypeFilter, Model.UserManagementViewModel.UserTypeFilterList, new { @class = "form-control border-cyan", @id = "drpDnLstUserType" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>By User:</label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.SelectedUserSearchFilter, new { @class = "form-control border-cyan", @id = "txtSearchUsers", @placeholder = "Enter Last Name, First Name" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Filtered:</label>
+            <div id="sectionUserDropdown">
+                @Html.DropDownListFor(m => Model.UserManagementViewModel.SelectedUser, Model.UserManagementViewModel.UserNameList, new { @class = "form-select form-control border-cyan", @id = "drpDnLstUsers" })
+            </div>
+        </div>
+    </div>
+</div>
+    
+<div class="form-actions">
+    <button class="btn btn-poppy mr-3 apply-filter" type="button">Search</button>
+    <button class="btn btn-poppy mr-3 open-permissions" onclick="openUserPermission();" type="button">User Permissions</button>
+    <button class="btn btn-poppy mr-3 add-user" onclick="AddUserClick();" type="button">Add User</button>
+</div>
+
+<h4 class="form-section"><i class="fa fa-person"></i> User Information</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="FirstName"> First Name:</label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.FirstName, new { @class = "form-control border-cyan", @id = "txtFirstName", maxlength = 100 })
+        </div>
+        <div class="form-group">
+            <label> Last Name:</label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.LastName, new { @class = "form-control border-cyan", @id = "txtLastName", maxlength = 100 })
+        </div>
+        <div class="form-group">
+            <label> User Name:</label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.UserName, new { @class = "form-control border-cyan", @id = "txtUserName", maxlength = 100 })
+        </div>
+        <div class="form-group">
+            <label> Role:</label>
+            @Html.ListBoxFor(m => Model.UserManagementViewModel.SelectedRoles, Model.UserManagementViewModel.RoleList,
+                new { @class = "multiselect form-control border-cyan", @id = "chkDrpDnLstRoles", @multiple = "multiple" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label> Project Type:</label>
+            @Html.ListBoxFor(m => Model.UserManagementViewModel.SelectedProjectTypes, Model.UserManagementViewModel.ProjectTypeList, new { @class = "multiselect form-control border-cyan", @id = "chkDrpDnLstProjectTypes", @multiple = "multiple" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label> Express:</label>
+            @Html.DropDownListFor(m => Model.UserManagementViewModel.ExpressSelected, Model.UserManagementViewModel.YNSelectList, new { @class = "form-select form-control border-cyan", @id = "drpDnLstExpress" }, isenabled)
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label> Phone:</label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.Phone, new { @class = "form-control border-cyan phone", @id = "txtPhone", placeholder = "(XXX)XXX-XXXX", maxlength = 14 })
+        </div>
+        <div class="form-group">
+            <label> Email:</label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.Email, new { @class = "form-control border-cyan", @id = "txtEmail", placeholder = "me@example.com", maxlength = 100 })
+        </div>
+        <div class="form-group">
+            <label> AD Account:</label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.AdAccount, new { @class = "form-control border-cyan", @id = "txtAdAccount", maxlength = 20 })
+        </div>
+        <div class="form-group">
+            <label>Trade/Agency:</label>
+            @Html.ListBoxFor(m => m.UserManagementViewModel.SelectedTradeAgency, Model.UserManagementViewModel.TradeAgencyList, new { @class = "multiselect form-control border-cyan", @id = "chkDrpDnLstTradeAgency", @multiple = "multiple" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>Occupancies:</label>
+            <div>
+                <button type="button" class="btn btn-poppy" data-toggle="modal" data-target="#occupancy-square-foot-modal">Square Footage By Occupancies</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Level:</label>
+            @Html.DropDownListFor(m => m.UserManagementViewModel.LevelSelected, Model.UserManagementViewModel.LevelList, new { @class = "form-select form-control border-cyan", @id = "drpDnLstLevel" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>Preliminary Meeting:</label>form-select
+            @Html.DropDownListFor(m => m.UserManagementViewModel.PriliminaryMeetingSelected, Model.UserManagementViewModel.YNSelectList, new { @class = "form-control border-cyan", @id = "drpDnLstPrilimMtg" }, isenabled)
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Notes:</label>
+            @Html.TextAreaFor(m => m.UserManagementViewModel.Notes, new { @class = "form-control border-cyan", @id = "txtNotes" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>Schedulable:</label>
+            @Html.DropDownListFor(m => m.UserManagementViewModel.IsSchedulableSelected, Model.UserManagementViewModel.IsSchedulableYNSelectList, new { @class = "form-select form-control border-cyan", @id = "drpDnLstSchedulable" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>Active:</label>
+            @Html.DropDownListFor(m => m.UserManagementViewModel.IsActiveSelected, Model.UserManagementViewModel.IsActiveYNSelectList, new { @class = "form-select form-control border-cyan", @id = "drpDnLstActiveUSER" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>
+                Reviewer Specific Plan Review
+                Hours Availability By Day:
+            </label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.PlanReviewHoursOverride, new { @class = "form-control border-cyan", @id = "ttPlanReviewHoursOverride", @type = "number", @min = "0", @max = "8.00", @step = ".5" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>
+                Hours Estimated:
+            </label>
+            @Html.DropDownListFor(m => m.UserManagementViewModel.SelectedHoursEstimated, Model.UserManagementViewModel.HoursEstimatedList, new { @class = "form-select form-control border-cyan", @id = "hrsEstimationLst" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>
+                Jurisdiction:
+            </label>
+            @Html.DropDownListFor(m => m.UserManagementViewModel.SelectedJurisdiction, Model.UserManagementViewModel.JurisdictionList, new { @class = "form-select form-control border-cyan", @id = "ddlJurisdiction" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>
+                City User:
+            </label>
+            @Html.DropDownListFor(m => m.UserManagementViewModel.IsCityUserSelected, Model.UserManagementViewModel.IsCityYNSelectList, new { @class = "form-select form-control border-cyan", @id = "drpDnLstCityUSER" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>
+                User Principal Name:
+            </label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.UserPrincipalName, new { @class = "form-control border-cyan" }, false)
+        </div>
+        <div class="form-group">
+            <label>
+                Calendar Id:
+            </label>
+            @Html.TextBoxFor(m => m.UserManagementViewModel.CalendarId, new { @class = "form-control border-cyan" }, false)
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_SquareFootageByOccupancyModal", Model.OccupancyViewModel)

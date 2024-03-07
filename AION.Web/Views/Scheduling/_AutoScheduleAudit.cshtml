@@ -1,0 +1,55 @@
+﻿
+
+@model AION.Web.Models.Scheduling.AutoScheduleAuditViewModel
+
+@*//put the objects here that are returned from autoscheduling
+    //when submitted, check these objects and determine if the user kept these values
+    //mark if this was auto scheduled*@
+
+<!-- Hidden fields for audit -->
+@Html.Hidden("auditAutoScheduleButton")
+@Html.Hidden("auditBuildingUserID")
+@Html.Hidden("auditElectricUserID")
+@Html.Hidden("auditMechUserID")
+@Html.Hidden("auditPlumbUserID")
+@Html.Hidden("auditZoneUserID")
+@Html.Hidden("auditFireUserID")
+@Html.Hidden("auditFoodServiceUserID")
+@Html.Hidden("auditPoolUserID")
+@Html.Hidden("auditFacilityUserID")
+@Html.Hidden("auditDayCareUserID")
+@Html.Hidden("auditBackFlowUserID")
+
+@Html.Hidden("auditScheduleStart")
+@Html.Hidden("auditScheduleEnd")
+
+@Html.Hidden("auditBuildingScheduleStart")
+@Html.Hidden("auditBuildingScheduleEnd")
+@Html.Hidden("auditElectricScheduleStart")
+@Html.Hidden("auditElectricScheduleEnd")
+@Html.Hidden("auditMechScheduleStart")
+@Html.Hidden("auditMechScheduleEnd")
+@Html.Hidden("auditPlumbScheduleStart")
+@Html.Hidden("auditPlumbScheduleEnd")
+@Html.Hidden("auditZoneScheduleStart")
+@Html.Hidden("auditZoneScheduleEnd")
+@Html.Hidden("auditFireScheduleStart")
+@Html.Hidden("auditFireScheduleEnd")
+@Html.Hidden("auditFoodScheduleStart")
+@Html.Hidden("auditFoodScheduleEnd")
+@Html.Hidden("auditPoolScheduleStart")
+@Html.Hidden("auditPoolScheduleEnd")
+@Html.Hidden("auditFacilityScheduleStart")
+@Html.Hidden("auditFacilityScheduleEnd")
+@Html.Hidden("auditDayCareScheduleStart")
+@Html.Hidden("auditDayCareScheduleEnd")
+@Html.Hidden("auditBackFlowScheduleStart")
+@Html.Hidden("auditBackFlowScheduleEnd")
+
+@Html.Hidden("auditMeetingRoomId")
+@Html.Hidden("auditSelectedStartDateTime")
+@Html.Hidden("auditSelectedEndDateTime")
+@Html.Hidden("auditZoneIsPool")
+
+@Html.Hidden("auditScheduleDate")
+<!--end hidden fields for audit -->

@@ -1,0 +1,72 @@
+﻿@model AION.Web.Models.CustomerProjectDetailViewModel
+
+<table class="table table-striped table-bordered table-hover" id="PendingResponse">
+    <thead>
+        <tr>
+            <th scope="col">Notes From Estimator</th>
+            <th scope="col">Customer Response</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.PendingEstimationNotes.Count(); i++)
+        {
+            <tr>
+                @{
+                    string notedivclass = "note" + Model.PendingEstimationNotes[i].ID;
+                    string custmrresponsetext = Model.PendingEstimationNotes[i].CustmrCanRespond ? "" : " disabled";
+                    string custmrresponseid = "CustmrResponse" + i;
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].ID);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].CustmrCanRespond);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].CreatedDate);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].CreatedUser);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].DeptNameEnum);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].NotesComments);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].NotesType);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].UpdatedDate);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].UpdatedUser);
+                    @Html.HiddenFor(m => m.PendingEstimationNotes[i].ParentNoteID);
+                }
+                <td>
+                    <div class="accordion-item">
+                        <table class="table table-sm mb-0">
+                            <tbody>
+                                <tr>
+                                    <td style="width:30%" class="border-0">@Model.PendingEstimationNotes[i].CreatedDate.ToString("MM/dd/yyyy hh:mm")</td>
+                                    <td style="width:50%" class="border-0"><center>@Model.PendingEstimationNotes[i].CreatedUser.FirstName  @Model.PendingEstimationNotes[i].CreatedUser.LastName</center> </td>
+                                    <td style="width:20%" class="border-0">
+                                        <a onclick="document.getElementById('@custmrresponseid').focus();" href="#" class="" data-bs-toggle="collapse" data-bs-target=".@notedivclass" aria-expanded="false" aria-controls="@notedivclass">Expand Notes</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="@notedivclass accordion-collapse collapse fade">
+                            <div class="accordion-body">
+                                @Model.PendingEstimationNotes[i].NotesComments
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    @{ if (Model.PendingEstimationNotes[i].CustmrCanRespond)
+                        {
+                            @Html.TextAreaFor(m => m.PendingEstimationNotes[i].CustmrResponseComment, new { @class = "form-control", id = "CustmrResponse" + i })
+
+                        }
+                        else
+                        {
+                            @Html.TextAreaFor(m => m.PendingEstimationNotes[i].CustmrResponseComment, new { @class = "form-control", @disabled = "disabled", id = "CustmrResponse" + i })
+
+                        }
+                    }
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@if (Model.PendingEstimationNotes.Count() != 0)
+{
+    <button type="submit" class="btn btn-poppy" id="btnSubmit" style="float:right">Submit Response</button>
+}
+
+

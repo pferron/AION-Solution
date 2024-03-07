@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1629121-7125-4257-8574-F19D04EF1C48}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AION.Accela.Engine</RootNamespace>
+    <AssemblyName>AION.Accela.Engine</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS1998</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Rest.ClientRuntime.2.3.24\lib\net461\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeTypesMap, Version=1.0.8.0, Culture=neutral, PublicKeyToken=1b320cc08ad5aa89, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MimeTypesMap.1.0.8\lib\net452\MimeTypesMap.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessObjects\AccelaAionMapBO.cs" />
+    <Compile Include="BusinessObjects\AccelaRecordCreationBO.cs" />
+    <Compile Include="Helpers\Logging.cs" />
+    <Compile Include="Models\AccelaAgenciesBE.cs" />
+    <Compile Include="Models\AccelaBE.cs" />
+    <Compile Include="Models\AccelaFileInfo.cs" />
+    <Compile Include="Models\AccelaParmsDetailBE.cs" />
+    <Compile Include="Models\AccelaRecordCustomTableTaskInsertBE.cs" />
+    <Compile Include="Models\AccelaRecordDocumentBE.cs" />
+    <Compile Include="Models\AccelaUpDateRecordWorkFlowTask.cs" />
+    <Compile Include="Models\AccelaWorkFlowTaskUpdate.cs" />
+    <Compile Include="BusinessObjects\AccelaAddressParcelsOwnersBO.cs" />
+    <Compile Include="BusinessObjects\AccelaApiBO.cs" />
+    <Compile Include="BusinessObjects\AccelaAuthorizationBO.cs" />
+    <Compile Include="BusinessObjects\AccelaBase.cs" />
+    <Compile Include="BusinessObjects\AccelaBO.cs" />
+    <Compile Include="BusinessObjects\AccelaContactsAndProfessionalsBO.cs" />
+    <Compile Include="BusinessObjects\AccelaDocumentsBO.cs" />
+    <Compile Include="BusinessObjects\AccelaRecordBO.cs" />
+    <Compile Include="BusinessObjects\AccelaSettingsBO.cs" />
+    <Compile Include="BusinessObjects\AccelaAgenciesBO.cs" />
+    <Compile Include="BusinessObjects\AccelTestJsonMethods.cs" />
+    <Compile Include="BusinessObjects\ApiExceptionBO.cs" />
+    <Compile Include="IAccelaEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecordParser\AccelaFeeParser.cs" />
+    <Compile Include="RecordParser\AccelaRecordParser.cs" />
+    <Compile Include="RecordParser\AccelaWorkTaskCustomFormParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="DataFiles\AccelaCommercialRTAP.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataFiles\AccelaCommercialProject.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataFiles\cycles.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataFiles\estimators.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataFiles\facilitators.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataFiles\meetings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataFiles\planreviewstatus.json" />
+    <None Include="DataFiles\projects.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataFiles\reviewers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Accela\AccelaAddressParcelsOwners\AccelaAddressParcelsOwners.csproj">
+      <Project>{46d1b2c9-ea81-45f7-ab60-085a641dccd1}</Project>
+      <Name>AccelaAddressParcelsOwners</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Accela\AccelaAgencies\AccelaAgencies.csproj">
+      <Project>{47efd900-b22b-4a26-8633-1b1fb62b4941}</Project>
+      <Name>AccelaAgencies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Accela\AccelaAuthorization\AccelaAuthorization.csproj">
+      <Project>{39284ef0-afbb-404e-8a22-f1db21451a17}</Project>
+      <Name>AccelaAuthorization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Accela\AccelaCitizens\AccelaCitizens.csproj">
+      <Project>{d45a5bf0-42c5-40ca-8bcd-5c3e38d1933c}</Project>
+      <Name>AccelaCitizens</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Accela\AccelaContactsAndProfessionals\AccelaContactsAndProfessionals.csproj">
+      <Project>{ead20172-08f7-4110-93a7-1dcfc94b3aac}</Project>
+      <Name>AccelaContactsAndProfessionals</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Accela\AccelaDocuments\AccelaDocuments.csproj">
+      <Project>{65c68f23-955d-43fc-b387-9df838604d16}</Project>
+      <Name>AccelaDocuments</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Accela\AccelaMiscellanous\AccelaMiscellanous.csproj">
+      <Project>{44659ef2-6800-4933-a7c5-f662c9fb485c}</Project>
+      <Name>AccelaMiscellanous</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Accela\AccelaRecords\AccelaRecords.csproj">
+      <Project>{60b61f02-3775-4bcd-bb6a-3a8e812f5ec3}</Project>
+      <Name>AccelaRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Accela\AccelaSettings\AccelaSettings.csproj">
+      <Project>{37b042b3-786f-4bdb-a4b4-0837545f0653}</Project>
+      <Name>AccelaSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AION.Base\AION.Base.csproj">
+      <Project>{b5d9e46e-1ed6-4d78-88d9-f5d96a2f3284}</Project>
+      <Name>AION.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Azure.KeyVault\Meck.Azure.KeyVault.csproj">
+      <Project>{bf8fc6ca-1611-40bf-b646-4a703a895f81}</Project>
+      <Name>Meck.Azure.KeyVault</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Data\Meck.Data.csproj">
+      <Project>{f54dc2c5-f5bc-46cb-a3a2-faaf89252013}</Project>
+      <Name>Meck.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Logging\Meck.Logging.csproj">
+      <Project>{3d235cd3-9012-4485-9a10-0ed0b09a423c}</Project>
+      <Name>Meck.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Shared\Meck.Shared.csproj">
+      <Project>{7f0c6b44-cd5b-44c2-a4ff-fdd9fac848dc}</Project>
+      <Name>Meck.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AION.AIONDB.Engine\AION.AIONDB.Engine.csproj">
+      <Project>{a2d6733b-5913-4177-b1dd-5ba875b52dbb}</Project>
+      <Name>AION.AIONDB.Engine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataFiles\test3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+</Project>

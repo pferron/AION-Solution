@@ -1,0 +1,15 @@
+﻿@using AION.Web.Helpers
+
+<li class="navigation-header">
+    <span>Menu</span><i class="ft-more-horizontal ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Menu"></i>
+</li>
+<li class="nav-item @Html.MenuLinkWithAction("Index", "Home")">
+    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i><span class="menu-title">Home</span></a>
+</li>
+<li class="nav-item @Html.MenuLinkWithAction("MeetingsDashboard", "Customer")">
+    <a href="@Url.Action("MeetingsDashboard", "Customer")"><i class="fa fa-calendar-days"></i><span class="menu-title">Meetings</span></a>
+</li>
+<li class="nav-item @Html.MenuLinkWithAction("ProjectsDashboard", "Customer")">
+    <a href="@Url.Action("ProjectsDashboard", "Customer")"><i class="fa fa-folder"></i><span class="menu-title">Projects</span></a>
+</li>
+

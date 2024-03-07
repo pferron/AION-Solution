@@ -1,0 +1,30 @@
+﻿[
+  {
+    "outputFile": "assets/skin/default_skin/less/theme_settings.css",
+    "inputFile": "assets/skin/default_skin/less/theme_settings.less"
+  },
+  {
+    "outputFile": "assets/skin/base/components/sidebar_left.css",
+    "inputFile": "assets/skin/base/components/sidebar_left.less"
+  },
+  {
+    "outputFile": "assets/skin/base/fonts/themerex.css",
+    "inputFile": "assets/skin/base/fonts/themerex.less"
+  },
+  {
+    "outputFile": "assets/skin/default_skin/less/theme_variables.css",
+    "inputFile": "assets/skin/default_skin/less/theme_variables.less"
+  },
+  {
+    "outputFile": "assets/skin/base/plugins/fullcalendar.css",
+    "inputFile": "assets/skin/base/plugins/fullcalendar.less"
+  },
+  {
+    "outputFile": "assets/skin/default_skin/less/theme.css",
+    "inputFile": "assets/skin/default_skin/less/theme.less"
+  },
+  {
+    "outputFile": "assets/skin/base/components/sidebar_right.css",
+    "inputFile": "assets/skin/base/components/sidebar_right.less"
+  }
+]

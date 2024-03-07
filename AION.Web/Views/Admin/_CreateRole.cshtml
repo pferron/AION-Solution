@@ -1,0 +1,63 @@
+﻿@using AION.Manager.Models
+@model AION.Web.Models.AdminViewModel
+
+@{
+    bool isreadonly = Model.IsReadOnly;
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+}
+<div>
+    <h4 class="form-section"><i class="fa fa-plus"></i> Add Role</h4>
+    @Html.Hidden("CreateRoleViewModel.WrkrId", Model.LoggedInUser.ID)
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Role Name: </label>
+                @Html.TextBoxFor(m => m.CreateRoleViewModel.SystemRoleName, new { @placeholder = "enter role name", @class = "form-control border-cyan", @id = "createviewmodel_rolename" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Base Permission:</label>
+                @Html.DropDownListFor(m => m.CreateRoleViewModel.ParentSystemRoleId, Model.CreateRoleViewModel.ParentSystemRoles, new { @class = "form-select form-control border-cyan", @id = "createsrparent" })
+            </div>
+        </div>
+    </div>
+
+    <h4 class="form-section"><i class="fa fa-edit"></i> Modify Permission</h4>
+
+    <div class="accordion" id="accrdnModifyPermissions" role="tablist" aria-multiselectable="true">
+             @{
+                 foreach (Permission module in Model.CreateRoleViewModel.PermsModulesList)
+                 {
+                     string moduleid = module.PermissionModuleId.Value.ToString();
+                     string modulename = module.PermissionModuleEnum.ToStringValue();
+                     string modulenamelink = modulename.Replace(" ", "");
+                    <div class="card collapse-icon accordion-icon-rotate left">
+                        <div id="@moduleid" class="card-header">
+                            <a data-toggle="collapse" data-parent="#accrdnModifyRolePermissions" href="#@modulenamelink"
+                            aria-expanded="false" aria-controls="@modulenamelink" class="card-title lead">@modulename</a>
+                        </div>
+                        <div id="@modulenamelink" role="tabpanel" aria-labelledby="@moduleid" class="collapse">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        @foreach (Permission permission in Model.CreateRoleViewModel.PermsList.Where(x => x.PermissionModuleId == module.PermissionModuleId).ToList())
+                                        {
+                                            <li class="skin skin-square">
+                                                @{ string checkboxid = permission.PermissionEnum.ToString();}
+                                                @Html.CheckBox("CreateRoleViewModel." + checkboxid, new { @class = "createroleperm" })
+                                                <label for="CreateRoleViewModel_@checkboxid">@permission.PermissionEnum.ToStringValue()</label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>

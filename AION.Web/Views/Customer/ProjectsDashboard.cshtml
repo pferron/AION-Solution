@@ -1,0 +1,110 @@
+﻿@using AION.Manager.Models;
+@model AION.Web.Models.CustmrProjectsDashboardViewModel
+@{
+    ViewBag.Title = "Customer Projects Dashboard";
+}
+
+@section style
+{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/fixedHeader.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/colReorder.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+}
+
+@section scripts
+    {
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.fixedHeader.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.colReorder.min.js"></script>
+
+    <script src="/app-assets/js/scripts/pages/dashboard.js"></script>
+
+    <script src="/app-assets/js/scripts/pages/customer-dashboard.js"></script>
+}
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+<div class="row">
+    <div class="card overflow" id="sectionCustomerProjectDashboard">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                <table class="table table-striped table-bordered table-hover fixed-header" id="projects">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Open Actions</th>
+                            <th>Project #</th>
+                            <th>Project Name</th>
+                            <th>Project Type</th>
+                            <th>Facilitator</th>
+                            <th>Status</th>
+                            <th>Tentative Start Date</th>
+                            <th>Acceptance Deadline</th>
+                            <th>Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ foreach (ProjectsList project in Model.ProjectsList)
+                            {
+                                bool showDates = (project.ProjectStatus == AION.BL.ProjectStatusEnum.Scheduled ||
+                                    project.ProjectStatus == AION.BL.ProjectStatusEnum.Tentatively_Scheduled);
+
+                                <tr>
+                                    <td class="text-center">
+                                        <h4 style="font-weight: 700;">
+                                            @if (project.HasOpenActions)
+                                            {
+                                                <span>Y</span>
+                                            }
+                                            else
+                                            {
+                                                <span>N</span>
+                                            }
+                                        </h4>
+                                    </td>
+                                    <td><a href="@Url.Action("ProjectDetail", "Customer", new { ProjectId = project.AccelaProjectRefID, RecIdTxt=project.RecIdTxt})"> @project.AccelaProjectRefID</a> </td>
+
+                                    <td>@project.ProjectName </td>
+                                    <td>@project.ProjectType.ToStringValue() </td>
+                                    <td>@project.FacilitatorName</td>
+                                    <td>@project.ProjectStatus.ToStringValue()</td>
+                                    <td>
+                                        @if (project.TentativeStartDate.HasValue && showDates)
+                                        {
+                                            @project.TentativeStartDate.Value.ToShortDateString()
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (project.AcceptanceDeadLine.HasValue && showDates)
+                                        {
+                                            @project.AcceptanceDeadLine.Value.ToShortDateString()
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            string ispaid = "";
+                                            if (project.IsPaidStatus.HasValue && project.IsPaidStatus.Value == true)
+                                            {
+                                                ispaid = "Yes";
+                                            }
+                                            else
+                                            {
+                                                ispaid = "No";
+                                            }
+                                        }
+                                        @ispaid
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

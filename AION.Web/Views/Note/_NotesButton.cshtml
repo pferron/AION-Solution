@@ -1,0 +1,24 @@
+﻿@model AION.Web.Models.ViewModelBase
+
+@{
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+    string primarycls = "btn-primary";
+    string btncls = primarycls;
+    //get the action so we can change the cls
+    var contr = ViewContext.RouteData.Values["action"];
+
+    if (contr.ToString().ToLower() == "ProjectDetail".ToLower())
+    {
+        btncls = "btn-light";
+    };
+
+
+}
+<a role="button" class="btn btn-cyan @btncls"
+   href="@Url.Action("NotesMain", "Note", new { ProjectNumber = Model.Project.AccelaProjectRefId })"
+   onclick="openNewWindow(this.href, 920,800); return false;" alt="Notes">Notes</a>
+

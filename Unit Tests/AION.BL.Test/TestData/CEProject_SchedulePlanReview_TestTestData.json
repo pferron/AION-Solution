@@ -1,0 +1,877 @@
+﻿{
+  "PlanReviewId": null,
+  "ProjectId": 2593,
+  "ApptResponseStatusRefId": 0,
+  "ApptResponseStatusEnum": 4,
+  "BuildStartDate": "2020-10-26T00:00:00",
+  "ElectStartDate": "0001-01-01T00:00:00",
+  "MechaStartDate": "0001-01-01T00:00:00",
+  "PlumbStartDate": "0001-01-01T00:00:00",
+  "FireStartDate": "0001-01-01T00:00:00",
+  "ZoneStartDate": "0001-01-01T00:00:00",
+  "BackfStartDate": "0001-01-01T00:00:00",
+  "PoolStartDate": "0001-01-01T00:00:00",
+  "FoodStartDate": "0001-01-01T00:00:00",
+  "FacilStartDate": "0001-01-01T00:00:00",
+  "DaycStartDate": "0001-01-01T00:00:00",
+  "BuildEndDate": "2020-10-28T00:00:00",
+  "ElectEndDate": "0001-01-01T00:00:00",
+  "MechaEndDate": "0001-01-01T00:00:00",
+  "PlumbEndDate": "0001-01-01T00:00:00",
+  "FireEndDate": "0001-01-01T00:00:00",
+  "ZoneEndDate": "0001-01-01T00:00:00",
+  "BackfEndDate": "0001-01-01T00:00:00",
+  "PoolEndDate": "0001-01-01T00:00:00",
+  "FoodEndDate": "0001-01-01T00:00:00",
+  "FacilEndDate": "0001-01-01T00:00:00",
+  "DaycEndDate": "0001-01-01T00:00:00",
+  "BuildFifo": null,
+  "ElectFifo": null,
+  "MechaFifo": null,
+  "PlumbFifo": null,
+  "FireFifo": null,
+  "ZoneFifo": null,
+  "BackfFifo": null,
+  "PoolFifo": null,
+  "FoodFifo": null,
+  "FacilFifo": null,
+  "DaycFifo": null,
+  "BuildPool": false,
+  "ElectPool": false,
+  "MechaPool": false,
+  "PlumbPool": false,
+  "FirePool": false,
+  "ZonePool": false,
+  "BackfPool": false,
+  "PoolPool": false,
+  "FoodPool": false,
+  "FacilPool": false,
+  "DaycPool": false,
+  "BuildPlanReviewScheduleId": 572,
+  "ElectPlanReviewScheduleId": null,
+  "MechaPlanReviewScheduleId": null,
+  "PlumbPlanReviewScheduleId": null,
+  "FirePlanReviewScheduleId": null,
+  "ZonePlanReviewScheduleId": null,
+  "BackfPlanReviewScheduleId": null,
+  "PoolPlanReviewScheduleId": null,
+  "FoodPlanReviewScheduleId": null,
+  "FacilPlanReviewScheduleId": null,
+  "DaycPlanReviewScheduleId": null,
+  "BuildPRSUpdateDate": "2020-10-13T19:21:49",
+  "ElectPRSUpdateDate": null,
+  "MechaPRSUpdateDate": null,
+  "PlumbPRSUpdateDate": null,
+  "FirePRSUpdateDate": null,
+  "ZonePRSUpdateDate": null,
+  "BackfPRSUpdateDate": null,
+  "PoolPRSUpdateDate": null,
+  "FoodPRSUpdateDate": null,
+  "FacilPRSUpdateDate": null,
+  "DaycPRSUpdateDate": null,
+  "PlanReviewProjectDetailsId": 122,
+  "PlanReviewProjectDetails": null,
+  "Cycle": 0,
+  "IsFutureCycle": false,
+  "HasFutureCycle": false,
+  "ReReviewBuilding": null,
+  "ReReviewElectric": null,
+  "ReReviewMech": null,
+  "ReReviewPlumb": null,
+  "ReReviewZoning": null,
+  "ReReviewFire": null,
+  "ReReviewBackFlow": null,
+  "ReReviewFood": null,
+  "ReReviewPool": null,
+  "ReReviewLodge": null,
+  "ReReviewDayCare": null,
+  "ScheduleAfterDate": null,
+  "RequestExpressNextCycle": false,
+  "ProdDate": null,
+  "EarliestDate": null,
+  "IsSubmit": false,
+  "IsReschedule": false,
+  "Attendees": null,
+  "NewAttendees": [
+    {
+      "AttendeeId": 39,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 1
+    }
+  ],
+  "AssignedReviewers": [
+    {
+      "AttendeeId": 39,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 1
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 25
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 21
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 2
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 24
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 14
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 22
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 3
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 4
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 23
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 6
+    }
+  ],
+  "InternalNotes": null,
+  "SchedulingNotes": null,
+  "MandatorySchedulingNotes": "Mega Multi-Family Mandatory Notes",
+  "AddSchedulingNotes": null,
+  "SchedulingStandardNotes": null,
+  "PrimaryReviewers": [
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 1
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 2
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 3
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 4
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 5
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 13
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 25
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 22
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 23
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 24
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 21
+    }
+  ],
+  "SecondaryReviewers": [
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 1
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 2
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 3
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 4
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 5
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 13
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 25
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 22
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 23
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 24
+    },
+    {
+      "AttendeeId": -1,
+      "BusinessRefId": 0,
+      "LastName": null,
+      "FirstName": null,
+      "DeptNameEnumId": 21
+    }
+  ],
+  "AssignedFacilitator": "138",
+  "ExcludedPlanReviewersBuild": [],
+  "ExcludedPlanReviewersElectric": [],
+  "ExcludedPlanReviewersMech": [],
+  "ExcludedPlanReviewersPlumb": [],
+  "ExcludedPlanReviewersZone": [],
+  "ExcludedPlanReviewersFire": [],
+  "ExcludedPlanReviewersBackFlow": [],
+  "ExcludedPlanReviewersFood": [],
+  "ExcludedPlanReviewersPool": [],
+  "ExcludedPlanReviewersLodge": [],
+  "ExcludedPlanReviewersDayCare": [],
+  "PlanReviewAutoScheduleId": null,
+  "HoursBuilding": 15.0,
+  "HoursElectic": 0.0,
+  "HoursMech": 0.0,
+  "HoursPlumb": 0.0,
+  "HoursZoning": 0.0,
+  "HoursFire": 0.0,
+  "HoursBackFlow": 0.0,
+  "HoursFood": 0.0,
+  "HoursPool": 0.0,
+  "HoursLodge": 0.0,
+  "HoursDayCare": 0.0,
+  "ID": 0,
+  "CreatedUser": {
+    "FirstName": null,
+    "LastName": null,
+    "SrcSystemValueText": null,
+    "ExternalSystemID": 0,
+    "DesignatedRoles": null,
+    "DesignatedDepartments": null,
+    "IsActive": false,
+    "UiSetting": null,
+    "IsValueCreated": false,
+    "IsExpressSched": false,
+    "UserName": null,
+    "ADName": null,
+    "Phone": null,
+    "Email": null,
+    "Notes": null,
+    "IsSchedulable": false,
+    "PlanReviewOverrideHours": 0.0,
+    "HoursEstimated": null,
+    "Jurisdiction": 0,
+    "SchedulableLevel": null,
+    "IsPrelimMeetingAllowed": false,
+    "ID": 65,
+    "CreatedUser": null,
+    "UpdatedUser": null,
+    "CreatedDate": "2020-10-13T15:45:51.9187828-04:00",
+    "UpdatedDate": "2020-10-13T15:45:51.9187828-04:00",
+    "IsModelUpdated": false
+  },
+  "UpdatedUser": {
+    "FirstName": null,
+    "LastName": null,
+    "SrcSystemValueText": null,
+    "ExternalSystemID": 0,
+    "DesignatedRoles": null,
+    "DesignatedDepartments": null,
+    "IsActive": false,
+    "UiSetting": null,
+    "IsValueCreated": false,
+    "IsExpressSched": false,
+    "UserName": null,
+    "ADName": null,
+    "Phone": null,
+    "Email": null,
+    "Notes": null,
+    "IsSchedulable": false,
+    "PlanReviewOverrideHours": 0.0,
+    "HoursEstimated": null,
+    "Jurisdiction": 0,
+    "SchedulableLevel": null,
+    "IsPrelimMeetingAllowed": false,
+    "ID": 65,
+    "CreatedUser": null,
+    "UpdatedUser": null,
+    "CreatedDate": "2020-10-13T15:45:51.9187828-04:00",
+    "UpdatedDate": "2020-10-13T15:45:51.9187828-04:00",
+    "IsModelUpdated": false
+  },
+  "CreatedDate": "2020-10-13T15:45:51.9253238-04:00",
+  "UpdatedDate": "0001-01-01T00:00:00",
+  "IsModelUpdated": false
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//{
+//  "PlanReviewId": null,
+//  "ProjectId": 2517,
+//  "ApptResponseStatusRefId": 0,
+//  "ApptResponseStatusEnum": 4,
+//  "BuildStartDate": "2020-12-21T00:00:00",
+//  "ElectStartDate": "2020-12-23T00:00:00",
+//  "MechaStartDate": "2020-12-22T00:00:00",
+//  "PlumbStartDate": "2020-12-23T00:00:00",
+//  "FireStartDate": "0001-01-01T00:00:00",
+//  "ZoneStartDate": "2020-12-23T00:00:00",
+//  "BackfStartDate": "0001-01-01T00:00:00",
+//  "PoolStartDate": "2020-12-24T00:00:00",
+//  "FoodStartDate": "2020-12-25T00:00:00",
+//  "FacilStartDate": "2020-12-24T00:00:00",
+//  "DaycStartDate": "2020-12-25T00:00:00",
+//  "BuildEndDate": "2020-12-22T00:00:00",
+//  "ElectEndDate": "2020-12-23T00:00:00",
+//  "MechaEndDate": "2020-12-23T00:00:00",
+//  "PlumbEndDate": "2020-12-23T00:00:00",
+//  "FireEndDate": "0001-01-01T00:00:00",
+//  "ZoneEndDate": "2020-12-24T00:00:00",
+//  "BackfEndDate": "0001-01-01T00:00:00",
+//  "PoolEndDate": "2020-12-24T00:00:00",
+//  "FoodEndDate": "2020-12-25T00:00:00",
+//  "FacilEndDate": "2020-12-25T00:00:00",
+//  "DaycEndDate": "2020-12-25T00:00:00",
+//  "BuildFifo": null,
+//  "ElectFifo": null,
+//  "MechaFifo": null,
+//  "PlumbFifo": null,
+//  "FireFifo": null,
+//  "ZoneFifo": null,
+//  "BackfFifo": null,
+//  "PoolFifo": null,
+//  "FoodFifo": null,
+//  "FacilFifo": null,
+//  "DaycFifo": null,
+//  "BuildPool": false,
+//  "ElectPool": false,
+//  "MechaPool": false,
+//  "PlumbPool": false,
+//  "FirePool": false,
+//  "ZonePool": false,
+//  "BackfPool": false,
+//  "PoolPool": false,
+//  "FoodPool": false,
+//  "FacilPool": false,
+//  "DaycPool": false,
+//  "BuildPlanReviewScheduleId": 563,
+//  "ElectPlanReviewScheduleId": null,
+//  "MechaPlanReviewScheduleId": null,
+//  "PlumbPlanReviewScheduleId": null,
+//  "FirePlanReviewScheduleId": null,
+//  "ZonePlanReviewScheduleId": null,
+//  "BackfPlanReviewScheduleId": null,
+//  "PoolPlanReviewScheduleId": null,
+//  "FoodPlanReviewScheduleId": null,
+//  "FacilPlanReviewScheduleId": null,
+//  "DaycPlanReviewScheduleId": null,
+//  "BuildPRSUpdateDate": "2020-10-12T13:52:43",
+//  "ElectPRSUpdateDate": null,
+//  "MechaPRSUpdateDate": null,
+//  "PlumbPRSUpdateDate": null,
+//  "FirePRSUpdateDate": null,
+//  "ZonePRSUpdateDate": null,
+//  "BackfPRSUpdateDate": null,
+//  "PoolPRSUpdateDate": null,
+//  "FoodPRSUpdateDate": null,
+//  "FacilPRSUpdateDate": null,
+//  "DaycPRSUpdateDate": null,
+//  "PlanReviewProjectDetailsId": 121,
+//  "PlanReviewProjectDetails": null,
+//  "Cycle": 0,
+//  "IsFutureCycle": false,
+//  "HasFutureCycle": false,
+//  "ReReviewBuilding": null,
+//  "ReReviewElectric": null,
+//  "ReReviewMech": null,
+//  "ReReviewPlumb": null,
+//  "ReReviewZoning": null,
+//  "ReReviewFire": null,
+//  "ReReviewBackFlow": null,
+//  "ReReviewFood": null,
+//  "ReReviewPool": null,
+//  "ReReviewLodge": null,
+//  "ReReviewDayCare": null,
+//  "ScheduleAfterDate": null,
+//  "RequestExpressNextCycle": false,
+//  "ProdDate": null,
+//  "EarliestDate": null,
+//  "IsSubmit": false,
+//  "IsReschedule": false,
+//  "Attendees": null,
+//  "NewAttendees": [
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 1
+//    }
+//  ],
+//  "AssignedReviewers": [
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 1
+//    },
+//    {
+//      "AttendeeId": 0,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 25
+//    },
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 21
+//    },
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 2
+//    },
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 24
+//    },
+//    {
+//      "AttendeeId": 0,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 14
+//    },
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 22
+//    },
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 3
+//    },
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 4
+//    },
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 23
+//    },
+//    {
+//      "AttendeeId": 39,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 6
+//    }
+//  ],
+//  "InternalNotes": null,
+//  "SchedulingNotes": null,
+//  "MandatorySchedulingNotes": "Onschedule Mandatory Notes",
+//  "AddSchedulingNotes": null,
+//  "SchedulingStandardNotes": null,
+//  "PrimaryReviewers": [
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 1
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 2
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 3
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 4
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 5
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 13
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 25
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 22
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 23
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 24
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 21
+//    }
+//  ],
+//  "SecondaryReviewers": [
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 1
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 2
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 3
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 4
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 5
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 13
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 25
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 22
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 23
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 24
+//    },
+//    {
+//      "AttendeeId": -1,
+//      "BusinessRefId": 0,
+//      "LastName": null,
+//      "FirstName": null,
+//      "DeptNameEnumId": 21
+//    }
+//  ],
+//  "AssignedFacilitator": "138",
+//  "ExcludedPlanReviewersBuild": [],
+//  "ExcludedPlanReviewersElectric": [],
+//  "ExcludedPlanReviewersMech": [],
+//  "ExcludedPlanReviewersPlumb": [],
+//  "ExcludedPlanReviewersZone": [],
+//  "ExcludedPlanReviewersFire": [],
+//  "ExcludedPlanReviewersBackFlow": [],
+//  "ExcludedPlanReviewersFood": [],
+//  "ExcludedPlanReviewersPool": [],
+//  "ExcludedPlanReviewersLodge": [],
+//  "ExcludedPlanReviewersDayCare": [],
+//  "PlanReviewAutoScheduleId": null,
+//  "HoursBuilding": 13.0,
+//  "HoursElectic": 3.0,
+//  "HoursMech": 4.0,
+//  "HoursPlumb": 2.0,
+//  "HoursZoning": 3.5,
+//  "HoursFire": 1.5,
+//  "HoursBackFlow": 5.0,
+//  "HoursFood": 2.0,
+//  "HoursPool": 3.0,
+//  "HoursLodge": 4.0,
+//  "HoursDayCare": 5.0,
+//  "ID": 0,
+//  "CreatedUser": {
+//    "FirstName": null,
+//    "LastName": null,
+//    "SrcSystemValueText": null,
+//    "ExternalSystemID": 0,
+//    "DesignatedRoles": null,
+//    "DesignatedDepartments": null,
+//    "IsActive": false,
+//    "UiSetting": null,
+//    "IsValueCreated": false,
+//    "IsExpressSched": false,
+//    "UserName": null,
+//    "ADName": null,
+//    "Phone": null,
+//    "Email": null,
+//    "Notes": null,
+//    "IsSchedulable": false,
+//    "PlanReviewOverrideHours": 0.0,
+//    "HoursEstimated": null,
+//    "Jurisdiction": 0,
+//    "SchedulableLevel": null,
+//    "IsPrelimMeetingAllowed": false,
+//    "ID": 65,
+//    "CreatedUser": null,
+//    "UpdatedUser": null,
+//    "CreatedDate": "2020-10-12T12:24:03.5602804-04:00",
+//    "UpdatedDate": "2020-10-12T12:24:03.5602804-04:00",
+//    "IsModelUpdated": false
+//  },
+//  "UpdatedUser": {
+//    "FirstName": null,
+//    "LastName": null,
+//    "SrcSystemValueText": null,
+//    "ExternalSystemID": 0,
+//    "DesignatedRoles": null,
+//    "DesignatedDepartments": null,
+//    "IsActive": false,
+//    "UiSetting": null,
+//    "IsValueCreated": false,
+//    "IsExpressSched": false,
+//    "UserName": null,
+//    "ADName": null,
+//    "Phone": null,
+//    "Email": null,
+//    "Notes": null,
+//    "IsSchedulable": false,
+//    "PlanReviewOverrideHours": 0.0,
+//    "HoursEstimated": null,
+//    "Jurisdiction": 0,
+//    "SchedulableLevel": null,
+//    "IsPrelimMeetingAllowed": false,
+//    "ID": 65,
+//    "CreatedUser": null,
+//    "UpdatedUser": null,
+//    "CreatedDate": "2020-10-12T12:24:03.5602804-04:00",
+//    "UpdatedDate": "2020-10-12T12:24:03.5602804-04:00",
+//    "IsModelUpdated": false
+//  },
+//  "CreatedDate": "2020-10-12T12:24:12.1092957-04:00",
+//  "UpdatedDate": "0001-01-01T00:00:00",
+//  "IsModelUpdated": false
+//}

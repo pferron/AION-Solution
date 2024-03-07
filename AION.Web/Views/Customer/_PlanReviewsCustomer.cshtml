@@ -1,0 +1,88 @@
+﻿@model List<AION.Web.Models.PlanReviewPartialViewModel>
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Response Due</th>
+                <th>Cycle</th>
+                <th>Plans Ready On Date</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var planReview in Model)
+            {
+                //if not the current cycle or future cycle, or is a suspended project just show uneditable row
+                if (planReview.IsCurrentCycle == false && planReview.IsFutureCycle == false
+                    || planReview.IsProjectSuspended)
+                {
+                    @Html.Partial("~/Views/Shared/ProjectDetails/_PlanReviewNotEditable.cshtml", planReview)
+                }
+                else
+                {
+                    string disabledClass = string.Empty;
+                    if (!planReview.CanUpdate) { disabledClass = " disabled"; }
+
+                    string prResponseClass = "form-select form-control apptResponseSelect";
+                    if (planReview.Project.AccelaPropertyType == AION.BL.PropertyTypeEnums.Express) { prResponseClass += " express"; }
+
+                    <tr>
+                        @Html.Hidden("PlanReviewScheduleId", planReview.PlanReviewScheduleId, new { @class = "planReviewScheduleId" })
+
+                        <td>@planReview.PlanReviewDate</td>
+                        <td>@planReview.ResponseDate</td>
+                        <td>@planReview.CycleNumber.ToString()</td>
+                        <td>
+                            @if (planReview.IsPlansReadyOnDateEditable)
+                            {
+                                @Html.EditorFor(model => planReview.PlansReadyOnDate, new { htmlAttributes = new { @class = "datepicker prProdDate" } })
+                            }
+                            else
+                            {
+                                @planReview.PlansReadyOnDate
+                                <input type="hidden" class="prProdDate" value="@planReview.PlansReadyOnDate" />
+                            }
+                        </td>
+                        <td>
+                            @if (planReview.IsStatusEditable)
+                            {
+                                @Html.DropDownList("PRResponse", planReview.PlanReviewCustomerResponseSelectList, "Select", new { @class = prResponseClass })
+                            }
+                            else
+                            {
+                                <span class="prStatusText">@planReview.StatusText</span>
+                            }
+                        </td>
+                        <td>
+                            <a role="button" class="btn btn-poppy btn-sm updateProjectCycle @disabledClass" href="#"
+                               data-cycle-id="@planReview.ProjectCycleId" data-review-id="@planReview.PlanReviewScheduleId" data-user="@planReview.LoggedInUser.ID"
+                               data-project-id="@planReview.Project.ID" disabled="@(!planReview.CanUpdate)">Update</a>
+                        </td>
+                        <td>
+                            @if (planReview.IsPooled)
+                            {
+                                <button type="button" class="btn btn-sm btn-warning setviewonly">POOLED</button>
+                            }
+                        </td>
+                    </tr>
+                    if (planReview.HasPlanReview)
+                    {
+                        <tr>
+                            <td colspan="7">
+                                <div class="font-weight-bold" style="color:red;">
+                                    @planReview.CancellationMessage
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+
+<div class="card mb-4">
+    @Html.Partial("_ScheduledReviewersByCycle", Model)
+</div>

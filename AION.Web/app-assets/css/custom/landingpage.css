@@ -1,0 +1,229 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: #ffffff;
+}
+
+.header-menu {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    margin-left: 0;
+    list-style: none;
+    border-style: solid;
+    border-width: medium;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 3px;
+    height: 92px;
+}
+
+    .header-menu > * {
+        margin: 0;
+        float: left;
+        font-size: .92308rem;
+        line-height: 1.5rem;
+        text-transform: none;
+        color: #707070
+    }
+
+    .header-menu > li:before {
+        content: "|";
+        color: #707070;
+        margin: 0 .92308rem;
+        position: relative;
+        top: 1px
+    }
+
+    .header-menu > li:first-child:before {
+        content: " ";
+        margin: 0;
+    }
+
+.menu-item {
+    color: #ffffff;
+    width: 14%;
+    margin: 0;
+    float: left;
+    font-size: .92308rem;
+    line-height: 1.5rem;
+    text-transform: none;
+    color: #707070;
+    text-align: center;
+}
+
+.breadcrumbs {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    margin-left: 0;
+    list-style: none;
+    border-style: solid;
+    border-width: medium;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 3px;
+}
+
+    .breadcrumbs > * {
+        margin: 0;
+        float: left;
+        font-size: .92308rem;
+        line-height: 1.5rem;
+        text-transform: none;
+        color: #707070
+    }
+
+        .breadcrumbs > * a {
+            color: #a1a1a1;
+        }
+
+        .breadcrumbs > *:before {
+            content: "|";
+            color: #e89f28;
+            margin: 0 .92308rem;
+            position: relative;
+            top: 1px
+        }
+
+        .breadcrumbs > *:first-child:before {
+            content: " ";
+            margin: 0
+        }
+
+.text-center {
+    text-align: center !important
+}
+
+ul, ol, dl {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+    list-style-position: outside;
+    font-family: inherit;
+    list-style: none;
+}
+
+.copyright {
+    background-color: #5d594d;
+    color: #707070;
+    padding: 18px 10px;
+    margin-top: 10px;
+    font-size: 12pt;
+}
+
+.mc-logo-container {
+    background-color: #000022;
+    max-width: 194px;
+    max-height: 102px;
+    padding-top: 10px;
+}
+
+.mega-menu-container {
+    background-color: #002553;
+    padding-top: 10px;
+}
+
+.card {
+    max-width: 100%;
+}
+
+.card-header {
+    background-color: #00768a;
+    color: #ffffff;
+    font-size: 14pt;
+    font-weight: bold;
+    padding: 0.75rem 1.25rem;
+}
+
+.card-body {
+    color: #333333;
+    font-size: 12pt;
+}
+
+    .card-body > .links {
+        color: #064a8e;
+    }
+
+.titlecol {
+    font-size: 24pt;
+}
+
+.title > .text {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.logo-text {
+    font-size: 20px;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
+    text-decoration: blue solid underline;
+}
+
+    .logo-text > .text-grey {
+        color: #BAB6B4;
+        white-space: nowrap;
+    }
+
+.menu-item a {
+    text-decoration: none;
+}
+
+.mc-icon {
+    min-height: 100px;
+}
+
+.icon-nav-county-active {
+    padding: calc(.7em + .7rem);
+    background-image: url('/Images/government.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.icon-nav-residents-active {
+    padding: calc(.7em + .7rem);
+    background-image: url('/Images/residents.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.icon-nav-business-active {
+    padding: calc(.7em + .7rem);
+    background-image: url('/Images/businesses.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.icon-nav-visitors-active {
+    padding: calc(.7em + .7rem);
+    background-image: url('/Images/visitors.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+/*   .landingsignin {
+            background-color: #002553;
+        }*/
+
+.table.no-cellpadding td {
+    padding: 0;
+}
+
+.mailtolinks {
+    word-break: break-all;
+}
+
+.header-row {
+    min-height: 10vh;
+}

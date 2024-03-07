@@ -1,0 +1,115 @@
+﻿@using AION.Web.Helpers
+@using AION.Web.Models.Shared
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Property Type:</h5>
+                </div>
+                <p>@Model.Project.ReviewTypRefDesc</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Type Of Work:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.TypeOfWork</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Zoning Of The Site:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ZoningOfSite</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Change Of Use:</h5>
+                </div>
+                <p>@(AccelaUIMappingHelper.ChangeChecked(Model.Project.DisplayOnlyInformation.ChangeOfUse))<</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">What is the previous type of business?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PreviousBusinessType</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Proposed Type of Business?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ProposedBusinessType</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Overall:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkOverall</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Mechanical:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkMechanical</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Civil:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkCivil</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Primary Occupancy:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PrimaryOccupancy</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Secondary Occupancy:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.SecondaryOccupancy</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Square Footage:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.SquareFootage</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Do you have a Project number with conditional permit approval from the town?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.IsConditionalPermitApproval</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">City of Charlotte or its Sphere of Influence:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml", new DetailsListViewModel {
+                             PermissionMapping = Model.PermissionMapping,
+                             DetailsList = AccelaUIMappingHelper.CityOfCharlotteDetails(Model.Project.DisplayOnlyInformation.CityOfC)
+                         })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Electrical:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkElectrical</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Plumbing:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkPlumbing</p>
+            </a>
+        </div>
+    </div>
+</div>

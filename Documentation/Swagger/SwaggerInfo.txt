@@ -1,0 +1,11 @@
+Read.me
+https://github.com/domaindrivendev/Swashbuckle
+
+Path to swagger root
+https://<your host>/swagger/ui/index
+https://localhost:44382/swagger/ui/index
+
+Path to swagger json 
+(Always use https url to build your swagger json, not http. if you use http, your scheme in the json will be http. We need it to be defined as https as that is what you will be using in your calls. )
+https://<you host>/swagger/docs/v1
+https://localhost:44382/swagger/docs/v1

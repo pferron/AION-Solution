@@ -1,0 +1,307 @@
+﻿@using AION.Web.Helpers
+@using AION.Web.Models.Shared
+
+@model AION.Web.Models.EstimationViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Property Type:</h5>
+                </div>
+                <p>@Model.Project.PrelimGeneralInfo.PropertyType</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Code Summary:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.CodeSummary</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Project Name:</h5>
+                </div>
+                <p>@Model.Project.ProjectName</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Type Of Work:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                            new DetailsListViewModel
+                                 {
+                                PermissionMapping = Model.PermissionMapping,
+                                DetailsList = AccelaUIMappingHelper.TypeOfWorkDetails(Model.Project.PrelimTypeOfWorkObjDetails),
+                                ListType = "unordered"
+                            })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Does this project include any affordable housing work force housing?</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                            new DetailsListViewModel
+                                 {
+                                PermissionMapping = Model.PermissionMapping,
+                                DetailsList = AccelaUIMappingHelper.PrelimProjectSummaryDetails(Model.Project.PrelimProjectSummaryObjDetails)
+                            })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Do you know the exact address for this project?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ExactAddress</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">
+                        Is any of the project being produced using BIM(Building Information Modeling)?
+                        - if yes, which design desciplines:
+                    </h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                        new DetailsListViewModel
+                        {
+                            PermissionMapping = Model.PermissionMapping,
+                            DetailsList = AccelaUIMappingHelper.BIMDetails(Model.Project.PrelimBIMProjectDeliveryObjDetails),
+                            DefaultRows = true
+
+                        })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Describe the proposed scope of work:</h5>
+                </div>
+                <p>@Model.Project.PrelimProposedWork.ProposedScopeOfWork</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Agenda:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                         new DetailsListViewModel
+                         {
+                             PermissionMapping = Model.PermissionMapping,
+                             DetailsList = AccelaUIMappingHelper.AgendaDetails(Model.Project.PrelimMeetingAgendaObjDetails),
+                             DefaultRows = true
+                         })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Number of Attendees:</h5>
+                </div>
+                <p>@Model.Project.PrelimMeetingDetail.NumberOfAttendees.ToString()</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Requested Meeting Timeline:</h5>
+                </div>
+                <p>
+                    @{
+                        string requestedMeetingTime = "";
+
+                        if (Model.Project.PrelimMeetingDetail.RequestedBeginDateRange != null
+                            && Model.Project.PrelimMeetingDetail.RequestedBeginDateRange != DateTime.MinValue)
+                        {
+                            requestedMeetingTime = Model.Project.PrelimMeetingDetail.RequestedBeginDateRange.ToShortDateString();
+                        }
+
+                        if (Model.Project.PrelimMeetingDetail.RequestedEndDateRange != null
+                            && Model.Project.PrelimMeetingDetail.RequestedEndDateRange != DateTime.MinValue)
+                        {
+                            requestedMeetingTime += " - ";
+                            requestedMeetingTime += Model.Project.PrelimMeetingDetail.RequestedEndDateRange.ToShortDateString();
+                        }
+                    }
+                    @requestedMeetingTime
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Have you already had a preliminary review for this project?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PreviousPreliminaryReview</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">What was the project number of the previous preliminary review?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ProjectNumberPrevPrelimReview</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Would you like the same review team or the first available date?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.IsSameReviewTeam</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Property Owner Name:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PropertyOwnerName</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Property Owner Address:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PropertyOwnerAddress</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Property Owner Email:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PropertyOwnerEmail</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Property Owner Phone:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PropertyOwnerPhone</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Property Owner Receive automatic email updates?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PropertyOwnerAutoEmail</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Architect/Designer Contact Name:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                    new DetailsListViewModel
+                        {
+                        PermissionMapping = Model.PermissionMapping,
+                        DetailsList = Model.Project.DisplayOnlyInformation.ArchDesContactName,
+                        DefaultRows = true
+                    })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Architect/Designer Contact Phone:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                    new DetailsListViewModel
+                        {
+                        PermissionMapping = Model.PermissionMapping,
+                        DetailsList = Model.Project.DisplayOnlyInformation.ArchDesContactPhone,
+                        DefaultRows = true
+                    })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Architect/Designer Contact Email:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                    new DetailsListViewModel
+                        {
+                        PermissionMapping = Model.PermissionMapping,
+                        DetailsList = Model.Project.DisplayOnlyInformation.ArchDesContactEmail,
+                        DefaultRows = true
+                    })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Architect/Designer Receive automatic email updates?</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                    new DetailsListViewModel
+                        {
+                        PermissionMapping = Model.PermissionMapping,
+                        DetailsList = Model.Project.DisplayOnlyInformation.ArchDesAutoEmail,
+                        DefaultRows = true
+                    })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Will the architecture drawings be sealed?</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.IsArchDrawingsSealed</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">License #:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                        new DetailsListViewModel
+                        {
+                            PermissionMapping = Model.PermissionMapping,
+                            DetailsList = Model.Project.DisplayOnlyInformation.ArchDesLicenseNum
+                        })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Board:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                        new DetailsListViewModel
+                        {
+                            PermissionMapping = Model.PermissionMapping,
+                            DetailsList = Model.Project.DisplayOnlyInformation.ArchDesLicenseBoard
+                        })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Architect/Designer employee/non-employee:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.IsArchDesEmployee</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Project Address:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ProjectAddress</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Parcel Number:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ParcelNumber</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Project Manager Name:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PropertyManagerName</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Project Manager Phone:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PropertyManagerPhone</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Project Manager Email:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.PropertyManagerEmail</p>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@using AION.Web.Models.ProjectDetail;
+
+@model AION.Web.Models.PlanReviewPartialViewModel
+@{ int icount = 1;}
+
+<div class="table" style="font-size: smaller;">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col font-weight-bold">Trade</div>
+                <div class="col font-weight-bold">Name</div>
+            </div>
+            @foreach (AssignedReviewerListViewModel planreview in Model.Attendees)
+            {
+                if (icount%2 != 0)
+                {
+                    <div class="row">
+                        <div class="col">
+                            @planreview.TradeName
+                        </div>
+                        <div class="col">
+                            @planreview.ReviewerName
+                        </div>
+                    </div>
+                }
+                icount++;
+            }
+
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col font-weight-bold">Trade</div>
+                <div class="col font-weight-bold">Name</div>
+            </div>
+            @{//restart the icount
+                icount = 1;}
+            @foreach (AssignedReviewerListViewModel planreview in Model.Attendees)
+            {
+                if (icount % 2 == 0)
+                {
+                    <div class="row">
+                        <div class="col">
+                            @planreview.TradeName
+                        </div>
+                        <div class="col">
+                            @planreview.ReviewerName
+                        </div>
+                    </div>
+                }
+                icount++;
+            }
+        </div>
+    </div>
+</div>

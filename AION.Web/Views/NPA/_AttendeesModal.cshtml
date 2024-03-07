@@ -1,0 +1,81 @@
+﻿
+@model AION.Web.Models.NPAViewModel
+
+@{
+
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+    bool hasCreate = Model.PermissionMapping.Create_NPA;
+    bool hasModify = Model.PermissionMapping.Modify_NPA;
+
+}
+
+<style>
+    .multiselect-dual option {
+        padding: 0.35rem 0.7rem;
+    }
+</style>
+
+<div class="modal fade text-left modal-attendees" id="modal-attendees" role="dialog" aria-labelledby="attendees">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-cyan white">
+                <h4 class="modal-title white">Add/Remove Attendees</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" class="input-schid" value="" />
+                <input type="hidden" class="input-npaid" value="" />
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3>Trade/Agency</h3>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownList("ddl-dept", Model.DeptNameList, new { @class = "form-select form-control border-cyan remviewonly ddl-dept", @id = "ddl-dept" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 box1">
+                        <div class="info-container">
+                            <h3>Available</h3><br>
+                            <span class="info"></span>
+                        </div>
+                        @Html.DropDownList("ddl-availdept", Model.BldgPersonSelectList, new { @multiple = "multiple", @size = "10", @class = "custom-select ddl-availdept form-select form-control multiselect-dual border-cyan multiselect-from listbox", @id = "ddl-availdept" })
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="button-container">
+                            <button type="button" id="btn-addto" class="btn btn-sm btn-poppy btn-block btn-addto setviewonly @disabledcls multiselect-add" @disablebtn><i class="fa-solid fa-chevron-right"></i></button>
+                            <button type="button" id="btn-rem" class="btn btn-sm btn-poppy btn-block btn-rem setviewonly @disabledcls multiselect-remove" @disablebtn><i class="fa-solid fa-chevron-left"></i></button>
+                            <br>
+                            <button type="button" id="btn-addtoall" class="btn btn-sm btn-poppy btn-block multiselect-addall btn-addall"><i class="fa-solid fa-angle-double-right"></i></button>
+                            <button type="button" id="btn-remall" class="btn btn-sm btn-poppy btn-block multiselect-removeall btn-remall"><i class="fa-solid fa-angle-double-left"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-5 box2">
+                        <div class="info-container">
+                            <h3>Scheduled</h3>
+                            <br>
+                            <span class="info"></span>
+                        </div>
+                        @Html.DropDownList("ddl-attendees", new SelectList(new[] { "...loading" }), new { @multiple = "multiple", @size = "10", @class = "custom-select ddl-attendees form-select form-control multiselect-dual border-cyan multiselect-to listbox", @id = "ddl-attendees" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-poppy" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" id="btn-submitattendees" class="btn-submitattendees btn btn-poppy setviewonly @disabledcls" @disablebtn>
+                    Submit
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

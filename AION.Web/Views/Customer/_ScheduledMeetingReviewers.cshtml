@@ -1,0 +1,49 @@
+﻿@using AION.Web.Models.ProjectDetail;
+
+@model AION.Web.Models.Shared.ScheduledMeetingsListViewModel
+@{ int icount = 1;
+    bool isPreliminary = Model.ScheduledMeetingPartialViewModels
+        .Where(x => x.AppointmentResponseStatusEnum == AION.BL.AppointmentResponseStatusEnum.Tentatively_Scheduled
+                && x.MeetingTypeEnum == AION.BL.MeetingTypeEnum.Preliminary).Any();
+
+
+    if (isPreliminary)
+    {
+        <div class="card-header">Scheduled Plan Reviewers for Prelimininary Meeting</div>
+        <div class="card-body">
+            @foreach (var meeting in Model.ScheduledMeetingPartialViewModels
+            .Where(x => x.AppointmentResponseStatusEnum == AION.BL.AppointmentResponseStatusEnum.Tentatively_Scheduled
+                    && x.MeetingTypeEnum == AION.BL.MeetingTypeEnum.Preliminary))
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        <table class="table table-striped table-bordered table-hover" style="width:auto">
+                            <thead>
+                                <tr>
+                                    <th>Trade</th>
+                                    @foreach (AssignedReviewerListViewModel planreview in meeting.Attendees)
+                                    {
+                                        <td>
+                                            @planreview.TradeName
+                                        </td>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Name</th>
+                                    @foreach (AssignedReviewerListViewModel planreview in meeting.Attendees)
+                                    {
+                                        <td>
+                                            @planreview.ReviewerName
+                                        </td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}

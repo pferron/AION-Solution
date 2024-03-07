@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\MSTest.TestAdapter.3.0.4\build\net462\MSTest.TestAdapter.props" Condition="Exists('..\..\packages\MSTest.TestAdapter.3.0.4\build\net462\MSTest.TestAdapter.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D10E5A9C-A1C4-4BC6-94FF-39BDC2AD091C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AION.BL.Test</RootNamespace>
+    <AssemblyName>AION.BL.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.33.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Azure.Core.1.33.0\lib\net461\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.5.1.1\lib\net462\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ical.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=65c0446cd019ea53, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ical.Net.4.2.0\lib\netstandard2.0\Ical.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Graph, Version=5.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Graph.5.15.0\lib\netstandard2.0\Microsoft.Graph.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Graph.Core, Version=3.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Graph.Core.3.0.7\lib\net462\Microsoft.Graph.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Abstractions.6.31.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.JsonWebTokens.6.31.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Logging.6.31.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Protocols.6.31.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.31.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Tokens.6.31.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Abstractions, Version=1.1.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Kiota.Abstractions.1.1.4\lib\netstandard2.0\Microsoft.Kiota.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Authentication.Azure, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Kiota.Authentication.Azure.1.0.2\lib\netstandard2.0\Microsoft.Kiota.Authentication.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Http.HttpClientLibrary, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Kiota.Http.HttpClientLibrary.1.0.4\lib\netstandard2.0\Microsoft.Kiota.Http.HttpClientLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Form, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Kiota.Serialization.Form.1.0.1\lib\netstandard2.0\Microsoft.Kiota.Serialization.Form.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Json, Version=1.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Kiota.Serialization.Json.1.0.6\lib\netstandard2.0\Microsoft.Kiota.Serialization.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Text, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Kiota.Serialization.Text.1.0.1\lib\netstandard2.0\Microsoft.Kiota.Serialization.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MSTest.TestFramework.3.0.4\lib\net462\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MSTest.TestFramework.3.0.4\lib\net462\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.18.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moq.4.18.4\lib\net462\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NodaTime, Version=3.1.9.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NodaTime.3.1.9\lib\netstandard2.0\NodaTime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IdentityModel.Tokens.Jwt.6.31.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Memory.Data.7.0.0\lib\net462\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reflection.TypeExtensions.4.7.0\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Claims, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Claims.4.3.0\lib\net46\System.Security.Claims.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=7.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Text.Json.7.0.3\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Web.Http.Common.4.0.20126.16343\lib\net40\System.Web.Http.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Tavis.UriTemplates, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5be2d48fa8a60581, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Tavis.UriTemplates.2.0.0\lib\netstandard2.0\Tavis.UriTemplates.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccelaBusinessObjects\AccelaFifoDueDateBOTests.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaProjectOccupancyTypeBOTests.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaReReviewTaskBOTests.cs" />
+    <Compile Include="AccelaBusinessObjects\ProjectLevelCalculatorBOTests.cs" />
+    <Compile Include="Adapters\AppointmentAdapterTests.cs" />
+    <Compile Include="Adapters\CalcAvgEstimationFactorAdapterTests.cs" />
+    <Compile Include="Adapters\CalendarAppointmentAdapterTests.cs" />
+    <Compile Include="Adapters\CalendarEventAdapterTests.cs" />
+    <Compile Include="Adapters\CloseProjectAdapterTests.cs" />
+    <Compile Include="Adapters\DashboardAdapterTests.cs" />
+    <Compile Include="Adapters\ReportingAdapterTests.cs" />
+    <Compile Include="Adapters\EmailAdapterTests.cs" />
+    <Compile Include="Adapters\EstimationAccelaAdapterTests.cs" />
+    <Compile Include="Adapters\EstimationCRUDAdapterTests.cs" />
+    <Compile Include="Adapters\ExpressAdapterTests.cs" />
+    <Compile Include="Adapters\FifoAdapterTests.cs" />
+    <Compile Include="Adapters\FunctionAdapterTests.cs" />
+    <Compile Include="Adapters\HolidayConfigAdapterTests.cs" />
+    <Compile Include="Adapters\NPAAdapterTests.cs" />
+    <Compile Include="Adapters\OutlookAdapterTests.cs" />
+    <Compile Include="Adapters\ProjectEstimationAdapterTests.cs" />
+    <Compile Include="Adapters\PermissionAdapterTests.cs" />
+    <Compile Include="Adapters\SchedulerAdapterTests.cs" />
+    <Compile Include="Adapters\ScheduleCapacityAdapterTests.cs" />
+    <Compile Include="Adapters\PlanReviewAdapterTests.cs" />
+    <Compile Include="Adapters\AdminAdapterTests.cs" />
+    <Compile Include="Adapters\NoteAdapterTests.cs" />
+    <Compile Include="Adapters\SearchAdapterTests.cs" />
+    <Compile Include="Adapters\AccelaBOAdapterTests.cs" />
+    <Compile Include="Adapters\UserAdapterTests.cs" />
+    <Compile Include="BusinessObjects\CatalogItemModelBOTests.cs" />
+    <Compile Include="BusinessObjects\EmailMessageBOTests.cs" />
+    <Compile Include="BusinessObjects\UiSettingsModelBOTests.cs" />
+    <Compile Include="BusinessObjects\ProjectEstimationModelBOTests.cs" />
+    <Compile Include="BusinessObjects\ProjectModelBaseBOTests.cs" />
+    <Compile Include="BusinessObjects\SchedulingLeadTimeReportBOTests.cs" />
+    <Compile Include="BusinessObjects\SystemRoleModelBOTests.cs" />
+    <Compile Include="BusinessObjects\UserIdentityModelBOTests.cs" />
+    <Compile Include="Common\DateTimeHelperTests.cs" />
+    <Compile Include="DefaultEstimationHourModelBOTests.cs" />
+    <Compile Include="DepartmentAndDeptTypeTest.cs" />
+    <Compile Include="Engines\AccelaSyncEngineTests.cs" />
+    <Compile Include="Engines\ExpressProjectSchedulingEngineTests.cs" />
+    <Compile Include="Engines\FIFOOptimizationEngineTests.cs" />
+    <Compile Include="Engines\ProjectStatusEngineTests.cs" />
+    <Compile Include="Engines\PlanReviewProjectSchedulingEngineTests.cs" />
+    <Compile Include="Engines\FIFOSchedulingEngineTests.cs" />
+    <Compile Include="Engines\MessageTemplateEngineTests.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="Helpers\DateTimeHelperTests.cs" />
+    <Compile Include="Helpers\AccelaTaskHelperTests.cs" />
+    <Compile Include="Helpers\AccelaMappingHelperTests.cs" />
+    <Compile Include="Helpers\AuditCompareTests.cs" />
+    <Compile Include="Helpers\ProjectEstimationCreator.cs" />
+    <Compile Include="JsonReader.cs" />
+    <Compile Include="EmailControllerTests.cs" />
+    <Compile Include="MockRepositories\MockAutoEstimationRefBO.cs" />
+    <Compile Include="MockRepositories\MockAverageEstimationHoursFactorBO.cs" />
+    <Compile Include="MockRepositories\MockAccelaEngine.cs" />
+    <Compile Include="MockRepositories\MockEstimationCRUDAdapter.cs" />
+    <Compile Include="MockRepositories\MockProjectBO.cs" />
+    <Compile Include="MockRepositories\MockProjectBusinessRelationshipBO.cs" />
+    <Compile Include="MockRepositories\MockProjectCycleBO.cs" />
+    <Compile Include="Models\AppointmentEmailTests.cs" />
+    <Compile Include="Models\Base\PropertyTypeEnumsExtensionsTests.cs" />
+    <Compile Include="Models\GateDateProcessorTests.cs" />
+    <Compile Include="Models\ProjectCycleProcessorTests.cs" />
+    <Compile Include="Models\TableAuditLogModelBOTests.cs" />
+    <Compile Include="Models\PlanReviewerAvailableTimeBOTests.cs" />
+    <Compile Include="Models\TimeAllocationTypeRefModelBOTests.cs" />
+    <Compile Include="ProjectAutoEstimationTests.cs" />
+    <Compile Include="ProjectModelBaseTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EstimationAccelaAdapterTests.cs" />
+    <Compile Include="ProjectEstimation_GetDefaultValuesTest.cs" />
+    <Compile Include="EstimationCRUDAdapterTests.cs" />
+    <Compile Include="DepartmentModelBOTests.cs" />
+    <Compile Include="SystemRoleModelBOTests.cs" />
+    <Compile Include="ExternalSystemModelBOTests.cs" />
+    <Compile Include="NotesModelBOTests.cs" />
+    <Compile Include="BLLoggingTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Engines\AION.Accela.Engine\DataFiles\AccelaCommercialProject.json">
+      <Link>DataFiles\AccelaCommercialProject.json</Link>
+    </None>
+    <None Include="..\..\Engines\AION.Accela.Engine\DataFiles\AccelaCommercialRTAP.json">
+      <Link>DataFiles\AccelaCommercialRTAP.json</Link>
+    </None>
+    <None Include="..\..\Engines\AION.Accela.Engine\DataFiles\estimators.json">
+      <Link>DataFiles\estimators.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Engines\AION.Accela.Engine\DataFiles\facilitators.json">
+      <Link>DataFiles\facilitators.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Engines\AION.Accela.Engine\DataFiles\projects.json">
+      <Link>DataFiles\projects.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Engines\AION.Accela.Engine\DataFiles\reviewers.json">
+      <Link>DataFiles\reviewers.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="TestData\CEProject_SchedulePlanReview_AutoSchedule_data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\NPA_API_UpdateAttendees_TestData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\CEProject_SchedulePlanReview_TestTestData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\DefaultProjectEstimationValues.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AION.Base\AION.Base.csproj">
+      <Project>{B5D9E46E-1ED6-4D78-88D9-F5D96A2F3284}</Project>
+      <Name>AION.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AION.Manager\AION.Manager.csproj">
+      <Project>{c0280304-be9c-4b98-8c71-f2fbca008579}</Project>
+      <Name>AION.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Azure.KeyVault\Meck.Azure.KeyVault.csproj">
+      <Project>{BF8FC6CA-1611-40BF-B646-4A703A895F81}</Project>
+      <Name>Meck.Azure.KeyVault</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Shared\Meck.Shared.csproj">
+      <Project>{d717203c-5c40-4328-8d90-270b56929061}</Project>
+      <Name>Meck.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.Accela.Engine\AION.Accela.Engine.csproj">
+      <Project>{A1629121-7125-4257-8574-F19D04EF1C48}</Project>
+      <Name>AION.Accela.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.AIONDB.Engine\AION.AIONDB.Engine.csproj">
+      <Project>{A2D6733B-5913-4177-B1DD-5BA875B52DBB}</Project>
+      <Name>AION.AIONDB.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.Email.Engine\AION.Email.Engine.csproj">
+      <Project>{C1282A29-EF40-4E2D-B1ED-D9FD77CD9198}</Project>
+      <Name>AION.Email.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.Estimator.Engine\AION.Estimator.Engine.csproj">
+      <Project>{A6345D62-9EAA-44FD-97CB-AB7EEEBE541A}</Project>
+      <Name>AION.Estimator.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.Scheduler.Engine\AION.Scheduler.Engine.csproj">
+      <Project>{2593c32a-b26b-4f45-afce-7eeef55d7cc6}</Project>
+      <Name>AION.Scheduler.Engine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\MSTest.TestAdapter.3.0.4\build\net462\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MSTest.TestAdapter.3.0.4\build\net462\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\..\packages\MSTest.TestAdapter.3.0.4\build\net462\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MSTest.TestAdapter.3.0.4\build\net462\MSTest.TestAdapter.targets'))" />
+    <Error Condition="!Exists('..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\MSTest.TestAdapter.3.0.4\build\net462\MSTest.TestAdapter.targets" Condition="Exists('..\..\packages\MSTest.TestAdapter.3.0.4\build\net462\MSTest.TestAdapter.targets')" />
+  <Import Project="..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+</Project>

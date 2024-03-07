@@ -1,0 +1,55 @@
+﻿
+@model AION.Web.Models.PlanReviewPartialViewModel
+
+@{
+    string disabledClass = string.Empty;
+    if (!Model.CanUpdate) { disabledClass = " disabled"; }
+
+
+    <tr>
+        <td>@Model.PlanReviewDate</td>
+        <td>
+            @if (Model.IsStatusEditable)
+            {
+                @Html.DropDownList("PRResponse", Model.PlanReviewResponseSelectList, "Select", new { @class = "form-select form-control apptResponseSelect" })
+            }
+            else
+            {
+                <span class="prStatusText">@Model.StatusText</span>
+            }
+        </td>
+        <td>@Model.CycleNumber.ToString()</td>
+        <td>
+            @if (Model.IsPlansReadyOnDateEditable)
+            {
+                @Html.EditorFor(model => Model.PlansReadyOnDate, new { htmlAttributes = new { @class = "DtPickerStyle cal-icon prProdDate", @style = "max-width: 140px;min-width: 140px;" } })
+            }
+            else
+            {
+                @Model.PlansReadyOnDate
+                <input type="hidden" class="prProdDate" value="@Model.PlansReadyOnDate" />
+            }
+        </td>
+        <td>
+            <a role="button" class="btn btn-poppy btn-sm updateProjectCycle @disabledClass" href="#"
+               data-id="@Model.ProjectCycleId" data-project-id="@Model.Project.ID" data-user="@Model.LoggedInUser.ID" disabled="@(!Model.CanUpdate)">Update</a>
+        </td>
+        <td>
+            @if (Model.StatusEnum == AION.BL.AppointmentResponseStatusEnum.Scheduled)
+            {
+                <a role="button" class="btn btn-light" href="@Url.Action("ScheduleFIFOPlanReview", "Scheduling",
+                   new { LoggedInUserEmail = Model.LoggedInUser.Email, ProjectId = Model.Project.AccelaProjectRefId,
+                       RecIdTxt = Model.Project.RecIdTxt })">Edit FIFO Reviewer</a>
+
+            }
+            else
+            {
+                <a role="button" class="btn btn-light disabled" href="#">Edit FIFO Reviewer</a>
+
+            }
+        </td>
+        <td>
+            @Html.Partial("~/Views/Shared/ProjectDetails/_PRReviewersList.cshtml", Model)
+        </td>
+    </tr>
+}

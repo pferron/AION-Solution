@@ -1,0 +1,95 @@
+﻿@model AION.Web.Models.EstimationViewModel
+
+@using AION.BL
+@using AION.BL.Models
+@using AION.Web.Extensions
+@{
+    /**/
+
+    string ModuleName = "Estimation";
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+}
+
+<div class="row match-height">
+    <div class="col-md-12 p-4">
+        <div class="accordion" id="NotesFolder">
+            <input type="hidden" id="StandardNoteType" name="StandardNoteType" value="" />
+
+            @foreach (StandardNoteGroupEnums grp in Model.StandardNoteGroups)
+            {
+                List<StandardNote> notes = Model.StandardNotes.Where(x => x.StandardNoteGroupEnum == grp).ToList();
+                string parentname = grp.ToString();
+
+
+                if (notes.Count() == 1)
+                {
+                    string id = notes[0].StandardNoteId.ToString();
+                    string modalname = "modal" + id;
+                    string foldername = "folder" + parentname;
+                    string chckboxid = "chck" + id;
+                    string txtbxname = "txtbx" + id;
+
+                    <div id="@parentname" class="card-header p-1" role="tab">
+                        @Html.CheckBox(chckboxid, new { @class = "chkstandnote icheckbox_square", @value = txtbxname }, isenabled)
+                        <a data-toggle="collapse" data-parent="#@parentname" href="#@modalname" aria-expanded="false" aria-controls="@modalname" class="card-title lead">@notes[0].StandardNoteTitle</a>
+                    </div>
+
+                    <div id="@modalname" role="tabpanel" aria-labelledby="@parentname" class="collapse">
+                        <div class="card-content">
+                            <div class="card-body">
+                                @Html.TextArea(txtbxname, notes[0].StandardNoteText, new { @style = "min-width: 600px;", @id = txtbxname }, isenabled)
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    string foldername = "folder" + parentname;
+
+                    <div id="@parentname" class="card-header p-1" role="tab">
+                        <a data-toggle="collapse" data-parent="#@parentname" href="#@foldername" aria-expanded="false" aria-controls="@foldername" class="card-title lead">&nbsp;&#11206;&nbsp;@notes[0].StandardNoteGroupDesc</a>
+                    </div>
+
+                    <div id="@foldername" role="tabpanel" aria-labelledby="@parentname" class="collapse">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="accordion" id="NestedNoteGroup">
+
+                                    @for (var i = 0; i < notes.Count(); i++)
+                                    {
+                                        string id = notes[i].StandardNoteId.ToString();
+                                        string modalname = "modal" + id;
+                                        string chckboxid = "chck" + id;
+                                        string txtbxname = "txtbx" + id;
+
+                                        <div id="@parentname" class="card-header p-1" role="tab">
+                                            @Html.CheckBox(chckboxid, new { @class = "chkstandnote icheckbox_square", @value = txtbxname }, isenabled)
+                                            <a data-toggle="collapse" data-parent="#@parentname" href="#@modalname" aria-expanded="false" aria-controls="@modalname" class="card-title lead">@notes[i].StandardNoteTitle</a>
+                                        </div>
+
+                                        <div id="@modalname" role="tabpanel" aria-labelledby="@parentname" class="collapse">
+                                            <div class="card-content">
+                                                <div class="card-body">
+                                                    @Html.TextArea(txtbxname, notes[i].StandardNoteText, new { @style = "min-width: 600px;", @id = txtbxname }, isenabled)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 allnotes collapse">
+    @Html.TextArea("StandardNoteText", new { @id = "StandardNoteText", @class = "StandardNoteText col", @style = "width: 400px;height: 600px;", @readonly = "true" })
+</div>

@@ -1,0 +1,32 @@
+﻿@using AION.Web.Models.ProjectDetail;
+
+@model AION.Web.Models.PlanReviewPartialViewModel
+@{
+    string colstyles = "prreviewers" + Model.PlanReviewScheduleId;
+    int numOfAttendees = Model.Attendees.Count();
+}
+<script type="text/javascript" src="~/app-assets/js/scripts/custom/scheduled-plan-reviewers-by-cycle.js"></script>
+<div class="table w-100">
+    <div class="row">
+        <div class="col-1" style="width: 20px; height: 20px;">
+            <a onclick="$('.@colstyles').toggle(); togglePlus(this);"
+               role="button"
+               class="btn btn-light"> + </a>
+        </div>
+        <div class="col-11">
+            <div class="table @colstyles collapse w-100" style="font-size: smaller;">
+                <div class="row">
+                    <div class="col-3 font-weight-bold text-nowrap">Trade</div>
+                    <div class="col-4 font-weight-bold">Name</div>
+                    <div class="col-4 font-weight-bold text-nowrap">Dates</div>
+                    <div class="col-1 font-weight-bold text-nowrap">Hours</div>
+
+                    @foreach (AssignedReviewerListViewModel planreview in Model.Attendees)
+                    {
+                        @Html.Partial("~/Views/Shared/ProjectDetails/_PRReviewersListRow.cshtml", planreview)
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

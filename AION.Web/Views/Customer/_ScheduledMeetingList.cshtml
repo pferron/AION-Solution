@@ -1,0 +1,74 @@
+﻿@model AION.Web.Models.Shared.ScheduledMeetingsListViewModel
+
+
+<div id="scheduledMeetings">
+    <input type="hidden" id="newUpdateMeetingScheduleProjectStatus" value="@Model.ProjectStatus" />
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Scheduled Meetings</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Response Due</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @*LES-2998 jcl If the meeting has been cancelled, show the row but don't allow interaction from the UI*@
+
+            @foreach (AION.Web.Models.ScheduledMeetingPartialViewModel meeting in
+                Model.ScheduledMeetingPartialViewModels.Where(x => x.AppointmentResponseStatusEnum == AION.BL.AppointmentResponseStatusEnum.Tentatively_Scheduled))
+            {
+                <tr data-id="@meeting.MeetingId">
+                    <td class="scheduledMeetingType">@meeting.MeetingTypeEnum.ToStringValue()</td>
+                    <td class="scheduledDate">@meeting.MeetingDate.ToShortDateString()</td>
+                    <td class="scheduledTime">@meeting.MeetingTime</td>
+                    <td class="scheduledResponseDue">
+                        @if (meeting.ResponseDue.HasValue)
+                        {@meeting.ResponseDue.Value.ToShortDateString()}
+                    </td>
+                    <td>
+                        @Html.DropDownList("MeetingResponse", meeting.MeetingApptResponseSelectList, "Select", new { @class = "form-select form-control meetingApptResponseSelect" })
+                    </td>
+                    <td>
+                        <a role="button" class="btn btn-poppy btn-sm updateScheduledMeeting" href="#" data-project-id="@meeting.ProjectId"
+                           data-id="@meeting.MeetingId" data-user="@meeting.LoggedInUserId">Update</a>
+                    </td>
+                </tr>
+            }
+
+            @foreach (AION.Web.Models.ScheduledMeetingPartialViewModel meeting in
+                Model.ScheduledMeetingPartialViewModels.Where(x => x.AppointmentResponseStatusEnum != AION.BL.AppointmentResponseStatusEnum.Tentatively_Scheduled))
+            {
+                string meetingdate = meeting.MeetingDate.ToShortDateString();
+                string meetingtime = meeting.MeetingTime;
+                string agendadue = meeting.AgendaDue.HasValue ? meeting.AgendaDue.Value.ToShortDateString() : "";
+
+                ////don't show meeting date for cancelled
+                if (meeting.AppointmentResponseStatusEnum == AION.BL.AppointmentResponseStatusEnum.Cancelled
+                    || meeting.AppointmentCancellationEnum == AION.BL.AppointmentCancellationEnum.Reject)
+                {
+                    meetingdate = "";
+                    meetingtime = "";
+                    agendadue = "";
+                }
+
+                <tr>
+                    <td class="scheduledMeetingType">@meeting.MeetingTypeEnum.ToStringValue()</td>
+                    <td class="scheduledDate">@meetingdate</td>
+                    <td class="scheduledTime">@meetingtime</td>
+                    <td class="scheduledResponseDue">
+                        @if (meeting.ResponseDue.HasValue && meeting.AppointmentResponseStatusEnum != AION.BL.AppointmentResponseStatusEnum.Cancelled)
+                        {@meeting.ResponseDue.Value.ToShortDateString()}
+                    </td>
+                    <td>@meeting.StatusLabel</td>
+                    <td colspan="2"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="card mb-4">
+    @Html.Partial("_ScheduledMeetingReviewers", Model)
+</div>

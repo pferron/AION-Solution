@@ -1,0 +1,44 @@
+﻿@using AION.BL
+@using AION.Web.Models.ProjectDetail
+
+@model AION.Web.Models.ProjectDetailViewModel
+@{
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+    bool hasCreate = Model.PermissionMapping.Create_NPA;
+    bool hasModify = Model.PermissionMapping.Modify_NPA;
+
+}
+
+    <table class="table table-striped table-bordered table-hover"
+            id="tblsendnotifs">
+        <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="NotifId" data-visible="false">ID</th>
+                <th data-field="NotifDate" data-sortable="true">Date</th>
+                <th data-field="NofigMsg" data-sortable="true">Message</th>
+                <th data-field="SendToAll" data-sortable="true">Resend To All</th>
+                <th data-field="NotifRecips" data-sortable="true">Select Recipients</th>
+                <th data-field="RecipEmailLst" data-sortable="true">Add Recipients</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ foreach (SendProjectNotifViewModel item in Model.ProjectNotifs)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@item.ProjectNotifEmailId</td>
+                        <td>@item.SendDate</td>
+                        <td>@item.EmailNotif.ToStringValue()</td>
+                        <td>@Html.CheckBoxFor(m => item.ResendAll, new { @id = "sendtoall" + item.ProjectNotifEmailId.ToString() })</td>
+                        <td>@Html.DropDownListFor(m=> item.SelectedRecipient, item.Recipients, new { @id = "recips" + item.ProjectNotifEmailId.ToString() })</td>
+                        <td>@Html.TextBoxFor(m=> item.AddRecipients, new { @id = "addtorecips" + item.ProjectNotifEmailId.ToString() })    </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Contacts and Professionals
+
+The Contacts and Professionals APIs enable apps to manage reference contacts and licensed professionals.
+
+OpenAPI spec version: v4
+
+-->
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EAD20172-08F7-4110-93A7-1DCFC94B3AAC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AccelaContactsAndProfessionals</RootNamespace>
+    <AssemblyName>AccelaContactsAndProfessionals</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0472</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JsonSubTypes, Version=2.0.1.0, Culture=neutral, PublicKeyToken=ee75fc290dbc1176, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JsonSubTypes.2.0.1\lib\net47\JsonSubTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="docs\ASITableDrill.md" />
+    <None Include="docs\ChildDrill.md" />
+    <None Include="docs\CommonConditionModel.md" />
+    <None Include="docs\CommonConditionModelActionbyDepartment.md" />
+    <None Include="docs\CommonConditionModelActionbyUser.md" />
+    <None Include="docs\CommonConditionModelActiveStatus.md" />
+    <None Include="docs\CommonConditionModelAppliedbyDepartment.md" />
+    <None Include="docs\CommonConditionModelAppliedbyUser.md" />
+    <None Include="docs\CommonConditionModelGroup.md" />
+    <None Include="docs\CommonConditionModelInheritable.md" />
+    <None Include="docs\CommonConditionModelPriority.md" />
+    <None Include="docs\CommonConditionModelSeverity.md" />
+    <None Include="docs\CommonConditionModelStatus.md" />
+    <None Include="docs\CommonConditionModelType.md" />
+    <None Include="docs\CompactAddressModel.md" />
+    <None Include="docs\CompactAddressModelCountry.md" />
+    <None Include="docs\CompactAddressModelState.md" />
+    <None Include="docs\ContactAddressModel.md" />
+    <None Include="docs\ContactAddressModelCountry.md" />
+    <None Include="docs\ContactAddressModelDirection.md" />
+    <None Include="docs\ContactAddressModelState.md" />
+    <None Include="docs\ContactAddressModelStatus.md" />
+    <None Include="docs\ContactAddressModelStreetSuffix.md" />
+    <None Include="docs\ContactAddressModelStreetSuffixDirection.md" />
+    <None Include="docs\ContactAddressModelType.md" />
+    <None Include="docs\ContactAddressModelUnitType.md" />
+    <None Include="docs\ContactModel.md" />
+    <None Include="docs\ContactModelBirthCity.md" />
+    <None Include="docs\ContactModelBirthRegion.md" />
+    <None Include="docs\ContactModelBirthState.md" />
+    <None Include="docs\ContactModelDriverLicenseState.md" />
+    <None Include="docs\ContactModelGender.md" />
+    <None Include="docs\ContactModelPreferredChannel.md" />
+    <None Include="docs\ContactModelRace.md" />
+    <None Include="docs\ContactModelRelation.md" />
+    <None Include="docs\ContactModelSalutation.md" />
+    <None Include="docs\ContactModelStatus.md" />
+    <None Include="docs\ContactModelType.md" />
+    <None Include="docs\ContactsAddressesApi.md" />
+    <None Include="docs\ContactsApi.md" />
+    <None Include="docs\ContactsConditionsApi.md" />
+    <None Include="docs\ContactsCustomFormsApi.md" />
+    <None Include="docs\ContactsCustomTablesApi.md" />
+    <None Include="docs\ContactsRecordsApi.md" />
+    <None Include="docs\CustomAttributeModel.md" />
+    <None Include="docs\CustomFormField.md" />
+    <None Include="docs\CustomFormFieldOptions.md" />
+    <None Include="docs\CustomFormMetadataModel.md" />
+    <None Include="docs\CustomFormModel.md" />
+    <None Include="docs\LicenseModel.md" />
+    <None Include="docs\LicenseModelLicenseType.md" />
+    <None Include="docs\LicenseModelLicensingBoard.md" />
+    <None Include="docs\LicenseModelState.md" />
+    <None Include="docs\LicenseModelStatus.md" />
+    <None Include="docs\LicenseRecordModel.md" />
+    <None Include="docs\PeopleConditionModel.md" />
+    <None Include="docs\ProfessionalsApi.md" />
+    <None Include="docs\ProfessionalsConditionsApi.md" />
+    <None Include="docs\ProfessionalsRecordsApi.md" />
+    <None Include="docs\RecordExpirationModel.md" />
+    <None Include="docs\RecordExpirationModelExpirationStatus.md" />
+    <None Include="docs\RecordTypeModel.md" />
+    <None Include="docs\RequestCommonConditionModel.md" />
+    <None Include="docs\RequestContactModel.md" />
+    <None Include="docs\ResponseCommonConditionModel.md" />
+    <None Include="docs\ResponseCommonConditionModelArray.md" />
+    <None Include="docs\ResponseContactAddressModelArray.md" />
+    <None Include="docs\ResponseContactModel.md" />
+    <None Include="docs\ResponseContactModelArray.md" />
+    <None Include="docs\ResponseCustomAttributeModelArray.md" />
+    <None Include="docs\ResponseCustomFormMetadataModelArray.md" />
+    <None Include="docs\ResponseLicenseModelArray.md" />
+    <None Include="docs\ResponseLicenseRecordModelArray.md" />
+    <None Include="docs\ResponsePeopleConditionModelArray.md" />
+    <None Include="docs\ResponseResultModelArray.md" />
+    <None Include="docs\ResponseSimpleRecordModelArray.md" />
+    <None Include="docs\ResponseTableModelArray.md" />
+    <None Include="docs\ResultModel.md" />
+    <None Include="docs\RowModel.md" />
+    <None Include="docs\SimpleRecordModel.md" />
+    <None Include="docs\SimpleRecordModelConstructionType.md" />
+    <None Include="docs\SimpleRecordModelPriority.md" />
+    <None Include="docs\SimpleRecordModelReportedChannel.md" />
+    <None Include="docs\SimpleRecordModelReportedType.md" />
+    <None Include="docs\SimpleRecordModelSeverity.md" />
+    <None Include="docs\SimpleRecordModelStatus.md" />
+    <None Include="docs\SimpleRecordModelStatusReason.md" />
+    <None Include="docs\TableModel.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

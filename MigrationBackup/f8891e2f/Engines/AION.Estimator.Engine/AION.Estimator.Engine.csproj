@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6345D62-9EAA-44FD-97CB-AB7EEEBE541A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AION.Estimator.Engine</RootNamespace>
+    <AssemblyName>AION.Estimator.Engine</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DEV|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DEV\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TST|AnyCPU'">
+    <OutputPath>bin\TST\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA|AnyCPU'">
+    <OutputPath>bin\QA\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PROD|AnyCPU'">
+    <OutputPath>bin\PROD\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessEntities\AdminBE.cs" />
+    <Compile Include="BusinessEntities\AttachmentLinkBE.cs" />
+    <Compile Include="BusinessEntities\AuditActionRefBE.cs" />
+    <Compile Include="BusinessEntities\AutoEstimationRefBE.cs" />
+    <Compile Include="BusinessEntities\AverageEstimationHoursFactorBE.cs" />
+    <Compile Include="BusinessEntities\BusinessDivisionRefBE.cs" />
+    <Compile Include="BusinessEntities\CatalogGroupRefBE.cs" />
+    <Compile Include="BusinessEntities\CatalogRefBE.cs" />
+    <Compile Include="BusinessEntities\FacilitatorBE.cs" />
+    <Compile Include="BusinessEntities\HolidayConfigBE.cs" />
+    <Compile Include="BusinessEntities\JurisdictionRefBE.cs" />
+    <Compile Include="BusinessEntities\MessageTemplateDataElementBE.cs" />
+    <Compile Include="BusinessEntities\OccupancySqrFootageUsrMapBE.cs" />
+    <Compile Include="BusinessEntities\OccupancyTypeRefBE.cs" />
+    <Compile Include="BusinessEntities\ProjectAuditBE.cs" />
+    <Compile Include="BusinessEntities\ProjectOccupancyTypeNameModelBE.cs" />
+    <Compile Include="BusinessEntities\ProjectOccupancyTypMapRefBE.cs" />
+    <Compile Include="BusinessEntities\ProjectOccupancyTypRelBE.cs" />
+    <Compile Include="BusinessEntities\ProjectSearchResultBE.cs" />
+    <Compile Include="BusinessEntities\ProjectTypeBusinessXRefBE.cs" />
+    <Compile Include="BusinessEntities\SquareFootageRefBE.cs" />
+    <Compile Include="BusinessEntities\StandardNoteBE.cs" />
+    <Compile Include="BusinessEntities\TableAuditLogBE.cs" />
+    <Compile Include="BusinessEntities\MessageTemplateBE.cs" />
+    <Compile Include="BusinessEntities\MessageTemplateTypeBE.cs" />
+    <Compile Include="BusinessEntities\UserJurisdictionXRefBE.cs" />
+    <Compile Include="BusinessEntities\UserProjectTypeRefBE.cs" />
+    <Compile Include="BusinessEntities\UserSystemRoleRelationshipBE.cs" />
+    <Compile Include="BusinessEntities\UserBusinessRelationshipBE.cs" />
+    <Compile Include="BusinessEntities\UserBE.cs" />
+    <Compile Include="BusinessEntities\SystemRoleBE.cs" />
+    <Compile Include="BusinessEntities\ProjectTypeRefBE.cs" />
+    <Compile Include="BusinessEntities\ProjectStatusRefBE.cs" />
+    <Compile Include="BusinessEntities\ProjectModeRefBE.cs" />
+    <Compile Include="BusinessEntities\ProjectBusinessRelationshipBE.cs" />
+    <Compile Include="BusinessEntities\ProjectBE.cs" />
+    <Compile Include="BusinessEntities\NotesTypeRefBE.cs" />
+    <Compile Include="BusinessEntities\NotesBE.cs" />
+    <Compile Include="BusinessEntities\ExternalSystemRefBE.cs" />
+    <Compile Include="BusinessEntities\ExcludedPlanReviewersBE.cs" />
+    <Compile Include="BusinessEntities\DefaultEstimationHoursBE.cs" />
+    <Compile Include="BusinessEntities\BusinessTypeRefBE.cs" />
+    <Compile Include="BusinessEntities\BusinessRefBE.cs" />
+    <Compile Include="BusinessEntities\EstimatorBE.cs" />
+    <Compile Include="BusinessEntities\PersonBE.cs" />
+    <Compile Include="BusinessObjects\AutoEstimationRefBO.cs" />
+    <Compile Include="BusinessObjects\BusinessDivisionRefBO.cs" />
+    <Compile Include="BusinessObjects\HolidayConfigBO.cs" />
+    <Compile Include="BusinessObjects\AttachmentLinkBO.cs" />
+    <Compile Include="BusinessObjects\AuditActionRefBO.cs" />
+    <Compile Include="BusinessObjects\AverageEstimationHoursFactorBO.cs" />
+    <Compile Include="BusinessObjects\CatalogGroupRefBO.cs" />
+    <Compile Include="BusinessObjects\CatalogRefBO.cs" />
+    <Compile Include="BusinessObjects\FacilitatorBO.cs" />
+    <Compile Include="BusinessObjects\.cs" />
+    <Compile Include="BusinessObjects\IDataContextAutoEstimationRefBO.cs" />
+    <Compile Include="BusinessObjects\IDataContextAverageEstimationHoursFactorBO.cs" />
+    <Compile Include="BusinessObjects\IDataContextProjectBO.cs" />
+    <Compile Include="BusinessObjects\IDataContextProjectBusinessRelationshipBO.cs" />
+    <Compile Include="BusinessObjects\JurisdictionRefBO.cs" />
+    <Compile Include="BusinessObjects\MessageTemplateDataElementBO.cs" />
+    <Compile Include="BusinessObjects\OccupancySqrFootageUsrMapBO.cs" />
+    <Compile Include="BusinessObjects\OccupancyTypeRefBO.cs" />
+    <Compile Include="BusinessObjects\PersonBO.cs" />
+    <Compile Include="BusinessObjects\ProjectAuditBO.cs" />
+    <Compile Include="BusinessObjects\ProjectOccupancyTypMapRefBO.cs" />
+    <Compile Include="BusinessObjects\ProjectOccupancyTypRelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectTypeBusinessXRefBO.cs" />
+    <Compile Include="BusinessObjects\SquareFootageRefBO.cs" />
+    <Compile Include="BusinessObjects\StandardNoteBO.cs" />
+    <Compile Include="BusinessObjects\TableAuditLogBO.cs" />
+    <Compile Include="BusinessObjects\MessageTemplateBO.cs" />
+    <Compile Include="BusinessObjects\MessageTemplateTypeBO.cs" />
+    <Compile Include="BusinessObjects\UserJurisdictionXRefBO.cs" />
+    <Compile Include="BusinessObjects\UserProjectTypeRefBO.cs" />
+    <Compile Include="BusinessObjects\UserSystemRoleRelationshipBO.cs" />
+    <Compile Include="BusinessObjects\UserBusinessRelationshipBO.cs" />
+    <Compile Include="BusinessObjects\UserBO.cs" />
+    <Compile Include="BusinessObjects\SystemRoleBO.cs" />
+    <Compile Include="BusinessObjects\ProjectTypeRefBO.cs" />
+    <Compile Include="BusinessObjects\ProjectStatusRefBO.cs" />
+    <Compile Include="BusinessObjects\ProjectModeRefBO.cs" />
+    <Compile Include="BusinessObjects\ProjectBusinessRelationshipBO.cs" />
+    <Compile Include="BusinessObjects\ProjectBO.cs" />
+    <Compile Include="BusinessObjects\NotesTypeRefBO.cs" />
+    <Compile Include="BusinessObjects\NotesBO.cs" />
+    <Compile Include="BusinessObjects\ExternalSystemRefBO.cs" />
+    <Compile Include="BusinessObjects\ExcludedPlanReviewersBO.cs" />
+    <Compile Include="BusinessObjects\DefaultEstimationHoursBO.cs" />
+    <Compile Include="BusinessObjects\BusinessTypeRefBO.cs" />
+    <Compile Include="BusinessObjects\BusinessRefBO.cs" />
+    <Compile Include="BusinessObjects\EstimatorBO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AION.Base\AION.Base.csproj">
+      <Project>{b5d9e46e-1ed6-4d78-88d9-f5d96a2f3284}</Project>
+      <Name>AION.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Azure.KeyVault\Meck.Azure.KeyVault.csproj">
+      <Project>{bf8fc6ca-1611-40bf-b646-4a703a895f81}</Project>
+      <Name>Meck.Azure.KeyVault</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Data\Meck.Data.csproj">
+      <Project>{f54dc2c5-f5bc-46cb-a3a2-faaf89252013}</Project>
+      <Name>Meck.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Logging\Meck.Logging.csproj">
+      <Project>{3d235cd3-9012-4485-9a10-0ed0b09a423c}</Project>
+      <Name>Meck.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Shared\Meck.Shared.csproj">
+      <Project>{7f0c6b44-cd5b-44c2-a4ff-fdd9fac848dc}</Project>
+      <Name>Meck.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_attachment_link.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_audit_action_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_auto_estimation_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_average_estimation_hours_factor.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_business_division_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_business_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_business_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_catalog_group_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_catalog_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_default_estimation_hours.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_excluded_plan_reviewers.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_external_system_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_non_project_appoinment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_notes.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_notes_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_occupancy_sqr_footage_usr_map.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_occupancy_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_audit.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_mode_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_occupancy_typ_map_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_occupancy_typ_rel.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_status_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_type_business_x_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_square_footage_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_standard_note.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_system_role.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_system_role_relationship_bysystemroleid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_all_aion_user_business_relationship_byuser.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_project_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_project_type_ref_byuser.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_system_role_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_system_role_relationship_base.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_get_facilitator_workload_summary_byDate.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_attachment_link.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_audit_action_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_auto_estimation_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_average_estimation_hours_factor.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_business_division_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_business_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_business_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_catalog_group_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_catalog_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_default_estimation_hours.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_excluded_plan_reviewers.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_external_system_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_holidayconfig.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_notes.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_notes_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_occupancy_sqr_footage_usr_map.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_occupancy_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_audit.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_mode_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_occupancy_typ_map_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_occupancy_typ_rel.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_status_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_type_business_x_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_v4.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_v3.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_square_footage_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_standard_note.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_system_role.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_template.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user_project_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user_system_role_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user_system_role_relationship_base.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_all_appointments_byprojectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_appt_byproject_bytype.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_attachment_link_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_attachment_link_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_audit_action_ref_get_by_name.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_audit_action_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_audit_action_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_projects_mmf_complete.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_auto_estimation_ref_get_active.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_auto_estimation_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_auto_estimation_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_average_estimation_hours_factor_getbyoccpncycnstrctn.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_average_estimation_hours_factor_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_average_estimation_hours_factor_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_division_ref_get_by_businessrefid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_division_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_division_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_division_xref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_ref_get_AllList.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_type_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_type_ref_get_Alllist.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_business_type_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_catalog_ref_get_by_externalRefID.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_catalog_group_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_catalog_group_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_catalog_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_catalog_ref_get_list_by_key.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_default_estimation_hours_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_default_estimation_hours_get_AllList.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_default_estimation_hours_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_excluded_plan_reviewers_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_excluded_plan_reviewers_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_excluded_plan_reviewers_get_list_by_PrjDeptID.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_external_system_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_external_system_ref_get_by_system_name.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_external_system_ref_get_Alllist.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_external_system_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_fma_internalmeetings_byprojectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_getByExternalSystemRef.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_getDefaultHoursByDepartmentProjectType.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_holidayconfig_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_message_template_data_element_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_non_project_appoinment_search.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_non_project_appoinment_search_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_notes_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_notes_get_list_by_Project.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_notes_type_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_notes_type_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_npa_AllIndByUserIds.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_npa_express_conflict_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_occupancy_sqr_footage_usr_map_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_occupancy_sqr_footage_usr_map_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_occupancy_type_map_by_usr_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_occupancy_type_ref_getbyprojectoccpncy.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_occupancy_type_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_occupancy_type_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_pma_internalmeetings_byprojectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_audit_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_audit_get_by_projectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_audit_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_business_relationship_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_business_relationship_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_business_relationship_get_list_byprojectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_by_externalRefInfo.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_by_externalRefInfo_v3.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_by_externalRefInfo_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_by_id_v3.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_by_id_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_byprojectids.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_by_BuildContr.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_by_fifo_due_dt.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_by_status_ids.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_mode_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_mode_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_occupancy_typ_map_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_occupancy_typ_map_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_occupancy_typ_rel_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_occupancy_typ_rel_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_search.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_status_ref_get_by_projectStatusEnum.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_status_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_status_ref_get_Alllist.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_status_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_type_business_x_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_type_business_x_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_type_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_type_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_square_footage_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_square_footage_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_standard_note_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_standard_note_get_list_bytype.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_standard_note_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_system_role_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_system_role_get_Alllist.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_system_role_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_table_audit_log_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_template_activebytype.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_template_bytypeid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_template_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_template_type_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_template_type_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_admin_search_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_business_relationship_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_business_relationship_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_business_relationship_processnpas.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_byparentsystemrole.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_bysystemroleid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_GetByExternalRefInfo.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_get_list_bybusinessrefid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_get_list_bypropertytype.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_get_reviewers_bypropertytype.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_project_type_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_project_type_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_system_role_relationship_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_system_role_relationship_get_by_userroleid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_system_role_relationship_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_system_role_relationship_get_list_byuserid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_assigned_facilitator.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_existing_projects_by_externalRefId_splitIds.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\USP_select_GetUsersListBySystemRole.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_sync_aion_user_from_accela.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_attachment_link.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_audit_action_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_auto_estimation_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_average_estimation_hours_factor.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_average_estimation_hours_factor_byoccpncycnstrctn.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_business_division_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_business_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_business_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_catalog_group_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_catalog_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_default_estimation_hours.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_excluded_plan_reviewers.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_external_system_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_holidayconfig_inactivate.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_notes.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_notes_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_occupancy_sqr_footage_usr_map.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_occupancy_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_prelim_meeting_proposed_dates.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_mode_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_occupancy_typ_map_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_occupancy_typ_rel.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_status_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_type_business_x_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_type_ref_autoassign_csvlist.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_v4.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_v3.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_square_footage_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_standard_note.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_system_role.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_active.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_business_relationship_processnpaind.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_isexpresssched.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_project_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_isschedulable.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_system_role_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_system_role_relationship_bysystemroleid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_facilitators_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_CATALOG_REF_SCHEDULINGMULTIPLIER_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_DEFAULT_ESTIMATION_HOURS_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_HOLIDAY_CONFIGURATION_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_NON_PROJECT_APPOINTMENT_TYPE_REF_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_PERMISSION_SYSTEM_ROLE_XREF_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_PLAN_REVIEWER_AVAILABLE_HOURS_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_SYSTEM_ROLE_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_TEMPLATE_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_USER_BUSINESS_RELATIONSHIP_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_USER_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_USER_PERMISSION_XREF_changelog.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\ust_USER_SYSTEM_ROLE_RELATIONSHIP_changelog.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+</Project>

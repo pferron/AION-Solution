@@ -1,0 +1,42 @@
+﻿@model AION.Web.Models.ProjectDetailViewModel
+
+@{ string disabled = string.Empty;
+    if (Model.ProjectCycleReviews.Count == 0) { disabled = "disabled"; }
+}
+
+@{
+    if (Model.Project.IsProjectPreliminary || Model.Project.IsPreliminaryMeetingRequested)
+    {
+        <a role="button" class="btn btn-poppy mr-3 mb-3 @disabled" href="@Url.Action("PreliminaryEstimation", "Estimation", new { ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt=Model.Project.RecIdTxt })">Estimate</a>
+    }
+    else
+    {
+        <a role="button" class="btn btn-poppy mr-3 mb-3 @disabled" href="@Url.Action("EstimationMain", "Estimation", new { ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt=Model.Project.RecIdTxt })">Estimate</a>
+
+    }
+    string ScheduleBtn_URL = Model.Project.AionPropertyType.ToString().Equals("Express") ? "ScheduleExpressMeeting" : "SchedulePlanReview";
+    string ScheduleBtn_Disabled = Model.Project.AionPropertyType.ToString().Equals("Express") ? Model.RescheduleExpressReviewDisabled : Model.ReschedulePlanReviewDisabled;
+}
+<a role="button" id="schedulePlanReview" class="btn btn-poppy mr-3 mb-3 @ScheduleBtn_Disabled"
+   href="@Url.Action(ScheduleBtn_URL, "Scheduling", new {ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt=Model.Project.RecIdTxt })">Schedule</a>
+<a role="button" class="btn btn-poppy mr-3 mb-3" href="@Model.AccelaProjectDeeplink" target="_blank">Application</a>
+@if (Model.PermissionMapping.Schdul_Notes_Sel)
+{
+    <button id="notes" type="button" class="btn btn-poppy mr-3 mb-3" data-toggle="modal" data-target="#notes-modal">Notes</button>
+}
+else
+{
+    <button id="notes" type="button" class="btn btn-poppy mr-3 mb-3 disabled" data-toggle="modal" data-target="#notes-modal">Notes</button>
+}
+
+@{
+    string notifbtncls = Model.PermissionMapping.Resend_Notif ? "opensendnotifs" : "disabled";
+}
+<a role="button" class="btn btn-poppy mr-3 mb-3 @notifbtncls" href="#">Resend Notifications</a>
+@Html.Partial("_NotesModal", new AION.Web.Models.Shared.NotesViewModel
+{
+LoggedInUser = Model.LoggedInUser,
+LoggedInUserEmail = Model.LoggedInUserEmail,
+Project = Model.Project,
+NotesComments = Model.Project.Notes
+})

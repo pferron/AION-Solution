@@ -1,0 +1,18 @@
+﻿<script type="text/javascript">
+
+    function optimizeFIFOSchedules() {
+        openWarning("Optimizing...", false);
+        var url = "/Admin/DebugFIFOOptimizer";
+        $.ajax
+            ({
+                method: "GET",
+                datatype: "json",
+                url: url
+            }).done(function (response, status, jqxhr) {
+                $("#dialog-modal-warning").dialog("close");
+            });
+    }
+
+</script>
+
+<button class="ml-2" type="button" onclick="optimizeFIFOSchedules();">Optimize FIFO Schedules</button>

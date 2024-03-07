@@ -1,0 +1,476 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+
+@model AION.Web.Models.AdminViewModel
+
+@{
+    bool isreadonly = Model.IsReadOnly;
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+}
+
+<div class="row">
+    <div class="col-md-6">
+
+        <h5 class="form-section">Schedule Gate Configuration</h5>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Plan Review Days:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.ScheduleDateConfigurationCatalogItem.Value,
+                             new { @id = "txtGateDate", @class = "form-control border-cyan" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <div>Business days before the plan review date</div>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="form-section">FIFO Same Company</h5>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Plan Review Days:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.SameBuildingContractorReviewDaysCatalogItem.Value,
+                         new { @id = "txtContractorRevieDays", @class = "form-control border-cyan", @min = "0.0", @type = "number", @step = "1" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <div>Business days before the plan review date</div>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="form-section">Plan Reviewers hours available by day</h5>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Plan Reviewer - Non MMF:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.HoursPlanReviewerMMF, new { @id = "txtHoursPlanReviewerMMF", @class = "form-control border-cyan", @min = "0.00", @max = "8.00", @type = "number", @step = ".5" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FIFO: Small Commercial:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.HoursFIFOSmComm, new { @id = "txtHoursFIFOSmComm", @class = "form-control border-cyan", @min = "0.00", @max = "8.00", @type = "number", @step = ".5" }, isenabled)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Mega Multi Family:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.HoursMMF, new { @id = "txtHoursMMF", @class = "form-control border-cyan", @min = "0.00", @max = "8.00", @type = "number", @step = ".5" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FIFO: Single Family Home:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.HoursFIFOSingleFH, new { @id = "txtHoursFIFOSinglFH", @class = "form-control border-cyan", @min = "0.00", @max = "8.00", @type = "number", @step = ".5" }, isenabled)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> County Fire:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.HoursCountyFire, new { @id = "txtHoursCountyFire", @class = "form-control border-cyan", @min = "0.00", @max = "8.00", @type = "number", @step = ".5" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FIFO: Master Plan:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.HoursFIFOMsPln, new { @id = "txtHoursFIFOMsPln", @class = "form-control border-cyan", @min = "0.00", @max = "8.00", @type = "number", @step = ".5" }, isenabled)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Express:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.HoursExpress, new { @id = "txtHoursExpress", @class = "form-control border-cyan", @min = "0.00", @max = "8.00", @type = "number", @step = ".5" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FIFO: Add/Reno SFH:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.HoursFIFOAddRenSFH, new { @id = "txtHoursFIFORenSFH", @class = "form-control border-cyan", @min = "0.00", @max = "8.00", @type = "number", @step = ".5" }, isenabled)
+                </div>
+            </div>
+        </div>
+
+        <h5 class="form-section">Plan Reviewer meeting time available by day</h5>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Commercial From:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.StartTimeCommercial, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @id = "starttimeselcom",
+                           @class = "form-control border-cyan pickatime-minmax",
+                           @Value = Model.MiscConfigurationViewModel.StartTimeCommercial.ToString("h:mm tt")
+                       }
+                   })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Commercial To:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.EndTimeCommercial, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @id = "endtimeselcom",
+                                        @class = "form-control border-cyan pickatime-minmax",
+                                        @Value = Model.MiscConfigurationViewModel.EndTimeCommercial.ToString("h:mm tt")
+                                    }
+                                })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Mega Multi Family From:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.StartTimeMMF, new
+                         {
+                             htmlAttributes = new
+                             {
+                                 @id = "starttimeselmmf",
+                                 @class = "form-control border-cyan pickatime-minmax",
+                                @Value = Model.MiscConfigurationViewModel.StartTimeMMF.ToString("h:mm tt")
+                             }
+                         })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Mega Multi Family To:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.EndTimeMMF, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @id = "endtimeselmmf",
+                                   @class = "form-control border-cyan pickatime-minmax",
+                                   @Value = Model.MiscConfigurationViewModel.EndTimeMMF.ToString("h:mm tt")
+                               }
+                           })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FIFO From:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.StartTimeFIFO, new
+                         {
+                             htmlAttributes = new
+                             {
+                                 @id = "starttimeselfifo",
+                                 @class = "form-control border-cyan pickatime-minmax",
+                                @Value = Model.MiscConfigurationViewModel.StartTimeFIFO.ToString("h:mm tt")
+                             }
+                         })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>FIFO To:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.EndTimeFIFO, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @id = "endtimeselfifo",
+                                @class = "form-control border-cyan pickatime-minmax",
+                                @Value = Model.MiscConfigurationViewModel.EndTimeFIFO.ToString("h:mm tt")
+                            }
+                        })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Special Teams From:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.StartTimeSpecialTeams, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @id = "starttimeselst",
+                                   @class = "form-control border-cyan pickatime-minmax",
+                                   @Value = Model.MiscConfigurationViewModel.StartTimeSpecialTeams.ToString("h:mm tt")
+                               }
+                           })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Special Teams To:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.EndTimeSpecialTeams, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @id = "endtimeselst",
+                                   @class = "form-control border-cyan pickatime-minmax",
+                                   @Value = Model.MiscConfigurationViewModel.EndTimeSpecialTeams.ToString("h:mm tt")
+                               }
+                           })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Townhomes From:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.StartTimeTownhomes, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @id = "starttimeselth",
+                                   @class = "form-control border-cyan pickatime-minmax",
+                                   @Value = Model.MiscConfigurationViewModel.StartTimeTownhomes.ToString("h:mm tt")
+                               }
+                           })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Townhomes To:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.EndTimeTownhomes, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @id = "endtimeselth",
+                                   @class = "form-control border-cyan pickatime-minmax",
+                                   @Value = Model.MiscConfigurationViewModel.EndTimeTownhomes.ToString("h:mm tt")
+                               }
+                           })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Fire Shop Drawings From:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.StartTimeCSD, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @id = "starttimeselcsd",
+                                   @class = "form-control border-cyan pickatime-minmax",
+                                   @Value = Model.MiscConfigurationViewModel.StartTimeCSD.ToString("h:mm tt")
+                               }
+                           })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Fire Shop Drawings To:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.MiscConfigurationViewModel.EndTimeCSD, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @id = "endtimeselcsd",
+                                   @class = "form-control border-cyan pickatime-minmax",
+                                   @Value = Model.MiscConfigurationViewModel.EndTimeCSD.ToString("h:mm tt")
+                               }
+                           })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="form-section">Scheduling Multiplier</h5>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Use:</label>
+                    @Html.DropDownListFor(m => Model.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierUseSelected, Model.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierUseSelectList, new { @class = "form-select form-control border-cyan", @id = "drpDnLstShe", @onChange = "toggleSteps(this)" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Name:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierName, new { @id = "txtScheduligMultiplierName", @class = "form-control border-cyan" }, isenabled)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Start Date:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierStartDate, new { htmlAttributes = new { @id = "dpStartDate", @class = "form-control border-cyan datepicker-future start-date", @Value = Model.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierStartDate.Date.ToString("MM/dd/yyyy") } })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>End Date:</label>
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierEndDate, new { htmlAttributes = new { @id = "dpEndDate", @class = "form-control border-cyan datepicker-future end-date", @Value = Model.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierEndDate.Date.ToString("MM/dd/yyyy") } })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Factor:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierFactor, new { @id = "txtSchedulingMultiplierFactor", @class = "form-control border-cyan", @min = "0.00", @max = "100", @step = "0.1", @type = "number" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Project Type:</label>
+                    @Html.ListBoxFor(m => Model.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierSelectedProjectTypes, Model.MiscConfigSchedulingMultiplierViewModel.SchedulingMultiplierProjectTypeList, new { @class = "multiselect form-control border-cyan", @id = "chkDrpDnLstSMProjectList", @multiple = "multiple" }, isenabled)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h5 class="form-section">Facilitator Assignment Designation</h5>
+
+            @Html.Partial("_MultiSelectWithModel",
+                    new AION.Web.Models.MultiSelectViewModel()
+                    {
+                        FromList = Model.MiscConfigurationViewModel.FacilitatorManualProjectTypes,
+                        ToList = Model.MiscConfigurationViewModel.FacilitatorAutoAssignableProjectTypes,
+                        PageName = "MISC",
+                        TitleFromList = "Manual",
+                        TitleToList = "Auto",
+                        NameFromList = "MiscConfigurationViewModel.SelectedFacilitatorManualProjectTypes",
+                        NameToList = "MiscConfigurationViewModel.SelectedFacilitatorAutoAssignableProjectTypes",
+                        DisplayMoveUpDown = false
+
+                    })
+
+        <h5 class="form-section">Cancellation Fee</h5>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Per Hour:</label>
+                    @Html.TextBoxFor(m => m.MiscConfigurationViewModel.CancellationFeePerHourCatalogItem.Value,
+                        new { @id = "txtCancellationFeePerHour", @class = "form-control border-cyan moneytextbox", @min = "0.00", step = "0.01", @type = "number" }, isenabled)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model AION.Web.Models.PlanReviewPartialViewModel
+
+@{
+    var contr = ViewContext.RouteData.Values["controller"];
+    bool isCustomer = contr.ToString().ToLower() == "Customer".ToLower();
+
+}
+@{ if (isCustomer)
+    {
+        <tr>
+            <td></td>
+            <td>@(!Model.IsProjectSuspended ? Model.PlanReviewDate :string.Empty)</td>
+            <td>@Model.ResponseDate</td>
+            <td>@Model.CycleNumber.ToString()</td>
+            <td>
+
+                @Model.PlansReadyOnDate
+                <input type="hidden" class="prProdDate" value="@Model.PlansReadyOnDate"/>
+            </td>
+            <td>
+
+                <span class="prStatusText">@Model.StatusText</span>
+
+            </td>
+            <td>
+            </td>
+            <td>
+                @if (Model.IsPooled)
+                {
+                    <button type="button" class="btn btn-sm btn-warning setviewonly">POOLED</button>
+                }
+
+
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+
+            <td>@Model.PlanReviewDate</td>
+            <td>
+                <span class="prStatusText">@Model.StatusText</span>
+            </td>
+            <td>@Model.CycleNumber.ToString()</td>
+            <td>
+                @Model.PlansReadyOnDate
+                <input type="hidden" class="prProdDate" value="@Model.PlansReadyOnDate" />
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                @Html.Partial("~/Views/Shared/ProjectDetails/_PRReviewersList.cshtml", Model)
+            </td>
+        </tr>
+    }
+}

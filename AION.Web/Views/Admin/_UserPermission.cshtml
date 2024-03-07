@@ -1,0 +1,58 @@
+﻿@using AION.Manager.Models
+@model AION.Web.Models.AdminViewModel
+
+@{
+    bool isreadonly = Model.IsReadOnly;
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+}
+<script type="text/javascript">
+    //https://getbootstrap.com/docs/4.3/components/collapse/
+
+</script>
+<div>
+    @Html.Hidden("ModifyUserPermissionViewModel.WrkrId", Model.LoggedInUser.ID)
+    <div class="row">
+        <div class="col">
+            User name
+            hidden user id
+        </div>
+    </div>
+    <div><h4>Modify Permissions</h4></div>
+
+    <div class="accordion" id="accrdnModifyRolePermissions" role="tablist" aria-multiselectable="true">
+        @{
+            foreach (Permission module in Model.ModifyRoleViewModel.PermsModulesList)
+            {
+                string moduleid = module.PermissionModuleId.Value.ToString();
+                string modulename = module.PermissionModuleEnum.ToStringValue();
+                string modulenamelink = modulename.Replace(" ", "");
+                <div class="card collapse-icon accordion-icon-rotate left">
+                    <div id="@moduleid" class="card-header">
+                        <a data-toggle="collapse" data-parent="#accrdnModifyRolePermissions" href="#@modulenamelink"
+                           aria-expanded="false" aria-controls="@modulenamelink" class="card-title lead">@modulename</a>
+                    </div>
+                    <div id="@modulenamelink" role="tabpanel" aria-labelledby="@moduleid" class="collapse">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    @foreach (Permission permission in Model.ModifyRoleViewModel.PermsList.Where(x => x.PermissionModuleId == module.PermissionModuleId).ToList())
+                                    {
+                                        <li class="skin skin-square">
+                                            @{ string checkboxid = permission.PermissionEnum.ToString();}
+                                            @Html.CheckBox("ModifyRoleViewModel." + checkboxid, new { @class = "modifyroleperm" })
+                                            <label for="ModifyRoleViewModel_@checkboxid">@permission.PermissionEnum.ToStringValue()</label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+

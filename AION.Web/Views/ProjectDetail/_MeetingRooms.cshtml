@@ -1,0 +1,37 @@
+﻿@using AION.BL.Models
+
+@model AION.Web.Models.ProjectDetailViewModel
+@{ 
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+    bool hasCreate = Model.PermissionMapping.Create_NPA;
+    bool hasModify = Model.PermissionMapping.Modify_NPA;
+
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <table class="table table-striped table-bordered table-hover" id="meetingroomtable" style="width:100% !important">
+            <thead>
+                <tr>
+                    <th data-field="state" data-checkbox="false" data-visible="false"></th>
+                    <th data-field="MeetingRoomRefID" data-visible="false">ID</th>
+                    <th data-field="MeetingRoomName" data-sortable="true">Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ foreach (MeetingRoom room in Model.MeetingRoomList)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@room.MeetingRoomRefID</td>
+                            <td><input type="radio" name="RefID" value="@room.MeetingRoomRefID"> <span>@room.MeetingRoomName</span></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

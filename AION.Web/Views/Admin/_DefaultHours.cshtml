@@ -1,0 +1,370 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+
+@model AION.Web.Models.AdminViewModel
+
+@{
+    bool isreadonly = Model.IsReadOnly;
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+}
+
+<style>
+    .disabledefaulthours {
+        background-color: #D3D3D3;
+    }
+</style>
+
+<h4 class="form-section"><i class="fa fa-magnifying-glass"></i> Search Project Type</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Project Type:</label>
+            <div class="input-group">
+                @Html.DropDownListFor(m => m.DefaultHoursViewModel.SelectedProjectType, Model.DefaultHoursViewModel.ProjectType, new { @id = "ProjectTypesSelect", @class = "form-select form-control border-cyan remviewonly" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="form-section"><i class="fa fa-clock"></i> Hours Configuration</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Building:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.BuildingSelection, Model.DefaultHoursViewModel.TradeSelectOptions,
+                            new { @class = "form-select form-control border-cyan Building", onchange = "EnableDisable('Building')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.BuildingHrs, new { @id = "txtBuilding", @class = "form-control border-cyan Building", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.BuildingHrsAllowed, new { @class = "HiddenBuilding" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Electrical:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.ElectricSelection, Model.DefaultHoursViewModel.TradeSelectOptions,
+                         new { @class = "form-select form-control border-cyan Electrical", onchange = "EnableDisable('Electrical')" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.ElectricHrs, new { @id = "txtElectrical", @class = "form-control border-cyan Electrical", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.ElectricHrsAllowed, new { @class = "HiddenElectrical" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Mechanical:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.MechSelection, Model.DefaultHoursViewModel.TradeSelectOptions,
+                    new { @class = "form-select form-control border-cyan Mechanical", onchange = "EnableDisable('Mechanical')" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.MechHrs, new { @id = "txtMechanical", @class = "form-control border-cyan Mechanical", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.MechHrsAllowed, new { @class = "HiddenMechanical" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Plumbing:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.PlumbSelection, Model.DefaultHoursViewModel.TradeSelectOptions,
+                    new { @class = "form-select form-control border-cyan Plumbing", onchange = "EnableDisable('Plumbing')" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.PlumbHrs, new { @id = "txtPlumbing", @class = "form-control border-cyan Plumbing", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.PlumbHrsAllowed, new { @class = "HiddenPlumbing" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> County Zoning:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.CountyZoneSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan CountyZoning", onchange = "EnableDisable('CountyZoning')" }, isenabled)
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.CountyZoneHrs, new { @id = "txtCountyZoning", @class = "form-control border-cyan CountyZoning", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.CountyZoneHrsAllowed, new { @class = "HiddenCountyZoning" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> City Zoning:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.CityZoneSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan CityZoning", onchange = "EnableDisable('CityZoning')" }, isenabled)
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.CityZoneHrs, new { @id = "txtCityZoning", @class = "form-control border-cyan CityZoning", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.CityZoneHrsAllowed, new { @class = "HiddenCityZoning" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> County Fire:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.CountyFireSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan CountyFire", onchange = "EnableDisable('CountyFire')" }, isenabled)
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.CountyFireHrs, new { @id = "txtCountyFire", @class = "form-control border-cyan CountyFire", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.CountyFireHrsAllowed, new { @class = "HiddenCountyFire" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> City Fire:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.CityFireSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan CityFire", onchange = "EnableDisable('CityFire')" }, isenabled)
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.CityFireHrs, new { @id = "txtCityFire", @class = "form-control border-cyan CityFire", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.CityFireHrsAllowed, new { @class = "HiddenCityFire" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> EHS Day Care:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.EHSDayCareSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan EHSDayCare", onchange = "EnableDisable('EHSDayCare')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.EHSDayCareHrs, new { @id = "txtEHSDayCare", @class = "form-control border-cyan EHSDayCare", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.EHSDayCareHrsAllowed, new { @class = "HiddenEHSDayCare" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> EHS Food Service:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.EHSFoodServiceSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan EHSFoodService", onchange = "EnableDisable('EHSFoodService')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.EHSFoodServiceHrs, new { @id = "txtEHSFoodService", @class = "form-control border-cyan EHSFoodService", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.EHSFoodServiceHrsAllowed, new { @class = "HiddenEHSFoodService" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> EHS Public Pool:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.EHSPoolSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan EHSPublicPool", onchange = "EnableDisable('EHSPublicPool')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.EHSPoolHrs, new { @id = "txtEHSPublicPool", @class = "form-control border-cyan EHSPublicPool", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.EHSPoolHrsAllowed, new { @class = "HiddenEHSPublicPool" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> EHS Facilities/Lodging:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.EHSLodgingSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan EHSLodging", onchange = "EnableDisable('EHSLodging')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.EHSLodgingHrs, new { @id = "txtEHSLodging", @class = "form-control border-cyan EHSLodging", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.EHSLodgingHrsAllowed, new { @class = "HiddenEHSLodging" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> CLT Water Backflow:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.BackFlowSelection, Model.DefaultHoursViewModel.AgencySelectOptions, new { @class = "form-select form-control border-cyan Backflow", onchange = "EnableDisable('Backflow')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.BackFlowHrs, new { @id = "txtBackflow", @class = "form-control border-cyan Backflow", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.BackFlowHrsAllowed, new { @class = "HiddenBackflow" })
+                </div>
+            </div>
+        </div>
+
+
+        <h4 class="form-section"><i class="fa fa-pie-chart"></i> Zoning Configuration</h4>
+
+        <div class="row hiddenzone">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Cornelius:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.CorneliusZoneSelection, Model.DefaultHoursViewModel.ZoneConfigSelectOptions, new { @class = "form-select form-control border-cyan Cornelius", onchange = "EnableDisable('Cornelius')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.CorneliusZoneHrs, new { @id = "txtCornelius", @class = "form-control border-cyan Cornelius", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.CorneliusZoneHrsAllowed, new { @class = "HiddenCornelius" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row hiddenzone">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Davidson:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.DavidsonZoneSelection, Model.DefaultHoursViewModel.ZoneConfigSelectOptions, new { @class = "form-select form-control border-cyan Davidson", onchange = "EnableDisable('Davidson')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.DavidsonZoneHrs, new { @id = "txtDavidson", @class = "form-control border-cyan Davidson", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.DavidsonZoneHrsAllowed, new { @class = "HiddenDavidson" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Huntersville:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.HuntersvilleZoneSelection, Model.DefaultHoursViewModel.ZoneConfigSelectOptions, new { @class = "form-select form-control border-cyan Huntersville", onchange = "EnableDisable('Huntersville')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.HuntersvilleZoneHrs, new { @id = "txtHuntersville", @class = "form-control border-cyan Huntersville", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.HuntersvilleZoneHrsAllowed, new { @class = "HiddenHuntersville" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    @Html.TextBox("pooltxt", "Pool", new { @id = "huntersvillepooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan pooltxt" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row hiddenzone">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Matthews:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.MatthewsZoneSelection, Model.DefaultHoursViewModel.ZoneConfigSelectOptions, new { @class = "form-select form-control border-cyan Matthews", onchange = "EnableDisable('Matthews')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.MatthewsZoneHrsAllowed, new { @id = "txtMatthews", @class = "form-control border-cyan Matthews", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.HuntersvilleZoneHrsAllowed, new { @class = "HiddenMatthews" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>  Mint Hill:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.MintHillZoneSelection, Model.DefaultHoursViewModel.ZoneConfigSelectOptions, new { @class = "form-select form-control border-cyan MintHill", onchange = "EnableDisable('MintHill')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.MintHillZoneHrs, new { @id = "txtMintHill", @class = "form-control border-cyan MintHill", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.MintHillZoneHrsAllowed, new { @class = "HiddenMintHill" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    @Html.TextBox("pooltxt", "Pool", new { @id = "minthillpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control pooltxt" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row hiddenzone">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Pineville:</label>
+                    @Html.DropDownListFor(m => m.DefaultHoursViewModel.PinevilleZoneSelection, Model.DefaultHoursViewModel.ZoneConfigSelectOptions, new { @class = "form-select form-control border-cyan Pineville", onchange = "EnableDisable('Pineville')" }, isenabled)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label> Default Hours:</label>
+                    @Html.TextBoxFor(m => m.DefaultHoursViewModel.PinevilleZoneHrs, new { @id = "txtPineville", @class = "form-control border-cyan Pineville", @min = "0.50", @max = "9999.00", @type = "number", @step = ".5" }, isenabled)
+                    @Html.HiddenFor(m => m.DefaultHoursViewModel.PinevilleZoneHrsAllowed, new { @class = "HiddenPineville" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

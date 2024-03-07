@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tst_sustainableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PROJECT">
+          <Key>
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="PROJECT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROJECT_NM" Type="varchar" MaxLength="100" />
+          <Property Name="EXTERNAL_SYSTEM_REF_ID" Type="int" />
+          <Property Name="WKR_ID_CREATED_TXT" Type="varchar" MaxLength="10" />
+          <Property Name="CREATED_DTTM" Type="datetime" />
+          <Property Name="WKR_ID_UPDATED_TXT" Type="varchar" MaxLength="10" />
+          <Property Name="UPDATED_DTTM" Type="datetime" />
+          <Property Name="PROJECT_STATUS_REF_ID" Type="int" />
+          <Property Name="PROJECT_TYP_REF_ID" Type="int" />
+          <Property Name="SRC_SYSTEM_VAL_TXT" Type="varchar" MaxLength="255" />
+          <Property Name="TAG_CREATED_ID_NUM" Type="varchar" MaxLength="10" />
+          <Property Name="TAG_CREATED_BY_TS" Type="datetime" />
+          <Property Name="TAG_UPDATED_BY_TS" Type="datetime" />
+          <Property Name="TAG_UPDATED_BY_ID_NUM" Type="varchar" MaxLength="10" />
+          <Property Name="ASSIGNED_ESTIMATOR_ID" Type="int" />
+          <Property Name="ASSIGNED_FACILITATOR_ID" Type="int" />
+          <Property Name="PROJECT_MODE_REF_ID" Type="int" Nullable="false" />
+          <Property Name="WORKFLOW_STATUS_REF_ID" Type="int" />
+          <Property Name="RTAP_IND" Type="bit" />
+          <Property Name="PRELIMINARY_IND" Type="bit" />
+          <Property Name="PROJECT_LVL_TXT" Type="varchar" MaxLength="10" />
+          <Property Name="GATE_DT" Type="datetime" />
+          <Property Name="PROJECT_ADDR_TXT" Type="varchar" MaxLength="255" />
+          <Property Name="PROJECT_MANAGER_ID" Type="int" />
+          <Property Name="BUILD_CONTR_NM" Type="varchar" MaxLength="100" />
+          <Property Name="BUILD_CONTR_ACCT_NUM" Type="varchar" MaxLength="100" />
+          <Property Name="GATE_ACCEPTED_IND" Type="bit" />
+          <Property Name="FIFO_DUE_DT" Type="datetime" />
+          <Property Name="PLANS_READY_ON_DT" Type="datetime" />
+          <Property Name="CYCLE_NBR" Type="int" />
+          <Property Name="PRELIM_MEETING_COMPLETE_IND" Type="bit" />
+          <Property Name="ACCELA_RTAP_PROJECT_REF_ID" Type="varchar" MaxLength="255" />
+          <Property Name="ACCELA_PRELIM_PROJECT_REF_ID" Type="varchar" MaxLength="255" />
+          <Property Name="PROJECT_OCCUPANCY_TYP_MAP_NM" Type="varchar" MaxLength="255" />
+          <Property Name="CONSTR_TYP_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="CONSTR_COST_AMT" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="SHEETS_CNT_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="SQUARE_FOOTAGE_TO_BE_REVIEWED_NBR" Type="int" />
+          <Property Name="SQUARE_FOOTAGE_OF_OVERALL_BUILD_NBR" Type="int" />
+          <Property Name="STORIES_CNT" Type="int" />
+          <Property Name="HIGH_RISE_IND" Type="bit" />
+          <Property Name="EXPRESS_IND" Type="bit" />
+          <Property Name="REVIEW_TYP_REF_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PRELIM_MEETING_CANCELLED_IND" Type="bit" />
+          <Property Name="FIFO_IND" Type="bit" />
+          <Property Name="TOTAL_JOB_COST_AMT" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="WORK_TYP_DESC" Type="varchar" MaxLength="1500" />
+          <Property Name="OCCUPANCY_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PRI_OCCUPANCY_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="SECONDARY_OCCUPANCY_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="SEAL_HOLDERS_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="DESIGNER_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="FIRE_DETAIL_DESC" Type="varchar" MaxLength="1500" />
+          <Property Name="OVERALL_WORK_SCOPE_DESC" Type="varchar" MaxLength="8000" />
+          <Property Name="MECH_WORK_SCOPE_DESC" Type="varchar" MaxLength="8000" />
+          <Property Name="ELCTR_WORK_SCOPE_DESC" Type="varchar" MaxLength="8000" />
+          <Property Name="PLUMB_WORK_SCOPE_DESC" Type="varchar" MaxLength="8000" />
+          <Property Name="CIVIL_WORK_SCOPE_DESC" Type="varchar" MaxLength="8000" />
+          <Property Name="ZONING_OF_SITE_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="CHG_OF_USE_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="CONDITIONAL_PERMIT_APPROVAL_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PREVIOUS_BUSINESS_TYP_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="CITY_OF_CHARLOTTE_DESC" Type="varchar" MaxLength="1500" />
+          <Property Name="PROPOSED_BUSINESS_TYP_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="CODE_SUMMARY_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="BACKFLOW_APPLICATION_DETAIL_DESC" Type="varchar" MaxLength="1500" />
+          <Property Name="WATER_SEWER_DETAIL_DESC" Type="varchar" MaxLength="1500" />
+          <Property Name="HEALTH_DEPT_DETAIL_DESC" Type="varchar" MaxLength="1500" />
+          <Property Name="DAY_CARE_DESC" Type="varchar" MaxLength="1500" />
+          <Property Name="PROPOSED_OUTDOOR_UNDERGROUND_PIPING_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PROPOSED_FIRE_SPRINKLER_PIPING_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="INSTALL_CMUD_BACKFLOW_PREVENTER_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="EXTENDING_PUBLIC_WATER_SEWER_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="GRADE_MOD_WATER_SEWER_EASEMENT_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PROPOSED_ENCROACHMENT_WATER_SEWER_EASEMENT_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PARCEL_NUM" Type="varchar" MaxLength="10" />
+          <Property Name="AFFORDABLE_HOUSING_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="EXACT_ADDR_TXT" Type="varchar" MaxLength="255" />
+          <Property Name="DELIVERY_MTHD_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="BIM_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="BIM_DESIGN_DISCIPLINE_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="ATTENDEES_CNT_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PREVIOUS_PRELIM_REVIEW_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PROJECT_NUM_PREVIOUS_PRELIM_REVIEW_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="SAME_REVIEW_TEAM_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PROPERTY_OWNER_NM" Type="varchar" MaxLength="100" />
+          <Property Name="PROPERTY_OWNER_ADDR_TXT" Type="varchar" MaxLength="255" />
+          <Property Name="PROPERTY_OWNER_EMAIL_ADDR_TXT" Type="varchar" MaxLength="100" />
+          <Property Name="PROPERTY_OWNER_PHONE_NUM" Type="varchar" MaxLength="20" />
+          <Property Name="PROPERTY_OWNER_AUTO_EMAIL_ADDR_TXT" Type="varchar" MaxLength="100" />
+          <Property Name="PROPERTY_MANAGER_NM" Type="varchar" MaxLength="100" />
+          <Property Name="PROPERTY_MANAGER_EMAIL_ADDR_TXT" Type="varchar" MaxLength="100" />
+          <Property Name="PROPERTY_MANAGER_EMAIL_ADDR_2_TXT" Type="varchar" MaxLength="100" />
+          <Property Name="ARCHITECT_DESIGNER_CNTCT_NM" Type="varchar" MaxLength="100" />
+          <Property Name="ARCHITECT_DESIGNER_CNTCT_PHONE_NUM" Type="varchar" MaxLength="20" />
+          <Property Name="ARCHITECT_DESIGNER_CNTCT_EMAIL_ADDR_TXT" Type="varchar" MaxLength="100" />
+          <Property Name="ARCHITECT_DESIGNER_AUTO_EMAIL_ADDR_TXT" Type="varchar" MaxLength="100" />
+          <Property Name="ARCHITECT_DRAWINGS_SEALED_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="ARCHITECT_DESIGNER_LICENSE_NUM" Type="varchar" MaxLength="255" />
+          <Property Name="ARCHITECT_DESIGNER_LICENSE_BOARD_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="ARCHITECT_DESIGNER_EMPLOYEE_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PERMIT_NUM" Type="varchar" MaxLength="10" />
+          <Property Name="TOTAL_FEE_AMT" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="BUILD_CODE_VERSION_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="SQUARE_FOOTAGE_DESC" Type="varchar" MaxLength="255" />
+          <Property Name="PROPERTY_MANAGER_PHONE_NUM" Type="varchar" MaxLength="20" />
+          <Property Name="REC_ID_TXT" Type="varchar" MaxLength="255" />
+          <Property Name="TEAM_GRADE_TXT" Type="varchar" MaxLength="30" />
+          <Property Name="PRELIM_PROJECT_SUMMARY_OBJ_DETAILS_TXT" Type="varchar" MaxLength="1500" />
+          <Property Name="PRELIM_GEN_INFO_OBJ_DETAILS_TXT" Type="varchar" MaxLength="1500" />
+          <Property Name="PRELIM_MEETING_AGENDA_OBJ_DETAILS_TXT" Type="varchar" MaxLength="1500" />
+          <Property Name="PRELIM_PROPOSED_WORK_OBJ_DETAILS_TXT" Type="varchar" MaxLength="1500" />
+          <Property Name="PRELIM_SYSTEM_INFO_OBJ_DETAILS_TXT" Type="varchar" MaxLength="1500" />
+          <Property Name="PRELIM_BIM_PROJECT_DELIVERY_OBJ_DETAILS_TXT" Type="varchar" MaxLength="1500" />
+          <Property Name="PRELIM_WORK_TYP_OBJ_DETAILS_TXT" Type="varchar" MaxLength="1500" />
+          <Property Name="PRELIM_MEETING_DETAIL_OBJ_DETAILS_TXT" Type="varchar" MaxLength="1500" />
+          <Property Name="CANCELLATION_FEE_AMT" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="PAID_STATUS_IND" Type="bit" />
+          <Property Name="MIGRATED_PROJECT_TYP_REF_ID" Type="int" />
+          <Property Name="RTAP_AFFORDABLE_UNIT_CHG_DESC" Type="varchar" MaxLength="100" />
+          <Property Name="RTAP_AFFORDABLE_UNITS_REMOVE_DESC" Type="varchar" MaxLength="100" />
+          <Property Name="RTAP_AFFORDABLE_WORKFORCE_UNITS_ADD_DESC" Type="varchar" MaxLength="100" />
+          <Property Name="RTAP_WORKFORCE_ADD_DESC" Type="varchar" MaxLength="100" />
+          <Property Name="RTAP_WORKFORCE_REMOVE_DESC" Type="varchar" MaxLength="100" />
+          <Property Name="PROFESSIONALS_TXT" Type="varchar" MaxLength="8000" />
+          <Property Name="ACCT_NUM" Type="varchar" MaxLength="100" />
+          <Property Name="EQUIP_COST_DESC" Type="varchar" MaxLength="100" />
+          <Property Name="PREPAID_FEE_PAYMENT_TYP_DESC" Type="varchar" MaxLength="100" />
+          <Property Name="ESTIMATED_FEE_DESC" Type="varchar" MaxLength="100" />
+          <Property Name="FIFO_DUE_ACCELA_DT" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="tst_sustainableModelStoreContainer">
+          <EntitySet Name="PROJECT" EntityType="Self.PROJECT" Schema="AION" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tst_sustainableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PROJECT">
+          <Key>
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="PROJECT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROJECT_NM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EXTERNAL_SYSTEM_REF_ID" Type="Int32" />
+          <Property Name="WKR_ID_CREATED_TXT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DTTM" Type="DateTime" Precision="3" />
+          <Property Name="WKR_ID_UPDATED_TXT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_DTTM" Type="DateTime" Precision="3" />
+          <Property Name="PROJECT_STATUS_REF_ID" Type="Int32" />
+          <Property Name="PROJECT_TYP_REF_ID" Type="Int32" />
+          <Property Name="SRC_SYSTEM_VAL_TXT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TAG_CREATED_ID_NUM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TAG_CREATED_BY_TS" Type="DateTime" Precision="3" />
+          <Property Name="TAG_UPDATED_BY_TS" Type="DateTime" Precision="3" />
+          <Property Name="TAG_UPDATED_BY_ID_NUM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ASSIGNED_ESTIMATOR_ID" Type="Int32" />
+          <Property Name="ASSIGNED_FACILITATOR_ID" Type="Int32" />
+          <Property Name="PROJECT_MODE_REF_ID" Type="Int32" Nullable="false" />
+          <Property Name="WORKFLOW_STATUS_REF_ID" Type="Int32" />
+          <Property Name="RTAP_IND" Type="Boolean" />
+          <Property Name="PRELIMINARY_IND" Type="Boolean" />
+          <Property Name="PROJECT_LVL_TXT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GATE_DT" Type="DateTime" Precision="3" />
+          <Property Name="PROJECT_ADDR_TXT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PROJECT_MANAGER_ID" Type="Int32" />
+          <Property Name="BUILD_CONTR_NM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BUILD_CONTR_ACCT_NUM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GATE_ACCEPTED_IND" Type="Boolean" />
+          <Property Name="FIFO_DUE_DT" Type="DateTime" Precision="3" />
+          <Property Name="PLANS_READY_ON_DT" Type="DateTime" Precision="3" />
+          <Property Name="CYCLE_NBR" Type="Int32" />
+          <Property Name="PRELIM_MEETING_COMPLETE_IND" Type="Boolean" />
+          <Property Name="ACCELA_RTAP_PROJECT_REF_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACCELA_PRELIM_PROJECT_REF_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PROJECT_OCCUPANCY_TYP_MAP_NM" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CONSTR_TYP_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CONSTR_COST_AMT" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="SHEETS_CNT_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SQUARE_FOOTAGE_TO_BE_REVIEWED_NBR" Type="Int32" />
+          <Property Name="SQUARE_FOOTAGE_OF_OVERALL_BUILD_NBR" Type="Int32" />
+          <Property Name="STORIES_CNT" Type="Int32" />
+          <Property Name="HIGH_RISE_IND" Type="Boolean" />
+          <Property Name="EXPRESS_IND" Type="Boolean" />
+          <Property Name="REVIEW_TYP_REF_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_MEETING_CANCELLED_IND" Type="Boolean" />
+          <Property Name="FIFO_IND" Type="Boolean" />
+          <Property Name="TOTAL_JOB_COST_AMT" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="WORK_TYP_DESC" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="OCCUPANCY_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PRI_OCCUPANCY_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SECONDARY_OCCUPANCY_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SEAL_HOLDERS_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DESIGNER_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FIRE_DETAIL_DESC" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="OVERALL_WORK_SCOPE_DESC" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="MECH_WORK_SCOPE_DESC" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="ELCTR_WORK_SCOPE_DESC" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="PLUMB_WORK_SCOPE_DESC" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="CIVIL_WORK_SCOPE_DESC" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="ZONING_OF_SITE_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CHG_OF_USE_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CONDITIONAL_PERMIT_APPROVAL_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PREVIOUS_BUSINESS_TYP_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CITY_OF_CHARLOTTE_DESC" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PROPOSED_BUSINESS_TYP_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CODE_SUMMARY_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BACKFLOW_APPLICATION_DETAIL_DESC" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="WATER_SEWER_DETAIL_DESC" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="HEALTH_DEPT_DETAIL_DESC" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="DAY_CARE_DESC" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PROPOSED_OUTDOOR_UNDERGROUND_PIPING_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PROPOSED_FIRE_SPRINKLER_PIPING_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="INSTALL_CMUD_BACKFLOW_PREVENTER_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EXTENDING_PUBLIC_WATER_SEWER_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GRADE_MOD_WATER_SEWER_EASEMENT_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PROPOSED_ENCROACHMENT_WATER_SEWER_EASEMENT_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PARCEL_NUM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AFFORDABLE_HOUSING_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EXACT_ADDR_TXT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DELIVERY_MTHD_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BIM_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BIM_DESIGN_DISCIPLINE_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ATTENDEES_CNT_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PREVIOUS_PRELIM_REVIEW_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PROJECT_NUM_PREVIOUS_PRELIM_REVIEW_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SAME_REVIEW_TEAM_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_OWNER_NM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_OWNER_ADDR_TXT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_OWNER_EMAIL_ADDR_TXT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_OWNER_PHONE_NUM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_OWNER_AUTO_EMAIL_ADDR_TXT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_MANAGER_NM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_MANAGER_EMAIL_ADDR_TXT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_MANAGER_EMAIL_ADDR_2_TXT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHITECT_DESIGNER_CNTCT_NM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHITECT_DESIGNER_CNTCT_PHONE_NUM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHITECT_DESIGNER_CNTCT_EMAIL_ADDR_TXT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHITECT_DESIGNER_AUTO_EMAIL_ADDR_TXT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHITECT_DRAWINGS_SEALED_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHITECT_DESIGNER_LICENSE_NUM" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHITECT_DESIGNER_LICENSE_BOARD_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHITECT_DESIGNER_EMPLOYEE_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PERMIT_NUM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TOTAL_FEE_AMT" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="BUILD_CODE_VERSION_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SQUARE_FOOTAGE_DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PROPERTY_MANAGER_PHONE_NUM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REC_ID_TXT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TEAM_GRADE_TXT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_PROJECT_SUMMARY_OBJ_DETAILS_TXT" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_GEN_INFO_OBJ_DETAILS_TXT" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_MEETING_AGENDA_OBJ_DETAILS_TXT" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_PROPOSED_WORK_OBJ_DETAILS_TXT" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_SYSTEM_INFO_OBJ_DETAILS_TXT" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_BIM_PROJECT_DELIVERY_OBJ_DETAILS_TXT" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_WORK_TYP_OBJ_DETAILS_TXT" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="PRELIM_MEETING_DETAIL_OBJ_DETAILS_TXT" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="CANCELLATION_FEE_AMT" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PAID_STATUS_IND" Type="Boolean" />
+          <Property Name="MIGRATED_PROJECT_TYP_REF_ID" Type="Int32" />
+          <Property Name="RTAP_AFFORDABLE_UNIT_CHG_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RTAP_AFFORDABLE_UNITS_REMOVE_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RTAP_AFFORDABLE_WORKFORCE_UNITS_ADD_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RTAP_WORKFORCE_ADD_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RTAP_WORKFORCE_REMOVE_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROFESSIONALS_TXT" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="ACCT_NUM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EQUIP_COST_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PREPAID_FEE_PAYMENT_TYP_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ESTIMATED_FEE_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FIFO_DUE_ACCELA_DT" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="AIONDbContext1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PROJECTs" EntityType="Self.PROJECT" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tst_sustainableModelStoreContainer" CdmEntityContainer="AIONDbContext1">
+          <EntitySetMapping Name="PROJECTs">
+            <EntityTypeMapping TypeName="tst_sustainableModel.PROJECT">
+              <MappingFragment StoreEntitySet="PROJECT">
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="PROJECT_NM" ColumnName="PROJECT_NM" />
+                <ScalarProperty Name="EXTERNAL_SYSTEM_REF_ID" ColumnName="EXTERNAL_SYSTEM_REF_ID" />
+                <ScalarProperty Name="WKR_ID_CREATED_TXT" ColumnName="WKR_ID_CREATED_TXT" />
+                <ScalarProperty Name="CREATED_DTTM" ColumnName="CREATED_DTTM" />
+                <ScalarProperty Name="WKR_ID_UPDATED_TXT" ColumnName="WKR_ID_UPDATED_TXT" />
+                <ScalarProperty Name="UPDATED_DTTM" ColumnName="UPDATED_DTTM" />
+                <ScalarProperty Name="PROJECT_STATUS_REF_ID" ColumnName="PROJECT_STATUS_REF_ID" />
+                <ScalarProperty Name="PROJECT_TYP_REF_ID" ColumnName="PROJECT_TYP_REF_ID" />
+                <ScalarProperty Name="SRC_SYSTEM_VAL_TXT" ColumnName="SRC_SYSTEM_VAL_TXT" />
+                <ScalarProperty Name="TAG_CREATED_ID_NUM" ColumnName="TAG_CREATED_ID_NUM" />
+                <ScalarProperty Name="TAG_CREATED_BY_TS" ColumnName="TAG_CREATED_BY_TS" />
+                <ScalarProperty Name="TAG_UPDATED_BY_TS" ColumnName="TAG_UPDATED_BY_TS" />
+                <ScalarProperty Name="TAG_UPDATED_BY_ID_NUM" ColumnName="TAG_UPDATED_BY_ID_NUM" />
+                <ScalarProperty Name="ASSIGNED_ESTIMATOR_ID" ColumnName="ASSIGNED_ESTIMATOR_ID" />
+                <ScalarProperty Name="ASSIGNED_FACILITATOR_ID" ColumnName="ASSIGNED_FACILITATOR_ID" />
+                <ScalarProperty Name="PROJECT_MODE_REF_ID" ColumnName="PROJECT_MODE_REF_ID" />
+                <ScalarProperty Name="WORKFLOW_STATUS_REF_ID" ColumnName="WORKFLOW_STATUS_REF_ID" />
+                <ScalarProperty Name="RTAP_IND" ColumnName="RTAP_IND" />
+                <ScalarProperty Name="PRELIMINARY_IND" ColumnName="PRELIMINARY_IND" />
+                <ScalarProperty Name="PROJECT_LVL_TXT" ColumnName="PROJECT_LVL_TXT" />
+                <ScalarProperty Name="GATE_DT" ColumnName="GATE_DT" />
+                <ScalarProperty Name="PROJECT_ADDR_TXT" ColumnName="PROJECT_ADDR_TXT" />
+                <ScalarProperty Name="PROJECT_MANAGER_ID" ColumnName="PROJECT_MANAGER_ID" />
+                <ScalarProperty Name="BUILD_CONTR_NM" ColumnName="BUILD_CONTR_NM" />
+                <ScalarProperty Name="BUILD_CONTR_ACCT_NUM" ColumnName="BUILD_CONTR_ACCT_NUM" />
+                <ScalarProperty Name="GATE_ACCEPTED_IND" ColumnName="GATE_ACCEPTED_IND" />
+                <ScalarProperty Name="FIFO_DUE_DT" ColumnName="FIFO_DUE_DT" />
+                <ScalarProperty Name="PLANS_READY_ON_DT" ColumnName="PLANS_READY_ON_DT" />
+                <ScalarProperty Name="CYCLE_NBR" ColumnName="CYCLE_NBR" />
+                <ScalarProperty Name="PRELIM_MEETING_COMPLETE_IND" ColumnName="PRELIM_MEETING_COMPLETE_IND" />
+                <ScalarProperty Name="ACCELA_RTAP_PROJECT_REF_ID" ColumnName="ACCELA_RTAP_PROJECT_REF_ID" />
+                <ScalarProperty Name="ACCELA_PRELIM_PROJECT_REF_ID" ColumnName="ACCELA_PRELIM_PROJECT_REF_ID" />
+                <ScalarProperty Name="PROJECT_OCCUPANCY_TYP_MAP_NM" ColumnName="PROJECT_OCCUPANCY_TYP_MAP_NM" />
+                <ScalarProperty Name="CONSTR_TYP_DESC" ColumnName="CONSTR_TYP_DESC" />
+                <ScalarProperty Name="CONSTR_COST_AMT" ColumnName="CONSTR_COST_AMT" />
+                <ScalarProperty Name="SHEETS_CNT_DESC" ColumnName="SHEETS_CNT_DESC" />
+                <ScalarProperty Name="SQUARE_FOOTAGE_TO_BE_REVIEWED_NBR" ColumnName="SQUARE_FOOTAGE_TO_BE_REVIEWED_NBR" />
+                <ScalarProperty Name="SQUARE_FOOTAGE_OF_OVERALL_BUILD_NBR" ColumnName="SQUARE_FOOTAGE_OF_OVERALL_BUILD_NBR" />
+                <ScalarProperty Name="STORIES_CNT" ColumnName="STORIES_CNT" />
+                <ScalarProperty Name="HIGH_RISE_IND" ColumnName="HIGH_RISE_IND" />
+                <ScalarProperty Name="EXPRESS_IND" ColumnName="EXPRESS_IND" />
+                <ScalarProperty Name="REVIEW_TYP_REF_DESC" ColumnName="REVIEW_TYP_REF_DESC" />
+                <ScalarProperty Name="PRELIM_MEETING_CANCELLED_IND" ColumnName="PRELIM_MEETING_CANCELLED_IND" />
+                <ScalarProperty Name="FIFO_IND" ColumnName="FIFO_IND" />
+                <ScalarProperty Name="TOTAL_JOB_COST_AMT" ColumnName="TOTAL_JOB_COST_AMT" />
+                <ScalarProperty Name="WORK_TYP_DESC" ColumnName="WORK_TYP_DESC" />
+                <ScalarProperty Name="OCCUPANCY_DESC" ColumnName="OCCUPANCY_DESC" />
+                <ScalarProperty Name="PRI_OCCUPANCY_DESC" ColumnName="PRI_OCCUPANCY_DESC" />
+                <ScalarProperty Name="SECONDARY_OCCUPANCY_DESC" ColumnName="SECONDARY_OCCUPANCY_DESC" />
+                <ScalarProperty Name="SEAL_HOLDERS_DESC" ColumnName="SEAL_HOLDERS_DESC" />
+                <ScalarProperty Name="DESIGNER_DESC" ColumnName="DESIGNER_DESC" />
+                <ScalarProperty Name="FIRE_DETAIL_DESC" ColumnName="FIRE_DETAIL_DESC" />
+                <ScalarProperty Name="OVERALL_WORK_SCOPE_DESC" ColumnName="OVERALL_WORK_SCOPE_DESC" />
+                <ScalarProperty Name="MECH_WORK_SCOPE_DESC" ColumnName="MECH_WORK_SCOPE_DESC" />
+                <ScalarProperty Name="ELCTR_WORK_SCOPE_DESC" ColumnName="ELCTR_WORK_SCOPE_DESC" />
+                <ScalarProperty Name="PLUMB_WORK_SCOPE_DESC" ColumnName="PLUMB_WORK_SCOPE_DESC" />
+                <ScalarProperty Name="CIVIL_WORK_SCOPE_DESC" ColumnName="CIVIL_WORK_SCOPE_DESC" />
+                <ScalarProperty Name="ZONING_OF_SITE_DESC" ColumnName="ZONING_OF_SITE_DESC" />
+                <ScalarProperty Name="CHG_OF_USE_DESC" ColumnName="CHG_OF_USE_DESC" />
+                <ScalarProperty Name="CONDITIONAL_PERMIT_APPROVAL_DESC" ColumnName="CONDITIONAL_PERMIT_APPROVAL_DESC" />
+                <ScalarProperty Name="PREVIOUS_BUSINESS_TYP_DESC" ColumnName="PREVIOUS_BUSINESS_TYP_DESC" />
+                <ScalarProperty Name="CITY_OF_CHARLOTTE_DESC" ColumnName="CITY_OF_CHARLOTTE_DESC" />
+                <ScalarProperty Name="PROPOSED_BUSINESS_TYP_DESC" ColumnName="PROPOSED_BUSINESS_TYP_DESC" />
+                <ScalarProperty Name="CODE_SUMMARY_DESC" ColumnName="CODE_SUMMARY_DESC" />
+                <ScalarProperty Name="BACKFLOW_APPLICATION_DETAIL_DESC" ColumnName="BACKFLOW_APPLICATION_DETAIL_DESC" />
+                <ScalarProperty Name="WATER_SEWER_DETAIL_DESC" ColumnName="WATER_SEWER_DETAIL_DESC" />
+                <ScalarProperty Name="HEALTH_DEPT_DETAIL_DESC" ColumnName="HEALTH_DEPT_DETAIL_DESC" />
+                <ScalarProperty Name="DAY_CARE_DESC" ColumnName="DAY_CARE_DESC" />
+                <ScalarProperty Name="PROPOSED_OUTDOOR_UNDERGROUND_PIPING_DESC" ColumnName="PROPOSED_OUTDOOR_UNDERGROUND_PIPING_DESC" />
+                <ScalarProperty Name="PROPOSED_FIRE_SPRINKLER_PIPING_DESC" ColumnName="PROPOSED_FIRE_SPRINKLER_PIPING_DESC" />
+                <ScalarProperty Name="INSTALL_CMUD_BACKFLOW_PREVENTER_DESC" ColumnName="INSTALL_CMUD_BACKFLOW_PREVENTER_DESC" />
+                <ScalarProperty Name="EXTENDING_PUBLIC_WATER_SEWER_DESC" ColumnName="EXTENDING_PUBLIC_WATER_SEWER_DESC" />
+                <ScalarProperty Name="GRADE_MOD_WATER_SEWER_EASEMENT_DESC" ColumnName="GRADE_MOD_WATER_SEWER_EASEMENT_DESC" />
+                <ScalarProperty Name="PROPOSED_ENCROACHMENT_WATER_SEWER_EASEMENT_DESC" ColumnName="PROPOSED_ENCROACHMENT_WATER_SEWER_EASEMENT_DESC" />
+                <ScalarProperty Name="PARCEL_NUM" ColumnName="PARCEL_NUM" />
+                <ScalarProperty Name="AFFORDABLE_HOUSING_DESC" ColumnName="AFFORDABLE_HOUSING_DESC" />
+                <ScalarProperty Name="EXACT_ADDR_TXT" ColumnName="EXACT_ADDR_TXT" />
+                <ScalarProperty Name="DELIVERY_MTHD_DESC" ColumnName="DELIVERY_MTHD_DESC" />
+                <ScalarProperty Name="BIM_DESC" ColumnName="BIM_DESC" />
+                <ScalarProperty Name="BIM_DESIGN_DISCIPLINE_DESC" ColumnName="BIM_DESIGN_DISCIPLINE_DESC" />
+                <ScalarProperty Name="ATTENDEES_CNT_DESC" ColumnName="ATTENDEES_CNT_DESC" />
+                <ScalarProperty Name="PREVIOUS_PRELIM_REVIEW_DESC" ColumnName="PREVIOUS_PRELIM_REVIEW_DESC" />
+                <ScalarProperty Name="PROJECT_NUM_PREVIOUS_PRELIM_REVIEW_DESC" ColumnName="PROJECT_NUM_PREVIOUS_PRELIM_REVIEW_DESC" />
+                <ScalarProperty Name="SAME_REVIEW_TEAM_DESC" ColumnName="SAME_REVIEW_TEAM_DESC" />
+                <ScalarProperty Name="PROPERTY_OWNER_NM" ColumnName="PROPERTY_OWNER_NM" />
+                <ScalarProperty Name="PROPERTY_OWNER_ADDR_TXT" ColumnName="PROPERTY_OWNER_ADDR_TXT" />
+                <ScalarProperty Name="PROPERTY_OWNER_EMAIL_ADDR_TXT" ColumnName="PROPERTY_OWNER_EMAIL_ADDR_TXT" />
+                <ScalarProperty Name="PROPERTY_OWNER_PHONE_NUM" ColumnName="PROPERTY_OWNER_PHONE_NUM" />
+                <ScalarProperty Name="PROPERTY_OWNER_AUTO_EMAIL_ADDR_TXT" ColumnName="PROPERTY_OWNER_AUTO_EMAIL_ADDR_TXT" />
+                <ScalarProperty Name="PROPERTY_MANAGER_NM" ColumnName="PROPERTY_MANAGER_NM" />
+                <ScalarProperty Name="PROPERTY_MANAGER_EMAIL_ADDR_TXT" ColumnName="PROPERTY_MANAGER_EMAIL_ADDR_TXT" />
+                <ScalarProperty Name="PROPERTY_MANAGER_EMAIL_ADDR_2_TXT" ColumnName="PROPERTY_MANAGER_EMAIL_ADDR_2_TXT" />
+                <ScalarProperty Name="ARCHITECT_DESIGNER_CNTCT_NM" ColumnName="ARCHITECT_DESIGNER_CNTCT_NM" />
+                <ScalarProperty Name="ARCHITECT_DESIGNER_CNTCT_PHONE_NUM" ColumnName="ARCHITECT_DESIGNER_CNTCT_PHONE_NUM" />
+                <ScalarProperty Name="ARCHITECT_DESIGNER_CNTCT_EMAIL_ADDR_TXT" ColumnName="ARCHITECT_DESIGNER_CNTCT_EMAIL_ADDR_TXT" />
+                <ScalarProperty Name="ARCHITECT_DESIGNER_AUTO_EMAIL_ADDR_TXT" ColumnName="ARCHITECT_DESIGNER_AUTO_EMAIL_ADDR_TXT" />
+                <ScalarProperty Name="ARCHITECT_DRAWINGS_SEALED_DESC" ColumnName="ARCHITECT_DRAWINGS_SEALED_DESC" />
+                <ScalarProperty Name="ARCHITECT_DESIGNER_LICENSE_NUM" ColumnName="ARCHITECT_DESIGNER_LICENSE_NUM" />
+                <ScalarProperty Name="ARCHITECT_DESIGNER_LICENSE_BOARD_DESC" ColumnName="ARCHITECT_DESIGNER_LICENSE_BOARD_DESC" />
+                <ScalarProperty Name="ARCHITECT_DESIGNER_EMPLOYEE_DESC" ColumnName="ARCHITECT_DESIGNER_EMPLOYEE_DESC" />
+                <ScalarProperty Name="PERMIT_NUM" ColumnName="PERMIT_NUM" />
+                <ScalarProperty Name="TOTAL_FEE_AMT" ColumnName="TOTAL_FEE_AMT" />
+                <ScalarProperty Name="BUILD_CODE_VERSION_DESC" ColumnName="BUILD_CODE_VERSION_DESC" />
+                <ScalarProperty Name="SQUARE_FOOTAGE_DESC" ColumnName="SQUARE_FOOTAGE_DESC" />
+                <ScalarProperty Name="PROPERTY_MANAGER_PHONE_NUM" ColumnName="PROPERTY_MANAGER_PHONE_NUM" />
+                <ScalarProperty Name="REC_ID_TXT" ColumnName="REC_ID_TXT" />
+                <ScalarProperty Name="TEAM_GRADE_TXT" ColumnName="TEAM_GRADE_TXT" />
+                <ScalarProperty Name="PRELIM_PROJECT_SUMMARY_OBJ_DETAILS_TXT" ColumnName="PRELIM_PROJECT_SUMMARY_OBJ_DETAILS_TXT" />
+                <ScalarProperty Name="PRELIM_GEN_INFO_OBJ_DETAILS_TXT" ColumnName="PRELIM_GEN_INFO_OBJ_DETAILS_TXT" />
+                <ScalarProperty Name="PRELIM_MEETING_AGENDA_OBJ_DETAILS_TXT" ColumnName="PRELIM_MEETING_AGENDA_OBJ_DETAILS_TXT" />
+                <ScalarProperty Name="PRELIM_PROPOSED_WORK_OBJ_DETAILS_TXT" ColumnName="PRELIM_PROPOSED_WORK_OBJ_DETAILS_TXT" />
+                <ScalarProperty Name="PRELIM_SYSTEM_INFO_OBJ_DETAILS_TXT" ColumnName="PRELIM_SYSTEM_INFO_OBJ_DETAILS_TXT" />
+                <ScalarProperty Name="PRELIM_BIM_PROJECT_DELIVERY_OBJ_DETAILS_TXT" ColumnName="PRELIM_BIM_PROJECT_DELIVERY_OBJ_DETAILS_TXT" />
+                <ScalarProperty Name="PRELIM_WORK_TYP_OBJ_DETAILS_TXT" ColumnName="PRELIM_WORK_TYP_OBJ_DETAILS_TXT" />
+                <ScalarProperty Name="PRELIM_MEETING_DETAIL_OBJ_DETAILS_TXT" ColumnName="PRELIM_MEETING_DETAIL_OBJ_DETAILS_TXT" />
+                <ScalarProperty Name="CANCELLATION_FEE_AMT" ColumnName="CANCELLATION_FEE_AMT" />
+                <ScalarProperty Name="PAID_STATUS_IND" ColumnName="PAID_STATUS_IND" />
+                <ScalarProperty Name="MIGRATED_PROJECT_TYP_REF_ID" ColumnName="MIGRATED_PROJECT_TYP_REF_ID" />
+                <ScalarProperty Name="RTAP_AFFORDABLE_UNIT_CHG_DESC" ColumnName="RTAP_AFFORDABLE_UNIT_CHG_DESC" />
+                <ScalarProperty Name="RTAP_AFFORDABLE_UNITS_REMOVE_DESC" ColumnName="RTAP_AFFORDABLE_UNITS_REMOVE_DESC" />
+                <ScalarProperty Name="RTAP_AFFORDABLE_WORKFORCE_UNITS_ADD_DESC" ColumnName="RTAP_AFFORDABLE_WORKFORCE_UNITS_ADD_DESC" />
+                <ScalarProperty Name="RTAP_WORKFORCE_ADD_DESC" ColumnName="RTAP_WORKFORCE_ADD_DESC" />
+                <ScalarProperty Name="RTAP_WORKFORCE_REMOVE_DESC" ColumnName="RTAP_WORKFORCE_REMOVE_DESC" />
+                <ScalarProperty Name="PROFESSIONALS_TXT" ColumnName="PROFESSIONALS_TXT" />
+                <ScalarProperty Name="ACCT_NUM" ColumnName="ACCT_NUM" />
+                <ScalarProperty Name="EQUIP_COST_DESC" ColumnName="EQUIP_COST_DESC" />
+                <ScalarProperty Name="PREPAID_FEE_PAYMENT_TYP_DESC" ColumnName="PREPAID_FEE_PAYMENT_TYP_DESC" />
+                <ScalarProperty Name="ESTIMATED_FEE_DESC" ColumnName="ESTIMATED_FEE_DESC" />
+                <ScalarProperty Name="FIFO_DUE_ACCELA_DT" ColumnName="FIFO_DUE_ACCELA_DT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

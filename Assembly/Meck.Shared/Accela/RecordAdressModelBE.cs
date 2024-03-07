@@ -1,0 +1,947 @@
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using System.Text;
+
+namespace Meck.Shared.Accela
+{
+    public partial class RecordAddressModelBE
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RecordAddressModel" /> class.
+        /// </summary>
+        /// <param name="addressLine1">The first line of the address..</param>
+        /// <param name="addressLine2">The second line of the address..</param>
+        /// <param name="addressTypeFlag">addressTypeFlag.</param>
+        /// <param name="city">The name of the city..</param>
+        /// <param name="country">country.</param>
+        /// <param name="crossStreetNameStart">The beginning intersecting street name for searching. Added in Civic Platform version: 9.2.0 .</param>
+        /// <param name="crossStreetNameEnd">The ending intersecting street name for searching. Added in Civic Platform version: 9.2.0 .</param>
+        /// <param name="county">The name of the county..</param>
+        /// <param name="description">A description of the address..</param>
+        /// <param name="direction">direction.</param>
+        /// <param name="distance">The distance from another landmark used to locate the address..</param>
+        /// <param name="houseAlphaStart">The beginning alphabetic unit in street address..</param>
+        /// <param name="houseAlphaEnd">The ending alphabetic unit in street address..</param>
+        /// <param name="houseFractionStart">houseFractionStart.</param>
+        /// <param name="houseFractionEnd">houseFractionEnd.</param>
+        /// <param name="id">The unique address id assigned by the Civic Platform server..</param>
+        /// <param name="inspectionDistrict">The inspection district where the address is located..</param>
+        /// <param name="inspectionDistrictPrefix">The prefix for the inspection district where the address is located..</param>
+        /// <param name="isPrimary">Indicates whether or not to designate the address as the primary address. Only one address can be primary at any given time..</param>
+        /// <param name="levelEnd">The ending level number (floor number) that makes up the address within a complex..</param>
+        /// <param name="levelPrefix">The prefix for the level numbers (floor numbers) that make up the address..</param>
+        /// <param name="levelStart">The starting level number (floor number) that makes up the address within a complex..</param>
+        /// <param name="locationType">The type of location used for Right of Way Management. The valid values are configured with the LOCATION_TYPE standard choice in Civic Platform Administration. Added in Civic Platform version: 9.2.0 .</param>
+        /// <param name="neighborhood">The neighborhood where the address is located..</param>
+        /// <param name="neighborhoodPrefix">The prefix for neighborhood where the address is located..</param>
+        /// <param name="postalCode">The postal ZIP code for the address..</param>
+        /// <param name="recordId">recordId.</param>
+        /// <param name="refAddressId">The reference address id..</param>
+        /// <param name="secondaryStreet">This field (along with the Secondary Road Number field) displays an extra description for the location when two roads that cross or a street with two names makes up the address of the location..</param>
+        /// <param name="secondaryStreetNumber">This field (along with the Secondary Road field) displays an extra description for the location when two roads that cross or a street with two names makes up the address of the location..</param>
+        /// <param name="serviceProviderCode">The unique agency identifier..</param>
+        /// <param name="state">state.</param>
+        /// <param name="status">status.</param>
+        /// <param name="streetAddress">The street address..</param>
+        /// <param name="streetEnd">The ending number of a street address range..</param>
+        /// <param name="streetEndFrom">The beginning number of a street end address range..</param>
+        /// <param name="streetEndTo">The ending number of a street end address range..</param>
+        /// <param name="streetName">The name of the street..</param>
+        /// <param name="streetNameStart">The beginning street name for searching. Added in Civic Platform version: 9.2.0 .</param>
+        /// <param name="streetNameEnd">The ending street name for searching. Added in Civic Platform version: 9.2.0 .</param>
+        /// <param name="streetPrefix">Any part of an address that appears before a street name or number. For example, if the address is 123 West Main, \&quot;West\&quot; is the street prefix..</param>
+        /// <param name="streetStart">The starting number of a street address range..</param>
+        /// <param name="streetStartFrom">The beginning number of a street start address range..</param>
+        /// <param name="streetStartTo">The ending number of a street start address range..</param>
+        /// <param name="streetSuffix">streetSuffix.</param>
+        /// <param name="streetSuffixDirection">streetSuffixDirection.</param>
+        /// <param name="type">type.</param>
+        /// <param name="unitStart">The starting value of a range of unit numbers..</param>
+        /// <param name="unitEnd">The ending value of a range of unit numbers..</param>
+        /// <param name="unitType">unitType.</param>
+        /// <param name="xCoordinate">The longitudinal coordinate for this address..</param>
+        /// <param name="yCoordinate">The latitudinal coordinate for this address..</param>
+        public RecordAddressModelBE(string addressLine1 = default(string), string addressLine2 = default(string), RecordAddressModelAddressTypeFlagBE addressTypeFlag = default(RecordAddressModelAddressTypeFlagBE), string city = default(string), RecordAddressModelCountryBE country = default(RecordAddressModelCountryBE), string crossStreetNameStart = default(string), string crossStreetNameEnd = default(string), string county = default(string), string description = default(string), RecordAddressModelDirectionBE direction = default(RecordAddressModelDirectionBE), double? distance = default(double?), string houseAlphaStart = default(string), string houseAlphaEnd = default(string), RecordAddressModelHouseFractionStartBE houseFractionStart = default(RecordAddressModelHouseFractionStartBE), RecordAddressModelHouseFractionEndBE houseFractionEnd = default(RecordAddressModelHouseFractionEndBE), long? id = default(long?), string inspectionDistrict = default(string), string inspectionDistrictPrefix = default(string), string isPrimary = default(string), string levelEnd = default(string), string levelPrefix = default(string), string levelStart = default(string), string locationType = default(string), string neighborhood = default(string), string neighborhoodPrefix = default(string), string postalCode = default(string), RecordIdModelBE recordId = default(RecordIdModelBE), long? refAddressId = default(long?), string secondaryStreet = default(string), decimal? secondaryStreetNumber = default(decimal?), string serviceProviderCode = default(string), RecordAddressModelStateBE state = default(RecordAddressModelStateBE), RecordAddressModelStatusBE status = default(RecordAddressModelStatusBE), string streetAddress = default(string), decimal? streetEnd = default(decimal?), long? streetEndFrom = default(long?), long? streetEndTo = default(long?), string streetName = default(string), string streetNameStart = default(string), string streetNameEnd = default(string), string streetPrefix = default(string), decimal? streetStart = default(decimal?), long? streetStartFrom = default(long?), long? streetStartTo = default(long?), RecordAddressModelStreetSuffixBE streetSuffix = default(RecordAddressModelStreetSuffixBE), RecordAddressModelStreetSuffixDirectionBE streetSuffixDirection = default(RecordAddressModelStreetSuffixDirectionBE), RecordAddressModelTypeBE type = default(RecordAddressModelTypeBE), string unitStart = default(string), string unitEnd = default(string), RecordAddressModelUnitTypeBE unitType = default(RecordAddressModelUnitTypeBE), double? xCoordinate = default(double?), double? yCoordinate = default(double?))
+        {
+            this.AddressLine1 = addressLine1;
+            this.AddressLine2 = addressLine2;
+            this.AddressTypeFlag = addressTypeFlag;
+            this.City = city;
+            this.Country = country;
+            this.CrossStreetNameStart = crossStreetNameStart;
+            this.CrossStreetNameEnd = crossStreetNameEnd;
+            this.County = county;
+            this.Description = description;
+            this.Direction = direction;
+            this.Distance = distance;
+            this.HouseAlphaStart = houseAlphaStart;
+            this.HouseAlphaEnd = houseAlphaEnd;
+            this.HouseFractionStart = houseFractionStart;
+            this.HouseFractionEnd = houseFractionEnd;
+            this.Id = id;
+            this.InspectionDistrict = inspectionDistrict;
+            this.InspectionDistrictPrefix = inspectionDistrictPrefix;
+            this.IsPrimary = isPrimary;
+            this.LevelEnd = levelEnd;
+            this.LevelPrefix = levelPrefix;
+            this.LevelStart = levelStart;
+            this.LocationType = locationType;
+            this.Neighborhood = neighborhood;
+            this.NeighborhoodPrefix = neighborhoodPrefix;
+            this.PostalCode = postalCode;
+            this.RecordId = recordId;
+            this.RefAddressId = refAddressId;
+            this.SecondaryStreet = secondaryStreet;
+            this.SecondaryStreetNumber = secondaryStreetNumber;
+            this.ServiceProviderCode = serviceProviderCode;
+            this.State = state;
+            this.Status = status;
+            this.StreetAddress = streetAddress;
+            this.StreetEnd = streetEnd;
+            this.StreetEndFrom = streetEndFrom;
+            this.StreetEndTo = streetEndTo;
+            this.StreetName = streetName;
+            this.StreetNameStart = streetNameStart;
+            this.StreetNameEnd = streetNameEnd;
+            this.StreetPrefix = streetPrefix;
+            this.StreetStart = streetStart;
+            this.StreetStartFrom = streetStartFrom;
+            this.StreetStartTo = streetStartTo;
+            this.StreetSuffix = streetSuffix;
+            this.StreetSuffixDirection = streetSuffixDirection;
+            this.Type = type;
+            this.UnitStart = unitStart;
+            this.UnitEnd = unitEnd;
+            this.UnitType = unitType;
+            this.XCoordinate = xCoordinate;
+            this.YCoordinate = yCoordinate;
+        }
+
+        /// <summary>
+        /// The first line of the address.
+        /// </summary>
+        /// <value>The first line of the address.</value>
+        [DataMember(Name = "addressLine1", EmitDefaultValue = false)]
+        public string AddressLine1 { get; set; }
+
+        /// <summary>
+        /// The second line of the address.
+        /// </summary>
+        /// <value>The second line of the address.</value>
+        [DataMember(Name = "addressLine2", EmitDefaultValue = false)]
+        public string AddressLine2 { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AddressTypeFlag
+        /// </summary>
+        [DataMember(Name = "addressTypeFlag", EmitDefaultValue = false)]
+        public RecordAddressModelAddressTypeFlagBE AddressTypeFlag { get; set; }
+
+        /// <summary>
+        /// The name of the city.
+        /// </summary>
+        /// <value>The name of the city.</value>
+        [DataMember(Name = "city", EmitDefaultValue = false)]
+        public string City { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Country
+        /// </summary>
+        [DataMember(Name = "country", EmitDefaultValue = false)]
+        public RecordAddressModelCountryBE Country { get; set; }
+
+        /// <summary>
+        /// The beginning intersecting street name for searching. Added in Civic Platform version: 9.2.0 
+        /// </summary>
+        /// <value>The beginning intersecting street name for searching. Added in Civic Platform version: 9.2.0 </value>
+        [DataMember(Name = "crossStreetNameStart", EmitDefaultValue = false)]
+        public string CrossStreetNameStart { get; set; }
+
+        /// <summary>
+        /// The ending intersecting street name for searching. Added in Civic Platform version: 9.2.0 
+        /// </summary>
+        /// <value>The ending intersecting street name for searching. Added in Civic Platform version: 9.2.0 </value>
+        [DataMember(Name = "crossStreetNameEnd", EmitDefaultValue = false)]
+        public string CrossStreetNameEnd { get; set; }
+
+        /// <summary>
+        /// The name of the county.
+        /// </summary>
+        /// <value>The name of the county.</value>
+        [DataMember(Name = "county", EmitDefaultValue = false)]
+        public string County { get; set; }
+
+        /// <summary>
+        /// A description of the address.
+        /// </summary>
+        /// <value>A description of the address.</value>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Direction
+        /// </summary>
+        [DataMember(Name = "direction", EmitDefaultValue = false)]
+        public RecordAddressModelDirectionBE Direction { get; set; }
+
+        /// <summary>
+        /// The distance from another landmark used to locate the address.
+        /// </summary>
+        /// <value>The distance from another landmark used to locate the address.</value>
+        [DataMember(Name = "distance", EmitDefaultValue = false)]
+        public double? Distance { get; set; }
+
+        /// <summary>
+        /// The beginning alphabetic unit in street address.
+        /// </summary>
+        /// <value>The beginning alphabetic unit in street address.</value>
+        [DataMember(Name = "houseAlphaStart", EmitDefaultValue = false)]
+        public string HouseAlphaStart { get; set; }
+
+        /// <summary>
+        /// The ending alphabetic unit in street address.
+        /// </summary>
+        /// <value>The ending alphabetic unit in street address.</value>
+        [DataMember(Name = "houseAlphaEnd", EmitDefaultValue = false)]
+        public string HouseAlphaEnd { get; set; }
+
+        /// <summary>
+        /// Gets or Sets HouseFractionStart
+        /// </summary>
+        [DataMember(Name = "houseFractionStart", EmitDefaultValue = false)]
+        public RecordAddressModelHouseFractionStartBE HouseFractionStart { get; set; }
+
+        /// <summary>
+        /// Gets or Sets HouseFractionEnd
+        /// </summary>
+        [DataMember(Name = "houseFractionEnd", EmitDefaultValue = false)]
+        public RecordAddressModelHouseFractionEndBE HouseFractionEnd { get; set; }
+
+        /// <summary>
+        /// The unique address id assigned by the Civic Platform server.
+        /// </summary>
+        /// <value>The unique address id assigned by the Civic Platform server.</value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public long? Id { get; set; }
+
+        /// <summary>
+        /// The inspection district where the address is located.
+        /// </summary>
+        /// <value>The inspection district where the address is located.</value>
+        [DataMember(Name = "inspectionDistrict", EmitDefaultValue = false)]
+        public string InspectionDistrict { get; set; }
+
+        /// <summary>
+        /// The prefix for the inspection district where the address is located.
+        /// </summary>
+        /// <value>The prefix for the inspection district where the address is located.</value>
+        [DataMember(Name = "inspectionDistrictPrefix", EmitDefaultValue = false)]
+        public string InspectionDistrictPrefix { get; set; }
+
+        /// <summary>
+        /// Indicates whether or not to designate the address as the primary address. Only one address can be primary at any given time.
+        /// </summary>
+        /// <value>Indicates whether or not to designate the address as the primary address. Only one address can be primary at any given time.</value>
+        [DataMember(Name = "isPrimary", EmitDefaultValue = false)]
+        public string IsPrimary { get; set; }
+
+        /// <summary>
+        /// The ending level number (floor number) that makes up the address within a complex.
+        /// </summary>
+        /// <value>The ending level number (floor number) that makes up the address within a complex.</value>
+        [DataMember(Name = "levelEnd", EmitDefaultValue = false)]
+        public string LevelEnd { get; set; }
+
+        /// <summary>
+        /// The prefix for the level numbers (floor numbers) that make up the address.
+        /// </summary>
+        /// <value>The prefix for the level numbers (floor numbers) that make up the address.</value>
+        [DataMember(Name = "levelPrefix", EmitDefaultValue = false)]
+        public string LevelPrefix { get; set; }
+
+        /// <summary>
+        /// The starting level number (floor number) that makes up the address within a complex.
+        /// </summary>
+        /// <value>The starting level number (floor number) that makes up the address within a complex.</value>
+        [DataMember(Name = "levelStart", EmitDefaultValue = false)]
+        public string LevelStart { get; set; }
+
+        /// <summary>
+        /// The type of location used for Right of Way Management. The valid values are configured with the LOCATION_TYPE standard choice in Civic Platform Administration. Added in Civic Platform version: 9.2.0 
+        /// </summary>
+        /// <value>The type of location used for Right of Way Management. The valid values are configured with the LOCATION_TYPE standard choice in Civic Platform Administration. Added in Civic Platform version: 9.2.0 </value>
+        [DataMember(Name = "locationType", EmitDefaultValue = false)]
+        public string LocationType { get; set; }
+
+        /// <summary>
+        /// The neighborhood where the address is located.
+        /// </summary>
+        /// <value>The neighborhood where the address is located.</value>
+        [DataMember(Name = "neighborhood", EmitDefaultValue = false)]
+        public string Neighborhood { get; set; }
+
+        /// <summary>
+        /// The prefix for neighborhood where the address is located.
+        /// </summary>
+        /// <value>The prefix for neighborhood where the address is located.</value>
+        [DataMember(Name = "neighborhoodPrefix", EmitDefaultValue = false)]
+        public string NeighborhoodPrefix { get; set; }
+
+        /// <summary>
+        /// The postal ZIP code for the address.
+        /// </summary>
+        /// <value>The postal ZIP code for the address.</value>
+        [DataMember(Name = "postalCode", EmitDefaultValue = false)]
+        public string PostalCode { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RecordId
+        /// </summary>
+        [DataMember(Name = "recordId", EmitDefaultValue = false)]
+        public RecordIdModelBE RecordId { get; set; }
+
+        /// <summary>
+        /// The reference address id.
+        /// </summary>
+        /// <value>The reference address id.</value>
+        [DataMember(Name = "refAddressId", EmitDefaultValue = false)]
+        public long? RefAddressId { get; set; }
+
+        /// <summary>
+        /// This field (along with the Secondary Road Number field) displays an extra description for the location when two roads that cross or a street with two names makes up the address of the location.
+        /// </summary>
+        /// <value>This field (along with the Secondary Road Number field) displays an extra description for the location when two roads that cross or a street with two names makes up the address of the location.</value>
+        [DataMember(Name = "secondaryStreet", EmitDefaultValue = false)]
+        public string SecondaryStreet { get; set; }
+
+        /// <summary>
+        /// This field (along with the Secondary Road field) displays an extra description for the location when two roads that cross or a street with two names makes up the address of the location.
+        /// </summary>
+        /// <value>This field (along with the Secondary Road field) displays an extra description for the location when two roads that cross or a street with two names makes up the address of the location.</value>
+        [DataMember(Name = "secondaryStreetNumber", EmitDefaultValue = false)]
+        public decimal? SecondaryStreetNumber { get; set; }
+
+        /// <summary>
+        /// The unique agency identifier.
+        /// </summary>
+        /// <value>The unique agency identifier.</value>
+        [DataMember(Name = "serviceProviderCode", EmitDefaultValue = false)]
+        public string ServiceProviderCode { get; set; }
+
+        /// <summary>
+        /// Gets or Sets State
+        /// </summary>
+        [DataMember(Name = "state", EmitDefaultValue = false)]
+        public RecordAddressModelStateBE State { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Status
+        /// </summary>
+        [DataMember(Name = "status", EmitDefaultValue = false)]
+        public RecordAddressModelStatusBE Status { get; set; }
+
+        /// <summary>
+        /// The street address.
+        /// </summary>
+        /// <value>The street address.</value>
+        [DataMember(Name = "streetAddress", EmitDefaultValue = false)]
+        public string StreetAddress { get; set; }
+
+        /// <summary>
+        /// The ending number of a street address range.
+        /// </summary>
+        /// <value>The ending number of a street address range.</value>
+        [DataMember(Name = "streetEnd", EmitDefaultValue = false)]
+        public decimal? StreetEnd { get; set; }
+
+        /// <summary>
+        /// The beginning number of a street end address range.
+        /// </summary>
+        /// <value>The beginning number of a street end address range.</value>
+        [DataMember(Name = "streetEndFrom", EmitDefaultValue = false)]
+        public long? StreetEndFrom { get; set; }
+
+        /// <summary>
+        /// The ending number of a street end address range.
+        /// </summary>
+        /// <value>The ending number of a street end address range.</value>
+        [DataMember(Name = "streetEndTo", EmitDefaultValue = false)]
+        public long? StreetEndTo { get; set; }
+
+        /// <summary>
+        /// The name of the street.
+        /// </summary>
+        /// <value>The name of the street.</value>
+        [DataMember(Name = "streetName", EmitDefaultValue = false)]
+        public string StreetName { get; set; }
+
+        /// <summary>
+        /// The beginning street name for searching. Added in Civic Platform version: 9.2.0 
+        /// </summary>
+        /// <value>The beginning street name for searching. Added in Civic Platform version: 9.2.0 </value>
+        [DataMember(Name = "streetNameStart", EmitDefaultValue = false)]
+        public string StreetNameStart { get; set; }
+
+        /// <summary>
+        /// The ending street name for searching. Added in Civic Platform version: 9.2.0 
+        /// </summary>
+        /// <value>The ending street name for searching. Added in Civic Platform version: 9.2.0 </value>
+        [DataMember(Name = "streetNameEnd", EmitDefaultValue = false)]
+        public string StreetNameEnd { get; set; }
+
+        /// <summary>
+        /// Any part of an address that appears before a street name or number. For example, if the address is 123 West Main, \&quot;West\&quot; is the street prefix.
+        /// </summary>
+        /// <value>Any part of an address that appears before a street name or number. For example, if the address is 123 West Main, \&quot;West\&quot; is the street prefix.</value>
+        [DataMember(Name = "streetPrefix", EmitDefaultValue = false)]
+        public string StreetPrefix { get; set; }
+
+        /// <summary>
+        /// The starting number of a street address range.
+        /// </summary>
+        /// <value>The starting number of a street address range.</value>
+        [DataMember(Name = "streetStart", EmitDefaultValue = false)]
+        public decimal? StreetStart { get; set; }
+
+        /// <summary>
+        /// The beginning number of a street start address range.
+        /// </summary>
+        /// <value>The beginning number of a street start address range.</value>
+        [DataMember(Name = "streetStartFrom", EmitDefaultValue = false)]
+        public long? StreetStartFrom { get; set; }
+
+        /// <summary>
+        /// The ending number of a street start address range.
+        /// </summary>
+        /// <value>The ending number of a street start address range.</value>
+        [DataMember(Name = "streetStartTo", EmitDefaultValue = false)]
+        public long? StreetStartTo { get; set; }
+
+        /// <summary>
+        /// Gets or Sets StreetSuffix
+        /// </summary>
+        [DataMember(Name = "streetSuffix", EmitDefaultValue = false)]
+        public RecordAddressModelStreetSuffixBE StreetSuffix { get; set; }
+
+        /// <summary>
+        /// Gets or Sets StreetSuffixDirection
+        /// </summary>
+        [DataMember(Name = "streetSuffixDirection", EmitDefaultValue = false)]
+        public RecordAddressModelStreetSuffixDirectionBE StreetSuffixDirection { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        public RecordAddressModelTypeBE Type { get; set; }
+
+        /// <summary>
+        /// The starting value of a range of unit numbers.
+        /// </summary>
+        /// <value>The starting value of a range of unit numbers.</value>
+        [DataMember(Name = "unitStart", EmitDefaultValue = false)]
+        public string UnitStart { get; set; }
+
+        /// <summary>
+        /// The ending value of a range of unit numbers.
+        /// </summary>
+        /// <value>The ending value of a range of unit numbers.</value>
+        [DataMember(Name = "unitEnd", EmitDefaultValue = false)]
+        public string UnitEnd { get; set; }
+
+        /// <summary>
+        /// Gets or Sets UnitType
+        /// </summary>
+        [DataMember(Name = "unitType", EmitDefaultValue = false)]
+        public RecordAddressModelUnitTypeBE UnitType { get; set; }
+
+        /// <summary>
+        /// The longitudinal coordinate for this address.
+        /// </summary>
+        /// <value>The longitudinal coordinate for this address.</value>
+        [DataMember(Name = "xCoordinate", EmitDefaultValue = false)]
+        public double? XCoordinate { get; set; }
+
+        /// <summary>
+        /// The latitudinal coordinate for this address.
+        /// </summary>
+        /// <value>The latitudinal coordinate for this address.</value>
+        [DataMember(Name = "yCoordinate", EmitDefaultValue = false)]
+        public double? YCoordinate { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("class RecordAddressModel {\n");
+            sb.Append("  AddressLine1: ").Append(AddressLine1).Append("\n");
+            sb.Append("  AddressLine2: ").Append(AddressLine2).Append("\n");
+            sb.Append("  AddressTypeFlag: ").Append(AddressTypeFlag).Append("\n");
+            sb.Append("  City: ").Append(City).Append("\n");
+            sb.Append("  Country: ").Append(Country).Append("\n");
+            sb.Append("  CrossStreetNameStart: ").Append(CrossStreetNameStart).Append("\n");
+            sb.Append("  CrossStreetNameEnd: ").Append(CrossStreetNameEnd).Append("\n");
+            sb.Append("  County: ").Append(County).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Direction: ").Append(Direction).Append("\n");
+            sb.Append("  Distance: ").Append(Distance).Append("\n");
+            sb.Append("  HouseAlphaStart: ").Append(HouseAlphaStart).Append("\n");
+            sb.Append("  HouseAlphaEnd: ").Append(HouseAlphaEnd).Append("\n");
+            sb.Append("  HouseFractionStart: ").Append(HouseFractionStart).Append("\n");
+            sb.Append("  HouseFractionEnd: ").Append(HouseFractionEnd).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  InspectionDistrict: ").Append(InspectionDistrict).Append("\n");
+            sb.Append("  InspectionDistrictPrefix: ").Append(InspectionDistrictPrefix).Append("\n");
+            sb.Append("  IsPrimary: ").Append(IsPrimary).Append("\n");
+            sb.Append("  LevelEnd: ").Append(LevelEnd).Append("\n");
+            sb.Append("  LevelPrefix: ").Append(LevelPrefix).Append("\n");
+            sb.Append("  LevelStart: ").Append(LevelStart).Append("\n");
+            sb.Append("  LocationType: ").Append(LocationType).Append("\n");
+            sb.Append("  Neighborhood: ").Append(Neighborhood).Append("\n");
+            sb.Append("  NeighborhoodPrefix: ").Append(NeighborhoodPrefix).Append("\n");
+            sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
+            sb.Append("  RecordId: ").Append(RecordId).Append("\n");
+            sb.Append("  RefAddressId: ").Append(RefAddressId).Append("\n");
+            sb.Append("  SecondaryStreet: ").Append(SecondaryStreet).Append("\n");
+            sb.Append("  SecondaryStreetNumber: ").Append(SecondaryStreetNumber).Append("\n");
+            sb.Append("  ServiceProviderCode: ").Append(ServiceProviderCode).Append("\n");
+            sb.Append("  State: ").Append(State).Append("\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  StreetAddress: ").Append(StreetAddress).Append("\n");
+            sb.Append("  StreetEnd: ").Append(StreetEnd).Append("\n");
+            sb.Append("  StreetEndFrom: ").Append(StreetEndFrom).Append("\n");
+            sb.Append("  StreetEndTo: ").Append(StreetEndTo).Append("\n");
+            sb.Append("  StreetName: ").Append(StreetName).Append("\n");
+            sb.Append("  StreetNameStart: ").Append(StreetNameStart).Append("\n");
+            sb.Append("  StreetNameEnd: ").Append(StreetNameEnd).Append("\n");
+            sb.Append("  StreetPrefix: ").Append(StreetPrefix).Append("\n");
+            sb.Append("  StreetStart: ").Append(StreetStart).Append("\n");
+            sb.Append("  StreetStartFrom: ").Append(StreetStartFrom).Append("\n");
+            sb.Append("  StreetStartTo: ").Append(StreetStartTo).Append("\n");
+            sb.Append("  StreetSuffix: ").Append(StreetSuffix).Append("\n");
+            sb.Append("  StreetSuffixDirection: ").Append(StreetSuffixDirection).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  UnitStart: ").Append(UnitStart).Append("\n");
+            sb.Append("  UnitEnd: ").Append(UnitEnd).Append("\n");
+            sb.Append("  UnitType: ").Append(UnitType).Append("\n");
+            sb.Append("  XCoordinate: ").Append(XCoordinate).Append("\n");
+            sb.Append("  YCoordinate: ").Append(YCoordinate).Append("\n");
+            sb.Append("}\n");
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
+        /// <returns>JSON string presentation of the object</returns>
+        public virtual string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
+
+        /// <summary>
+        /// Returns true if objects are equal
+        /// </summary>
+        /// <param name="input">Object to be compared</param>
+        /// <returns>Boolean</returns>
+        public override bool Equals(object input)
+        {
+            return this.Equals(input as RecordAddressModelBE);
+        }
+
+        /// <summary>
+        /// Returns true if RecordAddressModel instances are equal
+        /// </summary>
+        /// <param name="input">Instance of RecordAddressModel to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(RecordAddressModelBE input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    this.AddressLine1 == input.AddressLine1 ||
+                    (this.AddressLine1 != null &&
+                    this.AddressLine1.Equals(input.AddressLine1))
+                ) &&
+                (
+                    this.AddressLine2 == input.AddressLine2 ||
+                    (this.AddressLine2 != null &&
+                    this.AddressLine2.Equals(input.AddressLine2))
+                ) &&
+                (
+                    this.AddressTypeFlag == input.AddressTypeFlag ||
+                    (this.AddressTypeFlag != null &&
+                    this.AddressTypeFlag.Equals(input.AddressTypeFlag))
+                ) &&
+                (
+                    this.City == input.City ||
+                    (this.City != null &&
+                    this.City.Equals(input.City))
+                ) &&
+                (
+                    this.Country == input.Country ||
+                    (this.Country != null &&
+                    this.Country.Equals(input.Country))
+                ) &&
+                (
+                    this.CrossStreetNameStart == input.CrossStreetNameStart ||
+                    (this.CrossStreetNameStart != null &&
+                    this.CrossStreetNameStart.Equals(input.CrossStreetNameStart))
+                ) &&
+                (
+                    this.CrossStreetNameEnd == input.CrossStreetNameEnd ||
+                    (this.CrossStreetNameEnd != null &&
+                    this.CrossStreetNameEnd.Equals(input.CrossStreetNameEnd))
+                ) &&
+                (
+                    this.County == input.County ||
+                    (this.County != null &&
+                    this.County.Equals(input.County))
+                ) &&
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) &&
+                (
+                    this.Direction == input.Direction ||
+                    (this.Direction != null &&
+                    this.Direction.Equals(input.Direction))
+                ) &&
+                (
+                    this.Distance == input.Distance ||
+                    (this.Distance != null &&
+                    this.Distance.Equals(input.Distance))
+                ) &&
+                (
+                    this.HouseAlphaStart == input.HouseAlphaStart ||
+                    (this.HouseAlphaStart != null &&
+                    this.HouseAlphaStart.Equals(input.HouseAlphaStart))
+                ) &&
+                (
+                    this.HouseAlphaEnd == input.HouseAlphaEnd ||
+                    (this.HouseAlphaEnd != null &&
+                    this.HouseAlphaEnd.Equals(input.HouseAlphaEnd))
+                ) &&
+                (
+                    this.HouseFractionStart == input.HouseFractionStart ||
+                    (this.HouseFractionStart != null &&
+                    this.HouseFractionStart.Equals(input.HouseFractionStart))
+                ) &&
+                (
+                    this.HouseFractionEnd == input.HouseFractionEnd ||
+                    (this.HouseFractionEnd != null &&
+                    this.HouseFractionEnd.Equals(input.HouseFractionEnd))
+                ) &&
+                (
+                    this.Id == input.Id ||
+                    (this.Id != null &&
+                    this.Id.Equals(input.Id))
+                ) &&
+                (
+                    this.InspectionDistrict == input.InspectionDistrict ||
+                    (this.InspectionDistrict != null &&
+                    this.InspectionDistrict.Equals(input.InspectionDistrict))
+                ) &&
+                (
+                    this.InspectionDistrictPrefix == input.InspectionDistrictPrefix ||
+                    (this.InspectionDistrictPrefix != null &&
+                    this.InspectionDistrictPrefix.Equals(input.InspectionDistrictPrefix))
+                ) &&
+                (
+                    this.IsPrimary == input.IsPrimary ||
+                    (this.IsPrimary != null &&
+                    this.IsPrimary.Equals(input.IsPrimary))
+                ) &&
+                (
+                    this.LevelEnd == input.LevelEnd ||
+                    (this.LevelEnd != null &&
+                    this.LevelEnd.Equals(input.LevelEnd))
+                ) &&
+                (
+                    this.LevelPrefix == input.LevelPrefix ||
+                    (this.LevelPrefix != null &&
+                    this.LevelPrefix.Equals(input.LevelPrefix))
+                ) &&
+                (
+                    this.LevelStart == input.LevelStart ||
+                    (this.LevelStart != null &&
+                    this.LevelStart.Equals(input.LevelStart))
+                ) &&
+                (
+                    this.LocationType == input.LocationType ||
+                    (this.LocationType != null &&
+                    this.LocationType.Equals(input.LocationType))
+                ) &&
+                (
+                    this.Neighborhood == input.Neighborhood ||
+                    (this.Neighborhood != null &&
+                    this.Neighborhood.Equals(input.Neighborhood))
+                ) &&
+                (
+                    this.NeighborhoodPrefix == input.NeighborhoodPrefix ||
+                    (this.NeighborhoodPrefix != null &&
+                    this.NeighborhoodPrefix.Equals(input.NeighborhoodPrefix))
+                ) &&
+                (
+                    this.PostalCode == input.PostalCode ||
+                    (this.PostalCode != null &&
+                    this.PostalCode.Equals(input.PostalCode))
+                ) &&
+                (
+                    this.RecordId == input.RecordId ||
+                    (this.RecordId != null &&
+                    this.RecordId.Equals(input.RecordId))
+                ) &&
+                (
+                    this.RefAddressId == input.RefAddressId ||
+                    (this.RefAddressId != null &&
+                    this.RefAddressId.Equals(input.RefAddressId))
+                ) &&
+                (
+                    this.SecondaryStreet == input.SecondaryStreet ||
+                    (this.SecondaryStreet != null &&
+                    this.SecondaryStreet.Equals(input.SecondaryStreet))
+                ) &&
+                (
+                    this.SecondaryStreetNumber == input.SecondaryStreetNumber ||
+                    (this.SecondaryStreetNumber != null &&
+                    this.SecondaryStreetNumber.Equals(input.SecondaryStreetNumber))
+                ) &&
+                (
+                    this.ServiceProviderCode == input.ServiceProviderCode ||
+                    (this.ServiceProviderCode != null &&
+                    this.ServiceProviderCode.Equals(input.ServiceProviderCode))
+                ) &&
+                (
+                    this.State == input.State ||
+                    (this.State != null &&
+                    this.State.Equals(input.State))
+                ) &&
+                (
+                    this.Status == input.Status ||
+                    (this.Status != null &&
+                    this.Status.Equals(input.Status))
+                ) &&
+                (
+                    this.StreetAddress == input.StreetAddress ||
+                    (this.StreetAddress != null &&
+                    this.StreetAddress.Equals(input.StreetAddress))
+                ) &&
+                (
+                    this.StreetEnd == input.StreetEnd ||
+                    (this.StreetEnd != null &&
+                    this.StreetEnd.Equals(input.StreetEnd))
+                ) &&
+                (
+                    this.StreetEndFrom == input.StreetEndFrom ||
+                    (this.StreetEndFrom != null &&
+                    this.StreetEndFrom.Equals(input.StreetEndFrom))
+                ) &&
+                (
+                    this.StreetEndTo == input.StreetEndTo ||
+                    (this.StreetEndTo != null &&
+                    this.StreetEndTo.Equals(input.StreetEndTo))
+                ) &&
+                (
+                    this.StreetName == input.StreetName ||
+                    (this.StreetName != null &&
+                    this.StreetName.Equals(input.StreetName))
+                ) &&
+                (
+                    this.StreetNameStart == input.StreetNameStart ||
+                    (this.StreetNameStart != null &&
+                    this.StreetNameStart.Equals(input.StreetNameStart))
+                ) &&
+                (
+                    this.StreetNameEnd == input.StreetNameEnd ||
+                    (this.StreetNameEnd != null &&
+                    this.StreetNameEnd.Equals(input.StreetNameEnd))
+                ) &&
+                (
+                    this.StreetPrefix == input.StreetPrefix ||
+                    (this.StreetPrefix != null &&
+                    this.StreetPrefix.Equals(input.StreetPrefix))
+                ) &&
+                (
+                    this.StreetStart == input.StreetStart ||
+                    (this.StreetStart != null &&
+                    this.StreetStart.Equals(input.StreetStart))
+                ) &&
+                (
+                    this.StreetStartFrom == input.StreetStartFrom ||
+                    (this.StreetStartFrom != null &&
+                    this.StreetStartFrom.Equals(input.StreetStartFrom))
+                ) &&
+                (
+                    this.StreetStartTo == input.StreetStartTo ||
+                    (this.StreetStartTo != null &&
+                    this.StreetStartTo.Equals(input.StreetStartTo))
+                ) &&
+                (
+                    this.StreetSuffix == input.StreetSuffix ||
+                    (this.StreetSuffix != null &&
+                    this.StreetSuffix.Equals(input.StreetSuffix))
+                ) &&
+                (
+                    this.StreetSuffixDirection == input.StreetSuffixDirection ||
+                    (this.StreetSuffixDirection != null &&
+                    this.StreetSuffixDirection.Equals(input.StreetSuffixDirection))
+                ) &&
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) &&
+                (
+                    this.UnitStart == input.UnitStart ||
+                    (this.UnitStart != null &&
+                    this.UnitStart.Equals(input.UnitStart))
+                ) &&
+                (
+                    this.UnitEnd == input.UnitEnd ||
+                    (this.UnitEnd != null &&
+                    this.UnitEnd.Equals(input.UnitEnd))
+                ) &&
+                (
+                    this.UnitType == input.UnitType ||
+                    (this.UnitType != null &&
+                    this.UnitType.Equals(input.UnitType))
+                ) &&
+                (
+                    this.XCoordinate == input.XCoordinate ||
+                    (this.XCoordinate != null &&
+                    this.XCoordinate.Equals(input.XCoordinate))
+                ) &&
+                (
+                    this.YCoordinate == input.YCoordinate ||
+                    (this.YCoordinate != null &&
+                    this.YCoordinate.Equals(input.YCoordinate))
+                );
+        }
+
+        /// <summary>
+        /// Gets the hash code
+        /// </summary>
+        /// <returns>Hash code</returns>
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.AddressLine1 != null)
+                    hashCode = hashCode * 59 + this.AddressLine1.GetHashCode();
+                if (this.AddressLine2 != null)
+                    hashCode = hashCode * 59 + this.AddressLine2.GetHashCode();
+                if (this.AddressTypeFlag != null)
+                    hashCode = hashCode * 59 + this.AddressTypeFlag.GetHashCode();
+                if (this.City != null)
+                    hashCode = hashCode * 59 + this.City.GetHashCode();
+                if (this.Country != null)
+                    hashCode = hashCode * 59 + this.Country.GetHashCode();
+                if (this.CrossStreetNameStart != null)
+                    hashCode = hashCode * 59 + this.CrossStreetNameStart.GetHashCode();
+                if (this.CrossStreetNameEnd != null)
+                    hashCode = hashCode * 59 + this.CrossStreetNameEnd.GetHashCode();
+                if (this.County != null)
+                    hashCode = hashCode * 59 + this.County.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
+                if (this.Direction != null)
+                    hashCode = hashCode * 59 + this.Direction.GetHashCode();
+                if (this.Distance != null)
+                    hashCode = hashCode * 59 + this.Distance.GetHashCode();
+                if (this.HouseAlphaStart != null)
+                    hashCode = hashCode * 59 + this.HouseAlphaStart.GetHashCode();
+                if (this.HouseAlphaEnd != null)
+                    hashCode = hashCode * 59 + this.HouseAlphaEnd.GetHashCode();
+                if (this.HouseFractionStart != null)
+                    hashCode = hashCode * 59 + this.HouseFractionStart.GetHashCode();
+                if (this.HouseFractionEnd != null)
+                    hashCode = hashCode * 59 + this.HouseFractionEnd.GetHashCode();
+                if (this.Id != null)
+                    hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.InspectionDistrict != null)
+                    hashCode = hashCode * 59 + this.InspectionDistrict.GetHashCode();
+                if (this.InspectionDistrictPrefix != null)
+                    hashCode = hashCode * 59 + this.InspectionDistrictPrefix.GetHashCode();
+                if (this.IsPrimary != null)
+                    hashCode = hashCode * 59 + this.IsPrimary.GetHashCode();
+                if (this.LevelEnd != null)
+                    hashCode = hashCode * 59 + this.LevelEnd.GetHashCode();
+                if (this.LevelPrefix != null)
+                    hashCode = hashCode * 59 + this.LevelPrefix.GetHashCode();
+                if (this.LevelStart != null)
+                    hashCode = hashCode * 59 + this.LevelStart.GetHashCode();
+                if (this.LocationType != null)
+                    hashCode = hashCode * 59 + this.LocationType.GetHashCode();
+                if (this.Neighborhood != null)
+                    hashCode = hashCode * 59 + this.Neighborhood.GetHashCode();
+                if (this.NeighborhoodPrefix != null)
+                    hashCode = hashCode * 59 + this.NeighborhoodPrefix.GetHashCode();
+                if (this.PostalCode != null)
+                    hashCode = hashCode * 59 + this.PostalCode.GetHashCode();
+                if (this.RecordId != null)
+                    hashCode = hashCode * 59 + this.RecordId.GetHashCode();
+                if (this.RefAddressId != null)
+                    hashCode = hashCode * 59 + this.RefAddressId.GetHashCode();
+                if (this.SecondaryStreet != null)
+                    hashCode = hashCode * 59 + this.SecondaryStreet.GetHashCode();
+                if (this.SecondaryStreetNumber != null)
+                    hashCode = hashCode * 59 + this.SecondaryStreetNumber.GetHashCode();
+                if (this.ServiceProviderCode != null)
+                    hashCode = hashCode * 59 + this.ServiceProviderCode.GetHashCode();
+                if (this.State != null)
+                    hashCode = hashCode * 59 + this.State.GetHashCode();
+                if (this.Status != null)
+                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                if (this.StreetAddress != null)
+                    hashCode = hashCode * 59 + this.StreetAddress.GetHashCode();
+                if (this.StreetEnd != null)
+                    hashCode = hashCode * 59 + this.StreetEnd.GetHashCode();
+                if (this.StreetEndFrom != null)
+                    hashCode = hashCode * 59 + this.StreetEndFrom.GetHashCode();
+                if (this.StreetEndTo != null)
+                    hashCode = hashCode * 59 + this.StreetEndTo.GetHashCode();
+                if (this.StreetName != null)
+                    hashCode = hashCode * 59 + this.StreetName.GetHashCode();
+                if (this.StreetNameStart != null)
+                    hashCode = hashCode * 59 + this.StreetNameStart.GetHashCode();
+                if (this.StreetNameEnd != null)
+                    hashCode = hashCode * 59 + this.StreetNameEnd.GetHashCode();
+                if (this.StreetPrefix != null)
+                    hashCode = hashCode * 59 + this.StreetPrefix.GetHashCode();
+                if (this.StreetStart != null)
+                    hashCode = hashCode * 59 + this.StreetStart.GetHashCode();
+                if (this.StreetStartFrom != null)
+                    hashCode = hashCode * 59 + this.StreetStartFrom.GetHashCode();
+                if (this.StreetStartTo != null)
+                    hashCode = hashCode * 59 + this.StreetStartTo.GetHashCode();
+                if (this.StreetSuffix != null)
+                    hashCode = hashCode * 59 + this.StreetSuffix.GetHashCode();
+                if (this.StreetSuffixDirection != null)
+                    hashCode = hashCode * 59 + this.StreetSuffixDirection.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.UnitStart != null)
+                    hashCode = hashCode * 59 + this.UnitStart.GetHashCode();
+                if (this.UnitEnd != null)
+                    hashCode = hashCode * 59 + this.UnitEnd.GetHashCode();
+                if (this.UnitType != null)
+                    hashCode = hashCode * 59 + this.UnitType.GetHashCode();
+                if (this.XCoordinate != null)
+                    hashCode = hashCode * 59 + this.XCoordinate.GetHashCode();
+                if (this.YCoordinate != null)
+                    hashCode = hashCode * 59 + this.YCoordinate.GetHashCode();
+                return hashCode;
+            }
+        }
+    }
+}
+
+

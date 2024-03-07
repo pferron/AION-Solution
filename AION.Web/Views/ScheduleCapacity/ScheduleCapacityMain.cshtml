@@ -1,0 +1,126 @@
+﻿@using System.Web.Mvc.Html
+@model AION.Web.Models.Scheduling.ScheduleCapacityViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Schedule Capacity";
+
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+
+}
+@section style{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+
+    <style type="text/css">
+        label.error {
+            float: none;
+            color: red;
+            padding-left: .5em;
+            vertical-align: top;
+            display: block;
+        }
+
+        .multiselect-container > li > a > label.checkbox {
+            width: 300px;
+        }
+
+        .btn-group > .btn:first-child {
+            width: 300px;
+        }
+
+        .SCselectdeptreviewer {
+            width: 150px;
+        }
+    </style>
+
+}
+@section scripts{
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+
+    <script src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+
+    <script src="/app-assets/js/scripts/custom/select-lists.js"></script>
+    <script src="/app-assets/js/scripts/custom/register-selected-item-changed-event.js"></script>
+
+    <script src="/app-assets/js/scripts/navs/navs.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/schedule-capacity.js"></script>
+
+
+}
+
+<form class="form form-horizontal">
+    <div class="form-body">
+        <div class="form-group row">
+            @Html.HiddenFor(m => m.LoggedInUserEmail, @Model.LoggedInUserEmail)
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header">Schedule Capacity</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label> Start Date:</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @id = "SCsearchstartdate", @class = "datepicker-future start-date form-control border-cyan" } })
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <span class="fa fa-calendar-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>End Date:</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @id = "SCsearchenddate", @class = "datepicker-future end-date form-control border-cyan" } })
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <span class="fa fa-calendar-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @*This shows the error for missing reviewers - do not remove*@
+                                        <div class="error alert alert-danger"> @Html.Hidden("SCdeptreviewersselected")</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <input type="button" value="Submit" class="btn btn-poppy schcapsearch mx-2 mb-3 @disabledcls" @disablebtn />
+                                <input type="button" id="filter" class="btn btn-poppy mx-2 mb-3" name="filter" value="Refresh" />
+                            </div>
+
+                            <div id="scheduleCapDDLs">
+
+                            </div>
+                            <div id="searchtbody">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

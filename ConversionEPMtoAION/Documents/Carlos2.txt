@@ -1,0 +1,303 @@
+exec sp_executesql N'
+			select 
+				pcs.id_project_current_stat, 
+				pcs.nme_project,
+				pcs.project_number,
+				pcs.id_address,
+				pcs.txt_address,
+				pcs.txt_review_type_code,
+				pcs.txt_prop_type_code,
+				pcs.txt_cde_summary_code,
+				pcs.plans_ready_on,
+				pcs.id_project_coordinator,
+				pcs.id_project_state,
+				pcs.review_start_date,
+				pcs.id_client,
+				pcs.application_received_on,
+				pcs.app_form_file,
+				pcs.txt_soi,
+				pcs.media_type,
+				pcs.schedule_cycle,
+				pcs.txt_pool_project,
+				pcs.workflow_version,
+				pcs.orig_proj_number,
+				(select top 1 nme_project from tb_project_current_status where project_number = pcs.orig_proj_number) as ''orig_proj_name'',
+				u.id_user as id_project_manager,
+				u.nme_first + '' '' + u.nme_last as ''project_manager_name'',
+				u.nme_company as ''project_manager_company'',
+				u.txt_phone as ''project_manager_phone_number'',
+				u.txt_email as ''project_manager_email_address'',
+                pcs.id_file_store,
+                pcs.assessment_cycle,
+                pcs.interactive_cycle,
+                pcs.intake_cycle,
+                nme_town,
+                migrated_from_project_number,
+                migrated_to_project_number,
+                task_pending_flg,
+                task_pending_desc
+                
+			from 
+				tb_project_current_status pcs left outer join
+				tb_users u on pcs.id_project_manager = u.id_user
+			where
+				pcs.project_number = @ProjectNumber
+		',N'@ProjectNumber nvarchar(6)',@ProjectNumber=N'436520'
+go
+exec sp_reset_connection 
+go
+exec sp_executesql N'SELECT [t0].[id_est_current_stat], [t0].[project_number], [t0].[assessment_cycle], [t0].[txt_trade_code], [t0].[txt_est_state_code], [t0].[txt_est_hrs], [t0].[performed_on], [t0].[txt_performed_by], [t0].[txt_cust_notes], [t0].[txt_int_notes], [t0].[txt_gate_notes], [t0].[prelim_meeting_reqd], [t0].[scope_drawing_reqd], [t0].[other_info_reqd], [t0].[id_project_history]
+FROM [dbo].[tb_est_current_status] AS [t0]
+WHERE [t0].[project_number] = @p0',N'@p0 varchar(6)',@p0='436520'
+go
+exec sp_reset_connection 
+go
+exec sp_executesql N'SELECT TOP (1) [t0].[id_project_current_stat], [t0].[project_number], [t0].[id_project_group], [t0].[nme_project], [t0].[id_task], [t0].[txt_performed_by], [t0].[performed_on], [t0].[id_client], [t0].[id_project_manager], [t0].[id_project_coordinator], [t0].[assessment_cycle], [t0].[id_project_state], [t0].[plans_ready_on], [t0].[txt_review_type_code], [t0].[id_address], [t0].[txt_phased_constr], [t0].[txt_first_phase], [t0].[orig_proj_number], [t0].[txt_prop_type_code], [t0].[txt_cde_summary_code], [t0].[prelim_proj_number], [t0].[prelim_review_done_flag], [t0].[project_constr_cost], [t0].[review_start_date], [t0].[review_end_date], [t0].[review_cancel_by], [t0].[gate_open_date], [t0].[gate_close_date], [t0].[permit_fee], [t0].[review_cancel_fee], [t0].[review_total_hours], [t0].[id_workflow_instance], [t0].[txt_sustainable_design], [t0].[plans_review_fee], [t0].[id_tb_project_history], [t0].[application_received_on], [t0].[txt_app_edit_comment], [t0].[txt_pre_gate_comment], [t0].[txt_address], [t0].[pre_eng_metal_build], [t0].[txt_SOI], [t0].[abandon_email_sent_on], [t0].[rehab_code_type], [t0].[media_type], [t0].[app_form_file], [t0].[schedule_cycle], [t0].[txt_pool_project], [t0].[workflow_version], [t0].[app_form_xml], [t0].[interactive_cycle], [t0].[intake_cycle], [t0].[parent_project_number], [t0].[sibling_order], [t0].[current_group_id], [t0].[file_storage_path], [t0].[id_file_store], [t0].[team_score_perc], [t0].[team_score_indicator], [t0].[txt_paid_by], [t0].[package_submitted_flg], [t0].[nme_town], [t0].[plans_received_on], [t0].[prelim_minutes_required_flg], [t0].[has_loa_flg], [t0].[loa_bond_account_num], [t0].[migrated_from_project_number], [t0].[migrated_to_project_number], [t0].[task_pending_desc], [t0].[task_pending_flg], [t0].[force_package_resubmit_flg], [t0].[abort_fee_calc_review_hours], [t0].[abort_fee_calc_rate], [t0].[app_form_version], [t0].[shell_proj_number]
+FROM [dbo].[tb_project_current_status] AS [t0]
+WHERE [t0].[project_number] = @p0',N'@p0 varchar(6)',@p0='436520'
+go
+exec sp_reset_connection 
+go
+exec sp_executesql N'SELECT [t0].[id_appointment], [t0].[id_project_history], [t0].[schedule_cycle], [t0].[project_number], [t0].[assessment_cycle], [t0].[txt_trade_code], [t0].[id_user], [t0].[id_appointment_type], [t0].[start_date], [t0].[start_minute], [t0].[end_minute], [t0].[auto_scheduled], [t0].[by_internal_staff], [t0].[txt_conf_room], [t0].[txt_appointment_desc], [t0].[txt_color], [t0].[sensitivity], [t0].[txt_exchange_ref], [t0].[performed_by], [t0].[performed_on], [t0].[txt_trade_desc], [t0].[sort_order], [t0].[txt_appointment_type_desc], [t0].[nme_first], [t0].[nme_last], [t0].[txt_phone], [t0].[txt_phone_ext], [t0].[txt_fax], [t0].[txt_email], [t0].[nme_company], [t0].[txt_username], [t0].[txt_ad_username], [t0].[appt_start], [t0].[appt_end], [t0].[appt_duration_minutes]
+FROM [dbo].[vw_appointments] AS [t0]
+WHERE ([t0].[project_number] = @p0) AND ([t0].[assessment_cycle] = @p1) AND ([t0].[schedule_cycle] = @p2)',N'@p0 varchar(6),@p1 decimal(29,0),@p2 decimal(29,0)',@p0='436520',@p1=1,@p2=2
+go
+exec sp_reset_connection 
+go
+exec sp_executesql N'
+        select distinct fa.txt_functional_area_desc, 
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                ufa.license_number,
+                score = case when ues.score IS NULL then ''NA''                             
+                                else convert(varchar(8),ues.score)
+                                end,
+                fa.id_functional_area            
+        from tb_user_eval_snapshots ues
+        inner join ctb_functional_areas fa on ues.id_functional_area = fa.id_functional_area
+        inner join tb_user_functional_areas ufa on (ues.license_number = ufa.license_number 
+        and ues.id_functional_area = ufa.id_functional_area)
+        inner join tb_users u on ufa.id_user = u.id_user
+        where ues.project_number = @ProjectNumber
+        and fa.id_functional_area in (1, 2, 3, 4)
+      union
+      select distinct fa.txt_functional_area_desc, 
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 8                                  
+        inner join tb_users u on akc.id_user_designer = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 9
+        inner join tb_users u on akc.id_user_elec_designer = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 10
+        inner join tb_users u on akc.id_user_mech_designer = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 11
+        inner join tb_users u on akc.id_user_plumb_designer = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 5
+        inner join tb_users u on akc.id_user_fire_eng = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 12
+        inner join tb_users u on akc.id_user_fire_designer = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 13
+        inner join tb_users u on akc.id_user_civil_eng = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 14
+        inner join tb_users u on akc.id_user_civil_designer = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 15
+        inner join tb_users u on akc.id_user_struct_eng = u.id_user
+        where akc.project_number = @ProjectNumber
+      union
+      select distinct fa.txt_functional_area_desc,
+          txt_name = u.nme_first + '' '' + u.nme_last,
+                NULL,
+                ''NA'',
+                fa.id_functional_area
+        from tb_app_key_contacts akc
+        inner join ctb_functional_areas fa on fa.id_functional_area = 16
+        inner join tb_users u on akc.id_user_struct_designer = u.id_user
+        where akc.project_number = @ProjectNumber
+    ',N'@ProjectNumber nvarchar(6)',@ProjectNumber=N'436520'
+go
+exec sp_reset_connection 
+go
+exec sp_executesql N'SELECT TOP (1) [t0].[id_project_current_stat], [t0].[project_number], [t0].[id_project_group], [t0].[nme_project], [t0].[id_task], [t0].[txt_performed_by], [t0].[performed_on], [t0].[id_client], [t0].[id_project_manager], [t0].[id_project_coordinator], [t0].[assessment_cycle], [t0].[id_project_state], [t0].[plans_ready_on], [t0].[txt_review_type_code], [t0].[id_address], [t0].[txt_phased_constr], [t0].[txt_first_phase], [t0].[orig_proj_number], [t0].[txt_prop_type_code], [t0].[txt_cde_summary_code], [t0].[prelim_proj_number], [t0].[prelim_review_done_flag], [t0].[project_constr_cost], [t0].[review_start_date], [t0].[review_end_date], [t0].[review_cancel_by], [t0].[gate_open_date], [t0].[gate_close_date], [t0].[permit_fee], [t0].[review_cancel_fee], [t0].[review_total_hours], [t0].[id_workflow_instance], [t0].[txt_sustainable_design], [t0].[plans_review_fee], [t0].[id_tb_project_history], [t0].[application_received_on], [t0].[txt_app_edit_comment], [t0].[txt_pre_gate_comment], [t0].[txt_address], [t0].[pre_eng_metal_build], [t0].[txt_SOI], [t0].[abandon_email_sent_on], [t0].[rehab_code_type], [t0].[media_type], [t0].[app_form_file], [t0].[schedule_cycle], [t0].[txt_pool_project], [t0].[workflow_version], [t0].[app_form_xml], [t0].[interactive_cycle], [t0].[intake_cycle], [t0].[parent_project_number], [t0].[sibling_order], [t0].[current_group_id], [t0].[file_storage_path], [t0].[id_file_store], [t0].[team_score_perc], [t0].[team_score_indicator], [t0].[txt_paid_by], [t0].[package_submitted_flg], [t0].[nme_town], [t0].[plans_received_on], [t0].[prelim_minutes_required_flg], [t0].[has_loa_flg], [t0].[loa_bond_account_num], [t0].[migrated_from_project_number], [t0].[migrated_to_project_number], [t0].[task_pending_desc], [t0].[task_pending_flg], [t0].[force_package_resubmit_flg], [t0].[abort_fee_calc_review_hours], [t0].[abort_fee_calc_rate], [t0].[app_form_version], [t0].[shell_proj_number]
+FROM [dbo].[tb_project_current_status] AS [t0]
+WHERE [t0].[project_number] = @p0',N'@p0 varchar(6)',@p0='436520'
+go
+exec sp_reset_connection 
+go
+exec sp_executesql N'
+			select 
+				ph.DML_Datetime,
+				txt_performed_by = case 
+					when ph.id_task = 502 then (select u1.nme_first + '' '' + u1.nme_last from tb_users u1 where u1.txt_username = mh.updated_by)
+					when ph.id_task = 201 then COALESCE((select u2.nme_first + '' '' + u2.nme_last from tb_users u2 where u2.txt_username = eh.txt_performed_by), eh.txt_performed_by)
+                    when ph.txt_performed_by = ''MODELER'' then ''Posse''
+                    when ph.txt_performed_by = ''SCHEDULER'' then ''Posse''
+					else ISNULL((select top 1 u3.nme_first + '' '' + u3.nme_last from tb_users u3 where u3.txt_username = ph.txt_performed_by), ph.txt_performed_by)
+				end,
+				case 
+					when ph.id_task = 502 then mh.updated_on
+					when ph.id_task = 201 then eh.performed_on
+					else ph.performed_on
+				end perf_on,
+				state.nme_status,
+				task.nme_task,
+                task_desc = 
+				case 
+					when ph.id_task = 201 and eh.txt_trade_code IS NOT NULL then 
+						td.txt_trade_desc + '' Estimation '' + 
+							case eh.txt_est_state_code
+								when ''NA'' THEN ''Not Required''
+								when ''PE'' THEN ''Pending''
+								when ''ES'' THEN ''Completed''
+							end
+					when ph.id_task = 201 and eh.txt_trade_code IS NULL THEN ''All Estimations Completed''
+					when ph.id_task = 502 THEN mh.txt_status_text
+					when ph.id_task = 405 THEN ''Cycle '' + LTRIM(STR(ph.assessment_cycle)) + '' Created''
+					when ph.id_task = 403 or ph.id_task = 5037 THEN ''Cycle '' + LTRIM(STR(ph.assessment_cycle)) + '' Disapproved''
+					when ph.id_task = 404 or ph.id_task = 5038 THEN ''Cycle '' + LTRIM(STR(ph.assessment_cycle)) + '' Approved''
+					when ph.id_task = 406 THEN ''Cycle '' + LTRIM(STR(ph.assessment_cycle)) + '' Approved''
+                    
+                    when ph.id_task = 603 THEN /* Waive Fees */     COALESCE(ftd.nme_fee_type, ''Fee'') + '' Waived''
+                    when ph.id_task = 604 THEN /* Collect Fees */   COALESCE(ftd.nme_fee_type, ''Fee'') + '' Collected''
+                    when ph.id_task = 605 THEN /* Pay Fees */       COALESCE(ftd.nme_fee_type, ''Fee'') + '' Paid''
+                    
+					when ph.id_task = 1002 THEN 
+							case when la.txt_link_action_type_code = ''L'' THEN ''Project Linked''
+									 when la.txt_link_action_type_code = ''D'' THEN ''Project Link Removed''
+							end
+					when ph.id_task = 2040 then ptd.txt_trade_desc + '' Trade Result: '' + prh.result
+					when ph.id_task = 2050 then ''Minutes Review Cycle '' + LTRIM(STR(ph.assessment_cycle)) + '': Disapproved''
+					when ph.id_task = 2055 then ''Minutes Review Cycle '' + LTRIM(STR(ph.assessment_cycle)) + '': Approved''
+                    
+                    when ph.id_task = 3000 THEN /* Add Fees */      COALESCE(ftd.nme_fee_type, ''Fee'') + '' Added''
+                    when ph.id_task = 3014 THEN /* Update Fees */   COALESCE(ftd.nme_fee_type, ''Fee'') + '' Updated''
+                    
+                    when ph.id_task = 3016 then /* Start Plan Review */ 
+                        txt_history_text + '': Cycle '' + cast(ph.assessment_cycle as varchar)
+                    
+                    when ph.id_task = 3007 then /* Enter Trade Review Result */ 
+                        rrt_td.txt_trade_desc + '' '' + txt_history_text
+                    
+                    when ph.id_task = 3008 then /* Enter Agency Review Result */ 
+                        rrca_ad.nme_agency + '' '' + txt_history_text
+                    
+                    when ph.id_task = 5004 or ph.id_task = 5005 or ph.id_task = 5027 then /* Save, Accept or Reject Intake */ 
+                         case when ia.id_agency_def = 4 then ''County ''
+                              else ''Town ''
+                         end + txt_history_text
+                    
+                    when ph.id_task = 5006 THEN /* Create Cycle */ ''Cycle '' + LTRIM(STR(ph.assessment_cycle)) + '' Created''
+                    when ph.id_task = 5008 THEN /* Reopen Cycle */ ''Cycle '' + LTRIM(STR(ph.assessment_cycle)) + '' Reopened''
+                    when ph.id_task = 5010 THEN /* Add Fees */      COALESCE(ftd.nme_fee_type, ''Fee'') + '' Added''
+                    when ph.id_task = 5011 THEN /* Waive Fees */    COALESCE(ftd.nme_fee_type, ''Fee'') + '' Waived''
+                    when ph.id_task = 5012 THEN /* Collect Fees */  COALESCE(ftd.nme_fee_type, ''Fee'') + '' Collected''
+                    
+                    when ph.id_task = 5021 then /* WLR Enter Agency Review Result */ 
+                        rra_ad.nme_agency + '' '' + txt_history_text
+                    
+                    when ph.id_task = 5025 THEN /* Update Fees */   COALESCE(ftd.nme_fee_type, ''Fee'') + '' Updated''
+                    
+					else txt_history_text                
+				end,
+                
+				ph.id_task,
+				ph.id_tb_project_history,
+				ph.assessment_cycle,
+				ph.app_form_file,
+                ph.id_file_store
+			from 
+				tb_project_history ph 
+                left outer join ctb_state_defs state on ph.id_project_state = state.id_status 
+                left outer join ctb_task_defs task on ph.id_task = task.id_task 
+                left outer join tb_est_history eh on eh.id_project_history = ph.id_tb_project_history 
+                left outer join ctb_trade_defs td on td.txt_trade_code = eh.txt_trade_code 
+                left outer join tb_meeting_history mh on mh.id_project_history = ph.id_tb_project_history 
+                left outer join tb_link_actions la on ph.id_tb_project_history = la.id_project_history 
+                left outer join tb_prelim_results_history prh on ph.id_tb_project_history = prh.id_project_history and ph.id_task = 2040 
+                left outer join ctb_trade_defs ptd on ptd.txt_trade_code = prh.txt_trade_code
+                
+                left outer join tb_rvw_res_trade_history rrt on ph.id_task = 3007 /* Enter Trade Review Result */ and ph.id_tb_project_history = rrt.id_tb_project_history
+                left outer join ctb_trade_defs rrt_td on rrt.txt_trade_code = rrt_td.txt_trade_code
+            
+                left outer join tb_rvw_res_ce_agency_history rrca on ph.id_task = 3008 /* Enter Agency Review Result */ and ph.id_tb_project_history = rrca.id_tb_project_history
+                left outer join ctb_agency_defs rrca_ad on rrca.id_agency = rrca_ad.id_agency_def
+                                        
+                left outer join tb_intake_action ia on ph.id_tb_project_history = ia.id_tb_project_history
+                
+                left outer join tb_rvw_res_agency_history rra on ph.id_task = 5021 /* WLR Enter Agency Review Result */ and ph.id_tb_project_history = rra.id_tb_project_history
+                left outer join ctb_agency_defs rra_ad on rra.id_agency_def = rra_ad.id_agency_def
+            
+                left outer join tb_project_fee_history pfh on ph.id_task in (603, 604, 605, 3000, 3014, 5010, 5011, 5012, 5025) /* Fee Related Tasks */ and ph.id_tb_project_history = pfh.id_tb_project_history
+                left outer join ctb_feetype_defs ftd on pfh.id_fee_types = ftd.id_fee_types
+            
+			where
+				ph.project_number = @ProjectNumber
+			order by        
+				ph.id_tb_project_history asc        
+		',N'@ProjectNumber nvarchar(6)',@ProjectNumber=N'436520'
+go

@@ -1,0 +1,194 @@
+{
+  "result": [
+    {
+      "userID": 1,
+      "firstNm": "Reviewer01 fn",
+      "lastNm": "Reviewer01 ln",
+      "externalSystemRefId": "02",
+      "srcSystemValueTxt": "Reviewer01@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Reviewer01@accela.com",
+      "ADUserIDTxt": "Reviewer01@accela.com",
+      "phoneNum": 1111111111,
+      "emailAddrTxt": "Reviewer01@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [
+        {
+          "accelaDepartmentDivisionRef": "Zoning",
+          "accelaDepartmentRegionRef": "Huntersville"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Fire",
+          "accelaDepartmentRegionRef": "Huntersville"
+        }
+      ],
+      "tradesList": [
+        {
+          "accelaDepartmentDivisionRef": "Building"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Mechanical"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Plumbing"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Electrical"
+        }
+      ]
+    },
+    {
+      "userID": 2,
+      "firstNm": "Reviewer02 fn",
+      "lastNm": "Reviewer02 ln",
+      "externalSystemRefId": "02",
+      "srcSystemValueTxt": "Reviewer02@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Reviewer02@accela.com",
+      "ADUserIDTxt": "Reviewer02@accela.com",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "Reviewer02@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": [
+        {
+          "accelaDepartmentDivisionRef": "Building"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Mechanical"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Plumbing"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Electrical"
+        }
+      ]
+    },
+    {
+      "userID": 3,
+      "firstNm": "Reviewer03 fn",
+      "lastNm": "Reviewer03 ln",
+      "externalSystemRefId": "02",
+      "srcSystemValueTxt": "Reviewer03@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Reviewer03@accela.com",
+      "ADUserIDTxt": "Reviewer03@accela.com",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "Reviewer03@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [
+        {
+          "accelaDepartmentDivisionRef": "Zoning",
+          "accelaDepartmentRegionRef": "Huntersville"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Fire",
+          "accelaDepartmentRegionRef": "Huntersville"
+        }
+      ],
+      "tradesList": []
+    },
+    {
+      "userID": 4,
+      "firstNm": "Reviewer04 fn",
+      "lastNm": "Reviewer04 ln",
+      "externalSystemRefId": "02",
+      "srcSystemValueTxt": "Reviewer04@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Reviewer04@accela.com",
+      "ADUserIDTxt": "Reviewer04@accela.com",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "Reviewer04@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 5,
+      "firstNm": "Reviewer05 fn",
+      "lastNm": "Reviewer05 ln",
+      "externalSystemRefId": "02",
+      "srcSystemValueTxt": "Reviewer05@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Reviewer05@accela.com",
+      "ADUserIDTxt": "Reviewer05@accela.com",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "Reviewer05@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 6,
+      "firstNm": "Reviewer06 fn",
+      "lastNm": "Reviewer06 ln",
+      "externalSystemRefId": "02",
+      "srcSystemValueTxt": "Reviewer06@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Reviewer06@accela.com",
+      "ADUserIDTxt": "Reviewer06@accela.com",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "Reviewer06@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 7,
+      "firstNm": "Reviewer07 fn",
+      "lastNm": "Reviewer07 ln",
+      "externalSystemRefId": "07",
+      "srcSystemValueTxt": "Reviewer07@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Reviewer07@accela.com",
+      "ADUserIDTxt": "Reviewer07@accela.com",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "Reviewer07@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    }
+  ],
+  "status": 200,
+  "page": {
+    "offset": 0,
+    "limit": 25,
+    "hasmore": false
+  }
+}

@@ -1,0 +1,158 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@model AION.Web.Models.EstimationViewModel
+
+@{
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+    //if this is preliminary estimation, then check the right permissions
+    //get the controller, if this is preliminary, use those permissions, else use estimation perms
+    var contr = ViewContext.RouteData.Values["action"];
+    //if preliminary, change the model permissions so these render correctly
+    bool enableperm = Model.PermissionMapping.Estimat_Trads;
+    bool showRequested = true;
+
+    if (contr.ToString().ToLower() == "PreliminaryEstimation".ToLower())
+    {
+        enableperm = Model.PermissionMapping.Prlim_Estimat_Trads;
+        showRequested = true;
+    };
+
+}
+
+<section id="building-reviewers">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="PrimaryReviewerBuilding">Building Primary</label>
+                @Html.DropDownListFor(m => m.PrimaryReviewerBuilding, Model.AssignPlanReviewersListBuildSR, new { @id = "DrpDnPrimaryBuild", @class = "form-select form-control border-cyan" }, enableperm)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="SecondaryReviewerBuilding">Building Secondary</label>
+                @Html.DropDownListFor(m => m.SecondaryReviewerBuilding, Model.AssignPlanReviewersListBuildSR, new { @id = "DrpDnSecondaryBuild", @class = "form-select form-control border-cyan" }, enableperm)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="ExcludedPlanReviewersBuild">Building Excluded</label>
+                @Html.ListBoxFor(m => m.ExcludedPlanReviewersBuild, Model.PlanReviewersListViewModel,
+                    new { @id = "chkDrpDnExPlnRvrsBuild", @class = "border-cyan multiselect chkDrpDnExPln", @multiple = "multiple" }, enableperm)
+            </div>
+        </div>
+        @if (showRequested == true)
+        {
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ExcludedPlanReviewersBuild">Building Requested</label>
+                    <label class="form-control border-cyan">@Model.GetProposedPlanReviewerName(AION.BL.DepartmentNameEnums.Building)</label>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section id="electrical-reviewers">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="PrimaryReviewerElectrical">Electrical Primary</label>
+                @Html.DropDownListFor(m => m.PrimaryReviewerElectrical, Model.AssignPlanReviewersListElectricSR, new { @id = "DrpDnPrimaryElectric", @class = "form-select form-select form-control border-cyan" }, enableperm)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="SecondaryReviewerelectrical">Electrical Secondary</label>
+                @Html.DropDownListFor(m => m.SecondaryReviewerelectrical, Model.AssignPlanReviewersListElectricSR, new { @id = "DrpDnSecondaryElectric", @class = "form-select form-select form-control border-cyan" }, enableperm)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="ExcludedPlanReviewersElectric">Electrical Excluded</label>
+                @Html.ListBoxFor(m => m.ExcludedPlanReviewersElectric, Model.PlanReviewersListViewModel,
+                    new { @id = "chkDrpDnExPlnRvrsElectric", @class = "border-cyan multiselect chkDrpDnExPln", @multiple = "multiple" }, enableperm)
+            </div>
+        </div>
+        @if (showRequested == true)
+        {
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ExcludedPlanReviewersBuild">Electrical Requested</label>
+                    <label class="form-control border-cyan">@Model.GetProposedPlanReviewerName(AION.BL.DepartmentNameEnums.Electrical)</label>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section id="mechanical-reviewers">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="PrimaryReviewerMechanical">Mechanical Primary</label>
+                @Html.DropDownListFor(m => m.PrimaryReviewerMechanical, Model.AssignPlanReviewersListMechSR, new { @id = "DrpDnPrimaryMech", @class = "form-select form-control border-cyan" }, enableperm)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="SecondaryReviewerMechanical">Mechanical Secondary</label>
+                @Html.DropDownListFor(m => m.SecondaryReviewerMechanical, Model.AssignPlanReviewersListMechSR, new { @id = "DrpDnSecondaryMech", @class = "form-select form-control border-cyan" }, enableperm)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="ExcludedPlanReviewersMech">Mechanical Excluded</label>
+                @Html.ListBoxFor(m => m.ExcludedPlanReviewersMech, Model.PlanReviewersListViewModel,
+                    new { @id = "chkDrpDnExPlnRvrsMech", @class = "border-cyan multiselect chkDrpDnExPln", @multiple = "multiple" }, enableperm)
+            </div>
+        </div>
+        @if (showRequested == true)
+        {
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ExcludedPlanReviewersBuild">Mechanical Requested</label>
+                    <label class="form-control border-cyan">@Model.GetProposedPlanReviewerName(AION.BL.DepartmentNameEnums.Mechanical)</label>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section id="plumbing-reviewers">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="PrimaryReviewerPlumbing">Plumbing Primary</label>
+                @Html.DropDownListFor(m => m.PrimaryReviewerPlumbing, Model.AssignPlanReviewersListPlumbSR, new { @id = "DrpDnPrimaryPlumb", @class = "form-select form-control border-cyan" }, enableperm)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="SecondaryReviewerPlumbing">Plumbing Secondary</label>
+                @Html.DropDownListFor(m => m.SecondaryReviewerPlumbing, Model.AssignPlanReviewersListPlumbSR, new { @id = "DrpDnSecondaryPlumb", @class = "form-select form-control border-cyan" }, enableperm)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="ExcludedPlanReviewersPlumb">Plumbing Excluded</label>
+                @Html.ListBoxFor(m => m.ExcludedPlanReviewersPlumb, Model.PlanReviewersListViewModel,
+                    new { @id = "chkDrpDnExPlnRvrsPlumb", @class = "border-cyan multiselect chkDrpDnExPln", @multiple = "multiple" }, enableperm)
+            </div>
+        </div>
+        @if (showRequested == true)
+        {
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="RequestedPlanReviewerBuild">Plumbing Requested</label>
+                    <label class="form-control border-cyan">@Model.GetProposedPlanReviewerName(AION.BL.DepartmentNameEnums.Plumbing)</label>
+                </div>
+            </div>
+        }
+    </div>
+</section>

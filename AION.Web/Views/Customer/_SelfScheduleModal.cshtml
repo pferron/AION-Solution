@@ -1,0 +1,100 @@
+﻿@using AION.Web.Models
+@using AION.BL
+@using AION.Web.Models.Shared
+
+@model AION.Web.Models.CustomerProjectDetailViewModel
+
+
+<div class="modal fade" id="SelfSchedule" role="dialog" data-keyboard="false" data-backdrop="static">
+
+    <input type="hidden" id="prResponseEnum" name="prResponseEnum" />
+    <input type="hidden" id="PRProdDate" name="PRProdDate" />
+    <input type="hidden" id="prProdDateSelfSchedule" name="prProdDateSelfSchedule" />
+    <input type="hidden" id="prProjectCycleId" name="prProjectCycleId" />
+    <input type="hidden" id="prUserId" name="prUserId" />
+    <input type="hidden" id="prReviewId" name="prReviewId" />
+
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-cyan white">
+                <h4 class="modal-title white">Self Schedule</h4>
+                <a role="button" class="btn close closeSelfSchedule" data-bs-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col alert-info" id="selfSchStatusMsg" tabindex="-1">
+                    </div>
+                </div>
+                <div class="mb-4"><span style="color:red">Notice!</span> Max. 2 week search span</div>
+                <table class="mb-4">
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <input id="datepickerSS1" type="text"
+                                           class="datepicker form-control border-cyan text-box single-line"
+                                           style="max-width: 140px;min-width: 140px;" />
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-calendar-o"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <input id="datepickerSS2" type="text"
+                                           class="datepicker form-control border-cyan text-box single-line"
+                                           style="max-width: 140px;min-width: 140px;" />
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-calendar-o"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><button type="button" class="btn btn-primary" id="searchSelfScheduleDates">Search</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col text-center" id="SelfScheduleDatesList">
+
+                    </div>
+                </div>
+                <br />
+                <div class="row justify-content-center">
+                    <div>
+                        @{ for (var i = 0; i < Model.PendingEstimationNotes.Count(); i++)
+                            {
+                                string notedivclass = "note" + Model.PendingEstimationNotes[i].ID;
+                                <div class="row ">
+                                    <div class="col">
+                                        <a class="col" data-bs-toggle="collapse" data-bs-target=".@notedivclass" aria-expanded="false" aria-controls="@notedivclass">
+                                            @Model.PendingEstimationNotes[i].CreatedDate.ToString("MM/dd/yyyy hh:mm")
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button role="button" class="btn btn-default closeSelfSchedule" data-bs-dismiss="modal">Close</button>
+                <button role="button" class="btn btn-poppy" id="submitSelfSchedule">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+

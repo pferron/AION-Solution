@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Inspections
+
+Use the Inspections API to manage inspection records during their complete lifecycle from application submittal to permit issuance or license issuance. Your agency may need to complete inspections on new property developments, homes, or complaints.
+
+OpenAPI spec version: v4
+
+-->
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3D0A79D-2718-4AD2-8519-83731DC94840}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AccelaInspections</RootNamespace>
+    <AssemblyName>AccelaInspections</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0472</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JsonSubTypes, Version=2.0.1.0, Culture=neutral, PublicKeyToken=ee75fc290dbc1176, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JsonSubTypes.2.0.1\lib\net47\JsonSubTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="docs\ASITableDrill.md" />
+    <None Include="docs\AvailableDatesArray.md" />
+    <None Include="docs\AvailableTimesArray.md" />
+    <None Include="docs\ChecklistItemStatusModel.md" />
+    <None Include="docs\ChecklistModel.md" />
+    <None Include="docs\ChekclistItemHistoryModel.md" />
+    <None Include="docs\ChekclistItemHistoryModelMajorViolation.md" />
+    <None Include="docs\ChildDrill.md" />
+    <None Include="docs\ConditionHistoryModel.md" />
+    <None Include="docs\ConditionHistoryModelActionbyDepartment.md" />
+    <None Include="docs\CostingQuantityModel.md" />
+    <None Include="docs\CustomAttributeModel.md" />
+    <None Include="docs\CustomFormField.md" />
+    <None Include="docs\CustomFormFieldOptions.md" />
+    <None Include="docs\CustomFormMetadataModel.md" />
+    <None Include="docs\CustomTableMetadataFields.md" />
+    <None Include="docs\CustomTableMetadataModel.md" />
+    <None Include="docs\CustomTablesModel.md" />
+    <None Include="docs\CustomTablesStatusDetailModel.md" />
+    <None Include="docs\CustomTablesStatusModel.md" />
+    <None Include="docs\DocumentModel.md" />
+    <None Include="docs\DocumentModelCategory.md" />
+    <None Include="docs\DocumentModelGroup.md" />
+    <None Include="docs\DocumentModelStatus.md" />
+    <None Include="docs\InspectionAddressModel.md" />
+    <None Include="docs\InspectionAddressModelAddressTypeFlag.md" />
+    <None Include="docs\InspectionAddressModelCountry.md" />
+    <None Include="docs\InspectionAddressModelDirection.md" />
+    <None Include="docs\InspectionAddressModelHouseFractionEnd.md" />
+    <None Include="docs\InspectionAddressModelHouseFractionStart.md" />
+    <None Include="docs\InspectionAddressModelState.md" />
+    <None Include="docs\InspectionAddressModelStatus.md" />
+    <None Include="docs\InspectionAddressModelStreetSuffix.md" />
+    <None Include="docs\InspectionAddressModelStreetSuffixDirection.md" />
+    <None Include="docs\InspectionAddressModelUnitType.md" />
+    <None Include="docs\InspectionAvailabilityArray.md" />
+    <None Include="docs\InspectionChecklistItemCustomTable.md" />
+    <None Include="docs\InspectionChecklistItemModel.md" />
+    <None Include="docs\InspectionChecklistItemModelChecklistItem.md" />
+    <None Include="docs\InspectionChecklistItemModelComment.md" />
+    <None Include="docs\InspectionChecklistItemModelStatus.md" />
+    <None Include="docs\InspectionChecklistModel.md" />
+    <None Include="docs\InspectionChecklistModelGuideType.md" />
+    <None Include="docs\InspectionChecklistRowModel.md" />
+    <None Include="docs\InspectionCommentModel.md" />
+    <None Include="docs\InspectionConditionModel.md" />
+    <None Include="docs\InspectionConditionModelActionbyDepartment.md" />
+    <None Include="docs\InspectionConditionModelActionbyUser.md" />
+    <None Include="docs\InspectionConditionModelActiveStatus.md" />
+    <None Include="docs\InspectionConditionModelAppliedbyDepartment.md" />
+    <None Include="docs\InspectionConditionModelAppliedbyUser.md" />
+    <None Include="docs\InspectionConditionModelGroup.md" />
+    <None Include="docs\InspectionConditionModelInheritable.md" />
+    <None Include="docs\InspectionConditionModelPriority.md" />
+    <None Include="docs\InspectionConditionModelSeverity.md" />
+    <None Include="docs\InspectionConditionModelStatus.md" />
+    <None Include="docs\InspectionConditionModelType.md" />
+    <None Include="docs\InspectionContactModel.md" />
+    <None Include="docs\InspectionContactModelBirthCity.md" />
+    <None Include="docs\InspectionContactModelBirthRegion.md" />
+    <None Include="docs\InspectionContactModelBirthState.md" />
+    <None Include="docs\InspectionContactModelDriverLicenseState.md" />
+    <None Include="docs\InspectionContactModelGender.md" />
+    <None Include="docs\InspectionContactModelPreferredChannel.md" />
+    <None Include="docs\InspectionContactModelRace.md" />
+    <None Include="docs\InspectionContactModelRelation.md" />
+    <None Include="docs\InspectionContactModelSalutation.md" />
+    <None Include="docs\InspectionContactModelStatus.md" />
+    <None Include="docs\InspectionContactModelType.md" />
+    <None Include="docs\InspectionModel.md" />
+    <None Include="docs\InspectionModelStatus.md" />
+    <None Include="docs\InspectionRelatedModel.md" />
+    <None Include="docs\InspectionsApi.md" />
+    <None Include="docs\InspectionsChecklistsApi.md" />
+    <None Include="docs\InspectionsChecklistsChecklistItemsApi.md" />
+    <None Include="docs\InspectionsChecklistsChecklistItemsCustomFormsApi.md" />
+    <None Include="docs\InspectionsChecklistsChecklistItemsCustomTablesApi.md" />
+    <None Include="docs\InspectionsConditionApprovalsApi.md" />
+    <None Include="docs\InspectionsConditionsApi.md" />
+    <None Include="docs\InspectionsDocumentsApi.md" />
+    <None Include="docs\InspectionsTimeAccountingApi.md" />
+    <None Include="docs\InspectionTypeModel.md" />
+    <None Include="docs\InspectorModel.md" />
+    <None Include="docs\InspectorModelDepartment.md" />
+    <None Include="docs\InspectorsApi.md" />
+    <None Include="docs\OwnerAddressModel.md" />
+    <None Include="docs\PageModel.md" />
+    <None Include="docs\RecordIdModel.md" />
+    <None Include="docs\RecordTypeModel2.md" />
+    <None Include="docs\RequestRescheduleInspectionModel.md" />
+    <None Include="docs\RequestScheduleInspectionModel.md" />
+    <None Include="docs\RequestTimeLogModel.md" />
+    <None Include="docs\RequestUpdateInspectionModel.md" />
+    <None Include="docs\ResponseChecklistItemStatusModelArray.md" />
+    <None Include="docs\ResponseChecklistModelArray.md" />
+    <None Include="docs\ResponseChekclistItemHistoryModel.md" />
+    <None Include="docs\ResponseConditionHistoryModelArray.md" />
+    <None Include="docs\ResponseCustomAttributeModelArray.md" />
+    <None Include="docs\ResponseCustomFormMetadataModelArray.md" />
+    <None Include="docs\ResponseCustomTableMetadataModelArray.md" />
+    <None Include="docs\ResponseCustomTablesModelArray.md" />
+    <None Include="docs\ResponseDocumentModelArray.md" />
+    <None Include="docs\ResponseInspectionAvailabilityArray.md" />
+    <None Include="docs\ResponseInspectionChecklistItemModelArray.md" />
+    <None Include="docs\ResponseInspectionChecklistModelArray.md" />
+    <None Include="docs\ResponseInspectionCommentModelArray.md" />
+    <None Include="docs\ResponseInspectionConditionModel.md" />
+    <None Include="docs\ResponseInspectionConditionModelArray.md" />
+    <None Include="docs\ResponseInspectionModel.md" />
+    <None Include="docs\ResponseInspectionModelArray.md" />
+    <None Include="docs\ResponseInspectionRelatedModelArray.md" />
+    <None Include="docs\ResponseInspectorModel.md" />
+    <None Include="docs\ResponseInspectorModelArray.md" />
+    <None Include="docs\ResponseResultModel.md" />
+    <None Include="docs\ResponseResultModelArray.md" />
+    <None Include="docs\ResponseTimeLogModel.md" />
+    <None Include="docs\ResponseTimeLogModelArray.md" />
+    <None Include="docs\ResultModel.md" />
+    <None Include="docs\TimeLogModel.md" />
+    <None Include="docs\TimeLogModelGroup.md" />
+    <None Include="docs\TimeLogModelType.md" />
+    <None Include="docs\UserRolePrivilegeModel.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

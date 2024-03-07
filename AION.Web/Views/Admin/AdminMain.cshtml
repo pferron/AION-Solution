@@ -1,0 +1,180 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Models
+@using Newtonsoft.Json
+@using AION.Web.BusinessEntities;
+
+@model AION.Web.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "Admin";
+
+    bool isreadonly = Model.IsReadOnly;
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+}
+
+@section style
+{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/custom/multiselect-dual.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/fixedHeader.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/colReorder.dataTables.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/pages/admin-main.css" />
+}
+
+@section scripts
+    {
+
+    <script src="/app-assets/js/scripts/navs/navs.js"></script>
+
+    <script src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+
+    <script src="/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+    <script src="/app-assets/js/scripts/forms/checkbox-radio.js"></script>
+
+    @*admin validator*@
+    <script src="/app-assets/js/scripts/pages/admin/admin-validator.js"></script>
+
+    @*multiselect-dual*@
+    <script src="~/app-assets/vendors/js/multiselect/multiselect-dual.js"></script>
+    <script src="/app-assets/js/scripts/custom/multiselect-dual.js"></script>
+
+    @*ckeditor*@
+    <script src="/app-assets/js/scripts/editors/ckeditor/ckeditor_basic.js"></script>
+
+    @*user management tab*@
+    <script src="/app-assets/js/scripts/pages/admin/user-management.js"></script>
+
+    @*npa config tab*@
+    <script src="/app-assets/js/scripts/pages/admin/npa-config.js"></script>
+
+    @*holiday config tab*@
+    <script src="~/app-assets/js/scripts/pages/admin/holiday-config.js"></script>
+
+    @*default hours config tab*@
+    <script src="/app-assets/js/scripts/pages/admin/default-hours.js"></script>
+
+    @*misc config tab*@
+    <script src="/app-assets/js/scripts/pages/admin/misc-config.js"></script>
+
+    @*message config tab*@
+    <script src="/app-assets/js/scripts/pages/admin/message-config.js"></script>
+
+    <script src="~/app-assets/js/scripts/custom/system-role-perms.js"></script>
+
+    @*create role tab*@
+    <script src="~/app-assets/js/scripts/pages/admin/create-role.js"></script>
+
+    @*modify role tab*@
+    <script src="~/app-assets/js/scripts/pages/admin/modify-role.js"></script>
+
+    @*datatables*@
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.fixedHeader.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.colReorder.min.js"></script>
+
+    <script src="~/app-assets/vendors/js/tables/datatable/moment.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datetime-moment.js"></script>
+
+    <script src="/app-assets/js/scripts/pages/admin/admin-main.js"></script>
+}
+
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+@functions
+{
+    string ConvertModelToJson()
+    {
+        string ret = JsonConvert.SerializeObject(Model);
+        return ret;
+    }
+}
+@using (Html.BeginForm("Update", "Admin", FormMethod.Post, new { @id = "AdminForm", @class = "form form-horizontal" }))
+{
+    <div class="form-body">
+
+        @Html.HiddenFor(x => x.LoggedInUserEmail)
+
+        <div class="form-group row admincontent">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="alert-danger font-weight-bold" id="errorlist" style="display:none;"></div>
+                            <div id="tabs">
+
+                                <ul class="nav nav-tabs nav-topline nav-justified nav-border-left nav-border-right mb-4" id="nav-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="nav-usermgmt-tab" data-toggle="tab" href="#nav-usermgmt" role="tab" aria-controls="nav-usermgmt" aria-selected="true">Users</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="nav-npaconf-tab" data-toggle="tab" href="#nav-npaconf" role="tab" aria-controls="nav-npaconf" aria-selected="true">NPAs</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="nav-holidayconf-tab" data-toggle="tab" href="#nav-holidayconf" role="tab" aria-controls="nav-holidayconf" aria-selected="true">Holidays</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="nav-hoursconf-tab" data-toggle="tab" href="#nav-hoursconf" role="tab" aria-controls="nav-hoursconf" aria-selected="true">Hours</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="nav-miscconf-tab" data-toggle="tab" href="#nav-miscconf" role="tab" aria-controls="nav-miscconf" aria-selected="true">Misc</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="nav-messgeconf-tab" data-toggle="tab" href="#nav-messageconf" role="tab" aria-controls="nav-emailconf" aria-selected="true">Messages</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="nav-creatrole-tab" data-toggle="tab" href="#nav-creatrole" role="tab" aria-controls="nav-creatrole" aria-selected="true">Create Role</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="nav-modifyrole-tab" data-toggle="tab" href="#nav-modifyrole" role="tab" aria-controls="nav-modifyrole" aria-selected="true">Modify Role</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content ml-3 mr-3" id="nav-tabContent">
+                                    <div class="tab-pane col-xl-12 active" id="nav-usermgmt" role="tabpanel" aria-labelledby="nav-usermgmt-tab">
+                                        @Html.Partial("_UserManagement", Model)
+                                    </div>
+                                    <div class="tab-pane" id="nav-npaconf" role="tabpanel" aria-labelledby="nav-npaconf-tab">
+                                        @Html.Partial("_NPAConfiguration", Model)
+                                    </div>
+
+                                    <div class="tab-pane" id="nav-holidayconf" role="tabpanel" aria-labelledby="nav-holidayconf-tab">
+                                        @Html.Partial("_HolidayConfiguration", Model)
+                                    </div>
+                                    <div class="tab-pane col-xl-12" id="nav-hoursconf" role="tabpanel" aria-labelledby="nav-hoursmgmt-tab">
+                                        @Html.Partial("_DefaultHours", Model)
+                                    </div>
+                                    <div class="tab-pane col-xl-12" id="nav-miscconf" role="tabpanel" aria-labelledby="nav-miscconf-tab">
+                                        @Html.Partial("_MiscConfiguration", Model)
+                                    </div>
+                                    <div class="tab-pane" id="nav-messageconf" role="tabpanel" aria-labelledby="nav-messageconf-tab">
+                                        @Html.Partial("_MessageConfiguration", Model)
+                                    </div>
+                                    <div class="tab-pane" id="nav-creatrole" role="tabpanel" aria-labelledby="nav-creatrole-tab">
+                                        @Html.Partial("_CreateRole", Model)
+                                    </div>
+                                    <div class="tab-pane" id="nav-modifyrole" role="tabpanel" aria-labelledby="nav-modifyrole-tab">
+                                        @Html.Partial("_ModifyPermission", Model)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

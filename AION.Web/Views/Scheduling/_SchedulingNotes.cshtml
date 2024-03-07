@@ -1,0 +1,73 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@using AION.Web.Models
+@model AION.Web.Models.SchedulePlanReviewViewModel
+
+<div class="mb-4" id="sectionProjectSummary">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <div class="error alert" id="statusmessage">@Model.StatusMessage</div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h4 class="card-title">Project Summary</h4>
+                </div>
+                <div class="card-body">
+                    @Html.Partial("_ProjectSummary", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-title">
+    Scheduling Notes
+</div>
+<div class="row mb-4">
+    <div class="col p-4">
+        Mandatory Schedule Notes: <br />
+        @Html.TextAreaFor(m => m.MandatorySchedulingNotes, new { @class = "form-control col-md-12", @rows = "5" }, true)
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-3 p-4">
+        Scheduling Notes Selection<br />
+        @Html.Partial("_StandardNotes", new EstimationViewModel
+           {
+               LoggedInUser = Model.LoggedInUser,
+               LoggedInUserEmail = Model.LoggedInUserEmail,
+               StandardNoteGroups = Model.StandardNoteGroups,
+               StandardNotes = Model.StandardNotes
+
+           })
+        @Html.HiddenFor(m => m.SchedulingStandardNotes, new { @id = "schedstandardnotes" })
+    </div>
+    <div class="col p-2 text-wrap">
+        Estimation Notes <br />
+        @foreach (Note noteList in Model.NotesComments)
+        {
+            NoteTypeEnum noteTypeEnum = noteList.NotesType.Type;
+
+            if (noteTypeEnum == NoteTypeEnum.PendingNotes || noteTypeEnum == NoteTypeEnum.GateNotes || noteTypeEnum == NoteTypeEnum.InternalNotes)
+            {
+                <div class="row">
+                    <div class="col-md-1">@noteList.CreatedDate.ToString("MM/dd/yyyy hh:mm")</div>
+                    <div class="col-md-3">@noteList.CreatedUser.FirstName  @noteList.CreatedUser.LastName</div>
+                    <div class="col-md overflow-auto" style="min-width: 400px;">
+                        @noteList.NotesComments
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col p-2">
+        Add Notes:<br />
+        @Html.TextAreaFor(m => m.AddSchedulingNotes, new { @class = "form-control col-md-12", @rows = "5" }, true)
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@using AION.BL.Models
+
+@model List<AION.BL.Models.MeetingRoom>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <table class="table table-striped table-bordered zero-configuration dataTable" id="meetingroomtable">
+            <thead>
+                <tr>
+                    <th class="text-center">Select</th>
+                    <th>Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{foreach (MeetingRoom room in Model)
+                    {
+                        <tr>
+                            <td class="text-center skin skin-square">
+                                <fieldset>
+                                    <label>
+                                        <input type="checkbox" class="meeting-room" data-id="@room.MeetingRoomRefID" data-meeting-room="@room.MeetingRoomName" />
+                                    </label>
+                                </fieldset>
+                            </td>
+                            <td>@room.MeetingRoomName</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot>
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td><label>There are no available rooms.</label></td>
+                    </tr>
+                }
+            </tfoot>
+        </table>
+    </div>
+</div>

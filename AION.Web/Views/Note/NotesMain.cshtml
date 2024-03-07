@@ -1,0 +1,76 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@using AION.Web.Models
+@model AION.Web.Models.Shared.NotesViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Notes";
+
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+
+}
+
+<style type="text/css">
+    label.error {
+        float: none;
+        color: red;
+        padding-left: .5em;
+        vertical-align: top;
+        display: block;
+    }
+
+    .multiselect-container > li > a > label.checkbox {
+        width: 300px;
+    }
+
+    .btn-group > .btn:first-child {
+        width: 300px;
+    }
+
+</style>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.accelaleftbar').hide();
+
+    });
+    //**********end onload event **********************/
+</script>
+<div id="dialog-modal-success" title="" class="" style="display:none;max-width:300px;">
+    <div class="successmessage">
+        @*NPA can only be scheduled within the next 2 years.*@
+    </div>
+</div>
+<div id="dialog-modal-warning" title="" class="" style="display:none;max-width:300px;">
+    <div class="warningmessage">
+        @*NPA can only be scheduled within the next 2 years.*@
+    </div>
+</div>
+
+<div class="box-body">
+
+    <div class="w-100">
+        <div class="ml-5">
+            Project # :  @Model.Project.AccelaProjectRefId
+        </div>
+    </div>
+    <div >
+        <div class="ml-5">
+            <div class="p-2" id="searchtbody">
+                @Html.Partial("_NotesView", Model)
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

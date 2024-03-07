@@ -1,0 +1,28 @@
+﻿@model AION.Web.Models.ViewModelBase
+@{
+    ViewBag.Title = "Unauthorized";
+}
+
+@{
+    string uistatusmsg = Model.UIStatusMessage != AION.BL.UIStatusMessage.NA ? Model.UIStatusMessage.ToStringValue() : string.Empty;
+    List<string> msgs = new List<string>();
+    if (!string.IsNullOrWhiteSpace(uistatusmsg)) { msgs.Add(uistatusmsg); };
+}
+<div class="row">
+    <div class="alert-danger">
+        @if (msgs.Count > 0)
+        {
+            <ul>
+                @foreach (string msg in msgs)
+                {
+                    <li>
+                        <h3>
+                            @msg
+                        </h3>
+                    </li>
+                }
+
+            </ul>
+        }
+    </div>
+</div>

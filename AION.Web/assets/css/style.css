@@ -1,0 +1,221 @@
+/*================================================================================
+	Item Name: Robust - Responsive Admin Template
+	Version: 2.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+body {
+    font-weight: 500;
+    font-family: 'Muli', Georgia, 'Times New Roman', Times, serif;
+}
+
+.nav-item i {
+    width: 20px;
+}
+
+.card.overflow {
+    overflow: auto;
+}
+
+.ui-dialog {
+    z-index: 2000 !important;
+}
+
+.ps-scrollbar-y-rail {
+    z-index: 3500;
+}
+
+.btn-poppy {
+    color: #fff;
+    border: solid 2px #ef3e3d;
+    background-color: #ef3e3d;
+    text-transform: uppercase;
+}
+
+    .btn-poppy:hover {
+        color: #ef3e3d;
+        border: solid 2px #ef3e3d;
+        background-color: #fff;
+    }
+
+    .btn-poppy:focus,
+    .btn-poppy:active {
+        color: #fff !important;
+        border-color: #ef3e3d !important;
+        background-color: #ef3e3d !important;
+    }
+
+    .btn-poppy.btn-glow {
+        -webkit-box-shadow: 0 1px 20px 1px rgba(0, 188, 212, .6);
+        box-shadow: 0 1px 20px 1px rgba(0, 188, 212, .6);
+    }
+
+.btn-outline-poppy {
+    color: #ef3e3d;
+    border-color: #ef3e3d;
+    background-color: transparent;
+}
+
+    .btn-outline-poppy:hover {
+        color: #fff !important;
+        background-color: #ef3e3d;
+    }
+
+.sticky-breadcrumbs {
+    background: linear-gradient(90deg, rgba(241,241,241,1) 0%, rgba(243,243,243,1) 100%);
+}
+
+.mecko-card {
+    border-radius: 0.5rem;
+}
+
+    .mecko-card h4 {
+        line-height: 1.7;
+    }
+
+.report-section {
+    line-height: 3rem;
+    margin-bottom: 20px;
+    color: #1d2b36;
+    border-bottom: 1px solid #1d2b36;
+}
+
+.ui-multiselect {
+    border: 1px solid #00bcd4 !important;
+}
+/* LES-3407 */
+.pooltxt {
+    width: 70px;
+}
+
+/* Pool button on scheduling -- schedule-review.js */
+.btn-chartreuse {
+    color: #fff;
+    border: solid 2px #7fff00;
+    background-color: #7fff00;
+    text-transform: uppercase;
+}
+
+    .btn-chartreuse:hover {
+        color: #7fff00;
+        border: solid 2px #7fff00;
+        background-color: #fff;
+    }
+
+    .btn-chartreuse:focus,
+    .btn-chartreuse:active {
+        color: #fff !important;
+        border-color: #7fff00 !important;
+        background-color: #7fff00 !important;
+    }
+
+    .btn-chartreuse.btn-glow {
+        -webkit-box-shadow: 0 1px 20px 1px rgba(0, 188, 212, .6);
+        box-shadow: 0 1px 20px 1px rgba(0, 188, 212, .6);
+    }
+
+.btn-outline-chartreuse {
+    color: #7fff00;
+    border-color: #7fff00;
+    background-color: transparent;
+    text-transform: uppercase;
+}
+
+    .btn-outline-chartreuse:hover {
+        color: #fff !important;
+        background-color: #7fff00;
+    }
+
+.no-list-style {
+    list-style-type: none;
+}
+
+.ui-datepicker .ui-datepicker-header {
+    background: #fff;
+}
+
+.ui-widget-header {
+    border: none;
+}
+
+    .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+        border: 1px solid #ef3e3d;
+        background: #ef3e3d;
+        color: #fff;
+    }
+
+div.button-container {
+    margin-top: 200px;
+}
+
+.hrstextbox {
+    min-width: 100px;
+}
+
+/* begin fixes for upgrading to bootstrap 5 */
+.navbar-brand {
+    display: inline-block;
+}
+.card-header {
+    padding: 1.5rem 1.5rem;
+}
+.card-body {
+    padding: 1.5rem;
+}
+.mr-auto {
+    margin-right: auto;
+}
+.mr-3 {
+    margin-right: 1rem;
+}
+.ml-3 {
+    margin-left: 1rem !important;
+}
+.input-group-text {
+    padding: 0.90rem 1rem;
+}
+.form-control {
+    line-height: 1.25;
+    font-size: 1rem;
+    display: block;
+    height: calc(2.75rem + 2px);
+}
+label {
+    margin-bottom: 0.5rem;
+}
+.btn-block {
+    display: block;
+    width: 100%;
+}
+    .btn-block + .btn-block {
+        margin-top: 0.5rem;
+    }
+.btn-sm {
+    font-size: .875rem;
+    line-height: 1;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.18rem;
+}
+a.disabled,.btn.disabled, .btn:disabled {
+    opacity: .65;
+    color: #fff;
+    border: solid 2px #ef3e3d;
+    background-color: #ef3e3d;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 0.75rem 2rem;
+}
+.card-header {
+    background-color: #fff;
+}
+/* end fixes for upgrading to bootstrap 5 */
+
+
+
+
+

@@ -1,0 +1,316 @@
+﻿@using AION.Web.Extensions
+@model AION.Web.Models.NPAViewModel
+@{
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+    if (Model.PermissionMapping.IsViewOnly)
+    {
+        isenabled = false;
+    }
+    else
+    {
+        isenabled = Model.PermissionMapping.Create_NPA;
+    }
+}
+@Html.HiddenFor(m => m.NPAID)
+@Html.HiddenFor(m => m.MeetingRoomRefIDSelected, new { @class = "meetingroomrefid" })
+@Html.HiddenFor(m => m.MeetingRoomNameSelected, new { @class = "meetingroomname" })
+
+<h4 class="form-section"><i class="fa fa-clipboard"></i> NPA Details</h4>
+
+
+<div class="row">
+    <div class="col-md-3 mt-3">
+        <div class="form-group">
+            <label for="NPATypeSelected">Type </label>
+            @Html.DropDownListFor(m => m.NPATypeSelected, Model.NPATypeActiveSelectList, new { @class = "form-select form-control border-cyan" }, isenabled)
+        </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="form-group">
+            <label for="NPAName">Name </label>
+            @Html.TextBoxFor(m => m.NPAName, new { @placeholder = "Enter Name", @class = "form-select form-control border-cyan" }, isenabled)
+        </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="form-group">
+            <label for="YNSelected">All Plan Reviewers </label>
+            @Html.DropDownListFor(m => m.YNSelected, Model.YNSelectList, new { @class = "form-select form-control ynselectallreviewers border-cyan" }, isenabled)
+        </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="form-group">
+            <label>Meeting Room </label>
+            <div>
+                <a class="meetingroomnamelabel"
+                   data-toggle="modal" data-target="#meeting-room-modal" href="#"> - - </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="DaySelected"> Day </label>
+            @Html.DropDownListFor(m => m.DaySelected, Model.DaySelectList, new { @id = "drpdownDay", @class = "form-select form-control border-cyan" })
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="RecurrenceSelected">Recurrence </label>
+            @Html.DropDownListFor(m => m.RecurrenceSelected, Model.RecurrenceSelectList, new { @id = "drpdownReccurence", @class = "form-select form-control recurrenceSelected border-cyan" })
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group skin skin-square">
+            <label for="AllDay">All Day </label>
+            <div>
+                @Html.CheckBoxFor(m => m.AllDay, new { @class = "border-cyan" }, isenabled)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="StartDate">Start Date</label>
+            <div class="input-group">
+                @Html.EditorFor(model => model.StartDate, 
+                    new { htmlAttributes = new { @id = "startdatesel", @class = "form-control datepicker-restricted start-date border-cyan", Value = DateTime.Now.ToShortDateString() } })
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <span class="fa fa-calendar-o"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="EndDate">End Date</label>
+            <div class="input-group">
+                @Html.EditorFor(model => model.EndDate, 
+                new { htmlAttributes = new { @id = "enddatesel", @class = "form-control datepicker-restricted end-date border-cyan", Value = DateTime.Now.AddDays(7).ToShortDateString() } })
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <span class="fa fa-calendar-o"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="StartDate">Start Time</label>
+            <div class="input-group">
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @id = "starttimesel", @class = "form-control pickatime border-cyan", @Value = "" } })
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <span class="fa fa-clock-o"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="EndDate">End Time</label>
+            <div class="input-group">
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @id = "endtimesel", @class = "form-control pickatime border-cyan", @Value = "" } })
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <span class="fa fa-clock-o"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="form-section"><i class="fa fa-group"></i> Select Reviewers</h4>
+
+<div class="row">
+    <div class="col ml-2 p-2">
+        @*This shows the error for missing reviewers - do not remove*@
+        <div> @Html.Hidden("deptreviewersselected")</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 pt-3">
+        <h4>BEMP</h4>
+        <table class="table table-striped table-bordered zero-configuration dataTable table-responsive">
+            <thead>
+                <tr>
+                    <td class="col-md-1 text-center">Select All</td>
+                    <td class="col-md-3">Department</td>
+                    <td class="col-md-8">Reviewer</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center skin skin-square">
+                        @Html.CheckBoxFor(m => m.BldgSelectAll, new { @class = "selectalldeptreviewers bldgselectall" }, isenabled)
+                    </td>
+                    <td>Building:</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.BldgReviewerSelected, Model.BldgPersonSelectList,
+                        new { @id = "msBldgReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center skin skin-square">
+                        @Html.CheckBoxFor(m => m.ElecSelectAll, new { @class = "selectalldeptreviewers elecselectall" }, isenabled)
+                    </td>
+                    <td>
+                        Electrical
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.ElecReviewerSelected, Model.ElecPersonSelectList,
+                        new { @id = "msElecReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center skin skin-square">
+                        @Html.CheckBoxFor(m => m.MechSelectAll, new { @class = "selectalldeptreviewers mechselectall" }, isenabled)
+                    </td>
+                    <td>
+                        Mechanical
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.MechReviewerSelected, Model.MechPersonSelectList,
+                        new { @id = "msMechReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center skin skin-square">
+                        @Html.CheckBoxFor(m => m.PlumSelectAll, new { @class = "selectalldeptreviewers plumselectall" }, isenabled)
+                    </td>
+                    <td>
+                        Plumbing
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.PlumReviewerSelected, Model.PlumPersonSelectList,
+                        new { @id = "msPlumReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 col-sm-12 pt-3">
+        <h4>Health</h4>
+        <table class="table table-striped table-bordered zero-configuration dataTable table-responsive">
+            <thead>
+                <tr>
+                    <td class="col-md-1 text-center">Select All</td>
+                    <td class="col-md-3">Department</td>
+                    <td class="col-md-8">Reviewer</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center skin skin-square">@Html.CheckBoxFor(m => m.FoodSelectAll, new { @class = "selectalldeptreviewers foodselectall" }, isenabled) </td>
+                    <td>Food Service</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.FoodReviewerSelected, Model.FoodPersonSelectList,
+                        new { @id = "msFoodReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center skin skin-square">@Html.CheckBoxFor(m => m.PoolSelectAll, new { @class = "selectalldeptreviewers poolselectall" }, isenabled)</td>
+                    <td>Public Pool</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.PoolReviewerSelected, Model.PoolPersonSelectList,
+                        new { @id = "msPoolReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center skin skin-square"> @Html.CheckBoxFor(m => m.FaciSelectAll, new { @class = "selectalldeptreviewers faciselectall" }, isenabled) </td>
+                    <td>Facility/Lodging</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.FaciReviewerSelected, Model.FaciPersonSelectList,
+                        new { @id = "msFaciReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center skin skin-square"> @Html.CheckBoxFor(m => m.DayCSelectAll, new { @class = "selectalldeptreviewers daycselectall" }, isenabled) </td>
+                    <td>Day Care</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.DayCReviewerSelected, Model.DayCPersonSelectList,
+                        new { @id = "msDayCReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 col-sm-12 pt-3">
+        <h4>Zoning</h4>
+        <table class="table table-striped table-bordered zero-configuration dataTable table-responsive">
+            <thead>
+                <tr>
+                    <td class="col-md-1 text-center">Select All</td>
+                    <td class="col-md-3">Department</td>
+                    <td class="col-md-8">Reviewer</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center skin skin-square"> @Html.CheckBoxFor(m => m.ZoniSelectAll, new { @class = "selectalldeptreviewers zoniselectall" }, isenabled) </td>
+                    <td>Zoning</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.ZoniReviewerSelected, Model.ZoniPersonSelectList,
+                        new { @id = "msZoniReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 col-sm-12 pt-3">
+        <h4>Fire</h4>
+        <table class="table table-striped table-bordered zero-configuration dataTable table-responsive">
+            <thead>
+                <tr>
+                    <td class="col-md-1 text-center">Select All</td>
+                    <td class="col-md-3">Department</td>
+                    <td class="col-md-8">Reviewer</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center skin skin-square"> @Html.CheckBoxFor(m => m.FireSelectAll, new { @class = "selectalldeptreviewers fireselectall" }, isenabled)</td>
+                    <td>Fire</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.FireReviewerSelected, Model.FirePersonSelectList,
+                        new { @id = "msFireReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 col-sm-12 pt-3">
+        <h4>Backflow</h4>
+        <table class="table table-striped table-bordered zero-configuration dataTable table-responsive">
+            <thead>
+                <tr>
+                    <td class="col-md-1 text-center">Select All</td>
+                    <td class="col-md-3">Department</td>
+                    <td class="col-md-8">Reviewer</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center skin skin-square"> @Html.CheckBoxFor(m => m.BackSelectAll, new { @class = "selectalldeptreviewers backselectall" }, isenabled) </td>
+                    <td>Backflow</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.BackReviewerSelected, Model.BackPersonSelectList,
+                        new { @id = "msBackReviewers", @multiple = "multiple", @class = "border-cyan selectdeptreviewer form-select form-control" }, isenabled)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@using AION.Web.Models.ProjectDetail;
+
+@model List<AION.Web.Models.PlanReviewPartialViewModel>
+<script type="text/javascript" src="~/app-assets/js/scripts/custom/scheduled-plan-reviewers-by-cycle.js"></script>
+
+<div class="card-header">Scheduled Plan Reviewers by Cycle</div>
+<div class="table card-body" style="font-size: smaller;">
+    @foreach (var planReview in Model)
+    {
+        int icount = 1;
+        string colstyles = "customerreviewers" + planReview.CycleNumber;
+
+        bool isProjectSuspended = planReview.IsProjectSuspended;
+
+        <div class="row">
+            <div class="col-1 d-flex align-items-center justify-content-center">
+                @planReview.CycleNumber
+            </div>
+            <div class="col-1 d-flex align-items-center justify-content-center" id="openReviewers">
+                <a onclick="$('.@colstyles').toggle(); togglePlus(this);" role="button" class="btn btn-light text-nowrap m-1 font-weight-bold"> + </a>
+            </div>
+            <div class="col @colstyles collapse">
+                <table class="table table-striped table-bordered table-hover" style="width:auto">
+                    <thead>
+                        <tr>
+                            <th>Trade</th>
+                            @foreach (AssignedReviewerListViewModel planreview in planReview.Attendees)
+                            {
+                                <td>
+                                    @planreview.TradeName
+                                </td>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Name</th>
+                            @foreach (AssignedReviewerListViewModel planreview in planReview.Attendees)
+                            {
+                                <td>
+                                    @planreview.ReviewerName
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>Dates and Hours</th>
+                            @foreach (AssignedReviewerListViewModel planreview in planReview.Attendees)
+                            {
+                                <td>
+                                    @if (!isProjectSuspended)
+                                    {
+                                        @planreview.DateRange @:- @planreview.Hours hrs
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

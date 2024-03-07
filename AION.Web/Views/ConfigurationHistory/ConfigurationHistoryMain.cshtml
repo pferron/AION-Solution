@@ -1,0 +1,60 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@using AION.Web.Models.ConfigurationHistory
+@model AION.Web.Models.ConfigurationHistory.ConfigurationHistoryViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Configuration History";
+
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+
+}
+@section scripts{
+    <script type="text/javascript" src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script type="text/javascript" src="/app-assets/js/scripts/pages/admin/config-history.js"></script>
+}
+
+<form class="form form-horizontal">
+    <div class="form-body">
+        <div class="form-group row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header">History</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label> Type:</label>
+                                        @Html.DropDownList("SearchType", Model.TableTypeList, "Select Search Type", new { @class = "form-select form-control", @id = "SearchType" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Range:</label>
+                                        @Html.DropDownList("SearchRange", Model.SearchRangeList, "Select Search Range", new { @class = "form-select form-control", @id = "SearchRange" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-poppy searchtableaudit">Search</button>
+                            </div>
+
+                            <div class="row pt-2">
+                                @Html.Partial("_ConfigurationHistory", Model.AuditLogs)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

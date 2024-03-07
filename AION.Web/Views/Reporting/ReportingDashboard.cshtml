@@ -1,0 +1,101 @@
+﻿@model AION.Web.Models.Reporting.ReportingViewModel
+
+@{
+    ViewBag.Title = "Reporting Page";
+}
+
+@section style
+{
+    
+}
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+@{
+    bool report1access = Model.PermissionMapping.Management_Report_1;
+    bool report2access = Model.PermissionMapping.Management_Report_2;
+    bool report3access = Model.PermissionMapping.Management_Report_3;
+    bool report4access = Model.PermissionMapping.Management_Report_4;
+}
+
+<div class="row form">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="report-section"><i class="fa fa-calculator"></i> Estimation Reports</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="no-list-style">
+                            <li><a href="@($"{Model.ReportUrl}EstimationPerformanceSummaryReport")" class="text-body" target="_blank">Estimation Performance Summary</a></li>
+                            <li><a href="@($"{Model.ReportUrl}EstimationPerformanceDetailsReport")" class="text-body" target="_blank">Estimation Performance Details</a></li>
+                        </ul>
+                    </div>
+                 </div>
+            </div>
+            <div class="col-md-6">
+                <h4 class="report-section"><i class="fa fa-clock"></i> Scheduling Reports</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="no-list-style">
+                            <li><a href="@($"{Model.ReportUrl}SchedulingPerformanceSummaryReport")" class="text-body" target="_blank">Scheduling Performance Summary</a></li>
+                            <li><a href="@($"{Model.ReportUrl}SchedulingPerformanceDetailReport")" class="text-body" target="_blank">Scheduling Performance Details</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h4 class="report-section"><i class="fa fa-calendar-days"></i> Meeting Reports</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="no-list-style">
+                            <li><a href="@($"{Model.ReportUrl}MeetingSummaryReport")" class="text-body" target="_blank">Meeting Summary</a></li>
+                            <li><a href="@($"{Model.ReportUrl}MeetingDetailsReport")" class="text-body" target="_blank">Meeting Details</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h4 class="report-section"><i class="fa fa-person-digging"></i> Facilitator Reports</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="no-list-style">
+                            <li><a href="@($"{Model.ReportUrl}FacilitatorWorkloadDistributionSummaryReport")" class="text-body" target="_blank">Facilitator Workload Distribution</a></li>
+                            <li><a href="@($"{Model.ReportUrl}FacilitatorChangeReport")" class="text-body" target="_blank">Change Assigned Facilitator</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h4 class="report-section"><i class="fa fa-toolbox"></i> Management Reports</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="no-list-style">
+                            <li class="mb-4"><button type="button" class="btn btn-poppy btn-sm generateleadtimebtn">Generate Data for Scheduling Lead Time Report</button></li>
+                            <li><a href="@($"{Model.ManagementReportUrl}SchedulingLeadTimeReport")" class="text-body" target="_blank">Scheduling Lead Time For Projects</a></li>
+                            <li><a href="@($"{Model.ManagementReportUrl}SchedulingPerformanceDetailReport")" class="text-body" target="_blank">Scheduling Performance Details</a></li>
+                            <li><a href="@($"{Model.ManagementReportUrl}ReviewerSchedulingDetailsReport")" class="text-body" target="_blank">Reviewer Scheduling Details</a></li>
+                            <li><a href="@($"{Model.ManagementReportUrl}SchedulingEventAnalysisReport")" class="text-body" target="_blank">Scheduling Event Analysis</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="/app-assets/js/scripts/pages/reporting-dashboard.js"></script>
+}
+

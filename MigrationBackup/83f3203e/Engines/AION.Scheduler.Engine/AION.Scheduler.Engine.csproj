@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2593C32A-B26B-4F45-AFCE-7EEEF55D7CC6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AION.Scheduler.Engine</RootNamespace>
+    <AssemblyName>AION.Scheduler.Engine</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DEV|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DEV\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TST|AnyCPU'">
+    <OutputPath>bin\TST\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA|AnyCPU'">
+    <OutputPath>bin\QA\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PROD|AnyCPU'">
+    <OutputPath>bin\PROD\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessEntities\AppoinmentReccuranceRefBE.cs" />
+    <Compile Include="BusinessEntities\AppointmentBaseBE.cs" />
+    <Compile Include="BusinessEntities\AppointmentCancellationRefBE.cs" />
+    <Compile Include="BusinessEntities\AppointmentResponseStatusRefBE.cs" />
+    <Compile Include="BusinessEntities\CalendarEventBE.cs" />
+    <Compile Include="BusinessEntities\ConfigureReserveExpressBE.cs" />
+    <Compile Include="BusinessEntities\CustomerScheduledMeetingBE.cs" />
+    <Compile Include="BusinessEntities\FacilitatorMeetingAppointmentBE.cs" />
+    <Compile Include="BusinessEntities\FacilitatorMeetingApptDetailBE.cs" />
+    <Compile Include="BusinessEntities\MeetingBE.cs" />
+    <Compile Include="BusinessEntities\MeetingRoomRefBE.cs" />
+    <Compile Include="BusinessEntities\MeetingTypeRefBE.cs" />
+    <Compile Include="BusinessEntities\MessageTemplateAppointmentBE.cs" />
+    <Compile Include="BusinessEntities\ModuleBE.cs" />
+    <Compile Include="BusinessEntities\NonProjectAppoinmentBE.cs" />
+    <Compile Include="BusinessEntities\NotificationEmailListBE.cs" />
+    <Compile Include="BusinessEntities\NPASearchResultBE.cs" />
+    <Compile Include="BusinessEntities\NPATypeRefBE.cs" />
+    <Compile Include="BusinessEntities\PermissionBE.cs" />
+    <Compile Include="BusinessEntities\PermissionSystemRoleBE.cs" />
+    <Compile Include="BusinessEntities\PlanReviewerAvailableHoursBE.cs" />
+    <Compile Include="BusinessEntities\PlanReviewerAvailableTimeBE.cs" />
+    <Compile Include="BusinessEntities\PlanReviewScheduleBEOLD.cs" />
+    <Compile Include="BusinessEntities\PlanReviewScheduleDetailBE.cs" />
+    <Compile Include="BusinessEntities\PlanReviewScheduleBE.cs" />
+    <Compile Include="BusinessEntities\PreliminaryMeetingAppointmentBE.cs" />
+    <Compile Include="BusinessEntities\ProjectCycleBE.cs" />
+    <Compile Include="BusinessEntities\ProjectCycleDetailBE.cs" />
+    <Compile Include="BusinessEntities\ProjectEmailNotificationBE.cs" />
+    <Compile Include="BusinessEntities\ProjectListBE.cs" />
+    <Compile Include="BusinessEntities\ProjectOccupancyTypeNameModelBE.cs" />
+    <Compile Include="BusinessEntities\ProjectRtapMappingBE.cs" />
+    <Compile Include="BusinessEntities\ProjectScheduleBE.cs" />
+    <Compile Include="BusinessEntities\ReserveExpressPlanReviewerBE.cs" />
+    <Compile Include="BusinessEntities\ReserveExpressPlanReviewerSearchResultBE.cs" />
+    <Compile Include="BusinessEntities\ReserveExpressReservationBE.cs" />
+    <Compile Include="BusinessEntities\ScheduleCapacitySearchResultBE.cs" />
+    <Compile Include="BusinessEntities\SchedulerBE.cs" />
+    <Compile Include="BusinessEntities\SchedulingLeadTimeReportBE.cs" />
+    <Compile Include="BusinessEntities\TimeAllocationTypeRefBE.cs" />
+    <Compile Include="BusinessEntities\TimeSlot.cs" />
+    <Compile Include="BusinessEntities\UserPermissionBE.cs" />
+    <Compile Include="BusinessEntities\UserScheduleExBE.cs" />
+    <Compile Include="BusinessEntities\UserScheduleBE.cs" />
+    <Compile Include="BusinessEntities\UserScheduleStageBE.cs" />
+    <Compile Include="BusinessObjects\AppoinmentReccuranceRefBO.cs" />
+    <Compile Include="BusinessObjects\AppointmentCancellationRefBO.cs" />
+    <Compile Include="BusinessObjects\AppointmentResponseStatusRefBO.cs" />
+    <Compile Include="BusinessObjects\CalendarEventBO.cs" />
+    <Compile Include="BusinessObjects\ConfigureReserveExpressBO.cs" />
+    <Compile Include="BusinessObjects\CustomerScheduledMeetingBO.cs" />
+    <Compile Include="BusinessObjects\FacilitatorMeetingAppointmentBO.cs" />
+    <Compile Include="BusinessObjects\FacilitatorMeetingApptDetailBO.cs" />
+    <Compile Include="BusinessObjects\FifoScheduleBO.cs" />
+    <Compile Include="BusinessObjects\IDataContextProjectCycleBO.cs" />
+    <Compile Include="BusinessObjects\MeetingRoomRefBO.cs" />
+    <Compile Include="BusinessObjects\MeetingTypeRefBO.cs" />
+    <Compile Include="BusinessObjects\MessageTemplateAppointmentBO.cs" />
+    <Compile Include="BusinessObjects\ModuleBO.cs" />
+    <Compile Include="BusinessObjects\NonProjectAppoinmentBO.cs" />
+    <Compile Include="BusinessObjects\NotificationEmailListBO.cs" />
+    <Compile Include="BusinessObjects\NPATypeRefBO.cs" />
+    <Compile Include="BusinessObjects\PermissionBO.cs" />
+    <Compile Include="BusinessObjects\PermissionSystemRoleBO.cs" />
+    <Compile Include="BusinessObjects\PlanReviewerAvailableHoursBO.cs" />
+    <Compile Include="BusinessObjects\PlanReviewerAvailableTimeBO.cs" />
+    <Compile Include="BusinessObjects\PlanReviewScheduleBOOLD.cs" />
+    <Compile Include="BusinessObjects\PlanReviewScheduleDetailBO.cs" />
+    <Compile Include="BusinessObjects\PlanReviewScheduleBO.cs" />
+    <Compile Include="BusinessObjects\PreliminaryMeetingAppointmentBO.cs" />
+    <Compile Include="BusinessObjects\ProjectCycleBO.cs" />
+    <Compile Include="BusinessObjects\ProjectCycleDetailBO.cs" />
+    <Compile Include="BusinessObjects\ProjectEmailNotificationBO.cs" />
+    <Compile Include="BusinessObjects\ProjectRtapMappingBO.cs" />
+    <Compile Include="BusinessObjects\ProjectScheduleBO.cs" />
+    <Compile Include="BusinessObjects\ReserveExpressPlanReviewerBO.cs" />
+    <Compile Include="BusinessObjects\ReserveExpressReservationBO.cs" />
+    <Compile Include="BusinessObjects\ScheduleCapacitySearchResultBO.cs" />
+    <Compile Include="BusinessObjects\SchedulerBO.cs" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_facilitator_meeting_appt_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_facilitator_meeting_appt_detail_byFMAId.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_plan_review_schedule_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_cycle.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_cycle_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_time_allocation_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_schedules_by_user_schedule_ids.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_get_meeting_appointment_list_by_user_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_calendar_event_queue_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_facilitator_meeting_appointment_v3.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_get_internal_meeting_appointment_list_for_facilitators_v2.sql" />
+    <Compile Include="BusinessObjects\SchedulingLeadTimeReportBO.cs" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_facilitator_meeting_appointment_get_list_by_status_ids.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_holiday_config_get_dates.sql">
+      <SubType>Component</SubType>
+    </Content>
+    <Compile Include="BusinessObjects\TimeAllocationTypeRefBO.cs" />
+    <Compile Include="BusinessObjects\UserPermissionBO.cs" />
+    <Compile Include="BusinessObjects\UserScheduleBO.cs" />
+    <Compile Include="BusinessObjects\UserScheduleStageBO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AION.Base\AION.Base.csproj">
+      <Project>{b5d9e46e-1ed6-4d78-88d9-f5d96a2f3284}</Project>
+      <Name>AION.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Data\Meck.Data.csproj">
+      <Project>{f54dc2c5-f5bc-46cb-a3a2-faaf89252013}</Project>
+      <Name>Meck.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_appointment_cancellation_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_calendar_event_queue.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_fifo_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_notification_email_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_email_notification.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_reserve_express_plan_reviewer_all.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_schedule_business_relationship_stage.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_get_internal_meeting_appointment_list_by_user.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_get_internal_meeting_appointment_list_for_facilitators.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_appointment_cancellation_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_calendar_event_queue.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_facilitator_meeting_appointment_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_facilitator_meeting_appointment_v4.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_facilitator_meeting_appt_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_fifo_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_notification_email_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_permission_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_plan_review_schedule_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_preliminary_meeting_appointment_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_cycle.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_cycle_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_email_notification.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_reserve_express_reservation_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_schedule_business_relationship_stage.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_time_allocation_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_all_appointments_byprojectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_appointment_cancellation_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_appointment_cancellation_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_calendar_event_queue_get_by_id_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_calendar_event_queue_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_calendar_event_queue_get_list_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_calendar_event_queue_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_calendar_event_queue_get_list_for_processing_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_calendar_event_queue_get_list_for_processing.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_city_zoning_reviewer_assigned_latest.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_city_zoning_reviewer_assigned_latest_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_facilitator_meeting_appointment_get_by_project_ids.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_facilitator_meeting_appt_detail_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_facilitator_meeting_appt_detail_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_fifo_schedule_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_fifo_schedule_get_list_by_projectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_permission_get_list_bysystemroleid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_detail_getByProjectCycle.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_detail_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_detail_get_by_plan_review_schedule_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_detail_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_get_by_project_cycle_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_get_list_by_dates.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_get_list_by_project_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_cycle_detail_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_cycle_detail_get_list_by_project_cycle_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_cycle_detail_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_cycle_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_cycle_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_by_fifo_due_dt.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_fma_internalmeetings_byprojectid_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_notification_email_list_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_notification_email_list_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_permission_get_list_byuserid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_pma_internalmeetings_byprojectid_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_email_notification_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_email_notification_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_by_externalRefInfo.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_facilitator_meeting_appointment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_meeting_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_rtap_mapping.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_schedule_stage.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_appoinment_reccurance_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_configure_reserve_express.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_meeting_room_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_module.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_non_project_appoinment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_npa_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_permission.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_permission_system_role.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_plan_reviewer_available_hours.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_plan_reviewer_available_time.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_plan_review_project_details.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_plan_review_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_preliminary_meeting_appointment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_project_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_reserve_express_plan_reviewer.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_reserve_express_reservation.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_schedule_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_permission.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_delete_aion_user_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_get_custproject_scheduled_meeting_details_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_appoinment_reccurance_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_configure_reserve_express.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_facilitator_meeting_appointment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_meeting_room_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_meeting_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_module.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_non_project_appoinment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_npa_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_permission.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_permission_system_role.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_plan_reviewer_available_hours.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_plan_reviewer_available_time.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_plan_review_project_details.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_plan_review_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_preliminary_meeting_appointment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_rtap_mapping.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_project_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_reserve_express_plan_reviewer.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_reserve_express_reservation.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_reserve_express_reservation_department.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_schedule_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_standard_note.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user_permission.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_insert_aion_user_schedule_stage.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_facilitator_meeting_appointment_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_facilitator_meeting_appointment_get_by_project_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_facilitator_meeting_appointment_get_list_by_project_and_meeting_type.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_facilitator_meeting_appointment_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_meeting_type_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_meeting_type_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_byprojectids.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_byprojectstatus.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_by_BuildContr.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_get_list_by_status_ids.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_rtap_mapping_get_by_project_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_non_project_appoinment_by_prj_sch_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_rtap_mapping_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_rtap_mapping_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_schedule_business_relationship_stage_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_schedule_business_relationship_stage_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_schedule_capacity_search_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_schedule_capacity_search_meetings_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_schedule_capacity_search_plan_reviews.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_start_dt_byprojectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_time_allocation_type_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_time_allocation_type_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_get_by_email.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_schedule_stage_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_schedule_stage_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_appoinment_reccurance_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_appoinment_reccurance_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_configure_reserve_express_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_configure_reserve_express_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_meeting_room_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_meeting_room_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_module_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_module_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_non_project_appoinment_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_non_project_appoinment_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_npa_type_ref_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_npa_type_ref_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_permission_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_permission_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_permission_system_role_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_permission_system_role_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_reviewer_available_hours_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_reviewer_available_hours_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_reviewer_available_time_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_reviewer_available_time_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_project_details_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_project_details_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_plan_review_schedule_get_list_byprojectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_preliminary_meeting_appointment_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_preliminary_meeting_appointment_get_by_projectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_preliminary_meeting_appointment_get_list_search.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_schedule_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_schedule_get_by_schedule_details.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_project_schedule_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_reserve_express_plan_reviewer_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_reserve_express_plan_reviewer_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_reserve_express_plan_reviewer_get_list_all.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_reserve_express_reservation_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_reserve_express_reservation_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_reserve_express_reservation_get_list_bydate.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_schedule_business_relationship_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_schedule_business_relationship_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_reserve_express_reservation_get_list_bydate_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_standard_note_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_standard_note_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_standard_note_get_list_bytype.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_permission_get_byuserid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_permission_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_permission_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_used_schedules_extras_by_user_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_used_schedules_by_user_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_schedule_get_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_select_aion_user_schedule_get_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_appointment_cancellation_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_calendar_event_queue_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_calendar_event_queue.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_EMA_by_project_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_entities_not_in_json_object.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_express_meeting.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_facilitator_meeting_appointment_by_projectid.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_facilitator_meeting_appointment_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_meeting_saved_user_schedules.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_meeting_saved_user_schedules_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_prelim_meeting_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_project_by_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_PR_by_project_id.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_reserve_express_reservation.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_reserve_express_reservation_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_cancel_schedule_plan_review.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_express_meeting_appointment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_express_meeting_proposed_dates.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_facilitator_meeting_appointment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_facilitator_meeting_appt_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_facilitator_meeting_proposed_dates.Designer.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_facilitator_meeting_proposed_dates.sql">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_facilitator_meeting_response_status.Designer.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_facilitator_meeting_response_status.sql">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_fifo_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_meeting_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_notification_email_list.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_npa_type_ref_w_time.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_plan_review_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_plan_review_schedule_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_prelim_response_status.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_cycle.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_cycle_detail.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_email_notification.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_facilitator.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_rtap_mapping.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_v2.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_remove_future_schedules.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_remove_future_user_schedules.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_schedule_business_relationship_stage.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_time_allocation_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_schedule_stage.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_appoinment_reccurance_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_configure_reserve_express.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_meeting_room_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_module.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_non_project_appoinment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_npa_type_ref.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_permission.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_permission_system_role.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_plan_reviewer_available_hours.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_plan_reviewer_available_time.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_plan_review_project_details.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_preliminary_meeting_appointment.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_project_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_reserve_express_plan_reviewer.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_reserve_express_reservation.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_schedule_business_relationship.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_standard_note.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_permission.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_schedule.sql" />
+    <Content Include="BusinessObjects\StoredProcedures\usp_update_aion_user_v2.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+</Project>

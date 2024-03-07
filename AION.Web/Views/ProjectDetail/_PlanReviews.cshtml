@@ -1,0 +1,39 @@
+﻿@model List<AION.Web.Models.PlanReviewPartialViewModel>
+
+
+
+<table class="table table-striped table-bordered zero-configuration dataTable" id="planreviews">
+    <thead class="card-header">
+        <tr>
+            <th>Plan Review Date</th>
+            <th>Status</th>
+            <th>Cycle</th>
+            <th>Plans Ready On Date</th>
+            <th></th>
+            <th></th>
+            <th>Plan Reviewers</th>
+        </tr>
+    </thead>
+    <tbody class="card-body">
+        @foreach (var planReview in Model)
+        {
+            if (planReview.IsCurrentCycle == false && planReview.IsFutureCycle == false)
+            {
+                @Html.Partial("~/Views/Shared/ProjectDetails/_PlanReviewNotEditable.cshtml", planReview)
+            }
+            else
+            {
+                if (planReview.IsFifoProject)
+                {
+                    @Html.Partial("~/Views/Shared/ProjectDetails/_FifoPlanReviewEditable.cshtml", planReview)
+                }
+                else
+                {
+                    @Html.Partial("~/Views/Shared/ProjectDetails/_PlanReviewEditable.cshtml", planReview)
+
+                }
+            }
+
+        }
+    </tbody>
+</table>

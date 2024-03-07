@@ -1,0 +1,136 @@
+﻿@using AION.Manager.Models;
+@using AION.Web.Helpers
+@using AION.BL
+
+@model AION.Web.Models.ProjectDetailViewModel
+@{
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+}
+<table class="table table-striped table-bordered table-hover" id="projects">
+    <thead>
+        <tr>
+            @*"Preliminary
+                Exit
+                Phasing
+                Express
+                Prepermitting
+                COllaborative
+                "*@
+            <th data-field="th0" class="th0" data-sortable="true">Scheduled Meetings</th>
+            <th data-field="th01" class="th01" data-sortable="true">Date</th>
+            <th data-field="th02" class="th02" data-sortable="true">Time</th>
+            <th data-field="th04" class="th04" data-sortable="true">Room</th>
+            <th data-field="th06" class="th06" data-sortable="true">Status</th>
+            <th data-field="th08" class="th08"></th>
+            <th><!--Reviewer List--></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Meeting item in Model.ScheduledMeetingList)
+        {
+            string appendixagendadue = item.AppendixAgendaDue.HasValue ? item.AppendixAgendaDue.Value.ToShortDateString() : "";
+            <tr class="meetingRow">
+                @Html.Hidden("AppointmentId", item.AppointmentId, new { @class = "appointment-id" })
+
+                <td class="meetingType">
+                    <!-- do not remove this hidden row - contains links for jquery -->
+                    <div style="display:none">
+                        <a class="prelimLink" href="@Url.Action("SchedulePreliminaryMeeting", "Scheduling", new { ProjectId = item.ProjectExternalRefID, IsReschedule = "true", RecIdTxt=Model.Project.RecIdTxt })"></a>
+                        <a class="meetingLink" href="@Url.Action("ScheduleMeeting", "Scheduling", new { ProjectId = item.ProjectExternalRefID, MeetingTypeDesc = item.MeetingType.ToString(), IsReschedule = "true", RecIdTxt=Model.Project.RecIdTxt })"></a>
+                    </div>
+                    @item.MeetingType.ToStringValue()
+                </td>
+                <td>@item.MeetingDate.ToShortDateString()</td>
+                <td>@item.MeetingStart.ToShortTimeString() to @item.MeetingEnd.ToShortTimeString()</td>
+                <td>
+                    @item.MeetingRoom.MeetingRoomName
+                    @*Per 4/26/23 Meeting room email, only display the meeting room*@
+                    @*
+                        @{string meetingroomname = item.MeetingRoom != null ?
+                                                                        @item.MeetingRoom.MeetingRoomName : "Select A Meeting Room";
+                        }
+                        <a class="openmeetingrooms meetingroomnamelabel" href="#" data-toggle="modal" data-target="#dialog-modal-meetingrooms"> - @meetingroomname - </a>*@
+
+                </td>
+                <td class="meetingStatus">
+                    @{
+                        AppointmentResponseStatusDisplay display = (AppointmentResponseStatusDisplay)item.AppointmentResponseStatus;
+                    }
+                    @display.ToStringValue()
+                </td>
+                <td>
+                    @if (item.AppointmentResponseStatus != AION.BL.AppointmentResponseStatusEnum.Cancelled
+                        && item.AppointmentResponseStatus != AION.BL.AppointmentResponseStatusEnum.Tentatively_Scheduled)
+                    {
+                        if (item.MeetingType == AION.BL.MeetingTypeEnum.Preliminary)
+                        {
+                            <a role="button" class="btn btn-primary font-weight-bold"
+                               href="@Url.Action("SchedulePreliminaryMeeting", "Scheduling",
+                                                new { ProjectId = item.ProjectExternalRefID, MeetingTypeDesc = item.MeetingType.ToString(),
+                                                    IsReschedule = "true", RecIdTxt=Model.Project.RecIdTxt })">Reschedule Meeting</a>
+                        }
+                        else
+                        {
+                            <a role="button" class="btn btn-primary font-weight-bold"
+                               href="@Url.Action("ScheduleMeeting", "Scheduling",
+                                                new { ProjectId = item.ProjectExternalRefID, MeetingTypeDesc = item.MeetingType.ToString(),
+                                                    IsReschedule = "true", RecIdTxt=Model.Project.RecIdTxt })">Reschedule Meeting</a>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (item.MeetingType != MeetingTypeEnum.Preliminary && item.AppointmentResponseStatus != AppointmentResponseStatusEnum.Cancelled)
+                    {
+                        <a role="button" class="btn btn-poppy font-weight-bold cancel-meeting" href="#" data-id="@item.AppointmentId">Cancel</a>
+                    }
+                </td>
+
+                <td>
+                    @Html.Partial("~/Views/Shared/ProjectDetails/_PrelimReviewersList.cshtml",
+                   new AION.Web.Models.PlanReviewPartialViewModel
+                   {
+                       Attendees = ScheduleHelpers.BuildListFromAttendeeInfo(item.Attendees)
+                   }
+
+                   )
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!--#region Meeting Room modal -->
+@*Per 4/26/23 Meeting room email, only display the meeting room*@
+@*<div class="modal fade text-left" id="dialog-modal-meetingrooms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" aria-hidden="true">
+        <div class="modal-dialog modal modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-cyan white">
+                    <h4 class="modal-title white">
+                        Meeting Rooms
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="row">
+                            @if (Model != null)
+                            {
+                                @Html.Partial("_MeetingRooms", Model);
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-cyan" id="Submit_ChangeMeetingRooms">Submit</button>
+                    <button type="button" class="btn btn-sm bg-cyan white" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<!--#endregion modals -->

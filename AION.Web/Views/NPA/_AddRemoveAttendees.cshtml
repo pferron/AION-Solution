@@ -1,0 +1,49 @@
+﻿@using AION.Web.Models
+@using Newtonsoft.Json;
+
+@model NPASearchViewModel
+
+@{
+
+    /******
+    cjcl this javascript is added for each NPA that is scheduled so the boxes have the correct attendees
+    ***/
+
+    string jsonobj = JsonConvert.SerializeObject(Model.Attendees);
+
+}
+<script type="text/javascript">
+    /*
+    * push json array into attendees array for project schedule
+    * for search results--
+    *    check if id exists, remove current and add this one
+    * */
+    //if array doesn't exist, create
+    
+    if (arrAttendees == null) {
+        arrAttendees.push({ id: @Model.ProjectScheduleId.ToString(), dat: @Html.Raw(jsonobj) });
+    } else {
+        var dataobj = arrAttendees.find(x => x.id === @Model.ProjectScheduleId.ToString());
+        if (dataobj != null) {
+            //remove the row
+            //Find index of specific object using findIndex method.
+            var objIndex = arrAttendees.findIndex(x => x.id === @Model.ProjectScheduleId.ToString());
+
+            var data = arrAttendees.filter((item, index) =>
+                index != objIndex
+            );
+
+            arrAttendees = data;
+            //add the row
+            arrAttendees.push({ id: @Model.ProjectScheduleId.ToString(), dat: @Html.Raw(jsonobj) });
+        } else {
+            //add the row
+            arrAttendees.push({ id: @Model.ProjectScheduleId.ToString(), dat: @Html.Raw(jsonobj) });
+
+        }
+
+    }
+
+</script>
+
+

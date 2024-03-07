@@ -1,0 +1,27 @@
+﻿@model AION.Web.Models.ViewModelBase
+
+    <div class="content-header row sticky-breadcrumbs m-0 px-4 pt-4 border-bottom-grey">
+        <div class="content-header-left col-md-4 col-12">
+            <h2 class="content-header-title mb-0">@Model.MenuHeading</h2>
+            <div class="row breadcrumbs-top">
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="@Model.MenuLink">@Model.MenuLinkText</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            @Model.ActionText
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="content-header-right col-md-8 col-12">
+            <div class="mt-3 float-end">
+                @Html.Partial("_Actions", Model)
+            </div>
+        </div>
+        <div class="content-header-lead col-12 mt-4">
+            <p class="lead"></p>
+        </div>
+    </div>

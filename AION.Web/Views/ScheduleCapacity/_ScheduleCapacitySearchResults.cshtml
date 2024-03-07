@@ -1,0 +1,71 @@
+﻿@using AION.Manager.Models
+@model AION.Web.Models.Scheduling.ScheduleCapacityViewModel
+
+@{
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+    int userid = 0;
+    int holduserid = 0;
+}
+
+<table class="table table-striped table-bordered table-hover dataTable" id="schedulecapacitylist">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ScheduleCapacitySearchResult item in Model.ScheduleCapacitySearchList)
+        {
+            userid = item.UserId;
+            if (holduserid != userid)
+            {
+                holduserid = userid;
+
+                <tr>
+                    <td><div class="text-nowrap font-weight-bold">@item.FirstName @item.LastName</div></td>
+                    <td><div class="text-nowrap font-weight-bold">Plan Review Hours</div></td>
+                    <td><div class="text-nowrap font-weight-bold">Meetings</div></td>
+                    <td><div class="text-nowrap font-weight-bold">Express</div></td>
+                    <td><div class="text-nowrap font-weight-bold">NPA</div></td>
+                </tr>
+
+            };
+            <tr>
+                <td class="align-top align-content-center"><div class="text-nowrap">@item.ScheduleDate.ToShortDateString()</div></td>
+                <td class="align-top">@item.PlanReviewHours</td>
+                <td class="align-top">
+                    @foreach (Meeting meeting in item.Meetings.OrderBy(x => x.MeetingStart).ToList())
+                    {
+                        <div class="text-nowrap">
+                            @meeting.MeetingName @meeting.MeetingStart.ToShortTimeString() to @meeting.MeetingEnd.ToShortTimeString()
+                        </div>
+                    }
+                </td>
+                <td class="align-top">
+                    @foreach (Meeting reserve in item.ExpressReservations)
+                    {
+                        <div>  @reserve.MeetingName </div>
+
+                    }
+                </td>
+                <td class="align-top">
+                    @foreach (Meeting npa in item.NpaMeetings.OrderBy(x => x.MeetingStart).ToList())
+                    {
+                        <div class="text-nowrap">
+                            @npa.MeetingName @npa.MeetingStart.ToShortTimeString() to @npa.MeetingEnd.ToShortTimeString()
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

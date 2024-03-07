@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Citizens
+
+The Citizens API include endpoints for citizen users to manage their own accounts, authorized users to manage other accounts, and manage citizen delegates, announcements, and invitations. 
+
+OpenAPI spec version: v4
+
+-->
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D45A5BF0-42C5-40CA-8BCD-5C3E38D1933C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AccelaCitizens</RootNamespace>
+    <AssemblyName>AccelaCitizens</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0472</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JsonSubTypes, Version=2.0.1.0, Culture=neutral, PublicKeyToken=ee75fc290dbc1176, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JsonSubTypes.2.0.1\lib\net47\JsonSubTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="docs\AnnouncementsApi.md" />
+    <None Include="docs\CapIDModelV4GetCitizenaccessCitizensIdTrustAccounts.md" />
+    <None Include="docs\CitizenAccessDelegateInvitationsApi.md" />
+    <None Include="docs\CitizenAccessDelegateManagementApi.md" />
+    <None Include="docs\CitizenAccessSelfRegistrationApi.md" />
+    <None Include="docs\CitizenAccessUserManagementApi.md" />
+    <None Include="docs\CitizenContactModel.md" />
+    <None Include="docs\CitizenContactModelPreferredChannel.md" />
+    <None Include="docs\CitizenContactModelRace.md" />
+    <None Include="docs\CitizenContactModelSalutation.md" />
+    <None Include="docs\CitizenContactModelType.md" />
+    <None Include="docs\CitizenProfileModel.md" />
+    <None Include="docs\CompactAddressModelRequestV4PostCitizenaccessRegister.md" />
+    <None Include="docs\CompactAddressModelRequestV4PostCitizenaccessRegisterCountry.md" />
+    <None Include="docs\CompactAddressModelResponseV4PostCitizenaccessRegister.md" />
+    <None Include="docs\CompactAddressModelV4GetCitizenaccessCitizens.md" />
+    <None Include="docs\CompactAddressModelV4GetCivicidCitizenaccessContacts.md" />
+    <None Include="docs\CompactAddressModelV4PostCitizenaccessCitizens.md" />
+    <None Include="docs\ContactAddressModel.md" />
+    <None Include="docs\ContactAddressModelCountry.md" />
+    <None Include="docs\ContactAddressModelDirection.md" />
+    <None Include="docs\ContactAddressModelRequestV4PostCitizenaccessRegister.md" />
+    <None Include="docs\ContactAddressModelResponseV4PostCitizenaccessRegister.md" />
+    <None Include="docs\ContactAddressModelState.md" />
+    <None Include="docs\ContactAddressModelStatus.md" />
+    <None Include="docs\ContactAddressModelStreetSuffix.md" />
+    <None Include="docs\ContactAddressModelStreetSuffixDirection.md" />
+    <None Include="docs\ContactAddressModelUnitType.md" />
+    <None Include="docs\ContactAddressModelV4GetCitizenaccessCitizens.md" />
+    <None Include="docs\ContactAddressModelV4GetCivicidCitizenaccessContacts.md" />
+    <None Include="docs\ContactAddressModelV4PostCitizenaccessCitizens.md" />
+    <None Include="docs\ContractorPeopleModelV4GetCitizenaccessCitizens.md" />
+    <None Include="docs\DelegatePrivilegeModel.md" />
+    <None Include="docs\IdentifierModel.md" />
+    <None Include="docs\InlineResponse200.md" />
+    <None Include="docs\InlineResponse200Result.md" />
+    <None Include="docs\MessageModel.md" />
+    <None Include="docs\MultipleObjectResultModelV4PostCitizenaccessCitizens.md" />
+    <None Include="docs\MultipleObjectResultModelV4PostCitizenaccessCitizensDelegates.md" />
+    <None Include="docs\MultipleObjectResultModelV4PutAnnouncementsIdsRead.md" />
+    <None Include="docs\MultipleObjectResultModelV4PutCitizenaccessCitizensIdAccounts.md" />
+    <None Include="docs\OwnerAddressModel.md" />
+    <None Include="docs\PeopleModel.md" />
+    <None Include="docs\PeopleModelBirthCity.md" />
+    <None Include="docs\PeopleModelBirthRegion.md" />
+    <None Include="docs\PeopleModelBirthState.md" />
+    <None Include="docs\PeopleModelDriverLicenseState.md" />
+    <None Include="docs\PeopleModelGender.md" />
+    <None Include="docs\PeopleModelPreferredChannel.md" />
+    <None Include="docs\PeopleModelRace.md" />
+    <None Include="docs\PeopleModelRelation.md" />
+    <None Include="docs\PeopleModelRequestV4PostCitizenaccessRegister.md" />
+    <None Include="docs\PeopleModelResponseV4PostCitizenaccessRegister.md" />
+    <None Include="docs\PeopleModelSalutation.md" />
+    <None Include="docs\PeopleModelStatus.md" />
+    <None Include="docs\PeopleModelType.md" />
+    <None Include="docs\PeopleModelV4PostCitizenaccessCitizens.md" />
+    <None Include="docs\PermissionLevelModel.md" />
+    <None Include="docs\PermissionModel.md" />
+    <None Include="docs\PublicUserDelegateModel.md" />
+    <None Include="docs\PublicUserDelegatePermissionModel.md" />
+    <None Include="docs\PublicUserDelegatePermissionModelV4GetCitizenaccessCitizensInvitations.md" />
+    <None Include="docs\PublicUserDelegateStatusModel.md" />
+    <None Include="docs\PublicUserModel.md" />
+    <None Include="docs\PublicUserModelResponseV4PutCitizenaccessCitizensIdPassword.md" />
+    <None Include="docs\PublicUserModelV4GetCitizenaccessCitizensDelegatePrivileges.md" />
+    <None Include="docs\PublicUserPasswordModel.md" />
+    <None Include="docs\PublicUserQuestionModel.md" />
+    <None Include="docs\PublicUserRegisterModel.md" />
+    <None Include="docs\PublicUserRegisterModelRequestV4PostCitizenaccessRegister.md" />
+    <None Include="docs\PublicUserRegisterModelResponseV4PostCitizenaccessRegister.md" />
+    <None Include="docs\RequestCitizenProfileModel.md" />
+    <None Include="docs\RequestPublicUserDelegateModel.md" />
+    <None Include="docs\ResponseCitizenProfileModel.md" />
+    <None Include="docs\ResponseDelegatePrivilegeModelArray.md" />
+    <None Include="docs\ResponseMessageModelArray.md" />
+    <None Include="docs\ResponsePublicUserDelegateModelArray.md" />
+    <None Include="docs\ResponsePublicUserDelegateStatusModel.md" />
+    <None Include="docs\ResponsePublicUserModelArray.md" />
+    <None Include="docs\ResponsePublicUserRegisterModel.md" />
+    <None Include="docs\ResponseResultCountModel.md" />
+    <None Include="docs\ResponseResultModel.md" />
+    <None Include="docs\ResponseResultModelArray.md" />
+    <None Include="docs\ResponseTrustAccountModelArray.md" />
+    <None Include="docs\ResponseUserPINModelArray.md" />
+    <None Include="docs\ResultCountModel.md" />
+    <None Include="docs\ResultCountModelV4DeleteCitizensIdContactsContactIds.md" />
+    <None Include="docs\ResultCountModelV4DeleteCivicidCitizenaccessContactsIds.md" />
+    <None Include="docs\ResultCountModelV4PostCitizensIdContacts.md" />
+    <None Include="docs\ResultCountModelV4PostCivicidCitizenaccessContacts.md" />
+    <None Include="docs\ResultModel.md" />
+    <None Include="docs\TrustAccountModel.md" />
+    <None Include="docs\TrustAccountModelAssociations.md" />
+    <None Include="docs\TrustAccountModelOverdraft.md" />
+    <None Include="docs\TrustAccountModelStatus.md" />
+    <None Include="docs\UserPINModel.md" />
+    <None Include="docs\UserPINModelV4PutCitizenaccessCitizensIdAccounts.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

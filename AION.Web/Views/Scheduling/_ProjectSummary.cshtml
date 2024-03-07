@@ -1,0 +1,188 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@model AION.Web.Models.SchedulePlanReviewViewModel
+@{
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+    bool hasManualPerm = Model.PermissionMapping.Schdul_Rview_Pln_Rview_Man;
+    bool enablefacilitator = Model.PermissionMapping.E_Fclttor;
+
+    var contr = ViewContext.RouteData.Values["action"];
+
+    string scontrol = contr.ToString().ToLower();
+
+    bool isPreliminaryMeeting = false;
+    bool isPlanReview = false;
+    bool isFIFOPlanReview = false;
+    bool isExpressMeeting = false;
+    bool isMeeting = false;
+
+    string requesteddates = "";
+
+    switch (scontrol)
+    {
+        case "schedulepreliminarymeeting":
+            isPreliminaryMeeting = true;
+            if (Model.Project.PrelimMeetingDetail.RequestedBeginDateRange != DateTime.MinValue
+                         && Model.Project.PrelimMeetingDetail.RequestedEndDateRange != DateTime.MinValue)
+            {
+                requesteddates = @Model.Project.PrelimMeetingDetail.RequestedBeginDateRange.ToShortDateString()
+           + " to " + @Model.Project.PrelimMeetingDetail.RequestedEndDateRange.ToShortDateString();
+
+
+            }
+
+            break;
+        case "scheduleplanreview":
+            isPlanReview = true;
+            break;
+        case "schedulefifoplanreview":
+            isFIFOPlanReview = true;
+            break;
+        case "scheduleexpressmeeting":
+            isExpressMeeting = true;
+            break;
+        case "schedulemeeting":
+            isMeeting = true;
+            break;
+        default:
+            break;
+    }
+
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project # :</label>
+        <label>@Model.Project.AccelaProjectRefId</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Status :</label>
+        <label>@Model.Project.AIONProjectStatus.ProjectStatusCode</label>
+    </div>
+    @if (isPreliminaryMeeting)
+    {
+        <div class="col-md-4">
+            <label class="text-bold-600">Total customer attendees :</label>
+            <label>@Model.Project.DisplayOnlyInformation.NumOfAttendees</label>
+        </div>
+
+    }
+    else
+    {
+        <div class="col-md-4">
+            <label class="text-bold-600">Plan Review Cycle :</label>
+            <label>@Model.Cycle</label>
+        </div>
+
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Name :</label>
+        <label>@Model.Project.ProjectName</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Type :</label>
+        <label>@Model.Project.AionPropertyType.ToStringValue()</label>
+    </div>
+    @if (isPreliminaryMeeting)
+    {
+        <div class="col-md-4">
+            <label class="text-bold-600">Requested Date Range :</label>
+            <label>
+                @requesteddates
+            </label>
+        </div>
+
+    }
+    else
+    {
+        <div class="col-md-4">
+            <label class="text-bold-600">Multiplier :</label>
+            <label>@Model.SchedulingMultiplierName</label>
+        </div>
+
+    }
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Address :</label>
+        <label>@Model.Project.ProjectAddress</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Building Code Version :</label>
+        <label>@Model.Project.DisplayOnlyInformation.BuildingCodeVersion</label>
+    </div>
+    @if (isPreliminaryMeeting == false)
+    {
+        <div class="col-md-4">
+            <label class="text-bold-600">Project :</label>
+            <label>
+                <span>
+                    @if (Model.SchedulingMultiplierProjectTypes != null)
+                    {
+                        foreach (string id in Model.SchedulingMultiplierProjectTypes)
+                        {
+                            PropertyTypeEnums propertyTypeEnum = (PropertyTypeEnums)Int32.Parse(id);
+
+                            <span>@(propertyTypeEnum.ToStringValue()), </span>
+                        }
+                    }
+                </span>
+            </label>
+        </div>
+
+    }
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">PROD :</label>
+        <label>
+            @if (Model.PlansReadyOnDate.HasValue)
+            {
+
+                @Model.PlansReadyOnDate.Value.ToShortDateString()
+
+            }
+        </label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Team Score :</label>
+        <label>@Model.TeamScore</label>
+    </div>
+    @if (isPreliminaryMeeting == false)
+    {
+        <div class="col-md-4">
+            <label class="text-bold-600">Factor :</label>
+            <label>@Model.SchedulingMultiplierFactor</label>
+        </div>
+    }
+</div>
+@if (Model.Project.IsProjectRTAP)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <label class="text-bold-600">Original Project :</label>
+            <label>@Model.Project.AccelaRTAPProjectRefId</label>
+        </div>
+
+    </div>
+}
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Assign Facilitator :</label>
+        <label>
+            @Html.DropDownListFor(m => m.AssignedFacilitator, Model.FacilitatorsListViewModel, new { @id = "asndfacilitator", @class = "form-select form-control border-cyan" }, Model.PermissionMapping.E_Fclttor)
+        </label>
+    </div>
+</div>

@@ -1,0 +1,1002 @@
+[
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/1/2019 6:16:40 PM",
+        "ProjectId": "392436",
+        "OccupancyType": "CO",
+        "SqrFt": 1700.00000000,
+        "CostOfConstruction": 3500.00000000,
+        "NumberofSheets": 14
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 6:48:18 AM",
+        "ProjectId": "392438",
+        "OccupancyType": "CO",
+        "SqrFt": 9896.00000000,
+        "CostOfConstruction": 85000.00000000,
+        "NumberofSheets": 12
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 9:12:43 AM",
+        "ProjectId": "392440",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 9:25:59 AM",
+        "ProjectId": "392441",
+        "OccupancyType": "CO",
+        "SqrFt": 13773.00000000,
+        "CostOfConstruction": 1200000.00000000,
+        "NumberofSheets": 60
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 10:54:41 AM",
+        "ProjectId": "392446",
+        "OccupancyType": "CO",
+        "SqrFt": 30406.00000000,
+        "CostOfConstruction": 75000.00000000,
+        "NumberofSheets": 10
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 11:04:29 AM",
+        "ProjectId": "RV-391244-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 14
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CN",
+        "Datereceived": "1/2/2019 11:14:08 AM",
+        "ProjectId": "RV-377091-001",
+        "OccupancyType": "CN",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 184300.00000000,
+        "NumberofSheets": 3
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 11:15:23 AM",
+        "ProjectId": "392447",
+        "OccupancyType": "CO",
+        "SqrFt": 8256.00000000,
+        "CostOfConstruction": 36500.00000000,
+        "NumberofSheets": 9
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 11:41:05 AM",
+        "ProjectId": "392448",
+        "OccupancyType": "CO",
+        "SqrFt": 73355.00000000,
+        "CostOfConstruction": 312000.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 12:13:08 PM",
+        "ProjectId": "392451",
+        "OccupancyType": "CO",
+        "SqrFt": 149516.00000000,
+        "CostOfConstruction": 730000.00000000,
+        "NumberofSheets": 25
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 12:52:39 PM",
+        "ProjectId": "RV-380895-003",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 14
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 2:09:24 PM",
+        "ProjectId": "392454",
+        "OccupancyType": "CO",
+        "SqrFt": 480000.00000000,
+        "CostOfConstruction": 1340000.00000000,
+        "NumberofSheets": 30
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 2:18:23 PM",
+        "ProjectId": "RM-388680-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 32
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 2:35:20 PM",
+        "ProjectId": "RV-391392-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 23
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 3:12:06 PM",
+        "ProjectId": "RV-390636-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 100000.00000000,
+        "NumberofSheets": 12
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 3:15:13 PM",
+        "ProjectId": "RV-391075-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 1
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 4:15:41 PM",
+        "ProjectId": "RV-387307-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 9
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 4:26:48 PM",
+        "ProjectId": "392458",
+        "OccupancyType": "CO",
+        "SqrFt": 4928.00000000,
+        "CostOfConstruction": 623722.00000000,
+        "NumberofSheets": 46
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/2/2019 7:30:46 PM",
+        "ProjectId": "392459",
+        "OccupancyType": "CO",
+        "SqrFt": 1300.00000000,
+        "CostOfConstruction": 12300.00000000,
+        "NumberofSheets": 6
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 8:39:40 AM",
+        "ProjectId": "392464",
+        "OccupancyType": "CO",
+        "SqrFt": 351520.00000000,
+        "CostOfConstruction": 30000.00000000,
+        "NumberofSheets": 4
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 9:08:07 AM",
+        "ProjectId": "392466",
+        "OccupancyType": "CO",
+        "SqrFt": 328584.00000000,
+        "CostOfConstruction": 550000.00000000,
+        "NumberofSheets": 30
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 9:18:57 AM",
+        "ProjectId": "RV-376615-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 2
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 10:02:23 AM",
+        "ProjectId": "RV-383147-002",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 1
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 10:51:16 AM",
+        "ProjectId": "392471",
+        "OccupancyType": "CO",
+        "SqrFt": 91840.00000000,
+        "CostOfConstruction": 289286.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 11:02:35 AM",
+        "ProjectId": "RV-391387-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 1
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 11:12:34 AM",
+        "ProjectId": "392474",
+        "OccupancyType": "CO",
+        "SqrFt": 260446.00000000,
+        "CostOfConstruction": 25000.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 11:56:59 AM",
+        "ProjectId": "392479",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 11:59:26 AM",
+        "ProjectId": "392480",
+        "OccupancyType": "CO",
+        "SqrFt": 1035601.00000000,
+        "CostOfConstruction": 100000.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 12:43:47 PM",
+        "ProjectId": "392483",
+        "OccupancyType": "CO",
+        "SqrFt": 18850.00000000,
+        "CostOfConstruction": 2600000.00000000,
+        "NumberofSheets": 40
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 1:28:31 PM",
+        "ProjectId": "392486",
+        "OccupancyType": "CO",
+        "SqrFt": 6852.000,
+        "CostOfConstruction": 10000.00000000,
+        "NumberofSheets": 5
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 1:31:17 PM",
+        "ProjectId": "RV-387305-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 9
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 1:32:30 PM",
+        "ProjectId": "RV-387306-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 9
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 2:04:23 PM",
+        "ProjectId": "392488",
+        "OccupancyType": "CO",
+        "SqrFt": 20065.00000000,
+        "CostOfConstruction": 48345.00000000,
+        "NumberofSheets": 16
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 2:05:51 PM",
+        "ProjectId": "392489",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 2:25:50 PM",
+        "ProjectId": "RV-390712-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 10
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CN",
+        "Datereceived": "1/3/2019 2:27:13 PM",
+        "ProjectId": "RV-389063-001",
+        "OccupancyType": "CN",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 13
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 2:32:04 PM",
+        "ProjectId": "392490",
+        "OccupancyType": "CO",
+        "SqrFt": 89974.00000000,
+        "CostOfConstruction": 12900000.00000000,
+        "NumberofSheets": 254
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 2:37:45 PM",
+        "ProjectId": "RV-390721-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 21
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 3:47:02 PM",
+        "ProjectId": "392493",
+        "OccupancyType": "CO",
+        "SqrFt": 4400.00000000,
+        "CostOfConstruction": 7000.00000000,
+        "NumberofSheets": 10
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 4:47:42 PM",
+        "ProjectId": "RV-388869-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 1623347.00000000,
+        "NumberofSheets": 40
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 4:52:16 PM",
+        "ProjectId": "392494",
+        "OccupancyType": "CO",
+        "SqrFt": 117000.00000000,
+        "CostOfConstruction": 25000.00000000,
+        "NumberofSheets": 6
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 4:57:37 PM",
+        "ProjectId": "392495",
+        "OccupancyType": "CO",
+        "SqrFt": 5604.00000000,
+        "CostOfConstruction": 110000.00000000,
+        "NumberofSheets": 9
+    },
+    {
+        "reviewtype": "ER",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 5:11:03 PM",
+        "ProjectId": "392496",
+        "OccupancyType": "CO",
+        "SqrFt": 151952.00000000,
+        "CostOfConstruction": 907000.00000000,
+        "NumberofSheets": 35
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 5:41:49 PM",
+        "ProjectId": "392497",
+        "OccupancyType": "CO",
+        "SqrFt": 7500.00000000,
+        "CostOfConstruction": 12000.00000000,
+        "NumberofSheets": 11
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/3/2019 6:22:36 PM",
+        "ProjectId": "392498",
+        "OccupancyType": "CO",
+        "SqrFt": 71216.00000000,
+        "CostOfConstruction": 75000.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 9:13:03 AM",
+        "ProjectId": "392503",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 9:13:33 AM",
+        "ProjectId": "392504",
+        "OccupancyType": "CO",
+        "SqrFt": 351520.00000000,
+        "CostOfConstruction": 30000.00000000,
+        "NumberofSheets": 10
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 9:28:30 AM",
+        "ProjectId": "RV-391156-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 1
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 10:28:10 AM",
+        "ProjectId": "392506",
+        "OccupancyType": "CO",
+        "SqrFt": 7359.00000000,
+        "CostOfConstruction": 150000.00000000,
+        "NumberofSheets": 11
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 11:06:23 AM",
+        "ProjectId": "392508",
+        "OccupancyType": "CO",
+        "SqrFt": 197279.00000000,
+        "CostOfConstruction": 250000.00000000,
+        "NumberofSheets": 42
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 12:48:06 PM",
+        "ProjectId": "RV-387447-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 11
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 1:23:02 PM",
+        "ProjectId": "RV-391016-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 16
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 2:05:22 PM",
+        "ProjectId": "392528",
+        "OccupancyType": "CO",
+        "SqrFt": 511857.00000000,
+        "CostOfConstruction": 2931729.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 2:53:02 PM",
+        "ProjectId": "392533",
+        "OccupancyType": "CO",
+        "SqrFt": 36575.00000000,
+        "CostOfConstruction": 2950000.00000000,
+        "NumberofSheets": 48
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 3:01:06 PM",
+        "ProjectId": "392534",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 3:22:59 PM",
+        "ProjectId": "RV-391577-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 16000.00000000,
+        "NumberofSheets": 10
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 4:01:22 PM",
+        "ProjectId": "392538",
+        "OccupancyType": "CO",
+        "SqrFt": 165592.00000000,
+        "CostOfConstruction": 36000000.00000000,
+        "NumberofSheets": 280
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/4/2019 4:21:31 PM",
+        "ProjectId": "392541",
+        "OccupancyType": "CO",
+        "SqrFt": 46198.00000000,
+        "CostOfConstruction": 2000000.00000000,
+        "NumberofSheets": 92
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CN",
+        "Datereceived": "1/6/2019 9:40:46 AM",
+        "ProjectId": "392543",
+        "OccupancyType": "CN",
+        "SqrFt": 285971.00000000,
+        "CostOfConstruction": 30000000.00000000,
+        "NumberofSheets": 200
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/6/2019 5:15:14 PM",
+        "ProjectId": "392546",
+        "OccupancyType": "CO",
+        "SqrFt": 15833.00000000,
+        "CostOfConstruction": 55000.00000000,
+        "NumberofSheets": 12
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 9:06:09 AM",
+        "ProjectId": "392552",
+        "OccupancyType": "CO",
+        "SqrFt": 35729.00000000,
+        "CostOfConstruction": 93000.00000000,
+        "NumberofSheets": 12
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 10:17:11 AM",
+        "ProjectId": "392563",
+        "OccupancyType": "CO",
+        "SqrFt": 158886.00000000,
+        "CostOfConstruction": 162000.00000000,
+        "NumberofSheets": 10
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 11:50:21 AM",
+        "ProjectId": "RV-375604-008",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 4
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 11:56:39 AM",
+        "ProjectId": "392565",
+        "OccupancyType": "CO",
+        "SqrFt": 71527.00000000,
+        "CostOfConstruction": 100000.00000000,
+        "NumberofSheets": 30
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 12:15:33 PM",
+        "ProjectId": "392567",
+        "OccupancyType": "CO",
+        "SqrFt": 3200.00000000,
+        "CostOfConstruction": 60000.00000000,
+        "NumberofSheets": 22
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 12:20:36 PM",
+        "ProjectId": "RV-391156-002",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 1
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CN",
+        "Datereceived": "1/7/2019 1:03:58 PM",
+        "ProjectId": "392568",
+        "OccupancyType": "CN",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 1:07:48 PM",
+        "ProjectId": "392569",
+        "OccupancyType": "CO",
+        "SqrFt": 99740.00000000,
+        "CostOfConstruction": 60647.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 1:19:23 PM",
+        "ProjectId": "392570",
+        "OccupancyType": "CO",
+        "SqrFt": 77716.00000000,
+        "CostOfConstruction": 100000.00000000,
+        "NumberofSheets": 15
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 1:53:20 PM",
+        "ProjectId": "392574",
+        "OccupancyType": "CO",
+        "SqrFt": 117824.0,
+        "CostOfConstruction": 15000.00000000,
+        "NumberofSheets": 6
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 2:17:55 PM",
+        "ProjectId": "RV-388584-002",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 12
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 2:31:37 PM",
+        "ProjectId": "392576",
+        "OccupancyType": "CO",
+        "SqrFt": 3750.00000000,
+        "CostOfConstruction": 125000.00000000,
+        "NumberofSheets": 11
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 2:52:51 PM",
+        "ProjectId": "392581",
+        "OccupancyType": "CO",
+        "SqrFt": 2000.00000000,
+        "CostOfConstruction": 120000.00000000,
+        "NumberofSheets": 22
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 3:19:03 PM",
+        "ProjectId": "392583",
+        "OccupancyType": "CO",
+        "SqrFt": 115385.00000000,
+        "CostOfConstruction": 230000.00000000,
+        "NumberofSheets": 29
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 3:25:26 PM",
+        "ProjectId": "392586",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CN",
+        "Datereceived": "1/7/2019 3:38:01 PM",
+        "ProjectId": "392587",
+        "OccupancyType": "CN",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 3:44:19 PM",
+        "ProjectId": "RV-390504-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 12
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 4:51:23 PM",
+        "ProjectId": "392590",
+        "OccupancyType": "CO",
+        "SqrFt": 24310.00000000,
+        "CostOfConstruction": 60000.00000000,
+        "NumberofSheets": 13
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 5:09:48 PM",
+        "ProjectId": "392591",
+        "OccupancyType": "CO",
+        "SqrFt": 55515.00000000,
+        "CostOfConstruction": 225000.00000000,
+        "NumberofSheets": 10
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/7/2019 5:19:27 PM",
+        "ProjectId": "392592",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 8:59:39 AM",
+        "ProjectId": "392599",
+        "OccupancyType": "CO",
+        "SqrFt": 490339.00000000,
+        "CostOfConstruction": 525000.00000000,
+        "NumberofSheets": 42
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 10:05:48 AM",
+        "ProjectId": "392601",
+        "OccupancyType": "CO",
+        "SqrFt": 202315.00000000,
+        "CostOfConstruction": 126300.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 10:06:32 AM",
+        "ProjectId": "RV-390790-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 2
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 10:29:25 AM",
+        "ProjectId": "392602",
+        "OccupancyType": "CO",
+        "SqrFt": 125723.00000000,
+        "CostOfConstruction": 200000.00000000,
+        "NumberofSheets": 10
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 10:53:42 AM",
+        "ProjectId": "RV-373513-002",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 7
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 11:13:53 AM",
+        "ProjectId": "RV-391420-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 1
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 11:42:35 AM",
+        "ProjectId": "392609",
+        "OccupancyType": "CO",
+        "SqrFt": 2336.00000000,
+        "CostOfConstruction": 70000.00000000,
+        "NumberofSheets": 8
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 1:00:51 PM",
+        "ProjectId": "392620",
+        "OccupancyType": "CO",
+        "SqrFt": 511857.00000000,
+        "CostOfConstruction": 2931729.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 1:38:21 PM",
+        "ProjectId": "392626",
+        "OccupancyType": "CO",
+        "SqrFt": 192000.00000000,
+        "CostOfConstruction": 18616.00000000,
+        "NumberofSheets": 1
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 2:02:25 PM",
+        "ProjectId": "392629",
+        "OccupancyType": "CO",
+        "SqrFt": 112857.00000000,
+        "CostOfConstruction": 118000.00000000,
+        "NumberofSheets": 20
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 4:10:07 PM",
+        "ProjectId": "RV-388837-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 1
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 5:15:31 PM",
+        "ProjectId": "392636",
+        "OccupancyType": "CO",
+        "SqrFt": 83000.00000000,
+        "CostOfConstruction": 8850000.00000000,
+        "NumberofSheets": 50
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/8/2019 6:27:06 PM",
+        "ProjectId": "392637",
+        "OccupancyType": "CO",
+        "SqrFt": 63270.00000000,
+        "CostOfConstruction": 9750000.00000000,
+        "NumberofSheets": 109
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/9/2019 7:33:19 AM",
+        "ProjectId": "RV-391106-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 15
+    },
+    {
+        "reviewtype": "PL",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/9/2019 7:43:47 AM",
+        "ProjectId": "392646",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.0,
+        "NumberofSheets": 0
+    },
+    {
+        "reviewtype": "MP",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/9/2019 8:05:12 AM",
+        "ProjectId": "392647",
+        "OccupancyType": "CO",
+        "SqrFt": 855000.00000000,
+        "CostOfConstruction": 38687241.00000000,
+        "NumberofSheets": 9
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/9/2019 11:07:41 AM",
+        "ProjectId": "RV-384137-002",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 7
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/9/2019 11:18:03 AM",
+        "ProjectId": "392652",
+        "OccupancyType": "CO",
+        "SqrFt": 34602.00000000,
+        "CostOfConstruction": 29000.00000000,
+        "NumberofSheets": 7
+    },
+    {
+        "reviewtype": "OS",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/9/2019 11:28:50 AM",
+        "ProjectId": "392653",
+        "OccupancyType": "CO",
+        "SqrFt": 158886.00000000,
+        "CostOfConstruction": 330000.00000000,
+        "NumberofSheets": 30
+    },
+    {
+        "reviewtype": "RT",
+        "ProptypeCode": "CO",
+        "Datereceived": "1/9/2019 11:44:58 AM",
+        "ProjectId": "RB-386005-001",
+        "OccupancyType": "CO",
+        "SqrFt": 0.0,
+        "CostOfConstruction": 0.00000000,
+        "NumberofSheets": 1
+    }
+]

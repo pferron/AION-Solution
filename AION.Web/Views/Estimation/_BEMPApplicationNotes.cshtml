@@ -1,0 +1,65 @@
+﻿@using System.Web.Mvc.Html
+@using AION.Web.Extensions
+@model AION.Web.Models.EstimationViewModel
+
+@{
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="pndngreasonBEMP">Pending:</label>
+            <div class="input-group">
+                @Html.DropDownListFor(m => m.BEMPApplicationNotes.PendingReason, Model.PendingReasonList, new { @id = "pndngreasonBEMP", @class = "form-select form-control border-cyan" }, Model.PermissionMapping.Estimat_Trads)
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="pndngreasonBEMP">Pending Notes:</label>
+            <div class="input-group">
+                @Html.TextAreaFor(m => m.BEMPApplicationNotes.PendingNotesComments, new { @id = "BEMPPendingNotes", @class = "form-control border-cyan" }, Model.PermissionMapping.Estimat_Trads)
+            </div>
+            <div class="input-group pt-3">
+                <button type="submit" onclick="SendPendingEmail(3)" class="btn btn-poppy setviewonly @disabledcls" @disablebtn>
+                    Email Pending Notes
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>
+                Customer/Gate Notes:
+                @if (Model.PermissionMapping.Estimat_Trads)
+                {
+                    <a href="#" class="openstandnotes @disabledcls" data-gatenoteid="BEMPGateNotes" data-toggle="modal" data-target="#standard-notes-modal">Select Standard Notes</a>
+                }
+                else
+                {
+                    <a href="#" class="disabled" data-gatenoteid="BEMPGateNotes">Select Standard Notes</a>
+                }
+            </label>
+            <div class="input-group">
+                @Html.TextAreaFor(m => m.BEMPApplicationNotes.PendingGateNotesComments, new { id = "BEMPGateNotes", @class = "form-control border-cyan" }, Model.PermissionMapping.Estimat_Trads)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>
+                Internal Notes:
+            </label>
+            <div class="input-group">
+                @Html.TextAreaFor(m => m.BEMPApplicationNotes.InternalNotesComments, new { @id = "BEMPInternalNotes", @class = "form-control border-cyan" }, Model.PermissionMapping.Estimat_Trads)
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,160 @@
+﻿@model AION.Web.Models.SearchViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+@section style
+{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/plugins/ui/jqueryui.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+}
+
+@section scripts
+{
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+
+    <script src="/app-assets/vendors/js/tables/datatable/moment.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/datetime-moment.js"></script>
+
+    <script src="/app-assets/js/scripts/pages/search.js"></script>
+}
+
+@Html.HiddenFor(x => x.LoggedInUserEmail)
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="sectionSearch">
+            <div class="card-header">
+                <h4 class="card-title">Project/Meeting Search</h4>
+            </div>
+            <div class="card-content collpase show">
+                <div class="card-body">
+                    <div class="card-text">
+                        <p></p>
+                    </div>
+                    <form id="search-dashboard" class="form form-horizontal">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="StartDate">Start Date</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker start-date border-cyan" })
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <span class="fa fa-calendar-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="EndDate">End Date</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker end-date border-cyan" })
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <span class="fa fa-calendar-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="ProjectStatus">Status</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.ProjectStatus, Model.ProjectStatusSelectList, "- Select a Status -", new { @class = "form-select form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="PlanReviewer">Plan Reviewer</label>
+                                        <div class="input-group">
+                                            @Html.TextBox("PlanReviewer", "", new { @class = "form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="FacilitatorId">Facilitator</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.FacilitatorId, Model.FacilitatorSelectList, "- Select a Facilitator -", new { @class = "form-select form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="EstimatorId">Estimator</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.EstimatorId, Model.EstimatorSelectList, "- Select an Estimator -", new { @class = "form-select form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="ProjectNumber">Project #</label>
+                                        <div class="input-group">
+                                            @Html.TextBox("ProjectNumber", "", new { @class = "form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="ProjectName">Project Name</label>
+                                        <div class="input-group">
+                                            @Html.TextBox("ProjectName", "", new { @class = "form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="ProjectAddress">Project Address</label>
+                                        <div class="input-group">
+                                            @Html.TextBox("ProjectAddress", "", new { @class = "form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="CustomerName">Customer Name</label>
+                                        <div class="input-group">
+                                            @Html.TextBox("CustomerName", "", new { @class = "form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="MeetingType">Meeting Type</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.MeetingType, Model.MeetingTypeSelectList, "- Select a Meeting Type -", new { @class = "form-select form-control border-cyan" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="sectionResults" class="card" style="display: none;">
+            @Html.Partial("_Projects", Model.ProjectSearchResultsViewModel)
+        </div>
+    </div>
+</div>
+
+<div class="default-dialog" title="">
+    <p class="message"></p>
+</div>

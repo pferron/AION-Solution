@@ -1,0 +1,281 @@
+﻿
+@model AION.Web.Models.ViewModelBase
+
+@{
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+    string disableRescheduleBtn = string.Empty;
+    string disableRescheduleCls = string.Empty;
+    if (Model.IsReschedule)
+    {
+        disableRescheduleBtn = "disabled=\"disabled\"";
+        disableRescheduleCls = "disabled";
+    }
+}
+
+@if (Model.IsUserInternal)
+{
+    switch (Model.Controller.ToLower())
+    {
+        case "search":
+            <button type="button" class="btn btn-poppy btn-min-width mx-2 mb-3 @disabledcls" id="btn-reset">Reset</button>
+            <button type="button" class="btn btn-poppy btn-min-width mx-2 mb-3 @disabledcls" id="btn-submit">Submit</button>
+
+            break;
+
+        case "estimation":
+            switch (Model.Action.ToLower())
+            {
+                case "estimationdashboard":
+                    <button id="bulk-estimation" type="button" class="btn btn-poppy btn-min-width">Bulk Estimation</button>
+                    break;
+
+                case "estimationmain":
+                case "preliminaryestimation":
+                    if (Model.PermissionMapping.Schdul_Notes_Sel)
+                    {
+                        <button id="notes" type="button" class="btn btn-poppy btn-min-width mr-3 mb-3" data-toggle="modal" data-target="#notes-modal">Notes</button>
+                    }
+                    else
+                    {
+                        <button id="notes" type="button" class="btn btn-poppy btn-min-width mr-3 mb-3 disabled" data-toggle="modal" data-target="#notes-modal">Notes</button>
+                    }
+
+                    <a role="button" class="btn btn-poppy btn-min-width mr-3 mb-3" href="@Url.Action("ProjectDetail", "ProjectDetail", new { ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt = Model.Project.RecIdTxt })">Project Details</a>
+                    <a role="button" class="btn btn-poppy btn-min-width mr-3 mb-3" href="@Model.AccelaProjectDeeplink" target="_blank">Application</a>
+
+                    <button type="button" class="btn btn-poppy btn-min-width mr-3 mb-3 @disabledcls" id="btn-save">Save</button>
+                    <button type="button" class="btn btn-poppy btn-min-width mr-3 mb-3 @disabledcls" id="btn-submit" @disablebtn>Submit</button>
+
+                    break;
+            }
+
+            break;
+
+        case "admin":
+            <a href="@Url.Action("ConfigurationHistoryMain","ConfigurationHistory")" class="btn btn-poppy btn-min-width mr-3 mb-3 @disabledcls" id="btn-config-history" onclick="window.open(this.href, '_blank', 'width=920,height=800'); return false;">Configuration History</a>
+            <button type="button" class="btn btn-poppy btn-min-width mr-3 mb-3 @disabledcls" id="btn-submit" @disablebtn>Submit</button>
+            break;
+
+        case "express":
+            <button type="button" class="btn btn-poppy btn-min-width mr-3 mb-3 @disabledcls" id="btn-submit" @disablebtn>Submit</button>
+            break;
+
+        case "scheduling":
+            switch (Model.Action.ToLower())
+            {
+
+                case "scheduleexpressmeeting":
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Url.Action("ProjectDetail", "ProjectDetail", new {  ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt=Model.Project.RecIdTxt })">Project Details</a>
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Model.AccelaProjectDeeplink" target="_blank">Application</a>
+                    if (Model.PermissionMapping.Schdul_Notes_Sel)
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3" data-toggle="modal" data-target="#notes-modal">Notes</button>
+                    }
+                    else
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3 disabled" data-toggle="modal" data-target="#notes-modal">Notes</button>
+                    }
+
+                    // step 1 //////////////////////////////////////////////////////////
+                    if (Model.PermissionMapping.Schdul_Express_Auto)
+                    {
+                        <a role="button" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3" id="btnAutoSchedule" href="#" onclick="javascript:GetAutoScheduleValues();">Auto Schedule</a>
+                    }
+                    else
+                    {
+                        <a role="button" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 disabled" id="btnAutoSchedule" href="#">Auto Schedule</a>
+                    }
+
+                    if (Model.PermissionMapping.Schdul_Express_Man)
+                    {
+                        <button type="button" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 manschedbtn">Manually Schedule</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 manschedbtn disabled" disabled="disabled">Manually Schedule</button>
+                    }
+
+                    if (Model.IsReschedule)
+                    {
+                        disableRescheduleBtn = "disabled=\"disabled\"";
+                        disableRescheduleCls = "disabled";
+                    }
+                    <input type="button" value="Save" id="btnSave" name="btnSave" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls @disableRescheduleCls" @disablebtn @disableRescheduleBtn />
+                    <input type="button" value="Cancel" id="btnCancel" name="btnCancel" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+                    <input type="button" value="Submit" id="btnSubmit" name="btnSubmit" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+
+                    //step 2 /////////////////////////////////////////////////////////
+                    <input type="button" value="Back" id="btnBack" name="btnBack" class="step2btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+                    <input type="button" value="Submit" id="btnSubmitPR" name="btnSubmitPR" onclick="" class="step2btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+
+                    break;
+
+                case "schedulepreliminarymeeting":
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Url.Action("ProjectDetail", "ProjectDetail", new { ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt = Model.Project.RecIdTxt })">Project Details</a>
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Model.AccelaProjectDeeplink" target="_blank">Application</a>
+                    if (Model.PermissionMapping.Schdul_Prlim_Mtng_Auto)
+                    {
+                        <a role="button" id="btnAutoSchedule"
+                           href="#" onclick="AutoSchedule(2);"
+                           class="btn btn-min-width btn-poppy mr-3 mb-3 btnAutoSchedule">AutoSchedule</a>
+                    }
+                    else
+                    {
+                        <a role="button" id="btnAutoSchedule" href="#" class="btn btn-min-width btn-poppy mr-3 mb-3 disabled">AutoSchedule</a>
+                    }
+
+                    if (Model.PermissionMapping.Schdul_Prlim_Mtng_Man)
+                    {
+                        <button id="openattendees" type="button" data-toggle="modal" data-target="#dialog-modal-addattendees" class="btn btn-min-width btn-poppy mr-3 mb-3">Add Attendees</button>
+                    }
+                    else
+                    {
+                        <button id="openattendees" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3 disabled" disabled="disabled">Add Attendees</button>
+                    }
+
+                    if (Model.PermissionMapping.Schdul_Notes_Sel)
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3" data-toggle="modal" data-target="#notes-modal">Notes</button>
+                    }
+                    else
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3 disabled">Notes</button>
+                    }
+                    disableRescheduleBtn = string.Empty;
+                    disableRescheduleCls = string.Empty;
+                    if (Model.IsReschedule)
+                    {
+                        disableRescheduleBtn = "disabled=\"disabled\"";
+                        disableRescheduleCls = "disabled";
+                    }
+
+                    <button type="button" id="btnSave" name="btnSave" class="btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls @disableRescheduleCls" @disablebtn @disableRescheduleBtn>Save</button>
+                    <button type="button" id="btnCancel" name="btnCancel" class="btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn>Cancel</button>
+                    <button type="button" id="btnSubmit" name="btnSubmit" class="btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn>Submit</button>
+
+                    break;
+
+
+                case "scheduleplanreview":
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Url.Action("ProjectDetail", "ProjectDetail", new { ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt=Model.Project.RecIdTxt })">Project Details</a>
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Model.AccelaProjectDeeplink" target="_blank">Application</a>
+
+                    if (Model.PermissionMapping.Schdul_Notes_Sel)
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3" data-toggle="modal" data-target="#notes-modal">Notes</button>
+                    }
+                    else
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3 disabled">Notes</button>
+                    }
+
+                    //step 1 ///////////////////////////////////////////////////
+                    if (Model.PermissionMapping.Schdul_Rview_Pln_Rview_Auto)
+                    {
+                        <a role="button" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3" id="btnAutoSchedule" href="#" onclick="AutoSchedule(1);">Auto Schedule</a>
+                    }
+                    else
+                    {
+                        <a role="button" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 disabled" id="btnAutoSchedule" href="#">Auto Schedule</a>
+                    }
+                    //these three buttons are shown depending on permissions and project state/////////
+                    <input type="button" value="Sub Cycle Schedule" id="schedulecyclebtn" onclick="ToggleScheduleCycle();" class="step1btn btn btn-min-width btn-poppy schedulecyclebtn mr-3 mb-3" />
+
+                    <button type="button" id="activatenareviewbtn" onclick="ToggleNAReview();" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3">Activate NA Review</button>
+
+                    <input type="button" value="Adjust Hours" id="adjusthoursbtn" onclick="ToggleAdjustHours();" class="step1btn btn btn-min-width btn-poppy adjusthoursbtn mr-3 mb-3" />
+                    /////////////////////////////////////////////////////////
+                    <input type="button" value="Save" id="btnSave" name="btnSave" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3" @disablebtn @disableRescheduleBtn />
+                    <input type="button" value="Cancel" id="btnCancel" name="btnCancel" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+                    <input type="button" value="Submit" id="btnSubmit" name="btnSubmit" class="step1btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+
+                    //step 2 /////////////////////////////////////////////////////////
+                    <input type="button" value="Back" id="btnBack" name="btnBack" class="step2btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+                    <input type="button" value="Submit" id="btnSubmitPR" name="btnSubmitPR" class="step2btn btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+
+
+                    break;
+                case "schedulefifoplanreview":
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3"
+                       href="@System.Configuration.ConfigurationManager.AppSettings["AccelaBaseLink"].ToString()" target="_blank">
+                        Accela
+                    </a>
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Url.Action("ProjectDetail", "ProjectDetail", new { ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt=Model.Project.RecIdTxt })">Project Details</a>
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Model.AccelaProjectDeeplink" target="_blank">Application</a>
+
+                    if (Model.PermissionMapping.Schdul_Notes_Sel)
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3" data-toggle="modal" data-target="#notes-modal">Notes</button>
+                    }
+                    else
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3 disabled">Notes</button>
+                    }
+
+                    <input type="button" value="Save" id="btnSave" name="btnSave" class="btn btn-min-width btn-poppy mr-3 mb-3 disabled" disabled="disabled" />
+                    <input type="button" value="Cancel" id="btnCancel" name="btnCancel" class="btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+                    <input type="button" value="Submit" id="btnSubmit" name="btnSubmit" class="btn btn-min-width btn-poppy mr-3 mb-3 @disabledcls" @disablebtn />
+
+                    break;
+
+                case "schedulemeeting":
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3"
+                       href="@System.Configuration.ConfigurationManager.AppSettings["AccelaBaseLink"].ToString()" target="_blank">
+                        Accela
+                    </a>
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Url.Action("ProjectDetail", "ProjectDetail", new { ProjectId = Model.Project.AccelaProjectRefId, RecIdTxt=Model.Project.RecIdTxt })">Project Details</a>
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" href="@Model.AccelaProjectDeeplink" target="_blank">Application</a>
+                    <a role="button" class="btn btn-min-width btn-poppy mr-3 mb-3" id="btnAutoSchedule" href="#" onclick="javascript:GetAutoScheduleValues();">Auto Schedule</a>
+                    <button id="openattendees" type="button" data-toggle="modal" data-target="#dialog-modal-addattendees" class="btn btn-min-width btn-poppy mr-3 mb-3">Add Attendees</button>
+                    if (Model.PermissionMapping.Schdul_Notes_Sel)
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3" data-toggle="modal" data-target="#notes-modal">Notes</button>
+                    }
+                    else
+                    {
+                        <button id="notes" type="button" class="btn btn-min-width btn-poppy mr-3 mb-3 disabled">Notes</button>
+                    }
+
+                    disableRescheduleBtn = string.Empty;
+                    disableRescheduleCls = string.Empty;
+                    if (Model.IsReschedule)
+                    {
+                        disableRescheduleBtn = "disabled=\"disabled\"";
+                        disableRescheduleCls = "disabled";
+                    }
+
+                    <input type="button" value="Save" id="btnSaveFMA" name="btnSaveFMA" class="btn btn-poppy btn-min-width mr-3 mb-3 @disabledcls @disableRescheduleCls" @disablebtn @disableRescheduleBtn />
+                    <input type="button" value="Cancel" id="btnCancelFMA" name="btnCancelFMA" class="btn btn-poppy btn-min-width mr-3 mb-3 @disabledcls" @disablebtn />
+                    <input type="button" value="Submit" id="btnSubmitFMA" name="btnSubmitFMA" class="btn btn-poppy btn-min-width mr-3 mb-3 @disabledcls" @disablebtn />
+
+                    break;
+
+            }
+            break;
+
+        case "projectdetail":
+
+            @Html.Partial("_ProjectDetailNav", Model)
+
+            break;
+        case "customer":
+            <button type="button" class="btn btn-poppy mr-3 mb-3" data-toggle="modal" data-target="#notes-modal">View Notes</button>
+            <button type="button" class="btn btn-poppy mr-3 mb-3" data-bs-toggle="modal" data-bs-target="#PlanReviewAcceptanceEmail">Plan Review Acceptance Email</button>
+            break;
+
+        case "schedulecapacity":
+            <input type="button" value="Submit" class="btn btn-poppy mr-3 mb-3 schcapsearch @disabledcls" @disablebtn />
+            <input type="button" id="filter" class="btn btn-poppy mr-3 mb-3" name="filter" value="Refresh" />
+            break;
+
+        case "npa":
+            <button type="button" id="resetCreateNPA" class="btn btn-poppy mr-3 mb-3 setviewonly createnparesetbtn @disabledcls" @disablebtn>Reset</button>
+            <button type="button" class="btn btn-poppy mr-3 mb-3 createnpabutton setviewonly @disabledcls" @disablebtn>Submit</button>
+
+            break;
+    }
+}

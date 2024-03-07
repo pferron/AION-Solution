@@ -1,0 +1,124 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@using AION.Manager.Models
+@using Newtonsoft.Json;
+
+@model AION.Web.Models.AdminViewModel
+
+
+@{
+
+    bool isreadonly = Model.IsReadOnly;
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+}
+
+@*@Html.HiddenFor(x => x.MessageConfigAdminViewModel.ActiveDate)*@
+
+<div class="modal fade bd-example-modal-lg" id="emailElementsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" style="overflow-y: auto; max-height:calc(100vh - 143px);  margin-top: 50px; margin-bottom:50px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notesModalLabel">Email Template Data Elements</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid" id="divEmailElements">
+                    @foreach (MessageTemplateDataElement dataElement in Model.MessageConfigAdminViewModel.MessageTemplateDataElements)
+                    {
+                        <input class="btn btn-outline-secondary dataelement" type="button" data-valtxt="@dataElement.DataElementValTxt" value="@dataElement.DataElementName" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="form-section"><i class="fa fa-note-sticky"></i> Message Configuration</h4>
+
+<div class="row mb-4">
+    <div class="col-md-1">
+        <input class="btn btn-poppy edittemplate" type="button" value="Edit" disabled />
+        <input class="btn btn-poppy canceltemplate" style="display:none;" type="button" value="Cancel" />
+    </div>
+    <div class="col-md-8">
+        <div class="editingtemplate alert alert-danger" style="display:none;">You are editing this template.</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="SelectedUserTypeFilter">Name:</label>
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.MessageConfigAdminViewModel.MessageTemplateName,
+                        new { @id = "messageTemplateName", @class = "form-control border-cyan", @MaxLength = "300" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label for="SelectedUserSearchFilter">Active/Inactive Date:</label>
+        <div class="input-group">
+            @Html.EditorFor(model => model.MessageConfigAdminViewModel.ActiveDate,
+                    new { htmlAttributes = new { @id = "activeDate", @class = "form-control border-cyan datepicker-future", @Value = "", @inputmode = "none" } })
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <span class="fa fa-calendar-o"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label for="activeDateTime">Time</label>
+        <div class="input-group">
+            @Html.EditorFor(m => m.MessageConfigAdminViewModel.ActiveDateTime,
+                new { htmlAttributes = new { @id = "activeDateTime", @class = "form-control border-cyan pickatime", @Value = "", @style = "max-width: 120px;min-width: 120px;", @inputmode = "none" } })
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <span class="fa fa-clock-o"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="SelectedUserTypeFilter">Template Type:</label>
+            @Html.DropDownListFor(m => m.MessageConfigAdminViewModel.MessageTemplateTypeId, Model.MessageConfigAdminViewModel.MessageTemplateTypes,
+               new { @class = "form-select form-control border-cyan", @id = "messageTemplateType", @width = 500 })
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label for="SelectedUserSearchFilter">Template Name:</label>
+        @Html.DropDownListFor(m => m.MessageConfigAdminViewModel.MessageTemplateId, Model.MessageConfigAdminViewModel.MessageTemplates,
+                               new { @class = "form-select form-control border-cyan", @id = "messageTemplate" })
+    </div>
+    <div class="col-md-3">
+        <label for="activeDateTime">Status:</label>
+        @Html.DropDownListFor(m => Model.MessageConfigAdminViewModel.IsActive, Model.MessageConfigAdminViewModel.StatusList,
+            new { @class = "form-select form-control border-cyan", @id = "drpDnLstActive" })
+
+    </div>
+</div>
+
+<div class="form-actions">
+    <button class="btn btn-poppy" type="button" data-toggle="modal" data-target="#emailElementsModal">Add Data</button>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.TextAreaFor(model => model.MessageConfigAdminViewModel.MessageTemplateText,
+                new { @id = "FullDescription", @class = "form-control", @rows = "200", @width = "100%" })
+        @Html.ValidationMessageFor(model => model.MessageConfigAdminViewModel.MessageTemplateText, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model=>model.MessageConfigAdminViewModel.IsEdit,"")
+    </div>
+</div>

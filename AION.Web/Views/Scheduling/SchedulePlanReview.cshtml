@@ -1,0 +1,2049 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@using AION.Web.Models
+
+@model AION.Web.Models.SchedulePlanReviewViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Schedule Plan Review";
+
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+    bool hasManualPerm = Model.PermissionMapping.Schdul_Rview_Pln_Rview_Man;
+    bool canPoolForPoorPerformer = Model.CanPoolForPoorPerformer;
+    bool isFIFOProject = Model.Project.IsFifo;
+    string disablepoolbtns = string.Empty;
+    string disablepoolbtncls = string.Empty;
+    if (!hasManualPerm) { disablepoolbtns = " disabled=\"disabled\""; disablepoolbtncls = " disabled"; }
+    if (!canPoolForPoorPerformer) { disablepoolbtns = " disabled=\"disabled\""; disablepoolbtncls = " disabled"; }
+
+    //jcl LES-186 create a object with the values that were originally estimated so we know which to autoschedule
+    //  check the NA and put the correct name for the objects
+    string originalEstimate = string.Empty;
+    originalEstimate += Model.HrsNABackFlow == false ? "backflow,DrpDnScheduleBackFlow,backfstartdatesel,backfenddatesel," : "";
+    originalEstimate += Model.HrsNABuilding == false ? "building,DrpDnScheduleBuild,buildstartdatesel,buildenddatesel," : "";
+    originalEstimate += Model.HrsNADayCare == false ? "daycare,DrpDnScheduleDayCare,daycstartdatesel,daycenddatesel," : "";
+    originalEstimate += Model.HrsNAElectric == false ? "electric,DrpDnScheduleElectric,electstartdatesel,electenddatesel," : "";
+    originalEstimate += Model.HrsNAFacility == false ? "facilitylodginglodge,DrpDnPScheduleLodge,facilstartdatesel,facilenddatesel," : "";
+    originalEstimate += Model.HrsNAFire == false ? "fire,DrpDnScheduleFire,firestartdatesel,fireenddatesel," : "";
+    originalEstimate += Model.HrsNAFood == false ? "food,DrpDnScheduleFood,foodstartdatesel,foodenddatesel," : "";
+    originalEstimate += Model.HrsNAMech == false ? "mechanical,DrpDnScheduleMech,mechastartdatesel,mechaenddatesel," : "";
+    originalEstimate += Model.HrsNAPlumbing == false ? "plumbing,DrpDnSchedulePlumb,plumbstartdatesel,plumbenddatesel," : "";
+    originalEstimate += Model.HrsNAPool == false ? "pool,DrpDnSchedulePool,poolstartdatesel,poolenddatesel," : "";
+    originalEstimate += Model.HrsNAZone == false ? "zonezoning,DrpDnScheduleZone,zonestartdatesel,zoneenddatesel," : "";
+
+    //for hidden fields for javascript file
+    string strIsEstimationComplete = Model.IsEstimationComplete ? "true" : "false";
+    string strIsFIFOProject = isFIFOProject ? "true" : "false";
+    string strCanPoolForPoorPerformer = canPoolForPoorPerformer ? "true" : "false";
+    string strScheduled = Model.Project.AIONProjectStatus.ProjectStatusEnum == ProjectStatusEnum.Scheduled ? "true" : "false";
+    string strIsFutureCycle = Model.IsFutureCycle ? "true" : "false";
+    string strIsCycleComparison = Model.IsCycleComparison ? "true" : "false";
+    string strIsAdjustHours = Model.IsAdjustHours ? "true" : "false";
+    string strholidayslist = Model.Holidays;
+    string strBuildStartDate = Model.BuildStartDate.HasValue ? Model.BuildStartDate.ToString() : "";
+    string strBuildEndDate = Model.BuildEndDate.HasValue ? Model.BuildEndDate.ToString() : "";
+    string strElecStartDate = Model.ElectStartDate.HasValue ? Model.ElectStartDate.ToString() : "";
+    string strElectEndDate = Model.ElectEndDate.HasValue ? Model.ElectEndDate.ToString() : "";
+    string strMechaStartDate = Model.MechaStartDate.HasValue ? Model.MechaStartDate.ToString() : "";
+    string strMechaEndDate = Model.MechaEndDate.HasValue ? Model.MechaEndDate.ToString() : "";
+    string strPlumbStartDate = Model.PlumbStartDate.HasValue ? Model.PlumbStartDate.ToString() : "";
+    string strPlumbEndDate = Model.PlumbEndDate.HasValue ? Model.PlumbEndDate.ToString() : "";
+    string strBackfStartDate = Model.BackfStartDate.HasValue ? Model.BackfStartDate.ToString() : "";
+    string strBackfEndDate = Model.BackfEndDate.HasValue ? Model.BackfEndDate.ToString() : "";
+    string strFireStartDate = Model.FireStartDate.HasValue ? Model.FireStartDate.ToString() : "";
+    string strFireEndDate = Model.FireEndDate.HasValue ? Model.FireEndDate.ToString() : "";
+    string strZoneStartDate = Model.ZoneStartDate.HasValue ? Model.ZoneStartDate.ToString() : "";
+    string strZoneEndDate = Model.ZoneEndDate.HasValue ? Model.ZoneEndDate.ToString() : "";
+    string strPoolStartDate = Model.PoolStartDate.HasValue ? Model.PoolStartDate.ToString() : "";
+    string strPoolEndDate = Model.PoolEndDate.HasValue ? Model.PoolEndDate.ToString() : "";
+    string strFoodStartDate = Model.FoodStartDate.HasValue ? Model.FoodStartDate.ToString() : "";
+    string strFoodEndDate = Model.FoodEndDate.HasValue ? Model.FoodEndDate.ToString() : "";
+    string strFacilStartDate = Model.FacilStartDate.HasValue ? Model.FacilStartDate.ToString() : "";
+    string strFacilEndDate = Model.FacilEndDate.HasValue ? Model.FacilEndDate.ToString() : "";
+    string strDaycStartDate = Model.DaycStartDate.HasValue ? Model.DaycStartDate.ToString() : "";
+    string strDaycEndDate = Model.DaycEndDate.HasValue ? Model.DaycEndDate.ToString() : "";
+
+    //***** init pool txt *****************************************/
+
+    string strBuildPool = Model.BuildPool.HasValue && Model.BuildPool.Value == true ? "true" : "false";
+    string strElectPool = Model.ElectPool.HasValue && Model.ElectPool.Value == true ? "true" : "false";
+    string strMechaPool = Model.MechaPool.HasValue && Model.MechaPool.Value == true ? "true" : "false";
+    string strPlumbPool = Model.PlumbPool.HasValue && Model.PlumbPool.Value == true ? "true" : "false";
+    string strBackfPool = Model.BackfPool.HasValue && Model.BackfPool.Value == true ? "true" : "false";
+    string strZonePool = Model.ZonePool.HasValue && Model.ZonePool.Value == true ? "true" : "false";
+    string strFirePool = Model.FirePool.HasValue && Model.FirePool.Value == true ? "true" : "false";
+    string strFoodPool = Model.FoodPool.HasValue && Model.FoodPool.Value == true ? "true" : "false";
+    string strPoolPool = Model.PoolPool.HasValue && Model.PoolPool.Value == true ? "true" : "false";
+    string strFacilPool = Model.FacilPool.HasValue && Model.FacilPool.Value == true ? "true" : "false";
+    string strDaycPool = Model.DaycPool.HasValue && Model.DaycPool.Value == true ? "true" : "false";
+
+    //  only show the agencies they can estimate
+    string isagencyestimator = Model.PermissionMapping.IsAgencyEstimator ? "true" : "false";
+    string isceestimator = Model.PermissionMapping.IsTradeEstimator ? "true" : "false";
+    string isbempestimator = Model.PermissionMapping.IsBEMPAllowed ? "true" : "false";
+    string iszoneestimator = Model.PermissionMapping.IsZoneAllowed ? "true" : "false";
+    string isfireestimator = Model.PermissionMapping.IsFireAllowed ? "true" : "false";
+    string isbackflowestimator = Model.PermissionMapping.IsBackFlowAllowed ? "true" : "false";
+    string ishealthestimator = Model.PermissionMapping.IsHealthAllowed ? "true" : "false";
+
+    string sCanScheduleFutureCycle = Model.CanScheduleFutureCycle ? "true" : "false";
+
+    bool canScheduleFutureCycle = Model.CanScheduleFutureCycle;
+
+    string sIsReschedule = Model.IsReschedule ? "true" : "false";
+
+    string disableRescheduleBtn = string.Empty;
+    string disableRescheduleCls = string.Empty;
+    if (Model.IsReschedule)
+    {
+        disableRescheduleBtn = "disabled=\"disabled\"";
+        disableRescheduleCls = "disabled";
+    }
+
+    string isNAActivate = (Model.PermissionMapping.Activt_NA_Rview
+        && Model.Project.AIONProjectStatus.ProjectStatusEnum == ProjectStatusEnum.Scheduled) ? "true" : "false";
+
+}
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+
+@section style{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+}
+
+@section scripts{
+    <script src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+
+    <script src="/app-assets/js/scripts/custom/select-lists.js"></script>
+    <script src="/app-assets/js/scripts/custom/register-selected-item-changed-event.js"></script>
+
+    <script src="/app-assets/js/scripts/navs/navs.js"></script>
+
+    @*checkboxes*@
+    <script src="/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+    <script src="/app-assets/js/scripts/forms/checkbox-radio.js"></script>
+
+    @*datatables*@
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/shared/plan-review-validator.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/shared/standard-notes.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/shared/schedule-review.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/shared/register-scheduling-events.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/schedule-plan-review.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/pr-auto-schedule.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/activate-na-review.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/auto-schedule-audit.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/custom/set-tabs-permissions.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/custom/reviewer-capacity-search-modal.js"></script>
+
+}
+
+@using (Html.BeginForm("SavePlanReview", "Scheduling", FormMethod.Post, new { @id = "SchedulingForm", @class = "form form-horizontal" }))
+{
+
+    @Html.HiddenFor(m => m.IsAllNAChecked, new { @id = "hfIsAllNAChecked" })
+    @Html.HiddenFor(m => m.Project.AccelaProjectRefId, Model.Project.AccelaProjectRefId)
+    @Html.HiddenFor(m => m.Project.AccelaProjectRefId, new { @id = "AccelaProjectRefId" })
+    @Html.HiddenFor(m => m.Project.AccelaPropertyType, @Model.Project.AccelaPropertyType)
+    @Html.HiddenFor(m => m.Project.ID, new { @id = "ProjectId" })
+    @Html.HiddenFor(m => m.Project.AIONProjectStatus)
+    @Html.HiddenFor(m => m.Project.AIONProjectStatus.ID, @Model.Project.AIONProjectStatus.ID)
+    @Html.HiddenFor(m => m.LoggedInUser.ID, @Model.LoggedInUser.ID)
+    @Html.HiddenFor(m => m.LoggedInUserEmail, new { @id = "LoggedInUserEmail" })
+    @Html.HiddenFor(m => m.PreliminaryMeetingApptID, Model.PreliminaryMeetingApptID)
+    @Html.HiddenFor(m => m.UpdateDate, Model.UpdateDate)
+    @Html.HiddenFor(m => m.IsReschedule, Model.IsReschedule)
+    @Html.HiddenFor(m => m.IsRescheduleOverwrite, Model.IsRescheduleOverwrite)
+    @Html.HiddenFor(m => m.GateDate)
+    @Html.HiddenFor(m => m.IsFutureCycle)
+    @Html.HiddenFor(m => m.IsGateAccepted)
+
+
+    @*Plan Review Schedule data that needs to be returned with the view model*@
+    @Html.HiddenFor(m => m.BuildPlanReviewScheduleId, Model.BuildPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.ElectPlanReviewScheduleId, Model.ElectPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.MechaPlanReviewScheduleId, Model.MechaPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.PlumbPlanReviewScheduleId, Model.PlumbPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.FirePlanReviewScheduleId, Model.FirePlanReviewScheduleId)
+    @Html.HiddenFor(m => m.ZonePlanReviewScheduleId, Model.ZonePlanReviewScheduleId)
+    @Html.HiddenFor(m => m.BackfPlanReviewScheduleId, Model.BackfPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.PoolPlanReviewScheduleId, Model.PoolPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.FoodPlanReviewScheduleId, Model.FoodPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.FacilPlanReviewScheduleId, Model.FacilPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.DaycPlanReviewScheduleId, Model.DaycPlanReviewScheduleId)
+
+    @Html.HiddenFor(m => m.BuildPRSUpdateDate, Model.BuildPRSUpdateDate)
+    @Html.HiddenFor(m => m.ElectPRSUpdateDate, Model.ElectPRSUpdateDate)
+    @Html.HiddenFor(m => m.MechaPRSUpdateDate, Model.MechaPRSUpdateDate)
+    @Html.HiddenFor(m => m.PlumbPRSUpdateDate, Model.PlumbPRSUpdateDate)
+    @Html.HiddenFor(m => m.FirePRSUpdateDate, Model.FirePRSUpdateDate)
+    @Html.HiddenFor(m => m.ZonePRSUpdateDate, Model.ZonePRSUpdateDate)
+    @Html.HiddenFor(m => m.BackfPRSUpdateDate, Model.BackfPRSUpdateDate)
+    @Html.HiddenFor(m => m.PoolPRSUpdateDate, Model.PoolPRSUpdateDate)
+    @Html.HiddenFor(m => m.FoodPRSUpdateDate, Model.FoodPRSUpdateDate)
+    @Html.HiddenFor(m => m.FacilPRSUpdateDate, Model.FacilPRSUpdateDate)
+    @Html.HiddenFor(m => m.DaycPRSUpdateDate, Model.DaycPRSUpdateDate)
+
+    @Html.HiddenFor(m => m.HoursBuildingFinal, new { @id = "hoursbuildingfinal" })
+    @Html.HiddenFor(m => m.HoursElecticFinal, new { @id = "hourselectricfinal" })
+    @Html.HiddenFor(m => m.HoursMechFinal, new { @id = "hoursmechfinal" })
+    @Html.HiddenFor(m => m.HoursPlumbFinal, new { @id = "hoursplumbfinal" })
+    @Html.HiddenFor(m => m.HoursFireFinal, new { @id = "hoursfirefinal" })
+    @Html.HiddenFor(m => m.HoursZoningFinal, new { @id = "hourszoningfinal" })
+    @Html.HiddenFor(m => m.HoursBackFlowFinal, new { @id = "hoursbackflowfinal" })
+    @Html.HiddenFor(m => m.HoursPoolFinal, new { @id = "hourspoolfinal" })
+    @Html.HiddenFor(m => m.HoursFoodFinal, new { @id = "hoursfoodfinal" })
+    @Html.HiddenFor(m => m.HoursLodgeFinal, new { @id = "hourslodgefinal" })
+    @Html.HiddenFor(m => m.HoursDayCareFinal, new { @id = "hoursdaycarefinal" })
+    @Html.HiddenFor(m => m.PropertyType, new { @id = "propertytype" })
+
+    @Html.HiddenFor(m => m.Project.RecIdTxt, new { @id = "recidtxt" })
+
+    @Html.HiddenFor(m => m.ApptResponseStatusEnum, new { @id = "ApptResponseStatusEnum" })
+    @Html.HiddenFor(m => m.ProjectCycleId)
+    @Html.HiddenFor(m => m.PlanReviewScheduleId)
+    @Html.HiddenFor(m => m.PreviousAssignedFacilitator, new { @id = "PreviousAssignedFacilitatorId" })
+
+    @Html.HiddenFor(m => m.FireAgency)
+    @Html.HiddenFor(m => m.ZoneAgency)
+
+    <input type="hidden" id="IsSubmit" name="IsSubmit" value="true" />
+    <input type="hidden" id="SaveType" name="SaveType" value="1" />
+    <input type="hidden" id="PendingEmailType" name="PendingEmailType" value="" />
+    <input type="hidden" id="IsActivateNAReview" name="IsActivateNAReview" value="false" />
+
+    @*Hidden for js file schedule-plan-review.js*@
+    @*//  only show the agencies they can estimate*@
+    <input type="hidden" id="hIsagencyestimator" value="@isagencyestimator" />
+    <input type="hidden" id="hIsceestimator" value="=@isceestimator" />
+    <input type="hidden" id="hIsbempestimator" value="=@isbempestimator" />
+    <input type="hidden" id="hIszoneestimator" value="=@iszoneestimator" />
+    <input type="hidden" id="hIsfireestimator" value="=@isfireestimator" />
+    <input type="hidden" id="hIsbackflowestimator" value="=@isbackflowestimator" />
+    <input type="hidden" id="hIshealthestimator" value="=@ishealthestimator" />
+    <input type="hidden" id="hIsestimationcomplete" value="@strIsEstimationComplete" />
+
+    <input type="hidden" id="hIsFIFOProject" value="@strIsFIFOProject" />
+    <input type="hidden" id="hCanPoolForPoorPerformer" value="@strCanPoolForPoorPerformer" />
+    <input type="hidden" id="hScheduled" value="@strScheduled" />
+    <input type="hidden" id="hIsFutureCycle" value="@strIsFutureCycle" />
+    <input type="hidden" id="hIsCycleComparison" value="@strIsCycleComparison" />
+    <input type="hidden" id="hIsAdjustHours" value="@strIsAdjustHours" />
+    <input type="hidden" id="hHolidayslist" value="@strholidayslist" />
+    <input type="hidden" id="hBuildStartDate" value="@strBuildStartDate" />
+    <input type="hidden" id="hBuildEndDate" value="@strBuildEndDate" />
+    <input type="hidden" id="hElecStartDate" value="@strElecStartDate" />
+    <input type="hidden" id="hElectEndDate" value="@strElectEndDate" />
+    <input type="hidden" id="hMechaStartDate" value="@strMechaStartDate" />
+    <input type="hidden" id="hMechaEndDate" value="@strMechaEndDate" />
+    <input type="hidden" id="hPlumbStartDate" value="@strPlumbStartDate" />
+    <input type="hidden" id="hPlumbEndDate" value="@strPlumbEndDate" />
+    <input type="hidden" id="hBackfStartDate" value="@strBackfStartDate" />
+    <input type="hidden" id="hBackfEndDate" value="@strBackfEndDate" />
+    <input type="hidden" id="hFireStartDate" value="@strFireStartDate" />
+    <input type="hidden" id="hFireEndDate" value="@strFireEndDate" />
+    <input type="hidden" id="hZoneStartDate" value="@strZoneStartDate" />
+    <input type="hidden" id="hZoneEndDate" value="@strZoneEndDate" />
+    <input type="hidden" id="hPoolStartDate" value="@strPoolStartDate" />
+    <input type="hidden" id="hPoolEndDate" value="@strPoolEndDate" />
+    <input type="hidden" id="hFoodStartDate" value="@strFoodStartDate" />
+    <input type="hidden" id="hFoodEndDate" value="@strFoodEndDate" />
+    <input type="hidden" id="hFacilStartDate" value="@strFacilStartDate" />
+    <input type="hidden" id="hFacilEndDate" value="@strFacilEndDate" />
+    <input type="hidden" id="hDaycStartDate" value="@strDaycStartDate" />
+    <input type="hidden" id="hDaycEndDate" value="@strDaycEndDate" />
+    <input type="hidden" id="hOriginalEstimate" value="@originalEstimate" />
+
+    @Html.HiddenFor(m => m.IsFutureCycle, new { @id = "isfuturecycle" })
+    @Html.HiddenFor(m => m.IsCycleComparison, new { @id = "isCycleComparison" })
+    @Html.HiddenFor(m => m.IsAdjustHours, new { @id = "isadjusthours" })
+
+    @Html.HiddenFor(model => model.PlansReadyOnDate, new { @id = "plansreadyondate" })
+    @Html.HiddenFor(m => m.Project.FifoDueDt, new { @id = "FifoDueDt" })
+    @Html.HiddenFor(m => m.Project.CreatedDate, new { @id = "CreatedDt" })
+    @Html.HiddenFor(m => m.Cycle, new { @id = "CycleNbr" })
+    @Html.HiddenFor(m => m.IsNewCycle)
+
+    <input type="hidden" id="hCanScheduleFutureCycle" value="@sCanScheduleFutureCycle" />
+    <input type="hidden" id="hIsNAActivate" value="@isNAActivate" />
+
+    <div class="form-body">
+
+        @Html.Partial("_AutoScheduleAudit", Model)
+
+        <div id="sectionPlanReview">
+            <div class="row" id="sectionProjectSummary">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <div class="error alert alert-danger" id="statusmessage">@Model.StatusMessage</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <h4 class="card-title">Project Summary</h4>
+                            </div>
+                            <div class="card-body">
+                                @Html.Partial("_ProjectSummary", Model)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sadcontainer" class="row" style="display:none;">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Schedule After Date:</label>
+                                            <div class="input-group">
+                                                @{
+                                                    if (hasManualPerm)
+                                                    {
+                                                        @Html.EditorFor(model => model.ScheduleAfterDate, new { htmlAttributes = new { @id = "scheduleafterdate", @class = "form-control datepicker-restricted border-cyan" } })
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <span class="fa fa-calendar-o"></span>
+                                                            </span>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.HiddenFor(m => m.ScheduleAfterDate, new { @id = "scheduleafterdate" })
+                                                        string scheduleafterdate = string.Empty;
+                                                        if (Model.ScheduleAfterDate.HasValue)
+                                                        {
+                                                            scheduleafterdate = Model.ScheduleAfterDate.Value.ToShortDateString();
+                                                        }
+                                                        @Html.TextBox("disabledafterdate", scheduleafterdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted border-cyan" })
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <span class="fa fa-calendar-o"></span>
+                                                            </span>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                @Html.Partial("_NavTabsTopline", Model)
+                                <div class="tab-content ml-3 mr-3" id="nav-tabContent">
+                                    <div class="tab-pane col-xl-12 p-3 active" id="nav-bemp" role="tabpanel" aria-labelledby="nav-bemp-tab">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Building:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerBuilding, Model.AssignPlanReviewersListBuild, new { @id = "DrpDnScheduleBuild", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 buildstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.BuildStartDate, new { htmlAttributes = new { @id = "buildstartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 buildstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.BuildEndDate, new { htmlAttributes = new { @id = "buildenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string buildstartdate = string.Empty;
+                                                    string buildenddate = string.Empty;
+                                                    if (Model.BuildStartDate.HasValue) { buildstartdate = Model.BuildStartDate.Value.ToShortDateString(); }
+                                                    if (Model.BuildEndDate.HasValue) { buildenddate = Model.BuildEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.BuildStartDate, new { @id = "buildstartdatesel" })
+                                                    @Html.HiddenFor(m => m.BuildEndDate, new { @id = "buildenddatesel" })
+
+                                                    <div class="col-md-3 buildstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledbuildstartdate", buildstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 buildstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledbuildenddate", buildenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.BuildPool, new { @id = "buildpool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "buildpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Electrical:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerElectrical, Model.AssignPlanReviewersListElectric, new { @id = "DrpDnScheduleElectric", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 electstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.ElectStartDate, new { htmlAttributes = new { @id = "electstartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 electstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.ElectEndDate, new { htmlAttributes = new { @id = "electenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string elecstartdate = string.Empty;
+                                                    string elecenddate = string.Empty;
+                                                    if (Model.ElectStartDate.HasValue) { elecstartdate = Model.ElectStartDate.Value.ToShortDateString(); }
+                                                    if (Model.ElectEndDate.HasValue) { elecenddate = Model.ElectEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.ElectStartDate, new { @id = "electstartdatesel" })
+                                                    @Html.HiddenFor(m => m.ElectEndDate, new { @id = "electenddatesel" })
+
+                                                    <div class="col-md-3 electstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledelecstartdate", elecstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 electstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledelecenddate", elecenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.ElectPool, new { @id = "electpool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "electpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Mechanical:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerMechanical, Model.AssignPlanReviewersListMech, new { @id = "DrpDnScheduleMech", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 mechastartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.MechaStartDate, new { htmlAttributes = new { @id = "mechastartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mechastartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.MechaEndDate, new { htmlAttributes = new { @id = "mechaenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string mechstartdate = string.Empty;
+                                                    string mechenddate = string.Empty;
+                                                    if (Model.MechaStartDate.HasValue) { mechstartdate = Model.MechaStartDate.Value.ToShortDateString(); }
+                                                    if (Model.MechaEndDate.HasValue) { mechenddate = Model.MechaEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.MechaStartDate, new { @id = "mechastartdatesel" })
+                                                    @Html.HiddenFor(m => m.MechaEndDate, new { @id = "mechaenddatesel" })
+
+                                                    <div class="col-md-3 mechastartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledmechastartdate", mechstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mechastartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledmechaenddate", mechenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.MechaPool, new { @id = "mechapool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "mechapooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Plumbing:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerPlumbing, Model.AssignPlanReviewersListPlumb, new { @id = "DrpDnSchedulePlumb", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 plumbstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.PlumbStartDate, new { htmlAttributes = new { @id = "plumbstartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 plumbstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.PlumbEndDate, new { htmlAttributes = new { @id = "plumbenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string plumbstartdate = string.Empty;
+                                                    string plumbenddate = string.Empty;
+                                                    if (Model.PlumbStartDate.HasValue) { plumbstartdate = Model.PlumbStartDate.Value.ToShortDateString(); }
+                                                    if (Model.PlumbEndDate.HasValue) { plumbenddate = Model.PlumbEndDate.Value.ToShortDateString(); }
+
+
+                                                    @Html.HiddenFor(m => m.PlumbStartDate, new { @id = "plumbstartdatesel" })
+                                                    @Html.HiddenFor(m => m.PlumbEndDate, new { @id = "plumbenddatesel" })
+
+                                                    <div class="col-md-3 plumbstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledplumbstartdate", plumbstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 plumbstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledplumbenddate", plumbenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.PlumbPool, new { @id = "plumbpool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "plumbpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @if (Model.IsCycleComparison)
+                                                {
+                                                    <h5>
+                                                        Verify Scheduled vs Plan Reviewer entered hours
+                                                    </h5>
+                                                }
+                                                <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            @if (Model.IsCycleComparison)
+                                                            {
+                                                                <th class="proposedgroup">Proposed</th>
+                                                            }
+                                                            else
+                                                            {
+                                                                <th>Estimated</th>
+                                                            }
+                                                            @if (Model.Cycle > 1)
+                                                            {
+                                                                <th class="rereviewgroup">ReReview</th>
+                                                            }
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Building Hours:</td>
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ProposedBuilding, new { @id = "hoursproposedbuilding" })
+                                                                @if (Model.IsCycleComparison)
+                                                                {
+                                                                    if (Model.ProposedBuilding == null || Model.ProposedBuilding == 0)
+                                                                    {
+                                                                        @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => m.ProposedBuilding, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedBuilding", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.HiddenFor(m => m.HrsNABuilding, new { @class = "hrsna" })
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control na-txt" })
+                                                                    @Html.TextBoxFor(m => m.HoursBuilding, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursBuilding", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                                }
+                                                            </td>
+                                                            @if (Model.Cycle > 1)
+                                                            {
+                                                                <td>
+                                                                    @Html.HiddenFor(m => m.ReReviewBuilding, new { @id = "hoursrereviewbuilding" })
+
+                                                                    @if (Model.ReReviewBuilding == null)
+                                                                    {
+                                                                        @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => m.ReReviewBuilding, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewBuilding", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                    }
+                                                                </td>
+                                                            }
+                                                            <td>
+                                                                @{
+                                                                    string onclickstring = hasManualPerm ? "togglePool('buildpooltxt', 'buildpool', $('#buildpool').val(),'buildstartendsel', 'btnbuildpool');" : "";
+                                                                }
+                                                                <input type="button" value="Pool" id="btnbuildpool" name="btnbuildpool" onclick="@onclickstring" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Electrical Hours:</td>
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ProposedElectric, new { @id = "hoursproposedelectric" })
+                                                                @if (Model.IsCycleComparison)
+                                                                {
+                                                                    if (Model.ProposedElectric == null || Model.ProposedElectric == 0)
+                                                                    {
+                                                                        @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => m.ProposedElectric, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedElectric", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.HiddenFor(m => m.HrsNAElectric, new { @class = "hrsna" })
+                                                                    @Html.TextBox("naelectrictxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan na-txt" })
+                                                                    @Html.TextBoxFor(m => m.HoursElectic, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursElectic", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                                }
+                                                            </td>
+                                                            @if (Model.Cycle > 1)
+                                                            {
+                                                                <td>
+                                                                    @Html.HiddenFor(m => m.ReReviewElectric, new { @id = "hoursrereviewelectric" })
+
+                                                                    @if (Model.ReReviewElectric == null)
+                                                                    {
+                                                                        @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => m.ReReviewElectric, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewElectric", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                    }
+                                                                </td>
+                                                            }
+                                                            <td>
+                                                                @{
+                                                                    string onelecclick = hasManualPerm ? "togglePool('electpooltxt', 'electpool', $('#electpool').val(),'electstartendsel','btnelectpool');" : "";
+                                                                }
+                                                                <input type="button" value="Pool" id="btnelectpool" name="btnelectpool" onclick="@onelecclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Mechanical Hours:</td>
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ProposedMech, new { @id = "hoursproposedmech" })
+                                                                @if (Model.IsCycleComparison)
+                                                                {
+                                                                    if (Model.ProposedMech == null || Model.ProposedMech == 0)
+                                                                    {
+                                                                        @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => m.ProposedMech, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedMech", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.HiddenFor(m => m.HrsNAMech, new { @class = "hrsna" })
+                                                                    @Html.TextBox("namechtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan  a-txt" })
+                                                                    @Html.TextBoxFor(m => m.HoursMech, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursMech", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                                }
+                                                            </td>
+                                                            @if (Model.Cycle > 1)
+                                                            {
+                                                                <td>
+                                                                    @Html.HiddenFor(m => m.ReReviewMech, new { @id = "hoursrereviewmech" })
+
+                                                                    @if (Model.ReReviewMech == null)
+                                                                    {
+                                                                        @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => m.ReReviewMech, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewMech", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                    }
+                                                                </td>
+                                                            }
+                                                            <td>
+                                                                @{
+                                                                    string onmechclick = hasManualPerm ? "togglePool('mechapooltxt', 'mechapool', $('#mechapool').val(),'mechastartendsel','btnmechapool');" : "";
+                                                                }
+                                                                <input type="button" value="Pool" id="btnmechapool" name="btnmechapool" onclick="@onmechclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Plumbing Hours: </td>
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ProposedPlumb, new { @id = "hoursproposedplumb" })
+                                                                @if (Model.IsCycleComparison)
+                                                                {
+                                                                    if (Model.ProposedPlumb == null || Model.ProposedPlumb == 0)
+                                                                    {
+                                                                        @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => m.ProposedPlumb, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedPlumb", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.HiddenFor(m => m.HrsNAPlumbing, new { @class = "hrsna" })
+                                                                    @Html.TextBox("naplumbtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan  na-txt" })
+                                                                    @Html.TextBoxFor(m => m.HoursPlumb, new { @class = "form-control border-cyan  hrstextbox", @type = "number", @id = "txtHoursPlumb", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                                }
+                                                            </td>
+                                                            @if (Model.Cycle > 1)
+                                                            {
+                                                                <td>
+                                                                    @Html.HiddenFor(m => m.ReReviewPlumb, new { @id = "hoursrereviewplumb" })
+
+                                                                    @if (Model.ReReviewPlumb == null)
+                                                                    {
+                                                                        @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => m.ReReviewPlumb, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewPlumb", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                    }
+                                                                </td>
+                                                            }
+                                                            <td>
+                                                                @{
+                                                                    string onplumclick = hasManualPerm ? "togglePool('plumbpooltxt', 'plumbpool', $('#plumbpool').val(),'plumbstartendsel','btnplumbpool');" : "";
+                                                                }
+                                                                <input type="button" value="Pool" id="btnplumbpool" name="btnplumbpool" onclick="@onplumclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="bemp-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_BEMPReviewers", new SchedulePreliminaryMeetingViewModel
+                                         {
+                                         Project = Model.Project,
+                                         FacilitatorList = Model.FacilitatorList,
+                                         AllReviewers = Model.AllReviewers,
+                                         AssignPlanReviewersListBuild = Model.AssignPlanReviewersListBuild,
+                                         AssignPlanReviewersListElectric = Model.AssignPlanReviewersListElectric,
+                                         AssignPlanReviewersListMech = Model.AssignPlanReviewersListMech,
+                                         AssignPlanReviewersListPlumb = Model.AssignPlanReviewersListPlumb,
+                                         ExcludedPlanReviewersBuild = Model.ExcludedPlanReviewersBuild,
+                                         ExcludedPlanReviewersElectric = Model.ExcludedPlanReviewersElectric,
+                                         ExcludedPlanReviewersMech = Model.ExcludedPlanReviewersMech,
+                                         ExcludedPlanReviewersPlumb = Model.ExcludedPlanReviewersPlumb,
+                                         LoggedInUser = Model.LoggedInUser,
+                                         PermissionMapping = Model.PermissionMapping
+                                         });
+                                        }
+                                        </section>
+
+                                    </div>
+
+                                    <div class="tab-pane col-xl-12 p-3" id="nav-zoning" role="tabpanel" aria-labelledby="nav-zoning-tab">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Zone:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerZone, Model.AssignPlanReviewersListZone, new { @id = "DrpDnScheduleZone", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 zonestartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.ZoneStartDate, new { htmlAttributes = new { @id = "zonestartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 zonestartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.ZoneEndDate, new { htmlAttributes = new { @id = "zoneenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string zonestartdate = string.Empty;
+                                                    string zoneenddate = string.Empty;
+                                                    if (Model.ZoneStartDate.HasValue) { zonestartdate = Model.ZoneStartDate.Value.ToShortDateString(); }
+                                                    if (Model.ZoneEndDate.HasValue) { zoneenddate = Model.ZoneEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.ZoneStartDate, new { @id = "zonestartdatesel" })
+                                                    @Html.HiddenFor(m => m.ZoneEndDate, new { @id = "zoneenddatesel" })
+
+                                                    <div class="col-md-3 zonestartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledzonestartdate", zonestartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 zonestartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledzoneenddate", zoneenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.ZonePool, new { @id = "zonepool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "zonepooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @if (Model.IsCycleComparison)
+                                                {
+                                                    <h5>
+                                                        Verify Scheduled vs Plan Reviewer entered hours
+                                                    </h5>
+                                                }
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        @if (Model.IsCycleComparison)
+                                                        {
+                                                            <th class="proposedgroup">Proposed</th>
+                                                        }
+                                                        else
+                                                        {
+                                                            <th>Estimated</th>
+                                                        }
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <th class="rereviewgroup">ReReview</th>
+                                                        }
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Zoning Hours:</td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => m.ProposedZoning, new { @id = "hoursproposedzoning" })
+                                                            @if (Model.IsCycleComparison)
+                                                            {
+                                                                if (Model.ProposedZoning == null || Model.ProposedZoning == 0)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ProposedZoning, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedZoning", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.HiddenFor(m => m.HrsNAZone, new { @class = "hrsna" })
+                                                                @Html.TextBox("nazoningtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan  na-txt" })
+                                                                @Html.TextBoxFor(m => m.HoursZoning, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursZoning", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                            }
+                                                        </td>
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ReReviewZoning, new { @id = "hoursrereviewzoning" })
+
+                                                                @if (Model.ReReviewZoning == null)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ReReviewZoning, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewZoning", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            </td>
+                                                        }
+                                                        <td>
+                                                            @{
+                                                                string onzoneclick = hasManualPerm ? "togglePool('zonepooltxt', 'zonepool', $('#zonepool').val(),'zonestartendsel','btnzonepool');" : "";
+                                                            }
+                                                            <input type="button" value="Pool" id="btnzonepool" name="btnzonepool" onclick="@onzoneclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="zone-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_ZoningReviewers", new SchedulePreliminaryMeetingViewModel
+                                      {
+                                      Project = Model.Project,
+                                      AllReviewers = Model.AllReviewers,
+                                      AssignPlanReviewersListZone = Model.AssignPlanReviewersListZone,
+                                      ExcludedPlanReviewersZone = Model.ExcludedPlanReviewersZone,
+                                      LoggedInUser = Model.LoggedInUser,
+                                      PermissionMapping = Model.PermissionMapping
+
+                                      });
+                                        }
+                                        </section>
+
+                                    </div>
+                                    <div class="tab-pane col-xl-12 p-3" id="nav-fire" role="tabpanel" aria-labelledby="nav-fire-tab">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Fire:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerFire, Model.AssignPlanReviewersListFire, new { @id = "DrpDnScheduleFire", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 firestartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.FireStartDate, new { htmlAttributes = new { @id = "firestartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 firestartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.FireEndDate, new { htmlAttributes = new { @id = "fireenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string firestartdate = string.Empty;
+                                                    string fireenddate = string.Empty;
+                                                    if (Model.FireStartDate.HasValue) { firestartdate = Model.FireStartDate.Value.ToShortDateString(); }
+                                                    if (Model.FireEndDate.HasValue) { fireenddate = Model.FireEndDate.Value.ToShortDateString(); }
+                                                    @Html.HiddenFor(m => m.FireStartDate, new { @id = "firestartdatesel" })
+                                                    @Html.HiddenFor(m => m.FireEndDate, new { @id = "fireenddatesel" })
+
+                                                    <div class="col-md-3 firestartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledfirestartdate", firestartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 firestartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledfireenddate", fireenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                            @Html.HiddenFor(m => m.FirePool, new { @id = "firepool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "firepooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @if (Model.IsCycleComparison)
+                                                {
+                                                    <h5>
+                                                        Verify Scheduled vs Plan Reviewer entered hours
+                                                    </h5>
+                                                }
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        @if (Model.IsCycleComparison)
+                                                        {
+                                                            <th class="proposedgroup">Proposed</th>
+                                                        }
+                                                        else
+                                                        {
+                                                            <th>Estimated</th>
+                                                        }
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <th class="rereviewgroup">ReReview</th>
+                                                        }
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Fire Hours:</td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => m.ProposedFire, new { @id = "hoursproposedfire" })
+                                                            @if (Model.IsCycleComparison)
+                                                            {
+                                                                if (Model.ProposedFire == null || Model.ProposedFire == 0)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ProposedFire, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedFire", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.HiddenFor(m => m.HrsNAFire, new { @class = "hrsna" })
+                                                                @Html.TextBox("nafiretxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan  na-txt" })
+                                                                @Html.TextBoxFor(m => m.HoursFire, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursFire", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                            }
+                                                        </td>
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ReReviewFire, new { @id = "hoursrereviewfire" })
+
+                                                                @if (Model.ReReviewFire == null)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ReReviewFire, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewFire", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            </td>
+                                                        }
+                                                        <td>
+                                                            @{
+                                                                string onfireclick = hasManualPerm ? "togglePool('firepooltxt', 'firepool', $('#firepool').val(),'firestartendsel','btnfirepool');" : "";
+                                                            }
+                                                            <input type="button" value="Pool" id="btnfirepool" name="btnfirepool" onclick="@onfireclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="fire-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_FireReviewers", new SchedulePreliminaryMeetingViewModel
+                                           {
+                                           Project = Model.Project,
+                                           AllReviewers = Model.AllReviewers,
+                                           AssignPlanReviewersListFire = Model.AssignPlanReviewersListFire,
+                                           ExcludedPlanReviewersFire = Model.ExcludedPlanReviewersFire,
+                                           LoggedInUser = Model.LoggedInUser,
+                                           PermissionMapping = Model.PermissionMapping
+                                           });
+                                        }
+                                        </section>
+
+                                    </div>
+                                    <div class="tab-pane col-xl-12 p-3" id="nav-backflow" role="tabpanel" aria-labelledby="nav-backflow-tab">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*BackFlow:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerBackFlow, Model.AssignPlanReviewersListBackFlow, new { @id = "DrpDnScheduleBackFlow", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 backfstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.BackfStartDate, new { htmlAttributes = new { @id = "backfstartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 backfstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.BackfEndDate, new { htmlAttributes = new { @id = "backfenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string backstartdate = string.Empty;
+                                                    string backenddate = string.Empty;
+                                                    if (Model.BackfStartDate.HasValue) { backstartdate = Model.BackfStartDate.Value.ToShortDateString(); }
+                                                    if (Model.BackfEndDate.HasValue) { backenddate = Model.BackfEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.BackfStartDate, new { @id = "backfstartdatesel" })
+                                                    @Html.HiddenFor(m => m.BackfEndDate, new { @id = "backfenddatesel" })
+
+                                                    <div class="col-md-3 backfstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledbackstartdate", backstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 backfstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledbackenddate", backenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                            @Html.HiddenFor(m => m.BackfPool, new { @id = "backfpool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "backfpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @if (Model.IsCycleComparison)
+                                                {
+                                                    <h5>
+                                                        Verify Scheduled vs Plan Reviewer entered hours
+                                                    </h5>
+                                                }
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        @if (Model.IsCycleComparison)
+                                                        {
+                                                            <th class="proposedgroup">Proposed</th>
+                                                        }
+                                                        else
+                                                        {
+                                                            <th>Estimated</th>
+                                                        }
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <th class="rereviewgroup">ReReview</th>
+                                                        }
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>BackFlow Hours:</td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => m.ProposedBackFlow, new { @id = "hoursproposedbackflow" })
+                                                            @if (Model.IsCycleComparison)
+                                                            {
+                                                                if (Model.ProposedBackFlow == null || Model.ProposedBackFlow == 0)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ProposedBackFlow, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedBackFlow", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.HiddenFor(m => m.HrsNABackFlow, new { @class = "hrsna" })
+                                                                @Html.TextBox("nabackflowtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan na-txt" })
+                                                                @Html.TextBoxFor(m => m.HoursBackFlow, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursBackFlow", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                            }
+                                                        </td>
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ReReviewBackFlow, new { @id = "hoursrereviewbackflow" })
+
+                                                                @if (Model.ReReviewBackFlow == null)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ReReviewBackFlow, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewBackFlow", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            </td>
+                                                        }
+                                                        <td>
+                                                            @{
+                                                                string onbackclick = hasManualPerm ? "togglePool('backfpooltxt', 'backfpool', $('#backfpool').val(),'backfstartendsel','btnbackfpool');" : "";
+                                                            }
+                                                            <input type="button" value="Pool" id="btnbackfpool" name="btnbackfpool" onclick="@onbackclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="backflow-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_BackFlowReviewers", new SchedulePreliminaryMeetingViewModel
+                                      {
+                                      Project = Model.Project,
+                                      AllReviewers = Model.AllReviewers,
+                                      AssignPlanReviewersListBackFlow = Model.AssignPlanReviewersListBackFlow,
+                                      ExcludedPlanReviewersBackFlow = Model.ExcludedPlanReviewersBackFlow,
+                                      LoggedInUser = Model.LoggedInUser,
+                                      PermissionMapping = Model.PermissionMapping
+                                      });
+                                        }
+                                        </section>
+
+                                    </div>
+                                    <div class="tab-pane col-xl-12 p-3" id="nav-health" role="tabpanel" aria-labelledby="nav-health-tab">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Food Service:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerFood, Model.AssignPlanReviewersListFood, new { @id = "DrpDnScheduleFood", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 foodstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.FoodStartDate, new { htmlAttributes = new { @id = "foodstartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 foodstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.FoodEndDate, new { htmlAttributes = new { @id = "foodenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string foodstartdate = string.Empty;
+                                                    string foodenddate = string.Empty;
+                                                    if (Model.FoodStartDate.HasValue) { foodstartdate = Model.FoodStartDate.Value.ToShortDateString(); }
+                                                    if (Model.FoodEndDate.HasValue) { foodenddate = Model.FoodEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.FoodStartDate, new { @id = "FoodEndDate" })
+                                                    @Html.HiddenFor(m => m.FoodEndDate, new { @id = "foodenddatesel" })
+
+                                                    <div class="col-md-3 foodstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledfoodstartdate", foodstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 foodstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledfoodenddate", foodenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.FoodPool, new { @id = "foodpool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "foodpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Public Pool:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerPool, Model.AssignPlanReviewersListPool, new { @id = "DrpDnSchedulePool", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 poolstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.PoolStartDate, new { htmlAttributes = new { @id = "poolstartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 poolstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.PoolEndDate, new { htmlAttributes = new { @id = "poolenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string poolstartdate = string.Empty;
+                                                    string poolenddate = string.Empty;
+                                                    if (Model.PoolStartDate.HasValue) { poolstartdate = Model.PoolStartDate.Value.ToShortDateString(); }
+                                                    if (Model.PoolEndDate.HasValue) { poolenddate = Model.PoolEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.PoolStartDate, new { @id = "poolstartdatesel" })
+                                                    @Html.HiddenFor(m => m.PoolEndDate, new { @id = "poolenddatesel" })
+
+                                                    <div class="col-md-3 buildstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledpoolstartdate", poolstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 buildstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledpoolenddate", poolenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.PoolPool, new { @id = "poolpool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "poolpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Facility/Lodging:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerFacilities, Model.AssignPlanReviewersListLodge, new { @id = "DrpDnPScheduleLodge", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 facilstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.FacilStartDate, new { htmlAttributes = new { @id = "facilstartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 facilstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.FacilEndDate, new { htmlAttributes = new { @id = "facilenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string lodgstartdate = string.Empty;
+                                                    string lodgenddate = string.Empty;
+                                                    if (Model.FacilStartDate.HasValue) { lodgstartdate = Model.FacilStartDate.Value.ToShortDateString(); }
+                                                    if (Model.FacilEndDate.HasValue) { lodgenddate = Model.FacilEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.FacilStartDate, new { @id = "facilstartdatesel" })
+                                                    @Html.HiddenFor(m => m.FacilEndDate, new { @id = "facilenddatesel" })
+
+                                                    <div class="col-md-3 facilstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledfacstartdate", lodgstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 facilstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disabledfacenddate", lodgenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted end-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.FacilPool, new { @id = "facilpool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "facilpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>*Day Care:</label>
+                                                    @Html.DropDownListFor(m => m.ScheduledReviewerDayCare, Model.AssignPlanReviewersListDayCare, new { @id = "DrpDnScheduleDayCare", @class = "border-cyan form-select form-control scheduledreviewer" }, hasManualPerm)
+                                                </div>
+                                            </div>
+                                            @{
+                                                if (hasManualPerm)
+                                                {
+                                                    <div class="col-md-3 daycstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.DaycStartDate, new { htmlAttributes = new { @id = "daycstartdatesel", @class = "form-control datepicker-restricted start-date startdatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 daycstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.EditorFor(model => model.DaycEndDate, new { htmlAttributes = new { @id = "daycenddatesel", @class = "form-control datepicker-restricted end-date enddatesel border-cyan", @inputmode = "none" } })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    string daycstartdate = string.Empty;
+                                                    string daycenddate = string.Empty;
+                                                    if (Model.DaycStartDate.HasValue) { daycstartdate = Model.DaycStartDate.Value.ToShortDateString(); }
+                                                    if (Model.DaycEndDate.HasValue) { daycenddate = Model.DaycEndDate.Value.ToShortDateString(); }
+
+                                                    @Html.HiddenFor(m => m.DaycStartDate, new { @id = "daycstartdatesel" })
+                                                    @Html.HiddenFor(m => m.DaycEndDate, new { @id = "daycenddatesel" })
+
+                                                    <div class="col-md-3 daycstartendsel">
+                                                        <div class="form-group">
+                                                            <label>Start Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disableddaycstartdate", daycstartdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 daycstartendsel">
+                                                        <div class="form-group">
+                                                            <label>End Date:</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBox("disableddaycenddate", daycenddate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control datepicker-restricted start-date border-cyan" })
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="fa fa-calendar-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @Html.HiddenFor(m => m.DaycPool, new { @id = "daycpool" })
+                                            @Html.TextBox("pooltxt", "Pool", new { @id = "daycpooltxt", @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan collapse pooltxt mt-2" })
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                @if (Model.IsCycleComparison)
+                                                {
+                                                    <h5>
+                                                        Verify Scheduled vs Plan Reviewer entered hours
+                                                    </h5>
+                                                }
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        @if (Model.IsCycleComparison)
+                                                        {
+                                                            <th class="proposedgroup">Proposed</th>
+                                                        }
+                                                        else
+                                                        {
+                                                            <th>Estimated</th>
+                                                        }
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <th class="rereviewgroup">ReReview</th>
+                                                        }
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Food Service Hours:</td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => m.ProposedFood, new { @id = "hoursproposedfood" })
+                                                            @if (Model.IsCycleComparison)
+                                                            {
+                                                                if (Model.ProposedFood == null || Model.ProposedFood == 0)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ProposedFood, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedFood", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.HiddenFor(m => m.HrsNAFood, new { @class = "hrsna" })
+                                                                @Html.TextBox("nafoodtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan na-txt" })
+                                                                @Html.TextBoxFor(m => m.HoursFood, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursFood", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                            }
+                                                        </td>
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ReReviewFood, new { @id = "hoursrereviewfood" })
+
+                                                                @if (Model.ReReviewFood == null)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ReReviewFood, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewFood", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            </td>
+                                                        }
+                                                        <td>
+                                                            @{
+                                                                string onfoodclick = hasManualPerm ? "togglePool('foodpooltxt', 'foodpool', $('#foodpool').val(),'foodstartendsel','btnfoodpool');" : "";
+                                                            }
+                                                            <input type="button" value="Pool" id="btnfoodpool" name="btnfoodpool" onclick="@onfoodclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Public Pool Hours:</td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => m.ProposedPool, new { @id = "hoursproposedpool" })
+                                                            @if (Model.IsCycleComparison)
+                                                            {
+                                                                if (Model.ProposedPool == null || Model.ProposedPool == 0)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ProposedPool, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedPool", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.HiddenFor(m => m.HrsNAPool, new { @class = "hrsna" })
+                                                                @Html.TextBox("napooltxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan na-txt" })
+                                                                @Html.TextBoxFor(m => m.HoursPool, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursPool", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                            }
+                                                        </td>
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ReReviewPool, new { @id = "hoursrereviewpool" })
+
+                                                                @if (Model.ReReviewPool == null)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ReReviewPool, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewPool", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            </td>
+                                                        }
+                                                        <td>
+                                                            @{
+                                                                string onpoolclick = hasManualPerm ? "togglePool('poolpooltxt', 'poolpool', $('#poolpool').val(),'poolstartendsel','btnpoolpool');" : "";
+                                                            }
+                                                            <input type="button" value="Pool" id="btnpoolpool" name="btnpoolpool" onclick="@onpoolclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Facility/Lodging Hours:</td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => m.ProposedLodge, new { @id = "hoursproposedlodge" })
+                                                            @if (Model.IsCycleComparison)
+                                                            {
+                                                                if (Model.ProposedLodge == null || Model.ProposedLodge == 0)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ProposedLodge, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedLodge", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.HiddenFor(m => m.HrsNAFacility, new { @class = "hrsna" })
+                                                                @Html.TextBox("nalodgetxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan na-txt" })
+                                                                @Html.TextBoxFor(m => m.HoursLodge, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursLodge", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                            }
+                                                        </td>
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ReReviewLodge, new { @id = "hoursrereviewlodge" })
+
+                                                                @if (Model.ReReviewLodge == null)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ReReviewLodge, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewLodge", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            </td>
+                                                        }
+                                                        <td>
+                                                            @{
+                                                                string onfacilclick = hasManualPerm ? "togglePool('facilpooltxt', 'facilpool', $('#facilpool').val(),'facilstartendsel','btnfacilpool');" : "";
+                                                            }
+                                                            <input type="button" value="Pool" id="btnfacilpool" name="btnfacilpool" onclick="@onfacilclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Commercial Day Care Hours:</td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => m.ProposedDayCare, new { @id = "hoursproposeddaycare" })
+                                                            @if (Model.IsCycleComparison)
+                                                            {
+                                                                if (Model.ProposedDayCare == null || Model.ProposedDayCare == 0)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ProposedDayCare, new { @class = "form-control border-cyan", @type = "number", @id = "txtProposedDayCare", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.HiddenFor(m => m.HrsNADayCare, new { @class = "hrsna" })
+                                                                @Html.TextBox("nadaycaretxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan na-txt" })
+                                                                @Html.TextBoxFor(m => m.HoursDayCare, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursDayCare", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, hasManualPerm)
+                                                            }
+                                                        </td>
+                                                        @if (Model.Cycle > 1)
+                                                        {
+                                                            <td>
+                                                                @Html.HiddenFor(m => m.ReReviewDayCare, new { @id = "hoursrereviewdaycare" })
+
+                                                                @if (Model.ReReviewDayCare == null)
+                                                                {
+                                                                    @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.TextBoxFor(m => m.ReReviewDayCare, new { @class = "form-control border-cyan", @type = "number", @id = "txtReReviewDayCare", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                                }
+                                                            </td>
+                                                        }
+                                                        <td>
+                                                            @{
+                                                                string ondaycclick = hasManualPerm ? "togglePool('daycpooltxt', 'daycpool', $('#daycpool').val(),'daycstartendsel','btndaycpool');" : "";
+                                                            }
+                                                            <input type="button" value="Pool" id="btndaycpool" name="btndaycpool" onclick="@ondaycclick" class="btn @disabledcls @disablepoolbtncls" @disablebtn @disablepoolbtns />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="ehs-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_EHSReviewers", new SchedulePreliminaryMeetingViewModel
+                                {
+                                Project = Model.Project,
+                                AllReviewers = Model.AllReviewers,
+                                AssignPlanReviewersListDayCare = Model.AssignPlanReviewersListDayCare,
+                                AssignPlanReviewersListFood = Model.AssignPlanReviewersListFood,
+                                AssignPlanReviewersListLodge = Model.AssignPlanReviewersListLodge,
+                                AssignPlanReviewersListPool = Model.AssignPlanReviewersListPool,
+                                ExcludedPlanReviewersDayCare = Model.ExcludedPlanReviewersDayCare,
+                                ExcludedPlanReviewersFood = Model.ExcludedPlanReviewersFood,
+                                ExcludedPlanReviewersLodge = Model.ExcludedPlanReviewersLodge,
+                                ExcludedPlanReviewersPool = Model.ExcludedPlanReviewersPool,
+                                LoggedInUser = Model.LoggedInUser,
+                                PermissionMapping = Model.PermissionMapping
+                                });
+                                        }
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sectionInternalNotes">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="InternalNotes"> Internal Notes:</label>
+                                </div>
+                                @Html.TextAreaFor(m => m.InternalNotes, new { @class = "form-control h-25" }, true)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="sectionSchedulingNotes" class="row mb-4 card collapse hide">
+                @Html.Partial("_SchedulingNotes", Model)
+            </div>
+            @Html.Partial("_NotesModal", new AION.Web.Models.Shared.NotesViewModel
+            {
+                LoggedInUser = Model.LoggedInUser,
+                LoggedInUserEmail = Model.LoggedInUserEmail,
+                NotesComments = Model.NotesComments,
+                Project = Model.Project
+            })
+
+            <div id="dialog-modal-confirmation" title="" class="" style="display:none">
+                <div class="confirmationmessage">
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

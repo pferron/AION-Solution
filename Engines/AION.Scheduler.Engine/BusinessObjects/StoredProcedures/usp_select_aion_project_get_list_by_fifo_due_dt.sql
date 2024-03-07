@@ -1,0 +1,159 @@
+﻿/****** Object:  StoredProcedure [AION].[usp_select_aion_fifo_schedule_get_by_id]    Script Date: 6/1/2021 8:00:24 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+  
+/***********************************************************************************************************************  
+* Object:       usp_select_aion_project_get_list_by_fifo_due_dt
+* Description:  Retrieves scheduled project records with future fifo due dates.  
+* Parameters:     
+*  
+* Returns:      Recordset.  
+* Comments:     Developer may need to manually join to other tables, such as code tables,  
+*               to get additional info for retrieval.  Also, developer needs to verify id columns in WHERE clause.  
+* Version:      1.0  
+* Created by:   jallen  
+* Created:      6/14/2021 
+************************************************************************************************************************  
+* Change History: Date, Name, Description  
+* 6/14/2021     jallen  Get scheduled FIFO projects with a future FIFO due date.
+* 7/11/2021     jallen  Add REC_ID_TXT.
+***********************************************************************************************************************/  
+ALTER PROCEDURE [AION].[usp_select_aion_project_get_list_by_fifo_due_dt]  
+  
+AS
+
+       DECLARE @SCHEDULED_STATUS INT 
+       
+       SELECT @SCHEDULED_STATUS = 
+       PROJECT_STATUS_REF_ID
+       FROM PROJECT_STATUS_REF
+       WHERE PROJECT_STATUS_REF_DESC = 'Scheduled'
+
+       SELECT 
+            PROJECT.PROJECT_ID
+          , PROJECT.PROJECT_NM
+          , PROJECT.EXTERNAL_SYSTEM_REF_ID
+          , PROJECT.WKR_ID_CREATED_TXT
+          , PROJECT.CREATED_DTTM
+          , PROJECT.WKR_ID_UPDATED_TXT
+          , PROJECT.UPDATED_DTTM
+          , PROJECT.PROJECT_STATUS_REF_ID
+          , PROJECT.PROJECT_TYP_REF_ID
+          , PROJECT.SRC_SYSTEM_VAL_TXT
+          , PROJECT.TAG_CREATED_ID_NUM
+          , PROJECT.TAG_CREATED_BY_TS
+          , PROJECT.TAG_UPDATED_BY_TS
+          , PROJECT.TAG_UPDATED_BY_ID_NUM
+          , PROJECT.ASSIGNED_ESTIMATOR_ID
+          , PROJECT.ASSIGNED_FACILITATOR_ID
+          , PROJECT.PROJECT_MODE_REF_ID
+          , PROJECT.WORKFLOW_STATUS_REF_ID
+          , PROJECT.RTAP_IND
+          , PROJECT.PRELIMINARY_IND
+          , PROJECT.PROJECT_LVL_TXT
+          , PROJECT.GATE_DT
+          , PROJECT.PROJECT_ADDR_TXT
+          , PROJECT.PROJECT_MANAGER_ID
+          , PROJECT.BUILD_CONTR_NM
+          , PROJECT.BUILD_CONTR_ACCT_NUM
+          , PROJECT.GATE_ACCEPTED_IND
+          , PROJECT.FIFO_DUE_DT
+          , PROJECT.PLANS_READY_ON_DT
+          , PROJECT.CYCLE_NBR
+          , PROJECT.PRELIM_MEETING_COMPLETE_IND
+          , PROJECT.ACCELA_RTAP_PROJECT_REF_ID
+          , PROJECT.ACCELA_PRELIM_PROJECT_REF_ID
+          , PROJECT.PROJECT_OCCUPANCY_TYP_MAP_NM
+          , PROJECT.CONSTR_TYP_DESC
+          , PROJECT.CONSTR_COST_AMT
+          , PROJECT.SHEETS_CNT_DESC
+          , PROJECT.SQUARE_FOOTAGE_TO_BE_REVIEWED_NBR
+          , PROJECT.SQUARE_FOOTAGE_OF_OVERALL_BUILD_NBR
+          , PROJECT.STORIES_CNT
+          , PROJECT.HIGH_RISE_IND
+          , PROJECT.EXPRESS_IND
+          , PROJECT.REVIEW_TYP_REF_DESC
+          , PROJECT.PRELIM_MEETING_CANCELLED_IND
+          , PROJECT.FIFO_IND
+          , PROJECT.TOTAL_JOB_COST_AMT
+          , PROJECT.WORK_TYP_DESC
+          , PROJECT.OCCUPANCY_DESC
+          , PROJECT.PRI_OCCUPANCY_DESC
+          , PROJECT.SECONDARY_OCCUPANCY_DESC
+          , PROJECT.SEAL_HOLDERS_DESC
+          , PROJECT.DESIGNER_DESC
+          , PROJECT.FIRE_DETAIL_DESC
+          , PROJECT.OVERALL_WORK_SCOPE_DESC
+          , PROJECT.MECH_WORK_SCOPE_DESC
+          , PROJECT.ELCTR_WORK_SCOPE_DESC
+          , PROJECT.PLUMB_WORK_SCOPE_DESC
+          , PROJECT.CIVIL_WORK_SCOPE_DESC
+          , PROJECT.ZONING_OF_SITE_DESC
+          , PROJECT.CHG_OF_USE_DESC
+          , PROJECT.CONDITIONAL_PERMIT_APPROVAL_DESC
+          , PROJECT.PREVIOUS_BUSINESS_TYP_DESC
+          , PROJECT.CITY_OF_CHARLOTTE_DESC
+          , PROJECT.PROPOSED_BUSINESS_TYP_DESC
+          , PROJECT.CODE_SUMMARY_DESC
+          , PROJECT.BACKFLOW_APPLICATION_DETAIL_DESC
+          , PROJECT.WATER_SEWER_DETAIL_DESC
+          , PROJECT.HEALTH_DEPT_DETAIL_DESC
+          , PROJECT.DAY_CARE_DESC
+          , PROJECT.PROPOSED_OUTDOOR_UNDERGROUND_PIPING_DESC
+          , PROJECT.PROPOSED_FIRE_SPRINKLER_PIPING_DESC
+          , PROJECT.INSTALL_CMUD_BACKFLOW_PREVENTER_DESC
+          , PROJECT.EXTENDING_PUBLIC_WATER_SEWER_DESC
+          , PROJECT.GRADE_MOD_WATER_SEWER_EASEMENT_DESC
+          , PROJECT.PROPOSED_ENCROACHMENT_WATER_SEWER_EASEMENT_DESC
+          , PROJECT.PARCEL_NUM
+          , PROJECT.AFFORDABLE_HOUSING_DESC
+          , PROJECT.EXACT_ADDR_TXT
+          , PROJECT.DELIVERY_MTHD_DESC
+          , PROJECT.BIM_DESC
+          , PROJECT.BIM_DESIGN_DISCIPLINE_DESC
+          , PROJECT.ATTENDEES_CNT_DESC
+          , PROJECT.PREVIOUS_PRELIM_REVIEW_DESC
+          , PROJECT.PROJECT_NUM_PREVIOUS_PRELIM_REVIEW_DESC
+          , PROJECT.SAME_REVIEW_TEAM_DESC
+          , PROJECT.PROPERTY_OWNER_NM
+          , PROJECT.PROPERTY_OWNER_ADDR_TXT
+          , PROJECT.PROPERTY_OWNER_EMAIL_ADDR_TXT
+          , PROJECT.PROPERTY_OWNER_PHONE_NUM
+          , PROPERTY_OWNER_AUTO_EMAIL_ADDR_TXT
+          , PROJECT.PROPERTY_MANAGER_NM
+          , PROJECT.PROPERTY_MANAGER_EMAIL_ADDR_TXT
+          , PROJECT.PROPERTY_MANAGER_EMAIL_ADDR_2_TXT
+          , PROJECT.ARCHITECT_DESIGNER_CNTCT_NM
+          , PROJECT.ARCHITECT_DESIGNER_CNTCT_PHONE_NUM
+          , PROJECT.ARCHITECT_DESIGNER_CNTCT_EMAIL_ADDR_TXT
+          , PROJECT.ARCHITECT_DESIGNER_AUTO_EMAIL_ADDR_TXT
+          , PROJECT.ARCHITECT_DRAWINGS_SEALED_DESC
+          , PROJECT.ARCHITECT_DESIGNER_LICENSE_NUM
+          , PROJECT.ARCHITECT_DESIGNER_LICENSE_BOARD_DESC
+          , PROJECT.ARCHITECT_DESIGNER_EMPLOYEE_DESC
+          , PROJECT.PERMIT_NUM
+          , PROJECT.TOTAL_FEE_AMT
+          , PROJECT.BUILD_CODE_VERSION_DESC
+          , PROJECT.SQUARE_FOOTAGE_DESC
+          , PROJECT.PROPERTY_MANAGER_PHONE_NUM
+          , PROJECT.REC_ID_TXT
+          , PROJECT.TEAM_GRADE_TXT
+          , PROJECT.REVIEW_TYP_REF_DESC
+
+       FROM PROJECT
+
+       WHERE
+        
+       PROJECT.PROJECT_STATUS_REF_ID = @SCHEDULED_STATUS
+        AND ISNULL(PROJECT.FIFO_DUE_DT,'') <> ''
+        AND CONVERT(date, PROJECT.FIFO_DUE_DT) > CONVERT(date, GETDATE())
+
+      ORDER BY PROJECT.FIFO_DUE_DT
+
+
+RETURN
+
+
+

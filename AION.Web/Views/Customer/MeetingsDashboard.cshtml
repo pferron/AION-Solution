@@ -1,0 +1,68 @@
+﻿@using AION.Manager.Models;
+
+@model AION.Web.Models.CustmrMeetingsDashboardViewModel
+@{
+    ViewBag.Title = "Customer Meetings Dashboard";
+}
+@section style
+{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/fixedHeader.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/colReorder.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+}
+
+@section scripts
+    {
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.fixedHeader.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.colReorder.min.js"></script>
+
+    <script src="/app-assets/js/scripts/pages/customer-dashboard.js"></script>
+}
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+<div class="row">
+    <div class="card overflow" id="sectionCustomerProjectDashboard">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                <table class="table table-striped table-bordered table-hover fixed-header" id="projects">
+                    <thead>
+                        <tr>
+                            <th data-field="th0" class="th0" data-sortable="true">Meeting Date</th>
+                            <th data-field="th01" class="th01" data-sortable="true">Meeting Time</th>
+                            <th data-field="th02" class="th02" data-sortable="true">Meeting Type</th>
+                            <th data-field="th03" class="th03" data-sortable="true">Project Type</th>
+                            <th data-field="th04" class="th04" data-sortable="true">Project #</th>
+                            <th data-field="th05" class="th05" data-sortable="true">Project Name</th>
+                            <th data-field="th06" class="th06" data-sortable="true">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ foreach (CustmrMeetings meeting in Model.MeetingList)
+                            {
+                                <tr>
+                                    <td>@meeting.MeetingDate.ToShortDateString()</td>
+                                    <td>@meeting.MeetingTime.ToShortTimeString()</td>
+                                    <td>@meeting.MeetingType.ToStringValue()</td>
+                                    <td>@meeting.ProjectType.ToStringValue()</td>
+                                    <td>
+                                        <a href="@Url.Action("ProjectDetail", "Customer", new { ProjectId = meeting.ProjectExternalRefID, RecIdTxt= meeting.RecIdTxt})">
+                                            @meeting.ProjectExternalRefID
+                                        </a>
+                                    </td>
+                                    <td>@meeting.ProjectName</td>
+                                    <td>@meeting.MeetingStatus.ToStringValue()</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

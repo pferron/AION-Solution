@@ -1,0 +1,70 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+
+@model AION.Web.Models.SchedulePreliminaryMeetingViewModel
+
+@{
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+    bool showRequestedPlanReviewers = false;
+
+    //if this is preliminary estimation, then check the right permissions
+    //get the controller, if this is preliminary, use those permissions, else use estimation perms
+    var contr = ViewContext.RouteData.Values["action"];
+    //if preliminary, change the model permissions so these render correctly
+    bool enableperm = true;
+    switch (contr.ToString().ToLower())
+    {
+        case "schedulepreliminarymeeting":
+            showRequestedPlanReviewers = true;
+            enableperm = Model.PermissionMapping.Schdul_Prlim_Mtng_Man;
+            break;
+        case "scheduleplanreview":
+            enableperm = Model.PermissionMapping.Schdul_Rview_Pln_Rview_Man;
+            break;
+        case "schedulefifoplanreview":
+            //this is always disabled for FIFO
+            enableperm = false;
+            break;
+        default:
+            break;
+    }
+
+}
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="PrimaryReviewerFire">Fire Primary</label>
+            @Html.DropDownListFor(m => m.PrimaryReviewerFire, Model.AssignPlanReviewersListFireSR, new { @id = "DrpDnPrimaryFire", @class = "border-cyan form-select form-control" }, enableperm)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="SecondaryReviewerFire">Fire Secondary</label>
+            @Html.DropDownListFor(m => m.SecondaryReviewerFire, Model.AssignPlanReviewersListFireSR, new { @id = "DrpDnSecondaryFire", @class = "border-cyan form-select form-control" }, enableperm)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="ExcludedPlanReviewersFire">Fire Excluded</label>
+            @Html.ListBoxFor(m => m.ExcludedPlanReviewersFire, Model.PlanReviewersListViewModel,
+                new { @id = "chkDrpDnExPlnRvrsFire", @class = "border-cyan multiselect", @multiple = "multiple" }, enableperm)
+        </div>
+    </div>
+    @if (showRequestedPlanReviewers == true)
+    {
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="RequestedPlanReviewerZone">Fire Requested</label>
+                <label class="border-cyan form-control">@Model.GetProposedPlanReviewerName(AION.BL.DepartmentNameEnums.Fire_Cornelius)</label>
+            </div>
+        </div>
+    }
+</div>
+

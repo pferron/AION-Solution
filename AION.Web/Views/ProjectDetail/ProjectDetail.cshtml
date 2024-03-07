@@ -1,0 +1,204 @@
+﻿<!--#region Model & libraries-->
+@using AION.Manager.Models;
+@using AION.Web.Extensions
+@using AION.BL
+@using AION.Web.Models.Shared
+
+@model AION.Web.Models.ProjectDetailViewModel
+@{
+    ViewBag.Title = "Project Details";
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+}
+
+<!--#endregion Model & libraries-->
+<!--#region CSS-->
+@section style
+    {
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/ui/jquery-ui.min.css">
+}
+
+<!--#endregion CSS-->
+<!--#region Hidden HTML Values-->
+
+@Html.HiddenFor(m => m.Project.AccelaProjectRefId, Model.Project.AccelaProjectRefId)
+@Html.HiddenFor(m => m.Project.ID)
+@Html.HiddenFor(m => m.Project.AIONProjectStatus.ID, Model.Project.AIONProjectStatus.ID)
+@Html.HiddenFor(m => m.LoggedInUser.ID, @Model.LoggedInUser.ID)
+@Html.HiddenFor(m => m.LoggedInUserEmail, @Model.LoggedInUserEmail)
+@Html.HiddenFor(m => m.PlanReviewDate)
+@Html.HiddenFor(m => m.ProdNotKnown, new { @id = "isProdNotKnown" })
+@Html.HiddenFor(m => m.IsAbort)
+@Html.HiddenFor(m => m.Cycle)
+@Html.HiddenFor(m => m.Project.RecIdTxt, new { @id = "recidtxt" })
+@Html.Hidden("controller", System.Web.HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())
+@Html.HiddenFor(m => m.RescheduleWarning)
+@*used to get the selected meeting room when opening meeting*@
+@Html.Hidden("MeetingRoomRefIDSelected", new { @class = "meetingroomrefid" })
+
+<!--#endregion Hidden HTML Values-->
+<!--#region modals -->
+
+<div class="modal fade text-left" id="dialog-modal-confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-cyan white">
+                <h4 class="modal-title white">
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row p-2">
+                        <div class="confirmationmessage">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-poppy" id="yes_confirmmodal">Yes</button>
+                <button type="button" class="btn btn-sm btn-poppy" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-left" id="dialog-modal-cancel-meeting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-cyan white">
+                <h4 class="modal-title white">
+                    Comments
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row p-2">
+                        <div id="cancel-status-message" class="alert-danger" style="display:none;"></div>
+                        @Html.TextAreaFor(m => m.CancelMeetingNotes, new { @class = "form-control col-md-12 h-45" }, true)
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-poppy" id="Submit_CancelMeeting">Submit</button>
+                <button type="button" class="btn btn-sm btn-poppy" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-left" id="dialog-modal-change-facilitator" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-cyan white">
+                <h4 class="modal-title white">
+                    Facilitator
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div id="change-facilitator-message" class="alert-danger" style="display:none;"></div>
+                        @Html.DropDownListFor(x => x.Project.AssignedFacilitator, Model.FacilitatorsListViewModel, new { @class = "form-select form-control col-md-12" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-poppy" id="Submit_ChangeFacilitator">Submit</button>
+                <button type="button" class="btn btn-sm btn-poppy" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_SendNotificationsModal", Model)
+
+
+<!--#endregion modals -->
+
+<div>
+    @section breadcrumbs {
+        @Html.Partial("_Breadcrumbs", Model)
+    }
+
+    <!--#region project summary  -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Project Summary</h4>
+                </div>
+                <div class="card-body">
+                    @Html.Partial("_ProjectSummary", Model)
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--#endregion project summary  -->
+    <!--#region Meetings-->
+    <div class="card mb-4 meetings">
+        @if (Model != null)
+        {
+            <div class="card-header font-weight-bold"><h4 class="card-title">Meetings</h4></div>
+            <div class="card-body">
+                <div class="d-flex">
+                    <div>
+                        @Html.Partial("_Meetings", Model)
+                        <input type="hidden" id="appointmentId" name="appointmentId" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!--#endregion Meetings-->
+    <!--#region Act on Behalf of Customer-->
+    <div class="card mb-4">
+        <div class="card-header font-weight-bold"><h4 class="card-title">Act on Behalf of Customer</h4></div>
+        <div class="card-body">
+            <div class="d-flex">
+                <div>
+                    <div id="planReviews">
+                        @Html.Partial("_PlanReviews", Model.PlanReviewViewModels)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--#endregion Act on Behalf of Customer-->
+    <!--#region History-->
+    <div class="card mb-4" id="projectAudits">
+        @if (Model != null)
+        {
+            <div class="card-content collapse show">
+                <div class="card-header font-weight-bold"><h4 class="card-title">History </h4></div>
+                <div class="card-body card-dashboard">
+                    @Html.Partial("_ProjectAudit", Model.ProjectAudits)
+                </div>
+            </div>
+        }
+    </div>
+    <!--#endregion History  -->
+</div>
+
+<!--#region Scripts  -->
+@section scripts{
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/app-assets/js/scripts/pages/project-detail/project-detail.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/project-detail/send-notifs.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/project-detail/update-project-cycle.js"></script>
+}
+
+<!--#endregion Scripts  -->

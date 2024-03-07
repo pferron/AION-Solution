@@ -1,0 +1,56 @@
+﻿@model AION.Web.Models.MultiSelectViewModel
+
+@{
+    string fromList = Model.PageName;
+    string toList = Model.PageName + "_to";
+
+    string fromListTitle = Model.TitleFromList;
+    string toListTitle = Model.TitleToList;
+
+    string addBtn = Model.PageName + "_rightSelected";
+    string removeBtn = Model.PageName + "_leftSelected";
+    string addAllBtn = Model.PageName + "_rightAll";
+    string removeAllBtn = Model.PageName + "_leftAll";
+
+    string moveUp = Model.PageName + "_move_up";
+    string moveDown = Model.PageName + "_move_down";
+
+    string displayUpDown = Model.DisplayMoveUpDown ? "" : "none";
+}
+
+<div class="row multiselect-control">
+    <div class="col-md-4">
+        <div class="info-container">
+            <h3>@fromListTitle</h3><br>
+            <span class="info"></span>
+        </div>
+
+        @Html.DropDownList(Model.NameFromList, Model.FromList, new { id = fromList, @class = "form-control multiselect-dual listbox multiselect-from", size = 10, multiple = "multiple" })
+
+    </div>
+    <div class="col-md-2">
+        <div class="button-container">
+            <button type="button" id="@addBtn" class="btn btn-sm btn-poppy btn-block multiselect-add" data-from="@fromList" data-to="@toList"><i class="fa-solid fa-chevron-right"></i></button>
+            <button type="button" id="@removeBtn" class="btn btn-sm btn-poppy btn-block multiselect-remove" data-from="@fromList" data-to="@toList"><i class="fa-solid fa-chevron-left"></i></button>
+            <br>
+            <button type="button" id="@addAllBtn" class="btn btn-sm btn-poppy btn-block multiselect-addall" data-from="@fromList" data-to="@toList"><i class="fa-solid fa-angle-double-right"></i></button>
+            <button type="button" id="@removeAllBtn" class="btn btn-sm btn-poppy btn-block multiselect-removeall" data-from="@fromList" data-to="@toList"><i class="fa-solid fa-angle-double-left"></i></button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="info-container">
+            <h3>@toListTitle</h3>
+            <br>
+            <span class="info"></span>
+        </div>
+
+        @Html.DropDownList(Model.NameToList, Model.ToList, new { id = toList, @class = "form-control listbox multiselect-to", size = 10, multiple = "multiple" })
+
+    </div>
+    <div class="col-md-2" style="display:@displayUpDown">
+        <div class="button-container" >
+            <button type="button" id="@moveUp" class="btn btn-sm btn-poppy btn-block multiselect-move-up"><i class="fa-solid fa-chevron-up"></i></button>
+            <button type="button" id="@moveDown" class="btn btn-sm btn-poppy btn-block multiselect-move-down"><i class="fa-sharp fa-solid fa-chevron-down"></i></button>
+        </div>
+    </div>
+</div>

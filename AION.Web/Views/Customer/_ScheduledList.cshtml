@@ -1,0 +1,26 @@
+﻿@model AION.Web.Models.CustomerProjectDetailViewModel
+
+
+<table class="w-100" id="tblPlanReviews">
+    <thead class="card-header">
+        <tr>
+            <th>Scheduled Plan Review</th>
+            <th>Date</th>
+            <th>Response Due</th>
+            <th>Cycle</th>
+            <th>Plans Ready On Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="card-body">
+        @if (Model.HasPlanReviews)
+        {
+            @Html.Partial("_ScheduledPR", Model) // current and future could be in this list
+        }
+        else
+        {
+           @Html.Partial("_ScheduledDefaultRow", Model)
+        }
+    </tbody>
+</table>

@@ -1,0 +1,87 @@
+﻿
+@model AION.Web.Models.EstimationViewModel
+@using AION.BL
+@using AION.BL.Models
+@using AION.Web.Extensions
+@{
+    /**/
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+}
+
+<div class="d-flex flex-row">
+    <div class="p-2 flex-fill">
+        <div id="NotesFolder" class="accordion">
+            <input type="hidden" id="StandardNoteType" name="StandardNoteType" value="" />
+            @{ if (Model.StandardNoteGroups != null)
+                {
+                    foreach (StandardNoteGroupEnums grp in Model.StandardNoteGroups)
+                    {
+                        List<StandardNote> notes = Model.StandardNotes.Where(x => x.StandardNoteGroupEnum == grp).ToList();
+                        string parentname = grp.ToString();
+                        for (var i = 0; i < notes.Count(); i++)
+                        {
+                            string id = notes[i].StandardNoteId.ToString();
+                            string modalname = "modal" + id;
+                            string foldername = "folder" + parentname;
+                            string chckboxid = "chck" + id;
+                            string txtbxname = "txtbx" + id;
+                            //first row
+                            if (i == 0)
+                            {//is the note if it's only one
+                                if (notes.Count() == 1)
+                                {
+                                <div class="form-check" id="@parentname">
+                                    @Html.CheckBox(chckboxid, new { @class = "form-check-input chkstandnote", @value = txtbxname }, isenabled)
+                                    <a style="text-decoration: underline; color:blue;" data-toggle="collapse" href="#@modalname">@notes[i].StandardNoteTitle</a>
+                                    <div id="@modalname" class="collapse" data-parent="#@parentname">
+                                        @Html.TextArea(txtbxname, notes[i].StandardNoteText, new { @style = "min-width: 400px;", @id = txtbxname, @class = "h-25", @rows = "10" }, isenabled)
+                                    </div>
+                                </div>
+                                }
+                                else
+                                {
+                                <div id="@parentname">
+                                    <a style="text-decoration: underline;" data-toggle="collapse" href="#@foldername" href="#"> &#11206; @notes[i].StandardNoteGroupDesc</a>
+                                </div>
+                                <div class="form-check ml-4 collapse" id="@foldername" data-bs-parent="#@parentname">
+                                    @Html.CheckBox(chckboxid, new { @class = "form-check-input chkstandnote", @value = txtbxname }, isenabled)
+                                    <a style="text-decoration: underline; color:blue;" data-toggle="collapse" href="#@modalname" href="#">@notes[i].StandardNoteTitle</a>
+                                    <div id="@modalname" class="collapse" data-bs-parent="#@foldername">
+                                        @Html.TextArea(txtbxname, notes[i].StandardNoteText, new { @style = "min-width: 400px;", @id = txtbxname, @class = "h-25", @rows = "10" }, isenabled)
+                                    </div>
+                                </div>
+                                }
+                            }
+                            else
+                            {//row after first row
+                            <div class="form-check ml-4 collapse" id="@foldername" data-bs-parent="#@parentname">
+                                @Html.CheckBox(chckboxid, new { @class = "form-check-input chkstandnote", @value = txtbxname }, isenabled)
+                                <a style="text-decoration: underline; color:blue;" data-toggle="collapse" href="#@modalname" href="#">@notes[i].StandardNoteTitle</a>
+                                <div id="@modalname" class="collapse" data-bs-parent="#@foldername">
+                                    @Html.TextArea(txtbxname, notes[i].StandardNoteText, new { @style = "min-width: 400px;", @id = txtbxname, @class = "h-25", @rows = "10" }, isenabled)
+                                </div>
+                            </div>
+                                }
+                            }
+                        }
+                    }
+                }
+        </div>
+    </div>
+    <div class="p-2 allnotes collapse">
+        @Html.TextArea("StandardNoteText", new { @id = "StandardNoteText", @class = "StandardNoteText col", @style = "width: 400px;height: 600px;", @readonly = "true" })
+    </div>
+
+</div>
+<div class="d-flex flex-row">
+    <div class="p-2 flex-fill">
+    </div>
+    <div class="p-2 flex-fill">
+        @*<button type="button" class="btn btn-primary setviewonly standnotesubmit @disabledcls" @disablebtn>Submit</button>*@
+    </div>
+</div>

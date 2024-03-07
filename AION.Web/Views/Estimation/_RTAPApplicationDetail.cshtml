@@ -1,0 +1,141 @@
+﻿@using AION.Web.Helpers
+@using AION.Web.Models.Shared
+
+@model AION.Web.Models.EstimationViewModel
+
+<div class="card rtapapplicationdetails">
+    <div class="card-header">
+        <h6>RTAP Application Details</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <label>
+                    Property Type:
+                </label>
+                @Model.Project.ReviewTypRefDesc
+            </div>
+            <div class="col">
+                <label>
+                    Does this project include any affordable housing or work force housing?
+                </label>
+                @Model.Project.DisplayOnlyInformation.IsAffordableHousing
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Code Summary:</label>
+                @Model.Project.DisplayOnlyInformation.CodeSummary
+            </div>
+            <div class="col">
+                <label>Does this revision add or remove any of these units? </label>
+                @Model.Project.RTAPAffordableUnitChange
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Date Drawings will be ready for review:</label>
+                @if (Model.Project.PlansReadyOnDate != null)
+                {
+                    @Model.Project.PlansReadyOnDate.Value.ToShortDateString()
+                }
+            </div>
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Total # of Sheets:</label>
+                @Model.Project.AccelaNumberofSheets
+            </div>
+            <div class="col">
+                <label>
+                    Affordable Housing Units Added:
+                </label>
+                @Model.Project.RTAPAffordableWorkforceUnitsAdd
+            </div>
+        </div>
+
+        <div class="row">
+           <div class="col">
+              <label>Estimated Cost Of Construction:</label>
+              @Model.Project.AccelaCostOfConstruction
+           </div>
+            <div class="col">
+                <label>Affordable Housing Units Removed: </label>
+                @Model.Project.RTAPAffordableUnitsRemove
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>Estimated Cost Of Equipment: </label>
+                @Model.Project.EquipmentCost
+            </div>
+            <div class="col">
+                <label>Workforce Housing Units Added: </label>
+                @Model.Project.RTAPWorkforceAdd
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>How will submittal fees for this project be paid? </label>
+                @Model.Project.PrepaidFeePaymentType
+            </div>
+            <div class="col">
+                <label>Workforce Housing Units Removed: </label>
+                @Model.Project.RTAPWorkforceRemove
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col"><label>Account #: </label> @Model.Project.AccountNumber</div>
+            <div class="col">
+                <label>
+                    Architect/Designer:
+                </label>
+                <ol>
+                    @foreach (var item in Model.Project.ProfessionalsList)
+                    {
+                        if (string.IsNullOrWhiteSpace(item.fullName) == false)
+                        {
+                            <li>@item.fullName</li>
+                        }
+                    }
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>
+                    Project Manager Name:
+                </label>
+                @Model.Project.PMName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>
+                    Project Manager Phone:
+                </label>
+                @Model.Project.PMPhone
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>
+                    Project Manager Email:
+                </label>
+                @Model.Project.PMEmail
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>RTAP Scope:</label>
+                @Model.Project.DisplayOnlyInformation.ScopeOfWorkOverall
+            </div>
+        </div>
+    </div>
+</div>

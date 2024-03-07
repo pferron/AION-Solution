@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Settings
+
+The Settings API provides configuration values that have been defined in Civic Platform Administration, typically as standard choice values. The Settings APIs are helpful when you need reference or custom-configured values in your API calls.
+
+OpenAPI spec version: v4
+
+-->
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37B042B3-786F-4BDB-A4B4-0837545F0653}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AccelaSettings</RootNamespace>
+    <AssemblyName>AccelaSettings</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0472</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JsonSubTypes, Version=2.0.1.0, Culture=neutral, PublicKeyToken=ee75fc290dbc1176, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JsonSubTypes.2.0.1\lib\net47\JsonSubTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="docs\ApoCustomFormsMetadata.md" />
+    <None Include="docs\ApoCustomFormsMetadataFields.md" />
+    <None Include="docs\ApoCustomFormsMetadataFieldsLabel.md" />
+    <None Include="docs\ApoCustomFormsMetadataFieldsOptions.md" />
+    <None Include="docs\ASITableDrill.md" />
+    <None Include="docs\AssetRecordTypeModel.md" />
+    <None Include="docs\AssetTypeModel.md" />
+    <None Include="docs\AssetUnitTypeModel.md" />
+    <None Include="docs\ChecklistGroupModel.md" />
+    <None Include="docs\ChecklistItemModel.md" />
+    <None Include="docs\ChecklistItemStatusModel.md" />
+    <None Include="docs\ChecklistModel.md" />
+    <None Include="docs\ChildDrill.md" />
+    <None Include="docs\ConditionAssessmentModel.md" />
+    <None Include="docs\ConditionStatusModel.md" />
+    <None Include="docs\ConditionStatusModelSeverity.md" />
+    <None Include="docs\ConditionTypeModel.md" />
+    <None Include="docs\ConditionTypeModelGroups.md" />
+    <None Include="docs\CustomAttributeModel.md" />
+    <None Include="docs\CustomFormField.md" />
+    <None Include="docs\CustomFormFieldOptions.md" />
+    <None Include="docs\CustomFormMetadataModel.md" />
+    <None Include="docs\CustomTableMetadataModel.md" />
+    <None Include="docs\DepartmentModel.md" />
+    <None Include="docs\DocumentFolderModel.md" />
+    <None Include="docs\DocumentFolderModelDescription.md" />
+    <None Include="docs\DocumentTypeModel.md" />
+    <None Include="docs\DocumentTypeModelGroups.md" />
+    <None Include="docs\FolderGroupModel.md" />
+    <None Include="docs\GISLayerIdModel.md" />
+    <None Include="docs\GradeModel.md" />
+    <None Include="docs\GradeModelGrade.md" />
+    <None Include="docs\InlineResponse200.md" />
+    <None Include="docs\InspectionBeforeScheduledTime.md" />
+    <None Include="docs\InspectionGradeModel.md" />
+    <None Include="docs\InspectionRestrictionModel.md" />
+    <None Include="docs\InspectionResultStatusModel.md" />
+    <None Include="docs\InspectionTypeAssociationsModel.md" />
+    <None Include="docs\InspectionTypeAssociationsModelStandardCommentGroup.md" />
+    <None Include="docs\InspectionTypeModel.md" />
+    <None Include="docs\InspectionTypeModelGroupName.md" />
+    <None Include="docs\PageModel.md" />
+    <None Include="docs\PartLocationModel.md" />
+    <None Include="docs\PickListValueModel.md" />
+    <None Include="docs\PickListValueModelDescription.md" />
+    <None Include="docs\PickListValueModelStatus.md" />
+    <None Include="docs\RatingTypeModel.md" />
+    <None Include="docs\RecordStatusModel.md" />
+    <None Include="docs\RecordTypeAssetTypeModel.md" />
+    <None Include="docs\RecordTypeAssociationsModel.md" />
+    <None Include="docs\RecordTypeAssociationsModelStandardCommentGroup.md" />
+    <None Include="docs\RecordTypeModel.md" />
+    <None Include="docs\ResponseApoCustomFormsMetadata.md" />
+    <None Include="docs\ResponseAssetRecordTypeModelArray.md" />
+    <None Include="docs\ResponseAssetTypeModelArray.md" />
+    <None Include="docs\ResponseAssetUnitTypeModelArray.md" />
+    <None Include="docs\ResponseChecklistGroupModelArray.md" />
+    <None Include="docs\ResponseChecklistItemStatusModelArray.md" />
+    <None Include="docs\ResponseChecklistModelArray.md" />
+    <None Include="docs\ResponseConditionAssessmentModelArray.md" />
+    <None Include="docs\ResponseConditionStatusModelArray.md" />
+    <None Include="docs\ResponseConditionTypeModelArray.md" />
+    <None Include="docs\ResponseCustomFormMetadataModelArray.md" />
+    <None Include="docs\ResponseCustomTableMetadataModelArray.md" />
+    <None Include="docs\ResponseDepartmentModelArray.md" />
+    <None Include="docs\ResponseDocumentFolderModelArray.md" />
+    <None Include="docs\ResponseDocumentTypeModelArray.md" />
+    <None Include="docs\ResponseFolderGroupModelArray.md" />
+    <None Include="docs\ResponseInspectionGradeModelArray.md" />
+    <None Include="docs\ResponseInspectionResultStatusModelArray.md" />
+    <None Include="docs\ResponseInspectionTypeModelArray.md" />
+    <None Include="docs\ResponsePartLocationModelArray.md" />
+    <None Include="docs\ResponseRatingTypeModelArray.md" />
+    <None Include="docs\ResponseRecordStatusModelArray.md" />
+    <None Include="docs\ResponseRecordTypeAssetTypeModelArray.md" />
+    <None Include="docs\ResponseRecordTypeModelArray.md" />
+    <None Include="docs\ResponseResultModelArray.md" />
+    <None Include="docs\ResponseSettingValueModelArray.md" />
+    <None Include="docs\ResponseSharedPickListModelArray.md" />
+    <None Include="docs\ResponseSharedPickListValuesModel.md" />
+    <None Include="docs\ResponseStandardCommentGroupModelArray.md" />
+    <None Include="docs\ResponseStandardCommentModelArray.md" />
+    <None Include="docs\ResponseUserModelArray.md" />
+    <None Include="docs\ResultModel.md" />
+    <None Include="docs\RGuideSheetGroupModel.md" />
+    <None Include="docs\RowModel.md" />
+    <None Include="docs\SettingsActivitiesApi.md" />
+    <None Include="docs\SettingsAddressesApi.md" />
+    <None Include="docs\SettingsAssessmentsApi.md" />
+    <None Include="docs\SettingsAssetsApi.md" />
+    <None Include="docs\SettingsAssetTypesApi.md" />
+    <None Include="docs\SettingsCommentsApi.md" />
+    <None Include="docs\SettingsConditionsApi.md" />
+    <None Include="docs\SettingsContactsApi.md" />
+    <None Include="docs\SettingsCostsApi.md" />
+    <None Include="docs\SettingsDepartmentsApi.md" />
+    <None Include="docs\SettingsDocumentsApi.md" />
+    <None Include="docs\SettingsDrilldownsApi.md" />
+    <None Include="docs\SettingsInspectionsApi.md" />
+    <None Include="docs\SettingsModulesApi.md" />
+    <None Include="docs\SettingsOwnersApi.md" />
+    <None Include="docs\SettingsParcelsApi.md" />
+    <None Include="docs\SettingsPartsApi.md" />
+    <None Include="docs\SettingsPickListsApi.md" />
+    <None Include="docs\SettingsPrioritiesApi.md" />
+    <None Include="docs\SettingsProfesssionalsApi.md" />
+    <None Include="docs\SettingsRecordsApi.md" />
+    <None Include="docs\SettingsTimeAccountingApi.md" />
+    <None Include="docs\SettingValueModel.md" />
+    <None Include="docs\SharedPickListModel.md" />
+    <None Include="docs\SharedPickListModelStatus.md" />
+    <None Include="docs\SharedPickListValuesModel.md" />
+    <None Include="docs\StandardCommentGroupModel.md" />
+    <None Include="docs\StandardCommentModel.md" />
+    <None Include="docs\StandardCommentModelGroup.md" />
+    <None Include="docs\StandardCommentModelType.md" />
+    <None Include="docs\StandardCommentTypeModel.md" />
+    <None Include="docs\TableModel.md" />
+    <None Include="docs\UserGroupModel.md" />
+    <None Include="docs\UserModel.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

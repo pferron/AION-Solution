@@ -1,0 +1,27 @@
+﻿@*using AION.Web.Models;*@
+
+<style type="text/css">
+    .errorImage {
+        max-width: 350px;
+        height: auto;
+    }
+</style>
+
+<div class="text-center">
+    <img src="~/Images/500.png" class="errorImage" /><br/><br/>
+    <h3 class="text-secondary">Oops!</h3>
+    <label class="text-secondary">Please try again. If this happens again, please create ticket with Helpdesk and provide this error information. </label><br/>
+    <a href="@Url.Action("SearchDashboard", "Search")" class="btn btn-secondary"> <i class="fa fa-home" aria-hidden="true"></i>&nbsp;Go Home</a>
+    @*<a href="@Url.Action(Model.ActionName, Model.ControllerName)" class="btn btn-secondary"> <i class="fa fa-home" aria-hidden="true"></i>&nbsp;Go Back</a>*@
+</div>
+<br />
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-9 text-muted">
+            <h5>Error Information:</h5>
+            <div><strong>Error Code:</strong> @Model.LoggingId</div>
+            <div><strong>Error Date:</strong> @DateTime.UtcNow (UTC)</div>
+        </div>
+    </div>
+</div>

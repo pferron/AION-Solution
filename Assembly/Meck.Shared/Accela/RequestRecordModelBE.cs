@@ -1,0 +1,1183 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+
+
+namespace Meck.Shared.Accela
+{
+    /// <summary>
+    /// RequestRecordModel
+    /// </summary>
+    [DataContract]
+    public partial class RequestRecordModelBE 
+    {
+        /// <summary>
+        /// Indictes whether or not the record was cloned.
+        /// </summary>
+        /// <value>Indictes whether or not the record was cloned.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CreatedByCloningEnum
+        {
+            
+            /// <summary>
+            /// Enum Y for value: Y
+            /// </summary>
+            [EnumMember(Value = "Y")]
+            Y = 1,
+            
+            /// <summary>
+            /// Enum N for value: N
+            /// </summary>
+            [EnumMember(Value = "N")]
+            N = 2
+        }
+
+        /// <summary>
+        /// Indictes whether or not the record was cloned.
+        /// </summary>
+        /// <value>Indictes whether or not the record was cloned.</value>
+        [DataMember(Name="createdByCloning", EmitDefaultValue=false)]
+        public CreatedByCloningEnum? CreatedByCloning { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequestRecordModelBE" /> class.
+        /// </summary>
+        /// <param name="actualProductionUnit">Estimated cost per production unit..</param>
+        /// <param name="addresses">addresses.</param>
+        /// <param name="appearanceDate">The date for a hearing appearance..</param>
+        /// <param name="appearanceDayOfWeek">The day for a hearing appearance..</param>
+        /// <param name="assignedDate">The date the application was assigned..</param>
+        /// <param name="assignedToDepartment">The department responsible for the action. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments)..</param>
+        /// <param name="assignedUser">The staff member responsible for the action..</param>
+        /// <param name="booking">Indicates whether or not there was a booking in addition to a citation..</param>
+        /// <param name="closedByDepartment">The department responsible for closing the record. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments)..</param>
+        /// <param name="closedByUser">The staff member responsible for closure..</param>
+        /// <param name="closedDate">The date the application was closed..</param>
+        /// <param name="completeDate">The date the application was completed..</param>
+        /// <param name="completedByDepartment">The department responsible for completion. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments)..</param>
+        /// <param name="completedByUser">The staff member responsible for completion..</param>
+        /// <param name="constructionType">constructionType.</param>
+        /// <param name="contact">contact.</param>
+        /// <param name="costPerUnit">The cost for one unit associated to the record..</param>
+        /// <param name="createdBy">The unique user id of the individual that created the entry..</param>
+        /// <param name="createdByCloning">Indictes whether or not the record was cloned..</param>
+        /// <param name="customForms">customForms.</param>
+        /// <param name="customId">An ID based on a different numbering convention from the numbering convention used by the record ID (xxxxx-xx-xxxxx). Civic Platform auto-generates and applies an alternate ID value when you submit a new application..</param>
+        /// <param name="customTables">customTables.</param>
+        /// <param name="defendantSignature">Indicates whether or not a defendant&#39;s signature has been obtained..</param>
+        /// <param name="description">The description of the record or item..</param>
+        /// <param name="enforceDepartment">The name of the department responsible for enforcement. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments)..</param>
+        /// <param name="enforceUser">Name of the enforcement officer..</param>
+        /// <param name="enforceUserId">ID number of the enforcement officer..</param>
+        /// <param name="estimatedCostPerUnit">The estimated cost per unit..</param>
+        /// <param name="estimatedDueDate">The estimated date of completion..</param>
+        /// <param name="estimatedProductionUnit">The estimated number of production units..</param>
+        /// <param name="estimatedTotalJobCost">The estimated cost of the job..</param>
+        /// <param name="firstIssuedDate">The first issued date for license.</param>
+        /// <param name="housingUnits">The number of housing units..</param>
+        /// <param name="id">The record system id assigned by the Civic Platform server..</param>
+        /// <param name="initiatedProduct">The product or app that created the record. If initiatedProduct is null or not specified in the request, the default is \&quot;AV360\&quot; (Civic Platform application). Added in Civic Platform version: 9.2.0.</param>
+        /// <param name="inPossessionTime">The application level in possession time of the time tracking feature..</param>
+        /// <param name="infraction">Indicates whether or not an infraction occurred..</param>
+        /// <param name="inspectorDepartment">The name of the department where the inspector works. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments)..</param>
+        /// <param name="inspectorId">The ID number of the inspector. See [Get All Inspectors](./api-inspections.html#operation/v4.get.inspectors)..</param>
+        /// <param name="inspectorName">The name of the inspector. See [Get All Inspectors](./api-inspections.html#operation/v4.get.inspectors)..</param>
+        /// <param name="jobValue">The value of the job..</param>
+        /// <param name="misdemeanor">Indicates whether or not a misdemeanor occurred..</param>
+        /// <param name="module">The module the record belongs to. See [Get All Modules](./api-settings.html#operation/v4.get.settings.modules)..</param>
+        /// <param name="name">The name associated to the record..</param>
+        /// <param name="numberOfBuildings">The number of buildings..</param>
+        /// <param name="offenseWitnessed">Indicates whether or not  there was a witness to the alleged offense..</param>
+        /// <param name="owner">owner.</param>
+        /// <param name="parcel">parcel.</param>
+        /// <param name="priority">priority.</param>
+        /// <param name="professional">professional.</param>
+        /// <param name="publicOwned">Indicates whether or not the record is for the public..</param>
+        /// <param name="recordClass">General information about the record..</param>
+        /// <param name="renewalInfo">renewalInfo.</param>
+        /// <param name="reportedChannel">reportedChannel.</param>
+        /// <param name="reportedDate">The date the complaint was reported..</param>
+        /// <param name="reportedType">reportedType.</param>
+        /// <param name="scheduledDate">The date when the inspection gets scheduled..</param>
+        /// <param name="severity">severity.</param>
+        /// <param name="shortNotes">A brief note about the record subject..</param>
+        /// <param name="status">status.</param>
+        /// <param name="statusReason">statusReason.</param>
+        /// <param name="totalJobCost">The combination of work order assignments (labor) and costs..</param>
+        /// <param name="type">type.</param>
+        /// <param name="undistributedCost">The undistributed costs for this work order..</param>
+        public RequestRecordModelBE(double? actualProductionUnit = default(double?), List<RecordAddressModelBE> addresses = default(List<RecordAddressModelBE>), DateTime? appearanceDate = default(DateTime?), string appearanceDayOfWeek = default(string), DateTime? assignedDate = default(DateTime?), string assignedToDepartment = default(string), string assignedUser = default(string), bool? booking = default(bool?), string closedByDepartment = default(string), string closedByUser = default(string), DateTime? closedDate = default(DateTime?), DateTime? completeDate = default(DateTime?), string completedByDepartment = default(string), string completedByUser = default(string), RecordAPOCustomFormsModelConstructionTypeBE constructionType = default(RecordAPOCustomFormsModelConstructionTypeBE), RecordContactModelBE contact = default(RecordContactModelBE), double? costPerUnit = default(double?), string createdBy = default(string), CreatedByCloningEnum? createdByCloning = default(CreatedByCloningEnum?), List<CustomAttributeModelBE> customForms = default(List<CustomAttributeModelBE>), string customId = default(string), List<TableModelBE> customTables = default(List<TableModelBE>), bool? defendantSignature = default(bool?), string description = default(string), string enforceDepartment = default(string), string enforceUser = default(string), string enforceUserId = default(string), double? estimatedCostPerUnit = default(double?), DateTime? estimatedDueDate = default(DateTime?), double? estimatedProductionUnit = default(double?), double? estimatedTotalJobCost = default(double?), DateTime? firstIssuedDate = default(DateTime?), long? housingUnits = default(long?), string id = default(string), string initiatedProduct = default(string), double? inPossessionTime = default(double?), bool? infraction = default(bool?), string inspectorDepartment = default(string), string inspectorId = default(string), string inspectorName = default(string), double? jobValue = default(double?), bool? misdemeanor = default(bool?), string module = default(string), string name = default(string), long? numberOfBuildings = default(long?), bool? offenseWitnessed = default(bool?), List<RefOwnerModelBE> owner = default(List<RefOwnerModelBE>), List<ParcelModel1BE> parcel = default(List<ParcelModel1BE>), RecordAPOCustomFormsModelPriorityBE priority = default(RecordAPOCustomFormsModelPriorityBE), List<LicenseProfessionalModelBE> professional = default(List<LicenseProfessionalModelBE>), bool? publicOwned = default(bool?), string recordClass = default(string), RecordExpirationModelBE renewalInfo = default(RecordExpirationModelBE), RecordAPOCustomFormsModelReportedChannelBE reportedChannel = default(RecordAPOCustomFormsModelReportedChannelBE), DateTime? reportedDate = default(DateTime?), RecordAPOCustomFormsModelReportedTypeBE reportedType = default(RecordAPOCustomFormsModelReportedTypeBE), DateTime? scheduledDate = default(DateTime?), RecordAPOCustomFormsModelSeverityBE severity = default(RecordAPOCustomFormsModelSeverityBE), string shortNotes = default(string), RecordAPOCustomFormsModelStatusBE status = default(RecordAPOCustomFormsModelStatusBE), RecordAPOCustomFormsModelStatusReasonBE statusReason = default(RecordAPOCustomFormsModelStatusReasonBE), double? totalJobCost = default(double?), RecordTypeModelBE type = default(RecordTypeModelBE), double? undistributedCost = default(double?))
+        {
+            this.ActualProductionUnit = actualProductionUnit;
+            this.Addresses = addresses;
+            this.AppearanceDate = appearanceDate;
+            this.AppearanceDayOfWeek = appearanceDayOfWeek;
+            this.AssignedDate = assignedDate;
+            this.AssignedToDepartment = assignedToDepartment;
+            this.AssignedUser = assignedUser;
+            this.Booking = booking;
+            this.ClosedByDepartment = closedByDepartment;
+            this.ClosedByUser = closedByUser;
+            this.ClosedDate = closedDate;
+            this.CompleteDate = completeDate;
+            this.CompletedByDepartment = completedByDepartment;
+            this.CompletedByUser = completedByUser;
+            this.ConstructionType = constructionType;
+            this.Contact = contact;
+            this.CostPerUnit = costPerUnit;
+            this.CreatedBy = createdBy;
+            this.CreatedByCloning = createdByCloning;
+            this.CustomForms = customForms;
+            this.CustomId = customId;
+            this.CustomTables = customTables;
+            this.DefendantSignature = defendantSignature;
+            this.Description = description;
+            this.EnforceDepartment = enforceDepartment;
+            this.EnforceUser = enforceUser;
+            this.EnforceUserId = enforceUserId;
+            this.EstimatedCostPerUnit = estimatedCostPerUnit;
+            this.EstimatedDueDate = estimatedDueDate;
+            this.EstimatedProductionUnit = estimatedProductionUnit;
+            this.EstimatedTotalJobCost = estimatedTotalJobCost;
+            this.FirstIssuedDate = firstIssuedDate;
+            this.HousingUnits = housingUnits;
+            this.Id = id;
+            this.InitiatedProduct = initiatedProduct;
+            this.InPossessionTime = inPossessionTime;
+            this.Infraction = infraction;
+            this.InspectorDepartment = inspectorDepartment;
+            this.InspectorId = inspectorId;
+            this.InspectorName = inspectorName;
+            this.JobValue = jobValue;
+            this.Misdemeanor = misdemeanor;
+            this.Module = module;
+            this.Name = name;
+            this.NumberOfBuildings = numberOfBuildings;
+            this.OffenseWitnessed = offenseWitnessed;
+            this.Owner = owner;
+            this.Parcel = parcel;
+            this.Priority = priority;
+            this.Professional = professional;
+            this.PublicOwned = publicOwned;
+            this.RecordClass = recordClass;
+            this.RenewalInfo = renewalInfo;
+            this.ReportedChannel = reportedChannel;
+            this.ReportedDate = reportedDate;
+            this.ReportedType = reportedType;
+            this.ScheduledDate = scheduledDate;
+            this.Severity = severity;
+            this.ShortNotes = shortNotes;
+            this.Status = status;
+            this.StatusReason = statusReason;
+            this.TotalJobCost = totalJobCost;
+            this.Type = type;
+            this.UndistributedCost = undistributedCost;
+        }
+        
+        /// <summary>
+        /// Estimated cost per production unit.
+        /// </summary>
+        /// <value>Estimated cost per production unit.</value>
+        [DataMember(Name="actualProductionUnit", EmitDefaultValue=false)]
+        public double? ActualProductionUnit { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Addresses
+        /// </summary>
+        [DataMember(Name="addresses", EmitDefaultValue=false)]
+        public List<RecordAddressModelBE> Addresses { get; set; }
+
+        /// <summary>
+        /// The date for a hearing appearance.
+        /// </summary>
+        /// <value>The date for a hearing appearance.</value>
+        [DataMember(Name="appearanceDate", EmitDefaultValue=false)]
+        public DateTime? AppearanceDate { get; set; }
+
+        /// <summary>
+        /// The day for a hearing appearance.
+        /// </summary>
+        /// <value>The day for a hearing appearance.</value>
+        [DataMember(Name="appearanceDayOfWeek", EmitDefaultValue=false)]
+        public string AppearanceDayOfWeek { get; set; }
+
+        /// <summary>
+        /// The date the application was assigned.
+        /// </summary>
+        /// <value>The date the application was assigned.</value>
+        [DataMember(Name="assignedDate", EmitDefaultValue=false)]
+        public DateTime? AssignedDate { get; set; }
+
+        /// <summary>
+        /// The department responsible for the action. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).
+        /// </summary>
+        /// <value>The department responsible for the action. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).</value>
+        [DataMember(Name="assignedToDepartment", EmitDefaultValue=false)]
+        public string AssignedToDepartment { get; set; }
+
+        /// <summary>
+        /// The staff member responsible for the action.
+        /// </summary>
+        /// <value>The staff member responsible for the action.</value>
+        [DataMember(Name="assignedUser", EmitDefaultValue=false)]
+        public string AssignedUser { get; set; }
+
+        /// <summary>
+        /// Indicates whether or not there was a booking in addition to a citation.
+        /// </summary>
+        /// <value>Indicates whether or not there was a booking in addition to a citation.</value>
+        [DataMember(Name="booking", EmitDefaultValue=false)]
+        public bool? Booking { get; set; }
+
+        /// <summary>
+        /// The department responsible for closing the record. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).
+        /// </summary>
+        /// <value>The department responsible for closing the record. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).</value>
+        [DataMember(Name="closedByDepartment", EmitDefaultValue=false)]
+        public string ClosedByDepartment { get; set; }
+
+        /// <summary>
+        /// The staff member responsible for closure.
+        /// </summary>
+        /// <value>The staff member responsible for closure.</value>
+        [DataMember(Name="closedByUser", EmitDefaultValue=false)]
+        public string ClosedByUser { get; set; }
+
+        /// <summary>
+        /// The date the application was closed.
+        /// </summary>
+        /// <value>The date the application was closed.</value>
+        [DataMember(Name="closedDate", EmitDefaultValue=false)]
+        public DateTime? ClosedDate { get; set; }
+
+        /// <summary>
+        /// The date the application was completed.
+        /// </summary>
+        /// <value>The date the application was completed.</value>
+        [DataMember(Name="completeDate", EmitDefaultValue=false)]
+        public DateTime? CompleteDate { get; set; }
+
+        /// <summary>
+        /// The department responsible for completion. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).
+        /// </summary>
+        /// <value>The department responsible for completion. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).</value>
+        [DataMember(Name="completedByDepartment", EmitDefaultValue=false)]
+        public string CompletedByDepartment { get; set; }
+
+        /// <summary>
+        /// The staff member responsible for completion.
+        /// </summary>
+        /// <value>The staff member responsible for completion.</value>
+        [DataMember(Name="completedByUser", EmitDefaultValue=false)]
+        public string CompletedByUser { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ConstructionType
+        /// </summary>
+        [DataMember(Name="constructionType", EmitDefaultValue=false)]
+        public RecordAPOCustomFormsModelConstructionTypeBE ConstructionType { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Contact
+        /// </summary>
+        [DataMember(Name="contact", EmitDefaultValue=false)]
+        public RecordContactModelBE Contact { get; set; }
+
+        /// <summary>
+        /// The cost for one unit associated to the record.
+        /// </summary>
+        /// <value>The cost for one unit associated to the record.</value>
+        [DataMember(Name="costPerUnit", EmitDefaultValue=false)]
+        public double? CostPerUnit { get; set; }
+
+        /// <summary>
+        /// The unique user id of the individual that created the entry.
+        /// </summary>
+        /// <value>The unique user id of the individual that created the entry.</value>
+        [DataMember(Name="createdBy", EmitDefaultValue=false)]
+        public string CreatedBy { get; set; }
+
+
+        /// <summary>
+        /// Gets or Sets CustomForms
+        /// </summary>
+        [DataMember(Name="customForms", EmitDefaultValue=false)]
+        public List<CustomAttributeModelBE> CustomForms { get; set; }
+
+        /// <summary>
+        /// An ID based on a different numbering convention from the numbering convention used by the record ID (xxxxx-xx-xxxxx). Civic Platform auto-generates and applies an alternate ID value when you submit a new application.
+        /// </summary>
+        /// <value>An ID based on a different numbering convention from the numbering convention used by the record ID (xxxxx-xx-xxxxx). Civic Platform auto-generates and applies an alternate ID value when you submit a new application.</value>
+        [DataMember(Name="customId", EmitDefaultValue=false)]
+        public string CustomId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CustomTables
+        /// </summary>
+        [DataMember(Name="customTables", EmitDefaultValue=false)]
+        public List<TableModelBE> CustomTables { get; set; }
+
+        /// <summary>
+        /// Indicates whether or not a defendant&#39;s signature has been obtained.
+        /// </summary>
+        /// <value>Indicates whether or not a defendant&#39;s signature has been obtained.</value>
+        [DataMember(Name="defendantSignature", EmitDefaultValue=false)]
+        public bool? DefendantSignature { get; set; }
+
+        /// <summary>
+        /// The description of the record or item.
+        /// </summary>
+        /// <value>The description of the record or item.</value>
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// The name of the department responsible for enforcement. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).
+        /// </summary>
+        /// <value>The name of the department responsible for enforcement. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).</value>
+        [DataMember(Name="enforceDepartment", EmitDefaultValue=false)]
+        public string EnforceDepartment { get; set; }
+
+        /// <summary>
+        /// Name of the enforcement officer.
+        /// </summary>
+        /// <value>Name of the enforcement officer.</value>
+        [DataMember(Name="enforceUser", EmitDefaultValue=false)]
+        public string EnforceUser { get; set; }
+
+        /// <summary>
+        /// ID number of the enforcement officer.
+        /// </summary>
+        /// <value>ID number of the enforcement officer.</value>
+        [DataMember(Name="enforceUserId", EmitDefaultValue=false)]
+        public string EnforceUserId { get; set; }
+
+        /// <summary>
+        /// The estimated cost per unit.
+        /// </summary>
+        /// <value>The estimated cost per unit.</value>
+        [DataMember(Name="estimatedCostPerUnit", EmitDefaultValue=false)]
+        public double? EstimatedCostPerUnit { get; set; }
+
+        /// <summary>
+        /// The estimated date of completion.
+        /// </summary>
+        /// <value>The estimated date of completion.</value>
+        [DataMember(Name="estimatedDueDate", EmitDefaultValue=false)]
+        public DateTime? EstimatedDueDate { get; set; }
+
+        /// <summary>
+        /// The estimated number of production units.
+        /// </summary>
+        /// <value>The estimated number of production units.</value>
+        [DataMember(Name="estimatedProductionUnit", EmitDefaultValue=false)]
+        public double? EstimatedProductionUnit { get; set; }
+
+        /// <summary>
+        /// The estimated cost of the job.
+        /// </summary>
+        /// <value>The estimated cost of the job.</value>
+        [DataMember(Name="estimatedTotalJobCost", EmitDefaultValue=false)]
+        public double? EstimatedTotalJobCost { get; set; }
+
+        /// <summary>
+        /// The first issued date for license
+        /// </summary>
+        /// <value>The first issued date for license</value>
+        [DataMember(Name="firstIssuedDate", EmitDefaultValue=false)]
+        public DateTime? FirstIssuedDate { get; set; }
+
+        /// <summary>
+        /// The number of housing units.
+        /// </summary>
+        /// <value>The number of housing units.</value>
+        [DataMember(Name="housingUnits", EmitDefaultValue=false)]
+        public long? HousingUnits { get; set; }
+
+        /// <summary>
+        /// The record system id assigned by the Civic Platform server.
+        /// </summary>
+        /// <value>The record system id assigned by the Civic Platform server.</value>
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// The product or app that created the record. If initiatedProduct is null or not specified in the request, the default is \&quot;AV360\&quot; (Civic Platform application). Added in Civic Platform version: 9.2.0
+        /// </summary>
+        /// <value>The product or app that created the record. If initiatedProduct is null or not specified in the request, the default is \&quot;AV360\&quot; (Civic Platform application). Added in Civic Platform version: 9.2.0</value>
+        [DataMember(Name="initiatedProduct", EmitDefaultValue=false)]
+        public string InitiatedProduct { get; set; }
+
+        /// <summary>
+        /// The application level in possession time of the time tracking feature.
+        /// </summary>
+        /// <value>The application level in possession time of the time tracking feature.</value>
+        [DataMember(Name="inPossessionTime", EmitDefaultValue=false)]
+        public double? InPossessionTime { get; set; }
+
+        /// <summary>
+        /// Indicates whether or not an infraction occurred.
+        /// </summary>
+        /// <value>Indicates whether or not an infraction occurred.</value>
+        [DataMember(Name="infraction", EmitDefaultValue=false)]
+        public bool? Infraction { get; set; }
+
+        /// <summary>
+        /// The name of the department where the inspector works. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).
+        /// </summary>
+        /// <value>The name of the department where the inspector works. See [Get All Departments](./api-settings.html#operation/v4.get.settings.departments).</value>
+        [DataMember(Name="inspectorDepartment", EmitDefaultValue=false)]
+        public string InspectorDepartment { get; set; }
+
+        /// <summary>
+        /// The ID number of the inspector. See [Get All Inspectors](./api-inspections.html#operation/v4.get.inspectors).
+        /// </summary>
+        /// <value>The ID number of the inspector. See [Get All Inspectors](./api-inspections.html#operation/v4.get.inspectors).</value>
+        [DataMember(Name="inspectorId", EmitDefaultValue=false)]
+        public string InspectorId { get; set; }
+
+        /// <summary>
+        /// The name of the inspector. See [Get All Inspectors](./api-inspections.html#operation/v4.get.inspectors).
+        /// </summary>
+        /// <value>The name of the inspector. See [Get All Inspectors](./api-inspections.html#operation/v4.get.inspectors).</value>
+        [DataMember(Name="inspectorName", EmitDefaultValue=false)]
+        public string InspectorName { get; set; }
+
+        /// <summary>
+        /// The value of the job.
+        /// </summary>
+        /// <value>The value of the job.</value>
+        [DataMember(Name="jobValue", EmitDefaultValue=false)]
+        public double? JobValue { get; set; }
+
+        /// <summary>
+        /// Indicates whether or not a misdemeanor occurred.
+        /// </summary>
+        /// <value>Indicates whether or not a misdemeanor occurred.</value>
+        [DataMember(Name="misdemeanor", EmitDefaultValue=false)]
+        public bool? Misdemeanor { get; set; }
+
+        /// <summary>
+        /// The module the record belongs to. See [Get All Modules](./api-settings.html#operation/v4.get.settings.modules).
+        /// </summary>
+        /// <value>The module the record belongs to. See [Get All Modules](./api-settings.html#operation/v4.get.settings.modules).</value>
+        [DataMember(Name="module", EmitDefaultValue=false)]
+        public string Module { get; set; }
+
+        /// <summary>
+        /// The name associated to the record.
+        /// </summary>
+        /// <value>The name associated to the record.</value>
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The number of buildings.
+        /// </summary>
+        /// <value>The number of buildings.</value>
+        [DataMember(Name="numberOfBuildings", EmitDefaultValue=false)]
+        public long? NumberOfBuildings { get; set; }
+
+        /// <summary>
+        /// Indicates whether or not  there was a witness to the alleged offense.
+        /// </summary>
+        /// <value>Indicates whether or not  there was a witness to the alleged offense.</value>
+        [DataMember(Name="offenseWitnessed", EmitDefaultValue=false)]
+        public bool? OffenseWitnessed { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Owner
+        /// </summary>
+        [DataMember(Name="owner", EmitDefaultValue=false)]
+        public List<RefOwnerModelBE> Owner { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Parcel
+        /// </summary>
+        [DataMember(Name="parcel", EmitDefaultValue=false)]
+        public List<ParcelModel1BE> Parcel { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Priority
+        /// </summary>
+        [DataMember(Name="priority", EmitDefaultValue=false)]
+        public RecordAPOCustomFormsModelPriorityBE Priority { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Professional
+        /// </summary>
+        [DataMember(Name="professional", EmitDefaultValue=false)]
+        public List<LicenseProfessionalModelBE> Professional { get; set; }
+
+        /// <summary>
+        /// Indicates whether or not the record is for the public.
+        /// </summary>
+        /// <value>Indicates whether or not the record is for the public.</value>
+        [DataMember(Name="publicOwned", EmitDefaultValue=false)]
+        public bool? PublicOwned { get; set; }
+
+        /// <summary>
+        /// General information about the record.
+        /// </summary>
+        /// <value>General information about the record.</value>
+        [DataMember(Name="recordClass", EmitDefaultValue=false)]
+        public string RecordClass { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RenewalInfo
+        /// </summary>
+        [DataMember(Name="renewalInfo", EmitDefaultValue=false)]
+        public RecordExpirationModelBE RenewalInfo { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ReportedChannel
+        /// </summary>
+        [DataMember(Name="reportedChannel", EmitDefaultValue=false)]
+        public RecordAPOCustomFormsModelReportedChannelBE ReportedChannel { get; set; }
+
+        /// <summary>
+        /// The date the complaint was reported.
+        /// </summary>
+        /// <value>The date the complaint was reported.</value>
+        [DataMember(Name="reportedDate", EmitDefaultValue=false)]
+        public DateTime? ReportedDate { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ReportedType
+        /// </summary>
+        [DataMember(Name="reportedType", EmitDefaultValue=false)]
+        public RecordAPOCustomFormsModelReportedTypeBE ReportedType { get; set; }
+
+        /// <summary>
+        /// The date when the inspection gets scheduled.
+        /// </summary>
+        /// <value>The date when the inspection gets scheduled.</value>
+        [DataMember(Name="scheduledDate", EmitDefaultValue=false)]
+        public DateTime? ScheduledDate { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Severity
+        /// </summary>
+        [DataMember(Name="severity", EmitDefaultValue=false)]
+        public RecordAPOCustomFormsModelSeverityBE Severity { get; set; }
+
+        /// <summary>
+        /// A brief note about the record subject.
+        /// </summary>
+        /// <value>A brief note about the record subject.</value>
+        [DataMember(Name="shortNotes", EmitDefaultValue=false)]
+        public string ShortNotes { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Status
+        /// </summary>
+        [DataMember(Name="status", EmitDefaultValue=false)]
+        public RecordAPOCustomFormsModelStatusBE Status { get; set; }
+
+        /// <summary>
+        /// Gets or Sets StatusReason
+        /// </summary>
+        [DataMember(Name="statusReason", EmitDefaultValue=false)]
+        public RecordAPOCustomFormsModelStatusReasonBE StatusReason { get; set; }
+
+        /// <summary>
+        /// The combination of work order assignments (labor) and costs.
+        /// </summary>
+        /// <value>The combination of work order assignments (labor) and costs.</value>
+        [DataMember(Name="totalJobCost", EmitDefaultValue=false)]
+        public double? TotalJobCost { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public RecordTypeModelBE Type { get; set; }
+
+        /// <summary>
+        /// The undistributed costs for this work order.
+        /// </summary>
+        /// <value>The undistributed costs for this work order.</value>
+        [DataMember(Name="undistributedCost", EmitDefaultValue=false)]
+        public double? UndistributedCost { get; set; }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("class RequestRecordModel {\n");
+            sb.Append("  ActualProductionUnit: ").Append(ActualProductionUnit).Append("\n");
+            sb.Append("  Addresses: ").Append(Addresses).Append("\n");
+            sb.Append("  AppearanceDate: ").Append(AppearanceDate).Append("\n");
+            sb.Append("  AppearanceDayOfWeek: ").Append(AppearanceDayOfWeek).Append("\n");
+            sb.Append("  AssignedDate: ").Append(AssignedDate).Append("\n");
+            sb.Append("  AssignedToDepartment: ").Append(AssignedToDepartment).Append("\n");
+            sb.Append("  AssignedUser: ").Append(AssignedUser).Append("\n");
+            sb.Append("  Booking: ").Append(Booking).Append("\n");
+            sb.Append("  ClosedByDepartment: ").Append(ClosedByDepartment).Append("\n");
+            sb.Append("  ClosedByUser: ").Append(ClosedByUser).Append("\n");
+            sb.Append("  ClosedDate: ").Append(ClosedDate).Append("\n");
+            sb.Append("  CompleteDate: ").Append(CompleteDate).Append("\n");
+            sb.Append("  CompletedByDepartment: ").Append(CompletedByDepartment).Append("\n");
+            sb.Append("  CompletedByUser: ").Append(CompletedByUser).Append("\n");
+            sb.Append("  ConstructionType: ").Append(ConstructionType).Append("\n");
+            sb.Append("  Contact: ").Append(Contact).Append("\n");
+            sb.Append("  CostPerUnit: ").Append(CostPerUnit).Append("\n");
+            sb.Append("  CreatedBy: ").Append(CreatedBy).Append("\n");
+            sb.Append("  CreatedByCloning: ").Append(CreatedByCloning).Append("\n");
+            sb.Append("  CustomForms: ").Append(CustomForms).Append("\n");
+            sb.Append("  CustomId: ").Append(CustomId).Append("\n");
+            sb.Append("  CustomTables: ").Append(CustomTables).Append("\n");
+            sb.Append("  DefendantSignature: ").Append(DefendantSignature).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  EnforceDepartment: ").Append(EnforceDepartment).Append("\n");
+            sb.Append("  EnforceUser: ").Append(EnforceUser).Append("\n");
+            sb.Append("  EnforceUserId: ").Append(EnforceUserId).Append("\n");
+            sb.Append("  EstimatedCostPerUnit: ").Append(EstimatedCostPerUnit).Append("\n");
+            sb.Append("  EstimatedDueDate: ").Append(EstimatedDueDate).Append("\n");
+            sb.Append("  EstimatedProductionUnit: ").Append(EstimatedProductionUnit).Append("\n");
+            sb.Append("  EstimatedTotalJobCost: ").Append(EstimatedTotalJobCost).Append("\n");
+            sb.Append("  FirstIssuedDate: ").Append(FirstIssuedDate).Append("\n");
+            sb.Append("  HousingUnits: ").Append(HousingUnits).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  InitiatedProduct: ").Append(InitiatedProduct).Append("\n");
+            sb.Append("  InPossessionTime: ").Append(InPossessionTime).Append("\n");
+            sb.Append("  Infraction: ").Append(Infraction).Append("\n");
+            sb.Append("  InspectorDepartment: ").Append(InspectorDepartment).Append("\n");
+            sb.Append("  InspectorId: ").Append(InspectorId).Append("\n");
+            sb.Append("  InspectorName: ").Append(InspectorName).Append("\n");
+            sb.Append("  JobValue: ").Append(JobValue).Append("\n");
+            sb.Append("  Misdemeanor: ").Append(Misdemeanor).Append("\n");
+            sb.Append("  Module: ").Append(Module).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  NumberOfBuildings: ").Append(NumberOfBuildings).Append("\n");
+            sb.Append("  OffenseWitnessed: ").Append(OffenseWitnessed).Append("\n");
+            sb.Append("  Owner: ").Append(Owner).Append("\n");
+            sb.Append("  Parcel: ").Append(Parcel).Append("\n");
+            sb.Append("  Priority: ").Append(Priority).Append("\n");
+            sb.Append("  Professional: ").Append(Professional).Append("\n");
+            sb.Append("  PublicOwned: ").Append(PublicOwned).Append("\n");
+            sb.Append("  RecordClass: ").Append(RecordClass).Append("\n");
+            sb.Append("  RenewalInfo: ").Append(RenewalInfo).Append("\n");
+            sb.Append("  ReportedChannel: ").Append(ReportedChannel).Append("\n");
+            sb.Append("  ReportedDate: ").Append(ReportedDate).Append("\n");
+            sb.Append("  ReportedType: ").Append(ReportedType).Append("\n");
+            sb.Append("  ScheduledDate: ").Append(ScheduledDate).Append("\n");
+            sb.Append("  Severity: ").Append(Severity).Append("\n");
+            sb.Append("  ShortNotes: ").Append(ShortNotes).Append("\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  StatusReason: ").Append(StatusReason).Append("\n");
+            sb.Append("  TotalJobCost: ").Append(TotalJobCost).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  UndistributedCost: ").Append(UndistributedCost).Append("\n");
+            sb.Append("}\n");
+            return sb.ToString();
+        }
+  
+        /// <summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
+        /// <returns>JSON string presentation of the object</returns>
+        public virtual string ToJson()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
+
+        /// <summary>
+        /// Returns true if objects are equal
+        /// </summary>
+        /// <param name="input">Object to be compared</param>
+        /// <returns>Boolean</returns>
+        public override bool Equals(object input)
+        {
+            return this.Equals(input as RequestRecordModelBE);
+        }
+
+        /// <summary>
+        /// Returns true if RequestRecordModel instances are equal
+        /// </summary>
+        /// <param name="input">Instance of RequestRecordModel to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(RequestRecordModelBE input)
+        {
+            if (input == null)
+                return false;
+
+            return 
+                (
+                    this.ActualProductionUnit == input.ActualProductionUnit ||
+                    (this.ActualProductionUnit != null &&
+                    this.ActualProductionUnit.Equals(input.ActualProductionUnit))
+                ) && 
+                (
+                    this.Addresses == input.Addresses ||
+                    this.Addresses != null &&
+                    this.Addresses.SequenceEqual(input.Addresses)
+                ) && 
+                (
+                    this.AppearanceDate == input.AppearanceDate ||
+                    (this.AppearanceDate != null &&
+                    this.AppearanceDate.Equals(input.AppearanceDate))
+                ) && 
+                (
+                    this.AppearanceDayOfWeek == input.AppearanceDayOfWeek ||
+                    (this.AppearanceDayOfWeek != null &&
+                    this.AppearanceDayOfWeek.Equals(input.AppearanceDayOfWeek))
+                ) && 
+                (
+                    this.AssignedDate == input.AssignedDate ||
+                    (this.AssignedDate != null &&
+                    this.AssignedDate.Equals(input.AssignedDate))
+                ) && 
+                (
+                    this.AssignedToDepartment == input.AssignedToDepartment ||
+                    (this.AssignedToDepartment != null &&
+                    this.AssignedToDepartment.Equals(input.AssignedToDepartment))
+                ) && 
+                (
+                    this.AssignedUser == input.AssignedUser ||
+                    (this.AssignedUser != null &&
+                    this.AssignedUser.Equals(input.AssignedUser))
+                ) && 
+                (
+                    this.Booking == input.Booking ||
+                    (this.Booking != null &&
+                    this.Booking.Equals(input.Booking))
+                ) && 
+                (
+                    this.ClosedByDepartment == input.ClosedByDepartment ||
+                    (this.ClosedByDepartment != null &&
+                    this.ClosedByDepartment.Equals(input.ClosedByDepartment))
+                ) && 
+                (
+                    this.ClosedByUser == input.ClosedByUser ||
+                    (this.ClosedByUser != null &&
+                    this.ClosedByUser.Equals(input.ClosedByUser))
+                ) && 
+                (
+                    this.ClosedDate == input.ClosedDate ||
+                    (this.ClosedDate != null &&
+                    this.ClosedDate.Equals(input.ClosedDate))
+                ) && 
+                (
+                    this.CompleteDate == input.CompleteDate ||
+                    (this.CompleteDate != null &&
+                    this.CompleteDate.Equals(input.CompleteDate))
+                ) && 
+                (
+                    this.CompletedByDepartment == input.CompletedByDepartment ||
+                    (this.CompletedByDepartment != null &&
+                    this.CompletedByDepartment.Equals(input.CompletedByDepartment))
+                ) && 
+                (
+                    this.CompletedByUser == input.CompletedByUser ||
+                    (this.CompletedByUser != null &&
+                    this.CompletedByUser.Equals(input.CompletedByUser))
+                ) && 
+                (
+                    this.ConstructionType == input.ConstructionType ||
+                    (this.ConstructionType != null &&
+                    this.ConstructionType.Equals(input.ConstructionType))
+                ) && 
+                (
+                    this.Contact == input.Contact ||
+                    (this.Contact != null &&
+                    this.Contact.Equals(input.Contact))
+                ) && 
+                (
+                    this.CostPerUnit == input.CostPerUnit ||
+                    (this.CostPerUnit != null &&
+                    this.CostPerUnit.Equals(input.CostPerUnit))
+                ) && 
+                (
+                    this.CreatedBy == input.CreatedBy ||
+                    (this.CreatedBy != null &&
+                    this.CreatedBy.Equals(input.CreatedBy))
+                ) && 
+                (
+                    this.CreatedByCloning == input.CreatedByCloning ||
+                    (this.CreatedByCloning != null &&
+                    this.CreatedByCloning.Equals(input.CreatedByCloning))
+                ) && 
+                (
+                    this.CustomForms == input.CustomForms ||
+                    this.CustomForms != null &&
+                    this.CustomForms.SequenceEqual(input.CustomForms)
+                ) && 
+                (
+                    this.CustomId == input.CustomId ||
+                    (this.CustomId != null &&
+                    this.CustomId.Equals(input.CustomId))
+                ) && 
+                (
+                    this.CustomTables == input.CustomTables ||
+                    this.CustomTables != null &&
+                    this.CustomTables.SequenceEqual(input.CustomTables)
+                ) && 
+                (
+                    this.DefendantSignature == input.DefendantSignature ||
+                    (this.DefendantSignature != null &&
+                    this.DefendantSignature.Equals(input.DefendantSignature))
+                ) && 
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && 
+                (
+                    this.EnforceDepartment == input.EnforceDepartment ||
+                    (this.EnforceDepartment != null &&
+                    this.EnforceDepartment.Equals(input.EnforceDepartment))
+                ) && 
+                (
+                    this.EnforceUser == input.EnforceUser ||
+                    (this.EnforceUser != null &&
+                    this.EnforceUser.Equals(input.EnforceUser))
+                ) && 
+                (
+                    this.EnforceUserId == input.EnforceUserId ||
+                    (this.EnforceUserId != null &&
+                    this.EnforceUserId.Equals(input.EnforceUserId))
+                ) && 
+                (
+                    this.EstimatedCostPerUnit == input.EstimatedCostPerUnit ||
+                    (this.EstimatedCostPerUnit != null &&
+                    this.EstimatedCostPerUnit.Equals(input.EstimatedCostPerUnit))
+                ) && 
+                (
+                    this.EstimatedDueDate == input.EstimatedDueDate ||
+                    (this.EstimatedDueDate != null &&
+                    this.EstimatedDueDate.Equals(input.EstimatedDueDate))
+                ) && 
+                (
+                    this.EstimatedProductionUnit == input.EstimatedProductionUnit ||
+                    (this.EstimatedProductionUnit != null &&
+                    this.EstimatedProductionUnit.Equals(input.EstimatedProductionUnit))
+                ) && 
+                (
+                    this.EstimatedTotalJobCost == input.EstimatedTotalJobCost ||
+                    (this.EstimatedTotalJobCost != null &&
+                    this.EstimatedTotalJobCost.Equals(input.EstimatedTotalJobCost))
+                ) && 
+                (
+                    this.FirstIssuedDate == input.FirstIssuedDate ||
+                    (this.FirstIssuedDate != null &&
+                    this.FirstIssuedDate.Equals(input.FirstIssuedDate))
+                ) && 
+                (
+                    this.HousingUnits == input.HousingUnits ||
+                    (this.HousingUnits != null &&
+                    this.HousingUnits.Equals(input.HousingUnits))
+                ) && 
+                (
+                    this.Id == input.Id ||
+                    (this.Id != null &&
+                    this.Id.Equals(input.Id))
+                ) && 
+                (
+                    this.InitiatedProduct == input.InitiatedProduct ||
+                    (this.InitiatedProduct != null &&
+                    this.InitiatedProduct.Equals(input.InitiatedProduct))
+                ) && 
+                (
+                    this.InPossessionTime == input.InPossessionTime ||
+                    (this.InPossessionTime != null &&
+                    this.InPossessionTime.Equals(input.InPossessionTime))
+                ) && 
+                (
+                    this.Infraction == input.Infraction ||
+                    (this.Infraction != null &&
+                    this.Infraction.Equals(input.Infraction))
+                ) && 
+                (
+                    this.InspectorDepartment == input.InspectorDepartment ||
+                    (this.InspectorDepartment != null &&
+                    this.InspectorDepartment.Equals(input.InspectorDepartment))
+                ) && 
+                (
+                    this.InspectorId == input.InspectorId ||
+                    (this.InspectorId != null &&
+                    this.InspectorId.Equals(input.InspectorId))
+                ) && 
+                (
+                    this.InspectorName == input.InspectorName ||
+                    (this.InspectorName != null &&
+                    this.InspectorName.Equals(input.InspectorName))
+                ) && 
+                (
+                    this.JobValue == input.JobValue ||
+                    (this.JobValue != null &&
+                    this.JobValue.Equals(input.JobValue))
+                ) && 
+                (
+                    this.Misdemeanor == input.Misdemeanor ||
+                    (this.Misdemeanor != null &&
+                    this.Misdemeanor.Equals(input.Misdemeanor))
+                ) && 
+                (
+                    this.Module == input.Module ||
+                    (this.Module != null &&
+                    this.Module.Equals(input.Module))
+                ) && 
+                (
+                    this.Name == input.Name ||
+                    (this.Name != null &&
+                    this.Name.Equals(input.Name))
+                ) && 
+                (
+                    this.NumberOfBuildings == input.NumberOfBuildings ||
+                    (this.NumberOfBuildings != null &&
+                    this.NumberOfBuildings.Equals(input.NumberOfBuildings))
+                ) && 
+                (
+                    this.OffenseWitnessed == input.OffenseWitnessed ||
+                    (this.OffenseWitnessed != null &&
+                    this.OffenseWitnessed.Equals(input.OffenseWitnessed))
+                ) && 
+                (
+                    this.Owner == input.Owner ||
+                    this.Owner != null &&
+                    this.Owner.SequenceEqual(input.Owner)
+                ) && 
+                (
+                    this.Parcel == input.Parcel ||
+                    this.Parcel != null &&
+                    this.Parcel.SequenceEqual(input.Parcel)
+                ) && 
+                (
+                    this.Priority == input.Priority ||
+                    (this.Priority != null &&
+                    this.Priority.Equals(input.Priority))
+                ) && 
+                (
+                    this.Professional == input.Professional ||
+                    this.Professional != null &&
+                    this.Professional.SequenceEqual(input.Professional)
+                ) && 
+                (
+                    this.PublicOwned == input.PublicOwned ||
+                    (this.PublicOwned != null &&
+                    this.PublicOwned.Equals(input.PublicOwned))
+                ) && 
+                (
+                    this.RecordClass == input.RecordClass ||
+                    (this.RecordClass != null &&
+                    this.RecordClass.Equals(input.RecordClass))
+                ) && 
+                (
+                    this.RenewalInfo == input.RenewalInfo ||
+                    (this.RenewalInfo != null &&
+                    this.RenewalInfo.Equals(input.RenewalInfo))
+                ) && 
+                (
+                    this.ReportedChannel == input.ReportedChannel ||
+                    (this.ReportedChannel != null &&
+                    this.ReportedChannel.Equals(input.ReportedChannel))
+                ) && 
+                (
+                    this.ReportedDate == input.ReportedDate ||
+                    (this.ReportedDate != null &&
+                    this.ReportedDate.Equals(input.ReportedDate))
+                ) && 
+                (
+                    this.ReportedType == input.ReportedType ||
+                    (this.ReportedType != null &&
+                    this.ReportedType.Equals(input.ReportedType))
+                ) && 
+                (
+                    this.ScheduledDate == input.ScheduledDate ||
+                    (this.ScheduledDate != null &&
+                    this.ScheduledDate.Equals(input.ScheduledDate))
+                ) && 
+                (
+                    this.Severity == input.Severity ||
+                    (this.Severity != null &&
+                    this.Severity.Equals(input.Severity))
+                ) && 
+                (
+                    this.ShortNotes == input.ShortNotes ||
+                    (this.ShortNotes != null &&
+                    this.ShortNotes.Equals(input.ShortNotes))
+                ) && 
+                (
+                    this.Status == input.Status ||
+                    (this.Status != null &&
+                    this.Status.Equals(input.Status))
+                ) && 
+                (
+                    this.StatusReason == input.StatusReason ||
+                    (this.StatusReason != null &&
+                    this.StatusReason.Equals(input.StatusReason))
+                ) && 
+                (
+                    this.TotalJobCost == input.TotalJobCost ||
+                    (this.TotalJobCost != null &&
+                    this.TotalJobCost.Equals(input.TotalJobCost))
+                ) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.UndistributedCost == input.UndistributedCost ||
+                    (this.UndistributedCost != null &&
+                    this.UndistributedCost.Equals(input.UndistributedCost))
+                );
+        }
+
+        /// <summary>
+        /// Gets the hash code
+        /// </summary>
+        /// <returns>Hash code</returns>
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.ActualProductionUnit != null)
+                    hashCode = hashCode * 59 + this.ActualProductionUnit.GetHashCode();
+                if (this.Addresses != null)
+                    hashCode = hashCode * 59 + this.Addresses.GetHashCode();
+                if (this.AppearanceDate != null)
+                    hashCode = hashCode * 59 + this.AppearanceDate.GetHashCode();
+                if (this.AppearanceDayOfWeek != null)
+                    hashCode = hashCode * 59 + this.AppearanceDayOfWeek.GetHashCode();
+                if (this.AssignedDate != null)
+                    hashCode = hashCode * 59 + this.AssignedDate.GetHashCode();
+                if (this.AssignedToDepartment != null)
+                    hashCode = hashCode * 59 + this.AssignedToDepartment.GetHashCode();
+                if (this.AssignedUser != null)
+                    hashCode = hashCode * 59 + this.AssignedUser.GetHashCode();
+                if (this.Booking != null)
+                    hashCode = hashCode * 59 + this.Booking.GetHashCode();
+                if (this.ClosedByDepartment != null)
+                    hashCode = hashCode * 59 + this.ClosedByDepartment.GetHashCode();
+                if (this.ClosedByUser != null)
+                    hashCode = hashCode * 59 + this.ClosedByUser.GetHashCode();
+                if (this.ClosedDate != null)
+                    hashCode = hashCode * 59 + this.ClosedDate.GetHashCode();
+                if (this.CompleteDate != null)
+                    hashCode = hashCode * 59 + this.CompleteDate.GetHashCode();
+                if (this.CompletedByDepartment != null)
+                    hashCode = hashCode * 59 + this.CompletedByDepartment.GetHashCode();
+                if (this.CompletedByUser != null)
+                    hashCode = hashCode * 59 + this.CompletedByUser.GetHashCode();
+                if (this.ConstructionType != null)
+                    hashCode = hashCode * 59 + this.ConstructionType.GetHashCode();
+                if (this.Contact != null)
+                    hashCode = hashCode * 59 + this.Contact.GetHashCode();
+                if (this.CostPerUnit != null)
+                    hashCode = hashCode * 59 + this.CostPerUnit.GetHashCode();
+                if (this.CreatedBy != null)
+                    hashCode = hashCode * 59 + this.CreatedBy.GetHashCode();
+                if (this.CreatedByCloning != null)
+                    hashCode = hashCode * 59 + this.CreatedByCloning.GetHashCode();
+                if (this.CustomForms != null)
+                    hashCode = hashCode * 59 + this.CustomForms.GetHashCode();
+                if (this.CustomId != null)
+                    hashCode = hashCode * 59 + this.CustomId.GetHashCode();
+                if (this.CustomTables != null)
+                    hashCode = hashCode * 59 + this.CustomTables.GetHashCode();
+                if (this.DefendantSignature != null)
+                    hashCode = hashCode * 59 + this.DefendantSignature.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
+                if (this.EnforceDepartment != null)
+                    hashCode = hashCode * 59 + this.EnforceDepartment.GetHashCode();
+                if (this.EnforceUser != null)
+                    hashCode = hashCode * 59 + this.EnforceUser.GetHashCode();
+                if (this.EnforceUserId != null)
+                    hashCode = hashCode * 59 + this.EnforceUserId.GetHashCode();
+                if (this.EstimatedCostPerUnit != null)
+                    hashCode = hashCode * 59 + this.EstimatedCostPerUnit.GetHashCode();
+                if (this.EstimatedDueDate != null)
+                    hashCode = hashCode * 59 + this.EstimatedDueDate.GetHashCode();
+                if (this.EstimatedProductionUnit != null)
+                    hashCode = hashCode * 59 + this.EstimatedProductionUnit.GetHashCode();
+                if (this.EstimatedTotalJobCost != null)
+                    hashCode = hashCode * 59 + this.EstimatedTotalJobCost.GetHashCode();
+                if (this.FirstIssuedDate != null)
+                    hashCode = hashCode * 59 + this.FirstIssuedDate.GetHashCode();
+                if (this.HousingUnits != null)
+                    hashCode = hashCode * 59 + this.HousingUnits.GetHashCode();
+                if (this.Id != null)
+                    hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.InitiatedProduct != null)
+                    hashCode = hashCode * 59 + this.InitiatedProduct.GetHashCode();
+                if (this.InPossessionTime != null)
+                    hashCode = hashCode * 59 + this.InPossessionTime.GetHashCode();
+                if (this.Infraction != null)
+                    hashCode = hashCode * 59 + this.Infraction.GetHashCode();
+                if (this.InspectorDepartment != null)
+                    hashCode = hashCode * 59 + this.InspectorDepartment.GetHashCode();
+                if (this.InspectorId != null)
+                    hashCode = hashCode * 59 + this.InspectorId.GetHashCode();
+                if (this.InspectorName != null)
+                    hashCode = hashCode * 59 + this.InspectorName.GetHashCode();
+                if (this.JobValue != null)
+                    hashCode = hashCode * 59 + this.JobValue.GetHashCode();
+                if (this.Misdemeanor != null)
+                    hashCode = hashCode * 59 + this.Misdemeanor.GetHashCode();
+                if (this.Module != null)
+                    hashCode = hashCode * 59 + this.Module.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.NumberOfBuildings != null)
+                    hashCode = hashCode * 59 + this.NumberOfBuildings.GetHashCode();
+                if (this.OffenseWitnessed != null)
+                    hashCode = hashCode * 59 + this.OffenseWitnessed.GetHashCode();
+                if (this.Owner != null)
+                    hashCode = hashCode * 59 + this.Owner.GetHashCode();
+                if (this.Parcel != null)
+                    hashCode = hashCode * 59 + this.Parcel.GetHashCode();
+                if (this.Priority != null)
+                    hashCode = hashCode * 59 + this.Priority.GetHashCode();
+                if (this.Professional != null)
+                    hashCode = hashCode * 59 + this.Professional.GetHashCode();
+                if (this.PublicOwned != null)
+                    hashCode = hashCode * 59 + this.PublicOwned.GetHashCode();
+                if (this.RecordClass != null)
+                    hashCode = hashCode * 59 + this.RecordClass.GetHashCode();
+                if (this.RenewalInfo != null)
+                    hashCode = hashCode * 59 + this.RenewalInfo.GetHashCode();
+                if (this.ReportedChannel != null)
+                    hashCode = hashCode * 59 + this.ReportedChannel.GetHashCode();
+                if (this.ReportedDate != null)
+                    hashCode = hashCode * 59 + this.ReportedDate.GetHashCode();
+                if (this.ReportedType != null)
+                    hashCode = hashCode * 59 + this.ReportedType.GetHashCode();
+                if (this.ScheduledDate != null)
+                    hashCode = hashCode * 59 + this.ScheduledDate.GetHashCode();
+                if (this.Severity != null)
+                    hashCode = hashCode * 59 + this.Severity.GetHashCode();
+                if (this.ShortNotes != null)
+                    hashCode = hashCode * 59 + this.ShortNotes.GetHashCode();
+                if (this.Status != null)
+                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                if (this.StatusReason != null)
+                    hashCode = hashCode * 59 + this.StatusReason.GetHashCode();
+                if (this.TotalJobCost != null)
+                    hashCode = hashCode * 59 + this.TotalJobCost.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.UndistributedCost != null)
+                    hashCode = hashCode * 59 + this.UndistributedCost.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+
+    }
+
+}

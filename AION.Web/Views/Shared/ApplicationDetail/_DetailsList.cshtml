@@ -1,0 +1,71 @@
+﻿@model AION.Web.Models.Shared.DetailsListViewModel
+
+@{
+
+    if(Model.DefaultRows == true)
+    {
+        Model.ListType = "unordered";
+    }
+
+    switch (Model.ListType)
+    {
+        case "ordered":
+            if (Model.DetailsList != null && Model.DetailsList.Contains(";"))
+            {
+                <ol>
+                    @foreach (string item in Model.DetailsList.Split(';'))
+                    {
+                        if (string.IsNullOrWhiteSpace(item) == false)
+                        {
+                            <li>@item</li>
+                        }
+                    }
+                </ol>
+            }
+            else
+            {
+                <div>@Model.DetailsList</div>
+            }
+            break;
+
+        case "unordered":
+            if (Model.DetailsList != null && Model.DetailsList.Contains(";"))
+            {
+                <ul>
+                    @foreach (string item in Model.DetailsList.Split(';'))
+                    {
+                        if (string.IsNullOrWhiteSpace(item) == false)
+                        {
+                            <li>@item</li>
+                        }
+                    }
+                </ul>
+            }
+            else
+            {
+                <div>@Model.DetailsList</div>
+            }
+            break;
+
+
+        default:
+            if (Model.DetailsList != null && Model.DetailsList.Contains(";"))
+            {
+                foreach (string item in Model.DetailsList.Split(';'))
+                {
+                    if (string.IsNullOrWhiteSpace(item) == false)
+                    {
+                        <div>@item</div>
+                    }
+
+                }
+            }
+            else
+            {
+                <div>@Model.DetailsList</div>
+            }
+            break;
+    }
+
+}
+

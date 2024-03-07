@@ -1,0 +1,24 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@using AION.Manager.Models
+
+@model AION.Web.Models.OccupancyViewModel
+
+@foreach (var OccList in Model.UserOccupancySquareFootageList)
+{
+<div class="row" id="@OccList.OccupancyId">
+    <input type="checkbox" class="chkBoxOccupancy" value="@OccList.OccupancyId" checked="@OccList.OccuIdSelected"  />
+    <input type="hidden" id="hdnUserId_@OccList.OccupancyId" value="@OccList.UserId" />
+    <input type="hidden" id="hdnSquareFootageIdSelected_@OccList.OccupancyId" value="1" />
+ 
+        <div class="col-md-3">@OccList.OccupancyName</div>
+        <select id="occuDD_@OccList.OccupancyId" onchange="SquareFootageSelected(this, @OccList.OccupancyId )" disabled>
+            @foreach (var ddItem in Model.SquareFootageList)
+            {
+                <option value="@ddItem.Value" selected="@(Convert.ToInt32(ddItem.Value) == OccList.SquareFootageId)" )>@ddItem.Text</option>
+            }
+        </select>  
+</div>
+    <br />
+}

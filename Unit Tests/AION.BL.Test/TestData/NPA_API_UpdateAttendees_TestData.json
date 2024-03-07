@@ -1,0 +1,18 @@
+﻿{
+  "AttendeeIds": [
+    {
+      "AttendeeId": 96,
+      "DeptNameEnumId": 1,
+      "BusinessRefId": 1,
+      "DeptNameListId": "Building",
+      "FirstName": "Reviewer02 fn",
+      "LastName": "Reviewer02 ln",
+      "RotationNbr": 0
+    }
+  ],
+  "ApptId": 143,
+  "WkrId": 65,
+  "DeleteNPAProjectSchedule": false,
+  "ProjectScheduleID": 5312,
+  "SendApptEmail": false
+}

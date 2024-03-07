@@ -1,0 +1,200 @@
+{
+  "result": [
+    {
+      "userID": 1,
+      "firstNm": "Estimator01 fn",
+      "lastNm": "Estimator01 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "Estimtor1@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+
+      "externalAppUserNm": "Estimator01@accela.com",
+      "ADUserIDTxt": "Estimator01@accela.com",
+      "phoneNum": 1111111111,
+      "emailAddrTxt": "Estimator01@accela.com",
+      "notesTxt": "notes 1",
+
+      "agencyList": [
+        {
+          "accelaDepartmentDivisionRef": "Zoning",
+          "accelaDepartmentRegionRef": "Huntersville"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Fire",
+          "accelaDepartmentRegionRef": "Huntersville"
+        }
+      ],
+      "tradesList": [
+        {
+          "accelaDepartmentDivisionRef": "Building"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Mechanical"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Plumbing"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Electrical"
+        }
+      ]
+    },
+    {
+      "userID": 2,
+      "firstNm": "Estimator02 fn",
+      "lastNm": "Estimator02 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "2",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Estimator02@accela.com",
+      "ADUserIDTxt": "Estimator02@accela.com",
+      "phoneNum": 1111111112,
+      "emailAddrTxt": "Estimator02@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": [
+        {
+          "accelaDepartmentDivisionRef": "Building"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Mechanical"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Plumbing"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Electrical"
+        }
+      ]
+    },
+    {
+      "userID": 3,
+      "firstNm": "Estimator03 fn",
+      "lastNm": "Estimator03 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "3",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Estimator03@accela.com",
+      "ADUserIDTxt": "Estimator03@accela.com",
+      "phoneNum": 1111111113,
+      "emailAddrTxt": "Estimator03@accela.com",
+      "notesTxt": "notes 1",
+      "agencyList": [
+        {
+          "accelaDepartmentDivisionRef": "Zoning",
+          "accelaDepartmentRegionRef": "Huntersville"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Fire",
+          "accelaDepartmentRegionRef": "Huntersville"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Backflow",
+          "accelaDepartmentRegionRef": "Huntersville"
+        }
+      ],
+      "tradesList": []
+    },
+    {
+      "userID": 4,
+      "firstNm": "Estimator04 fn",
+      "lastNm": "Estimator04 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "4",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Estimator04@accela.com",
+      "ADUserIDTxt": "Estimator04@accela.com",
+      "phoneNum": 1111111114,
+      "emailAddrTxt": "Estimator04@accela.com",
+      "notesTxt": "notes 1",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 5,
+      "firstNm": "Estimator05 fn",
+      "lastNm": "Estimator05 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "5",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Estimator05@accela.com",
+      "ADUserIDTxt": "Estimator05@accela.com",
+      "phoneNum": 1111111115,
+      "emailAddrTxt": "Estimator05@accela.com",
+      "notesTxt": "notes 1",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 6,
+      "firstNm": "Estimator06 fn",
+      "lastNm": "Estimator06 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "6",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Estimator06@accela.com",
+      "ADUserIDTxt": "Estimator06@accela.com",
+      "phoneNum": 1111111116,
+      "emailAddrTxt": "Estimator06@accela.com",
+      "notesTxt": "notes 1",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 7,
+      "firstNm": "Estimator07 fn",
+      "lastNm": "Estimator07 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "7",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Estimator07@accela.com",
+      "ADUserIDTxt": "Estimator07@accela.com",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "Estimator07@accela.com",
+      "notesTxt": "notes 7",
+      "agencyList": [],
+      "tradesList": []
+    }
+  ],
+  "status": 200,
+  "page": {
+    "offset": 0,
+    "limit": 25,
+    "hasmore": false
+  }
+}

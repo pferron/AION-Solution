@@ -1,0 +1,922 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C0280304-BE9C-4B98-8C71-F2FBCA008579}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AION.Manager</RootNamespace>
+    <AssemblyName>AION.Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44382</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Core, Version=1.33.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.33.0\lib\net461\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ical.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=65c0446cd019ea53, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ical.Net.4.2.0\lib\netstandard2.0\Ical.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Graph, Version=5.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.5.15.0\lib\netstandard2.0\Microsoft.Graph.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Graph.Core, Version=3.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.Core.3.0.7\lib\net462\Microsoft.Graph.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=4.54.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.54.1\lib\net461\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.6.31.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.31.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.31.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.6.31.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.31.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.WsFederation, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.WsFederation.6.31.0\lib\net472\Microsoft.IdentityModel.Protocols.WsFederation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.31.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens.Saml, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.Saml.6.31.0\lib\net472\Microsoft.IdentityModel.Tokens.Saml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Xml, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Xml.6.31.0\lib\net472\Microsoft.IdentityModel.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Abstractions, Version=1.1.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Abstractions.1.1.4\lib\netstandard2.0\Microsoft.Kiota.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Authentication.Azure, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Authentication.Azure.1.0.2\lib\netstandard2.0\Microsoft.Kiota.Authentication.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Http.HttpClientLibrary, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Http.HttpClientLibrary.1.0.4\lib\netstandard2.0\Microsoft.Kiota.Http.HttpClientLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Form, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Serialization.Form.1.0.1\lib\netstandard2.0\Microsoft.Kiota.Serialization.Form.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Json, Version=1.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Serialization.Json.1.0.6\lib\netstandard2.0\Microsoft.Kiota.Serialization.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Text, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Serialization.Text.1.0.1\lib\netstandard2.0\Microsoft.Kiota.Serialization.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.ActiveDirectory, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.ActiveDirectory.4.2.2\lib\net45\Microsoft.Owin.Security.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Jwt, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Jwt.4.2.2\lib\net45\Microsoft.Owin.Security.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.2\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MoreLinq, Version=3.4.2.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.3.4.2\lib\net462\MoreLinq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NodaTime, Version=3.1.9.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NodaTime.3.1.9\lib\netstandard2.0\NodaTime.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.31.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.31.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.Data.7.0.0\lib\net462\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.7.0\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Claims, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Claims.4.3.0\lib\net46\System.Security.Claims.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=7.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.7.0.3\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.7.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Tavis.UriTemplates, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5be2d48fa8a60581, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tavis.UriTemplates.2.0.0\lib\netstandard2.0\Tavis.UriTemplates.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccelaBusinessObjects\AccelaBusinessObjectBase.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaDepartmentBO.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaFifoDueDateBO.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaMeetingBO.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaProjectDisplayInfoBO.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaProjectModelBO.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaProjectOccupancyTypeBO.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaProjectStatusBO.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaPropertyTypeBO.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaReReviewTaskBO.cs" />
+    <Compile Include="AccelaBusinessObjects\ContactDetailBO.cs" />
+    <Compile Include="AccelaBusinessObjects\GateResponseBO.cs" />
+    <Compile Include="AccelaBusinessObjects\ProcessAccelaMeetingBO.cs" />
+    <Compile Include="AccelaBusinessObjects\ProcessPlanReviewCycleBO.cs" />
+    <Compile Include="AccelaBusinessObjects\ProfessionalDetailBO.cs" />
+    <Compile Include="AccelaBusinessObjects\ProjectLevelCalculatorBO.cs" />
+    <Compile Include="AccelaBusinessObjects\TaskActivationBO.cs" />
+    <Compile Include="Accessors\EMAAccessor.cs" />
+    <Compile Include="Accessors\FMAAccessor.cs" />
+    <Compile Include="Accessors\Interfaces\IEMAAccessor.cs" />
+    <Compile Include="Accessors\Interfaces\IFMAAccessor.cs" />
+    <Compile Include="Accessors\Interfaces\INPAAccessor.cs" />
+    <Compile Include="Accessors\Interfaces\IPMAAccessor.cs" />
+    <Compile Include="Accessors\NPAAccessor.cs" />
+    <Compile Include="Accessors\PMAAccessor.cs" />
+    <Compile Include="Adapters\BaseManagerAdapter.cs" />
+    <Compile Include="Adapters\CalcAvgEstimationFactorAdapter.cs" />
+    <Compile Include="Adapters\CloseProjectAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\ICalcAvgEstimationFactorAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IDataContextCloseProject.cs" />
+    <Compile Include="Adapters\NoteAdapter.cs" />
+    <Compile Include="Adapters\ProjectTypeAdapter.cs" />
+    <Compile Include="Adapters\ReportingAdapter.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="BusinessObjects\SchedulingLeadTimeReportBO.cs" />
+    <Compile Include="Controllers\NoteController.cs" />
+    <Compile Include="Controllers\ReportingController.cs" />
+    <Compile Include="Engines\SyncAccela\FIFOAccelaSyncEngine.cs" />
+    <Compile Include="Engines\SyncAccela\IAccelaSyncEngine.cs" />
+    <Compile Include="Helpers\FailureHelper.cs" />
+    <Compile Include="Helpers\FireAndZoneAgencyHelper.cs" />
+    <Compile Include="Models\AccelaFailure.cs" />
+    <Compile Include="Models\Admin\AdminModel.cs" />
+    <Compile Include="Models\AppointmentEmail.cs" />
+    <Compile Include="Adapters\ConfigurationHistoryAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IAppointmentAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IConfigurationHistoryAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IEMAAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IExpressAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IFIFOAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IFMAAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\INPAAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\INPATypeAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IPMAAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IUserAdapter.cs" />
+    <Compile Include="Adapters\NPATypeAdapter.cs" />
+    <Compile Include="BusinessObjects\AppointmentCancellationRefModelBO.cs" />
+    <Compile Include="BusinessObjects\PlanReviewScheduleDetailModelBO.cs" />
+    <Compile Include="BusinessObjects\PlanReviewScheduleModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectCycleDetailModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectCycleModelBO.cs" />
+    <Compile Include="BusinessObjects\TimeAllocationTypeRefModelBO.cs" />
+    <Compile Include="Common\Enum.cs" />
+    <Compile Include="Controllers\ConfigurationHistoryController.cs" />
+    <Compile Include="Engines\Scheduling\AllocationValues.cs" />
+    <Compile Include="Engines\Scheduling\BaseFIFOEngine.cs" />
+    <Compile Include="Engines\Scheduling\BaseSchedulingEngine.cs" />
+    <Compile Include="Engines\MessageConfiguration\MessageTemplateEngine.cs" />
+    <Compile Include="Common\AppointmentHelper.cs" />
+    <Compile Include="Engines\Scheduling\FIFOOptimizationEngine.cs" />
+    <Compile Include="Engines\Scheduling\ReviewerHoursByDate.cs" />
+    <Compile Include="Engines\SyncAccela\AccelaSyncEngine.cs" />
+    <Compile Include="Helpers\AccelaTaskHelper.cs" />
+    <Compile Include="Helpers\DashboardHelper.cs" />
+    <Compile Include="Helpers\AccelaSyncHelper.cs" />
+    <Compile Include="Helpers\ProjectHelper.cs" />
+    <Compile Include="Helpers\SchedulingHelper.cs" />
+    <Compile Include="Models\AppointmentCancellationReason.cs" />
+    <Compile Include="Adapters\CalendarEventAdapter.cs" />
+    <Compile Include="Adapters\AccelaBOAdapter.cs" />
+    <Compile Include="Adapters\AdminAdapter.cs" />
+    <Compile Include="Adapters\AppointmentAdapter.cs" />
+    <Compile Include="Adapters\CalendarAppointmentAdapter.cs" />
+    <Compile Include="Adapters\DashboardAdapter.cs" />
+    <Compile Include="Adapters\EMAAdapter.cs" />
+    <Compile Include="Adapters\EmailAdapter.cs" />
+    <Compile Include="Adapters\EstimationAccelaAdapter.cs" />
+    <Compile Include="Adapters\EstimationCRUDAdapter.cs" />
+    <Compile Include="Adapters\ExpressAdapter.cs" />
+    <Compile Include="Adapters\FIFOAdapter.cs" />
+    <Compile Include="Adapters\FMAAdapter.cs" />
+    <Compile Include="Adapters\FunctionAdapter.cs" />
+    <Compile Include="Adapters\HolidayConfigAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IEstimationAccelaAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IEstimationCRUDAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IMeetingRoomAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IPlanReviewAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IProjectAuditAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IProjectEstimationAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IProjectFacilitatorAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\IScheduleCapacityAdapter.cs" />
+    <Compile Include="Adapters\Interfaces\ISearchAdapter.cs" />
+    <Compile Include="Adapters\MeetingRoomAdapter.cs" />
+    <Compile Include="Adapters\NPAAdapter.cs" />
+    <Compile Include="Adapters\OutlookAdapter.cs" />
+    <Compile Include="Adapters\PermissionAdapter.cs" />
+    <Compile Include="Adapters\PlanReviewAdapter.cs" />
+    <Compile Include="Adapters\PMAAdapter.cs" />
+    <Compile Include="Adapters\ProjectAuditAdapter.cs" />
+    <Compile Include="Adapters\ProjectEstimationAdapter.cs" />
+    <Compile Include="Adapters\ProjectFacilitatorAdapter.cs" />
+    <Compile Include="Adapters\ProjectManagerEmailAdapter.cs" />
+    <Compile Include="Adapters\ScheduleCapacityAdapter.cs" />
+    <Compile Include="Adapters\SchedulerAdapter.cs" />
+    <Compile Include="Adapters\SearchAdapter.cs" />
+    <Compile Include="Adapters\UserAdapter.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\ExceptionHandlingAttribute.cs" />
+    <Compile Include="BusinessObjects\AttendeeDetails.cs" />
+    <Compile Include="BusinessObjects\AppointmentResponseStatusModelBO.cs" />
+    <Compile Include="BusinessObjects\AuditActionRefModelBO.cs" />
+    <Compile Include="BusinessObjects\Base\ModelBaseModelBO.cs" />
+    <Compile Include="BusinessObjects\Base\ProjectDepartmentModelBaseBO.cs" />
+    <Compile Include="BusinessObjects\Base\ProjectModelBaseBO.cs" />
+    <Compile Include="BusinessObjects\CatalogItemModelBO.cs" />
+    <Compile Include="BusinessObjects\DefaultEstimationHourModelBO.cs" />
+    <Compile Include="BusinessObjects\DepartmentModelBO.cs" />
+    <Compile Include="BusinessObjects\DepartmentTypeModelBO.cs" />
+    <Compile Include="BusinessObjects\ExternalSystemModelBO.cs" />
+    <Compile Include="BusinessObjects\FacilitatorModelBO.cs" />
+    <Compile Include="BusinessObjects\HolidayConfigModelBO.cs" />
+    <Compile Include="BusinessObjects\MeetingModelBO.cs" />
+    <Compile Include="BusinessObjects\MeetingRoomBO.cs" />
+    <Compile Include="BusinessObjects\MeetingTypeModelBO.cs" />
+    <Compile Include="BusinessObjects\PermissionModuleModelBO.cs" />
+    <Compile Include="BusinessObjects\NonProjectAppointmentBO.cs" />
+    <Compile Include="BusinessObjects\NoteModelBO.cs" />
+    <Compile Include="BusinessObjects\NotesAttachmentsModelBO.cs" />
+    <Compile Include="BusinessObjects\NoteTypeModelBO.cs" />
+    <Compile Include="BusinessObjects\PermissionMappingModelBO.cs" />
+    <Compile Include="BusinessObjects\PermissionModelBO.cs" />
+    <Compile Include="BusinessObjects\FacilitatorMeetingApptModelBO.cs" />
+    <Compile Include="BusinessObjects\PreliminaryMeetingApptModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectAgencyModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectAuditModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectDeptEstimationReqBO.cs" />
+    <Compile Include="BusinessObjects\ProjectEstimationModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectInfoModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectScheduleModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectStatusModelBO.cs" />
+    <Compile Include="BusinessObjects\ProjectTradeModelBO.cs" />
+    <Compile Include="BusinessObjects\ReserveExpressReservationModelBO.cs" />
+    <Compile Include="BusinessObjects\ReviewerModelBO.cs" />
+    <Compile Include="BusinessObjects\ScheduleCapacitySearchBO.cs" />
+    <Compile Include="BusinessObjects\StandardNoteBO.cs" />
+    <Compile Include="BusinessObjects\SystemRoleModelBO.cs" />
+    <Compile Include="BusinessObjects\TableAuditLogModelBO.cs" />
+    <Compile Include="BusinessObjects\UiSettingsModelBO.cs" />
+    <Compile Include="BusinessObjects\UserIdentityModelBO.cs" />
+    <Compile Include="Common\AccelaDataLoaders\GenericDataParser.cs" />
+    <Compile Include="Common\DateTimeHelper.cs" />
+    <Compile Include="Common\ExtensionMethodsShared.cs" />
+    <Compile Include="Common\ExtensionMethods.cs" />
+    <Compile Include="Common\Helper.cs" />
+    <Compile Include="Common\ITransform.cs" />
+    <Compile Include="Common\LazyEx.cs" />
+    <Compile Include="Common\LoggingWrapper.cs" />
+    <Compile Include="Common\RegexUtilities.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\EstimationAccelaController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\EstimationCRUDController.cs" />
+    <Compile Include="Controllers\ExpressController.cs" />
+    <Compile Include="Controllers\FunctionController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OutlookController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\SchedulingController.cs" />
+    <Compile Include="Controllers\NPAController.cs" />
+    <Compile Include="Controllers\ProjectEstimationController.cs" />
+    <Compile Include="Controllers\ProjectFacilitatorController.cs" />
+    <Compile Include="Controllers\BaseDataController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Engines\Scheduling\ExpressProjectSchedulingEngine.cs" />
+    <Compile Include="Engines\Scheduling\FIFOSchedulingEngine.cs" />
+    <Compile Include="Engines\Estimation\IProjectAutoEstimationEngine.cs" />
+    <Compile Include="Engines\Scheduling\PlanReviewProjectSchedulingEngine.cs" />
+    <Compile Include="Engines\Estimation\PreliminaryProjectEstimationEngine.cs" />
+    <Compile Include="Engines\Scheduling\FacilitatorMeetingSchedulingEngine.cs" />
+    <Compile Include="Engines\Estimation\ProjectAutoEstimationEngine.cs" />
+    <Compile Include="Engines\Scheduling\PrelimProjectSchedulingEngine.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Common\AccelaMappingHelper.cs" />
+    <Compile Include="Models\ApplicationNotes.cs" />
+    <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\AppointmentResponseStatus.cs" />
+    <Compile Include="Models\ApptAttendeesManagerModel.cs" />
+    <Compile Include="Models\AttendeeInfo.cs" />
+    <Compile Include="Models\AuditActionRef.cs" />
+    <Compile Include="Models\AutoScheduledCE.cs" />
+    <Compile Include="Models\AutoScheduledPrelim.cs" />
+    <Compile Include="Models\AutoScheduleModels.cs" />
+    <Compile Include="Models\AverageActualHoursFactor.cs" />
+    <Compile Include="Models\Base\DepartmentTypeBase.cs" />
+    <Compile Include="Models\Base\ExtensionMethods.cs" />
+    <Compile Include="Models\Base\IModelCollectionCreater.cs" />
+    <Compile Include="Models\Base\LModelBase.cs" />
+    <Compile Include="Models\Base\ModelBase.cs" />
+    <Compile Include="Models\Base\ProjectInfo.cs" />
+    <Compile Include="Models\Base\Project.cs" />
+    <Compile Include="Models\Base\ProjectDepartment.cs" />
+    <Compile Include="Models\Base\ProjectParms.cs" />
+    <Compile Include="Models\Base\UModelBase.cs" />
+    <Compile Include="Models\Base\UserIdentity.cs" />
+    <Compile Include="Models\CancelMeetingModel.cs" />
+    <Compile Include="Models\CatalogItem.cs" />
+    <Compile Include="Models\ConfigurationHistory\ConfigurationHistory.cs" />
+    <Compile Include="Models\CustomerMeetingsList.cs" />
+    <Compile Include="Models\CustSchedMeeting.cs" />
+    <Compile Include="Models\Dashboard\DashboardListBase.cs" />
+    <Compile Include="Models\Dashboard\EstimationDashboardListItem.cs" />
+    <Compile Include="Models\Dashboard\ProjectsList.cs" />
+    <Compile Include="Models\Dashboard\SchedulingDashboardListItem.cs" />
+    <Compile Include="Models\Estimation\ActualsData.cs" />
+    <Compile Include="Models\Estimation\AveragedData.cs" />
+    <Compile Include="Models\Estimation\BulkEstimationModel.cs" />
+    <Compile Include="Models\Estimation\EstimationModel.cs" />
+    <Compile Include="Models\Estimation\Factor.cs" />
+    <Compile Include="Models\Estimation\FactorCalculationParms.cs" />
+    <Compile Include="Models\Express\ExpressModel.cs" />
+    <Compile Include="Models\Express\ExpressScheduledList.cs" />
+    <Compile Include="Models\FacilitatorMeeting.cs" />
+    <Compile Include="Models\FacilitatorMeetingAppointment.cs" />
+    <Compile Include="Models\FIFOReviewer.cs" />
+    <Compile Include="Models\FIFOSchedule.cs" />
+    <Compile Include="Models\ManualReservation.cs" />
+    <Compile Include="Models\MeetingType.cs" />
+    <Compile Include="Models\MessageTemplate.cs" />
+    <Compile Include="Models\MessageTemplateDataElement.cs" />
+    <Compile Include="Models\MessageTemplateType.cs" />
+    <Compile Include="Models\MMFHoursGroupingFlattened.cs" />
+    <Compile Include="Models\NotificationEmailList.cs" />
+    <Compile Include="Models\NPA\NPAModel.cs" />
+    <Compile Include="Models\Outlook\CalendarEvent.cs" />
+    <Compile Include="Models\Outlook\OutlookCalendarAppointment.cs" />
+    <Compile Include="Models\Failure.cs" />
+    <Compile Include="Models\PlanReviewScheduleDetail.cs" />
+    <Compile Include="Models\ProjectCycle.cs" />
+    <Compile Include="Models\PlanReviewEmailModel.cs" />
+    <Compile Include="Models\PlanReviewProjectDetails.cs" />
+    <Compile Include="Models\PlanReviewerAvailableTime.cs" />
+    <Compile Include="Models\CustExpressMeeting.cs" />
+    <Compile Include="Models\ConfigureReserveExpressDays.cs" />
+    <Compile Include="Models\Express\ExpressReviewerModel.cs" />
+    <Compile Include="Models\Express\ExpressSearchResult.cs" />
+    <Compile Include="Models\GateDateProcessor.cs" />
+    <Compile Include="Models\InjectMeetingModel.cs" />
+    <Compile Include="Models\ExpressMeetingAppointment.cs" />
+    <Compile Include="Models\PlanReviewSchedule.cs" />
+    <Compile Include="Models\PlanReviewCycle.cs" />
+    <Compile Include="Models\ProjectCycleDetail.cs" />
+    <Compile Include="Models\ProjectCycleProcessor.cs" />
+    <Compile Include="Models\ProjectCycleReview.cs" />
+    <Compile Include="Models\ProjectCycleSummary.cs" />
+    <Compile Include="Models\ProjectDetailMeetingAction.cs" />
+    <Compile Include="Models\ProjectGateDateModel.cs" />
+    <Compile Include="Models\ProjectLevelCalculatorParms.cs" />
+    <Compile Include="Models\ProjectNotificationEmail.cs" />
+    <Compile Include="Models\ProjectRtapMapping.cs" />
+    <Compile Include="Models\CalendarScheduleTime.cs" />
+    <Compile Include="Models\ProjectSearchResult.cs" />
+    <Compile Include="Models\Project\ProjectDetailModel.cs" />
+    <Compile Include="Models\RequestExpressDatesManagerModel.cs" />
+    <Compile Include="Models\RequestMeetingDatesManagerModel.cs" />
+    <Compile Include="Models\ReReview.cs" />
+    <Compile Include="Models\SameBuildingContractor.cs" />
+    <Compile Include="Models\SaveMeetingStatus.cs" />
+    <Compile Include="Models\SchedulingLeadTimeReport.cs" />
+    <Compile Include="Models\Scheduling\SchedulingModel.cs" />
+    <Compile Include="Models\SendProjectNotification.cs" />
+    <Compile Include="Models\ReserveExpressPlanReviewer.cs" />
+    <Compile Include="Models\CustmrMeetings.cs" />
+    <Compile Include="Models\DefaultEstimationHour.cs" />
+    <Compile Include="Models\DefaultEstimationHourManagerModel.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\EstimatorUIModel.cs" />
+    <Compile Include="Models\MeetingAllocationData.cs" />
+    <Compile Include="Models\ExternalSystem.cs" />
+    <Compile Include="Models\Facilitator.cs" />
+    <Compile Include="Models\FiltersManagerModel.cs" />
+    <Compile Include="Models\HolidayConfig.cs" />
+    <Compile Include="Models\HolidayConfigManagerModel.cs" />
+    <Compile Include="Models\IAttendeeInfo.cs" />
+    <Compile Include="Models\InternalMeetings.cs" />
+    <Compile Include="Models\InternalNoteManagerModel.cs" />
+    <Compile Include="Models\Meeting.cs" />
+    <Compile Include="Models\MeetingRoom.cs" />
+    <Compile Include="Models\NonProjectAppointment.cs" />
+    <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\NotesAttachments.cs" />
+    <Compile Include="Models\NoteType.cs" />
+    <Compile Include="Models\NPADeleteInput.cs" />
+    <Compile Include="Models\NpaType.cs" />
+    <Compile Include="Models\NPA\INPAAttendeesModel.cs" />
+    <Compile Include="Models\NPA\NPAAttendeesModel.cs" />
+    <Compile Include="Models\NPA\NPASearchResult.cs" />
+    <Compile Include="Models\Occupancy.cs" />
+    <Compile Include="Models\OccupancyOutput.cs" />
+    <Compile Include="Models\OccupancySquareFootage.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\PermissionMapping.cs" />
+    <Compile Include="Models\PermissionModule.cs" />
+    <Compile Include="Models\PlanReview.cs" />
+    <Compile Include="Models\PlanReviewerAvailableHour.cs" />
+    <Compile Include="Models\PreliminaryMeetingAppointment.cs" />
+    <Compile Include="Models\ProjectAgency.cs" />
+    <Compile Include="Models\ProjectAudit.cs" />
+    <Compile Include="Models\ProjectDeptEstimationReq.cs" />
+    <Compile Include="Models\ProjectEstimation.cs" />
+    <Compile Include="Models\ProjectEstimationManagerModel.cs" />
+    <Compile Include="Models\ProjectOccupancyTypeNameModel.cs" />
+    <Compile Include="Models\ProjectSchedule.cs" />
+    <Compile Include="Models\ProjectStatus.cs" />
+    <Compile Include="Models\ProjectTrade.cs" />
+    <Compile Include="Models\ProjectType.cs" />
+    <Compile Include="Models\RequestPrelimDatesManagerModel.cs" />
+    <Compile Include="Models\ReserveExpressReservation.cs" />
+    <Compile Include="Models\Reviewer.cs" />
+    <Compile Include="Models\RoleMappingManagerModel.cs" />
+    <Compile Include="Models\SavePrelimStatus.cs" />
+    <Compile Include="Models\ScheduleBusinessRelationship.cs" />
+    <Compile Include="Models\ScheduleCapacitySearchResult.cs" />
+    <Compile Include="Models\ScheduleCapacitySearch.cs" />
+    <Compile Include="Models\SendNAEmailModel.cs" />
+    <Compile Include="Models\SendPendingEmailModel.cs" />
+    <Compile Include="Models\SendPrelimMeetingEmailModel.cs" />
+    <Compile Include="Models\StandardNote.cs" />
+    <Compile Include="Models\SystemRoleOptionsManagerModel.cs" />
+    <Compile Include="Models\SystemRole.cs" />
+    <Compile Include="Models\TableAuditLog.cs" />
+    <Compile Include="Models\TimeAllocationTypeRef.cs" />
+    <Compile Include="Models\UiSettings.cs" />
+    <Compile Include="Models\UserDepartmentXref.cs" />
+    <Compile Include="Models\UserMgmtOccupancy.cs" />
+    <Compile Include="Models\UserPermissionsSaveModel.cs" />
+    <Compile Include="Models\UserProjectTypeXref.cs" />
+    <Compile Include="Models\Outlook\UserOutlookDetail.cs" />
+    <Compile Include="Models\User\UserJurisdictionSaveModel.cs" />
+    <Compile Include="Models\User\UserJurisdictionXRef.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="libman.json" />
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Web.PRD.config" />
+    <Content Include="Web.QA.config" />
+    <Content Include="Web.TST.config" />
+    <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
+    <Content Include="Web.DEV.config" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\AccelaEngineTest\" />
+    <Folder Include="Views\EstimationCrud\" />
+    <Folder Include="Views\Express\" />
+    <Folder Include="Views\Function\" />
+    <Folder Include="Views\Note\" />
+    <Folder Include="Views\NPA\" />
+    <Folder Include="Views\ProjectEstimation\" />
+    <Folder Include="Views\ProjectFacilitator\" />
+    <Folder Include="Views\Search\" />
+    <Folder Include="Views\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AION.Base\AION.Base.csproj">
+      <Project>{b5d9e46e-1ed6-4d78-88d9-f5d96a2f3284}</Project>
+      <Name>AION.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Assembly\Meck.Azure.KeyVault\Meck.Azure.KeyVault.csproj">
+      <Project>{BF8FC6CA-1611-40BF-B646-4A703A895F81}</Project>
+      <Name>Meck.Azure.KeyVault</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Assembly\Meck.Data\Meck.Data.csproj">
+      <Project>{F54DC2C5-F5BC-46CB-A3A2-FAAF89252013}</Project>
+      <Name>Meck.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Assembly\Meck.Logging\Meck.Logging.csproj">
+      <Project>{3d235cd3-9012-4485-9a10-0ed0b09a423c}</Project>
+      <Name>Meck.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Assembly\Meck.Shared\Meck.Shared.csproj">
+      <Project>{D717203C-5C40-4328-8D90-270B56929061}</Project>
+      <Name>Meck.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engines\AION.Accela.Engine\AION.Accela.Engine.csproj">
+      <Project>{a1629121-7125-4257-8574-f19d04ef1c48}</Project>
+      <Name>AION.Accela.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engines\AION.AIONDB.Engine\AION.AIONDB.Engine.csproj">
+      <Project>{a2d6733b-5913-4177-b1dd-5ba875b52dbb}</Project>
+      <Name>AION.AIONDB.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engines\AION.Email.Engine\AION.Email.Engine.csproj">
+      <Project>{C1282A29-EF40-4E2D-B1ED-D9FD77CD9198}</Project>
+      <Name>AION.Email.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engines\AION.Estimator.Engine\AION.Estimator.Engine.csproj">
+      <Project>{a6345d62-9eaa-44fd-97cb-ab7eeebe541a}</Project>
+      <Name>AION.Estimator.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engines\AION.Scheduler.Engine\AION.Scheduler.Engine.csproj">
+      <Project>{2593c32a-b26b-4f45-afce-7eeef55d7cc6}</Project>
+      <Name>AION.Scheduler.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engines\AION.Security.Engine\AION.Security.Engine.csproj">
+      <Project>{0b810892-cc65-4445-8dc1-9d5e4580e308}</Project>
+      <Name>AION.Security.Engine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1794</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44382/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

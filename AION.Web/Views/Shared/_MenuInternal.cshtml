@@ -1,0 +1,61 @@
+﻿@using AION.Web.Helpers
+
+@model AION.Web.Models.ViewModelBase
+
+<li class="navigation-header">
+    <span>Menu</span><i class="ft-more-horizontal ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Menu"></i>
+</li>
+
+<li class="nav-item @Html.MenuLink("Search")">
+    <a href="@Url.Action("SearchDashboard", "Search")"><i class="fa fa-magnifying-glass"></i><span class="menu-title">Search</span></a>
+</li>
+<li class="nav-item @Html.MenuLink("Estimation")">
+    <a href="@Url.Action("EstimationDashboard", "Estimation")"><i class="fa fa-calculator"></i><span class="menu-title">Estimation</span></a>
+</li>
+
+<li class="nav-item">
+    @if (Model.PermissionMapping.Vw_Fclttor_Wrkload)
+    {
+        <a href="@Url.Action("FacilitatorWorkloadSummary","Estimation")" onclick="window.open(this.href, '_blank', 'width=920,height=800'); return false;"><i class="fa fa-person-digging"></i><span class="menu-title">Facilitator Workload</span></a>
+    }
+    else
+    {
+        <a id="facilitator-workload-dialog-btn" class="disabled"><i class="fa fa-person-digging"></i><span class="menu-title">Facilitator Workload</span></a>
+    }
+</li>
+
+<li class="nav-item @Html.MenuLink("Scheduling")">
+    <a href="@Url.Action("SchedulingDashboard", "Scheduling")"><i class="fa fa-clock"></i><span class="menu-title">Scheduling</span></a>
+</li>
+<li class="nav-item @Html.MenuLink("Express")">
+    <a href="@Url.Action("ExpressMain", "Express")"><i class="fa fa-person-running"></i><span class="menu-title">Express</span></a>
+</li>
+
+<li class="nav-item">
+    @if (Model.PermissionMapping.Vw_Schdul_Cpcty)
+    {
+        <a id="schedule-capacity-dialog-btn" href="@Url.Action("ScheduleCapacityMain","ScheduleCapacity")"
+           onclick="openNewWindow(this.href, 920, 800); return false;" ><i class="fa fa-gauge-high"></i><span class="menu-title">Schedule Capacity</span></a>
+    }
+    else
+    {
+        <a id="schedule-capacity-dialog-btn" href="#" class="disabled"><i class="fa fa-gauge-high"></i><span class="menu-title">Schedule Capacity</span></a>
+    }
+</li>
+
+<li class="nav-item @Html.MenuLink("NPA")">
+    <a href="@Url.Action("NPAMain", "NPA")"><i class="fa fa-calendar-xmark"></i><span class="menu-title">NPA</span></a>
+</li>
+<li class="nav-item @Html.MenuLinkWithAction("MeetingsDashboard", "Scheduling")">
+    <a href="@Url.Action("MeetingsDashboard", "Scheduling")"><i class="fa fa-calendar-days"></i><span class="menu-title">Meetings</span></a>
+</li>
+<li class="nav-item @Html.MenuLink("Reporting")">
+    <a href="@Url.Action("ReportingDashboard", "Reporting")"><i class="fa fa-folder"></i><span class="menu-title">Reporting</span></a>
+</li>
+
+<li class="nav-item @Html.MenuLink("Admin")">
+    <a href="@Url.Action("AdminMain", "Admin")"><i class="fa fa-toolbox"></i><span class="menu-title">Admin</span></a>
+</li>
+<li class="nav-item">
+    <a href="@Model.AccelaBaseLink" target="_blank"><i class="fa fa-square-pen"></i><span class="menu-title">Accela</span></a>
+</li>

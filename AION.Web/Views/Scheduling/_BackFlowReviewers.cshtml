@@ -1,0 +1,70 @@
+﻿@using System.Web.Mvc.Html
+@using AION.Web.Extensions
+
+@model AION.Web.Models.SchedulePreliminaryMeetingViewModel
+
+@{
+
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+    bool showRequestedPlanReviewers = false;
+
+    //if this is preliminary estimation, then check the right permissions
+    //get the controller, if this is preliminary, use those permissions, else use estimation perms
+    var contr = ViewContext.RouteData.Values["action"];
+    //if preliminary, change the model permissions so these render correctly
+    bool enableperm = true;
+
+    switch (contr.ToString().ToLower())
+    {
+        case "schedulepreliminarymeeting":
+            showRequestedPlanReviewers = true;
+            enableperm = Model.PermissionMapping.Schdul_Prlim_Mtng_Man;
+            break;
+        case "scheduleplanreview":
+            enableperm = Model.PermissionMapping.Schdul_Rview_Pln_Rview_Man;
+            break;
+        case "schedulefifoplanreview":
+            //this is always disabled for FIFO
+            enableperm = false;
+            break;
+        default:
+            break;
+    }
+}
+
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="PrimaryReviewerBackFlow">BackFlow Primary</label>
+            @Html.DropDownListFor(m => m.PrimaryReviewerBackFlow, Model.AssignPlanReviewersListBackFlowSR, new { @id = "DrpDnPrimaryBackFlow", @class = "border-cyan form-select form-control" }, enableperm)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="SecondaryReviewerBackFlow">BackFlow Secondary</label>
+            @Html.DropDownListFor(m => m.SecondaryReviewerBackFlow, Model.AssignPlanReviewersListBackFlowSR, new { @id = "DrpDnSecondaryBackFlow", @class = "border-cyan form-select form-control" }, enableperm)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="ExcludedPlanReviewersBackFlow">BackFlow Excluded</label>
+            @Html.ListBoxFor(m => m.ExcludedPlanReviewersBackFlow, Model.PlanReviewersListViewModel,
+                new { @id = "chkDrpDnExPlnRvrsBackFlow", @class = "border-cyan multiselect", @multiple = "multiple" }, enableperm)
+        </div>
+    </div>
+    @if (showRequestedPlanReviewers == true)
+    {
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="RequestedPlanReviewerBackFlow">BackFlow Requested</label>
+                <label class="border-cyan form-control">@Model.GetProposedPlanReviewerName(AION.BL.DepartmentNameEnums.Backflow)</label>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,97 @@
+﻿
+@using System.Web.Mvc.Html
+@using AION.Web.Extensions
+@model AION.Web.Models.Scheduling.ScheduleCapacityViewModel
+
+@{
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label> *Building:</label>
+            @Html.DropDownListFor(m => m.BldgReviewerSelected, Model.BldgPersonSelectList,
+            new { @id = "msSCBldgReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label>
+                *Electrical:
+            </label>
+            @Html.DropDownListFor(m => m.ElecReviewerSelected, Model.ElecPersonSelectList,
+           new { @id = "msSCElecReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label for="scheduledReviewerMechanicalName" class="meetinglabeltxt">
+                *Mechanical:
+            </label>
+            @Html.DropDownListFor(m => m.MechReviewerSelected, Model.MechPersonSelectList,
+          new { @id = "msSCMechReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label for="scheduledReviewerPlumbingName" class="meetinglabeltxt">
+                *Plumbing:
+            </label>
+            @Html.DropDownListFor(m => m.PlumReviewerSelected, Model.PlumPersonSelectList,
+        new { @id = "msSCPlumReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="scheduledReviewerZoneName" class="meetinglabeltxt">
+                *Zone:
+            </label>
+            @Html.DropDownListFor(m => m.ZoniReviewerSelected, Model.ZoniPersonSelectList,
+         new { @id = "msSCZoniReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label for="scheduledReviewerFireName" class="meetinglabeltxt">
+                *Fire:
+            </label>
+            @Html.DropDownListFor(m => m.FireReviewerSelected, Model.FirePersonSelectList,
+         new { @id = "msSCFireReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label for="scheduledReviewerBackflowName" class="meetinglabeltxt">
+                *BackFlow:
+            </label>
+            @Html.DropDownListFor(m => m.BackReviewerSelected, Model.BackPersonSelectList,
+         new { @id = "msSCBackReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="scheduledReviewerFoodName" class="meetinglabellgtxt">
+                *Food Service:
+            </label>
+            @Html.DropDownListFor(m => m.FoodReviewerSelected, Model.FoodPersonSelectList,
+         new { @id = "msSCFoodReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label for="scheduledReviewerPoolName" class="meetinglabellgtxt">
+                *Public Pool:
+            </label>
+            @Html.DropDownListFor(m => m.PoolReviewerSelected, Model.PoolPersonSelectList,
+         new { @id = "msSCPoolReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label for="scheduledReviewerFacilitiesName" class="meetinglabellgtxt">
+                *Facility/Lodging:
+            </label>
+            @Html.DropDownListFor(m => m.FaciReviewerSelected, Model.FaciPersonSelectList,
+        new { @id = "msSCFaciReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+        <div class="form-group">
+            <label for="DrpDnScheduleDayCare" class="meetinglabellgtxt">
+                *Day Care:
+            </label>
+            @Html.DropDownListFor(m => m.DayCReviewerSelected, Model.DayCPersonSelectList,
+        new { @id = "msSCDayCReviewers", @multiple = "multiple", @class = "border-cyan SCselectdeptreviewer form-select form-control" }, isenabled)
+        </div>
+    </div>
+</div>

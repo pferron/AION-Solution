@@ -1,0 +1,625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Records
+
+Construct APIs for transactional records and related record resources
+
+OpenAPI spec version: v4
+
+-->
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{60B61F02-3775-4BCD-BB6A-3A8E812F5EC3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AccelaRecords</RootNamespace>
+    <AssemblyName>AccelaRecords</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0472</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JsonSubTypes, Version=2.0.1.0, Culture=neutral, PublicKeyToken=ee75fc290dbc1176, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JsonSubTypes.2.0.1\lib\net47\JsonSubTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.5.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\RecordsActivitiesApi.cs" />
+    <Compile Include="Api\RecordsAddressesApi.cs" />
+    <Compile Include="Api\RecordsAddressesCustomFormsApi.cs" />
+    <Compile Include="Api\RecordsApi.cs" />
+    <Compile Include="Api\RecordsAssetsApi.cs" />
+    <Compile Include="Api\RecordsCommentsApi.cs" />
+    <Compile Include="Api\RecordsConditionApprovalsApi.cs" />
+    <Compile Include="Api\RecordsConditionsApi.cs" />
+    <Compile Include="Api\RecordsContactsApi.cs" />
+    <Compile Include="Api\RecordsContactsCustomFormsApi.cs" />
+    <Compile Include="Api\RecordsContactsCustomTablesApi.cs" />
+    <Compile Include="Api\RecordsCostsApi.cs" />
+    <Compile Include="Api\RecordsCustomFormsApi.cs" />
+    <Compile Include="Api\RecordsCustomTablesApi.cs" />
+    <Compile Include="Api\RecordsDocumentsApi.cs" />
+    <Compile Include="Api\RecordsFeesApi.cs" />
+    <Compile Include="Api\RecordsInspectionsApi.cs" />
+    <Compile Include="Api\RecordsInvoicesApi.cs" />
+    <Compile Include="Api\RecordsOwnersApi.cs" />
+    <Compile Include="Api\RecordsParcelsApi.cs" />
+    <Compile Include="Api\RecordsPartTransactionsApi.cs" />
+    <Compile Include="Api\RecordsPaymentsApi.cs" />
+    <Compile Include="Api\RecordsProfessionalsApi.cs" />
+    <Compile Include="Api\RecordsTrustAccountsApi.cs" />
+    <Compile Include="Api\RecordsVotesApi.cs" />
+    <Compile Include="Api\RecordsWorkflowsApi.cs" />
+    <Compile Include="Client\ApiClient.cs" />
+    <Compile Include="Client\ApiException.cs" />
+    <Compile Include="Client\ApiResponse.cs" />
+    <Compile Include="Client\Configuration.cs" />
+    <Compile Include="Client\ExceptionFactory.cs" />
+    <Compile Include="Client\GlobalConfiguration.cs" />
+    <Compile Include="Client\IApiAccessor.cs" />
+    <Compile Include="Client\IReadableConfiguration.cs" />
+    <Compile Include="Client\SwaggerDateConverter.cs" />
+    <Compile Include="Model\ActivityModel.cs" />
+    <Compile Include="Model\ActivityModelActivityStatus.cs" />
+    <Compile Include="Model\ActivityModelAssignedDepartment.cs" />
+    <Compile Include="Model\ActivityModelAssignedUser.cs" />
+    <Compile Include="Model\ActivityModelPriority.cs" />
+    <Compile Include="Model\ActivityModelStatus.cs" />
+    <Compile Include="Model\ActivityModelType.cs" />
+    <Compile Include="Model\AddressModel.cs" />
+    <Compile Include="Model\ApoCustomForm.cs" />
+    <Compile Include="Model\ApoCustomFormsMetadata.cs" />
+    <Compile Include="Model\ApoCustomFormsMetadataFields.cs" />
+    <Compile Include="Model\ApoCustomFormsMetadataFieldsLabel.cs" />
+    <Compile Include="Model\ApoCustomFormsMetadataFieldsOptions.cs" />
+    <Compile Include="Model\ASITableDrill.cs" />
+    <Compile Include="Model\AssetMasterModel.cs" />
+    <Compile Include="Model\AssetMasterModelComments.cs" />
+    <Compile Include="Model\AssetMasterModelDescription.cs" />
+    <Compile Include="Model\AssetMasterModelName.cs" />
+    <Compile Include="Model\AssetMasterModelStatus.cs" />
+    <Compile Include="Model\AssetMasterModelType.cs" />
+    <Compile Include="Model\CapConditionModel2.cs" />
+    <Compile Include="Model\CapIDModel.cs" />
+    <Compile Include="Model\ChildDrill.cs" />
+    <Compile Include="Model\CommentModel.cs" />
+    <Compile Include="Model\CompactAddressModel.cs" />
+    <Compile Include="Model\CompactAddressModelCountry.cs" />
+    <Compile Include="Model\CompactAddressModelState.cs" />
+    <Compile Include="Model\ConditionHistoryModel.cs" />
+    <Compile Include="Model\ContactAddress.cs" />
+    <Compile Include="Model\ContactCustomFormAttributeModel.cs" />
+    <Compile Include="Model\ContactTypeModel.cs" />
+    <Compile Include="Model\CostingModel.cs" />
+    <Compile Include="Model\CostingModelCostFactor.cs" />
+    <Compile Include="Model\CostingModelStatus.cs" />
+    <Compile Include="Model\CostingModelType.cs" />
+    <Compile Include="Model\CostingModelUnitOfMeasure.cs" />
+    <Compile Include="Model\CostingQuantityModel.cs" />
+    <Compile Include="Model\CustomAttributeModel.cs" />
+    <Compile Include="Model\CustomFormField.cs" />
+    <Compile Include="Model\CustomFormFieldOptions.cs" />
+    <Compile Include="Model\CustomFormMetadataModel.cs" />
+    <Compile Include="Model\CustomFormSubgroupModel.cs" />
+    <Compile Include="Model\DepartmentModel.cs" />
+    <Compile Include="Model\DescribeRecordModel.cs" />
+    <Compile Include="Model\DocumentModel.cs" />
+    <Compile Include="Model\DocumentModelCategory.cs" />
+    <Compile Include="Model\DocumentModelGroup.cs" />
+    <Compile Include="Model\DocumentModelStatus.cs" />
+    <Compile Include="Model\DocumentTypeModel.cs" />
+    <Compile Include="Model\DocumentTypeModelGroup.cs" />
+    <Compile Include="Model\ElementModel.cs" />
+    <Compile Include="Model\EstimateFeeModel.cs" />
+    <Compile Include="Model\FeeItemBaseModel.cs" />
+    <Compile Include="Model\FeeItemBaseModel1.cs" />
+    <Compile Include="Model\FeeItemBaseModel1Schedule.cs" />
+    <Compile Include="Model\FeeItemBaseModel1Version.cs" />
+    <Compile Include="Model\FeeItemBaseModelCode.cs" />
+    <Compile Include="Model\FeeItemBaseModelPaymentPeriod.cs" />
+    <Compile Include="Model\FeeItemBaseModelSchedule.cs" />
+    <Compile Include="Model\FeeItemBaseModelVersion.cs" />
+    <Compile Include="Model\FeeItemModel.cs" />
+    <Compile Include="Model\FeeItemModel1.cs" />
+    <Compile Include="Model\FeeItemModelCode.cs" />
+    <Compile Include="Model\FeeItemModelDescription.cs" />
+    <Compile Include="Model\FeeItemModelSchedule.cs" />
+    <Compile Include="Model\FeeItemModelSubGroup.cs" />
+    <Compile Include="Model\FeeItemModelUnit.cs" />
+    <Compile Include="Model\FeeItemModelVersion.cs" />
+    <Compile Include="Model\FieldModel.cs" />
+    <Compile Include="Model\GISObjectModel.cs" />
+    <Compile Include="Model\IdentifierModel.cs" />
+    <Compile Include="Model\InspectionBeforeScheduledTime.cs" />
+    <Compile Include="Model\InspectionContactModel.cs" />
+    <Compile Include="Model\InspectionModel.cs" />
+    <Compile Include="Model\InspectionModelStatus.cs" />
+    <Compile Include="Model\InspectionRestrictionModel.cs" />
+    <Compile Include="Model\InspectionTypeAssociationsModel.cs" />
+    <Compile Include="Model\InspectionTypeAssociationsModelStandardCommentGroup.cs" />
+    <Compile Include="Model\InspectionTypeModel.cs" />
+    <Compile Include="Model\InspectionTypeModelGroupName.cs" />
+    <Compile Include="Model\InspectionTypeSimpleModel.cs" />
+    <Compile Include="Model\InvoiceModel.cs" />
+    <Compile Include="Model\LicenseProfessionalModel.cs" />
+    <Compile Include="Model\LicenseProfessionalModelLicenseType.cs" />
+    <Compile Include="Model\LicenseProfessionalModelLicensingBoard.cs" />
+    <Compile Include="Model\LicenseProfessionalModelSalutation.cs" />
+    <Compile Include="Model\LicenseProfessionalModelState.cs" />
+    <Compile Include="Model\NoticeConditionModel.cs" />
+    <Compile Include="Model\OwnerAddressModel.cs" />
+    <Compile Include="Model\ParcelModel1.cs" />
+    <Compile Include="Model\PartTransactionModel.cs" />
+    <Compile Include="Model\PartTransactionModelStatus.cs" />
+    <Compile Include="Model\PartTransactionModelType.cs" />
+    <Compile Include="Model\PartTransactionModelUnitMeasurement.cs" />
+    <Compile Include="Model\PaymentModel.cs" />
+    <Compile Include="Model\RecordAdditionalModel.cs" />
+    <Compile Include="Model\RecordAdditionalModelConstructionType.cs" />
+    <Compile Include="Model\RecordAddressCustomFormsModel.cs" />
+    <Compile Include="Model\RecordAddressModel.cs" />
+    <Compile Include="Model\RecordAddressModelAddressTypeFlag.cs" />
+    <Compile Include="Model\RecordAddressModelCountry.cs" />
+    <Compile Include="Model\RecordAddressModelDirection.cs" />
+    <Compile Include="Model\RecordAddressModelHouseFractionEnd.cs" />
+    <Compile Include="Model\RecordAddressModelHouseFractionStart.cs" />
+    <Compile Include="Model\RecordAddressModelState.cs" />
+    <Compile Include="Model\RecordAddressModelStatus.cs" />
+    <Compile Include="Model\RecordAddressModelStreetSuffix.cs" />
+    <Compile Include="Model\RecordAddressModelStreetSuffixDirection.cs" />
+    <Compile Include="Model\RecordAddressModelType.cs" />
+    <Compile Include="Model\RecordAddressModelUnitType.cs" />
+    <Compile Include="Model\RecordAPOCustomFormsModel.cs" />
+    <Compile Include="Model\RecordAPOCustomFormsModelConstructionType.cs" />
+    <Compile Include="Model\RecordAPOCustomFormsModelPriority.cs" />
+    <Compile Include="Model\RecordAPOCustomFormsModelReportedChannel.cs" />
+    <Compile Include="Model\RecordAPOCustomFormsModelReportedType.cs" />
+    <Compile Include="Model\RecordAPOCustomFormsModelSeverity.cs" />
+    <Compile Include="Model\RecordAPOCustomFormsModelStatus.cs" />
+    <Compile Include="Model\RecordAPOCustomFormsModelStatusReason.cs" />
+    <Compile Include="Model\RecordCommentModel.cs" />
+    <Compile Include="Model\RecordConditionModel.cs" />
+    <Compile Include="Model\RecordConditionModelActionbyDepartment.cs" />
+    <Compile Include="Model\RecordConditionModelActionbyUser.cs" />
+    <Compile Include="Model\RecordConditionModelActiveStatus.cs" />
+    <Compile Include="Model\RecordConditionModelAppliedbyDepartment.cs" />
+    <Compile Include="Model\RecordConditionModelAppliedbyUser.cs" />
+    <Compile Include="Model\RecordConditionModelGroup.cs" />
+    <Compile Include="Model\RecordConditionModelInheritable.cs" />
+    <Compile Include="Model\RecordConditionModelPriority.cs" />
+    <Compile Include="Model\RecordConditionModelSeverity.cs" />
+    <Compile Include="Model\RecordConditionModelStatus.cs" />
+    <Compile Include="Model\RecordConditionModelType.cs" />
+    <Compile Include="Model\RecordContactModel.cs" />
+    <Compile Include="Model\RecordContactSimpleModel.cs" />
+    <Compile Include="Model\RecordContactSimpleModelBirthCity.cs" />
+    <Compile Include="Model\RecordContactSimpleModelBirthRegion.cs" />
+    <Compile Include="Model\RecordContactSimpleModelBirthState.cs" />
+    <Compile Include="Model\RecordContactSimpleModelDriverLicenseState.cs" />
+    <Compile Include="Model\RecordContactSimpleModelGender.cs" />
+    <Compile Include="Model\RecordContactSimpleModelPreferredChannel.cs" />
+    <Compile Include="Model\RecordContactSimpleModelRace.cs" />
+    <Compile Include="Model\RecordContactSimpleModelRelation.cs" />
+    <Compile Include="Model\RecordContactSimpleModelSalutation.cs" />
+    <Compile Include="Model\RecordContactSimpleModelStatus.cs" />
+    <Compile Include="Model\RecordContactSimpleModelType.cs" />
+    <Compile Include="Model\RecordExpirationModel.cs" />
+    <Compile Include="Model\RecordExpirationModelExpirationStatus.cs" />
+    <Compile Include="Model\RecordExtModel1.cs" />
+    <Compile Include="Model\RecordIdModel.cs" />
+    <Compile Include="Model\RecordIdSimpleModel.cs" />
+    <Compile Include="Model\RecordInspectionTypeModel.cs" />
+    <Compile Include="Model\RecordModel.cs" />
+    <Compile Include="Model\RecordParcelModel.cs" />
+    <Compile Include="Model\RecordParcelModelStatus.cs" />
+    <Compile Include="Model\RecordParcelModelSubdivision.cs" />
+    <Compile Include="Model\RecordRelatedModel.cs" />
+    <Compile Include="Model\RecordTypeModel.cs" />
+    <Compile Include="Model\RecordTypeNoAliasModel.cs" />
+    <Compile Include="Model\RefOwnerModel.cs" />
+    <Compile Include="Model\RefOwnerModelStatus.cs" />
+    <Compile Include="Model\RequestActivityAddModel.cs" />
+    <Compile Include="Model\RequestActivityUpdateModel.cs" />
+    <Compile Include="Model\RequestCreateRecordModel.cs" />
+    <Compile Include="Model\RequestRecordAddressModel.cs" />
+    <Compile Include="Model\RequestRecordConditionModel.cs" />
+    <Compile Include="Model\RequestRecordModel.cs" />
+    <Compile Include="Model\RequestSimpleRecordModel.cs" />
+    <Compile Include="Model\RequestTaskItemModel.cs" />
+    <Compile Include="Model\ResponseActivityModelArray.cs" />
+    <Compile Include="Model\ResponseApoCustomForms.cs" />
+    <Compile Include="Model\ResponseApoCustomFormsMetadata.cs" />
+    <Compile Include="Model\ResponseAssetMasterModelArray.cs" />
+    <Compile Include="Model\ResponseContactAddressArray.cs" />
+    <Compile Include="Model\ResponseContactCustomFormAttributeModel.cs" />
+    <Compile Include="Model\ResponseCostingModelArray.cs" />
+    <Compile Include="Model\ResponseCustomAttributeModelArray.cs" />
+    <Compile Include="Model\ResponseCustomFormMetadataModelArray.cs" />
+    <Compile Include="Model\ResponseCustomFormSubgroupModelArray.cs" />
+    <Compile Include="Model\ResponseDescribeRecordModel.cs" />
+    <Compile Include="Model\ResponseDocumentModelArray.cs" />
+    <Compile Include="Model\ResponseDocumentTypeModelArray.cs" />
+    <Compile Include="Model\ResponseEstimateFeeModel.cs" />
+    <Compile Include="Model\ResponseFeeItemModel1Array.cs" />
+    <Compile Include="Model\ResponseIdentifierModelArray.cs" />
+    <Compile Include="Model\ResponseInspectionModelArray.cs" />
+    <Compile Include="Model\ResponseInvoiceModelArray.cs" />
+    <Compile Include="Model\ResponseLicenseProfessionalModel.cs" />
+    <Compile Include="Model\ResponseLicenseProfessionalModelArray.cs" />
+    <Compile Include="Model\ResponsePartTransactionModelArray.cs" />
+    <Compile Include="Model\ResponsePaymentModelArray.cs" />
+    <Compile Include="Model\ResponseRecordAdditionalModelArray.cs" />
+    <Compile Include="Model\ResponseRecordAddressModelArray.cs" />
+    <Compile Include="Model\ResponseRecordCommentModel.cs" />
+    <Compile Include="Model\ResponseRecordCommentModelArray.cs" />
+    <Compile Include="Model\ResponseRecordConditionModelArray.cs" />
+    <Compile Include="Model\ResponseRecordContactSimpleModelArray.cs" />
+    <Compile Include="Model\ResponseRecordExtModel1Array.cs" />
+    <Compile Include="Model\ResponseRecordInspectionTypeModelArray.cs" />
+    <Compile Include="Model\ResponseRecordModelArray.cs" />
+    <Compile Include="Model\ResponseRecordParcelModelArray.cs" />
+    <Compile Include="Model\ResponseRecordRelatedModelArray.cs" />
+    <Compile Include="Model\ResponseRefOwnerModel.cs" />
+    <Compile Include="Model\ResponseRefOwnerModelArray.cs" />
+    <Compile Include="Model\ResponseResultModel.cs" />
+    <Compile Include="Model\ResponseResultModelArray.cs" />
+    <Compile Include="Model\ResponseSimpleRecordModel.cs" />
+    <Compile Include="Model\ResponseSimpleRecordModelArray.cs" />
+    <Compile Include="Model\ResponseTableModelArray.cs" />
+    <Compile Include="Model\ResponseTaskItemActionModelArray.cs" />
+    <Compile Include="Model\ResponseTaskItemModel.cs" />
+    <Compile Include="Model\ResponseTaskItemModelArray.cs" />
+    <Compile Include="Model\ResponseTrustAccountModelArray.cs" />
+    <Compile Include="Model\ResponseVoteResult.cs" />
+    <Compile Include="Model\ResponseVoteSummary.cs" />
+    <Compile Include="Model\ResponseWorkflowTaskCommentModelArray.cs" />
+    <Compile Include="Model\ResultModel.cs" />
+    <Compile Include="Model\RGuideSheetGroupModel.cs" />
+    <Compile Include="Model\RowModel.cs" />
+    <Compile Include="Model\SimpleRecordModel.cs" />
+    <Compile Include="Model\TableModel.cs" />
+    <Compile Include="Model\TaskItemActionModel.cs" />
+    <Compile Include="Model\TaskItemModel.cs" />
+    <Compile Include="Model\TaskItemModelAssignedUser.cs" />
+    <Compile Include="Model\TaskItemModelStatus.cs" />
+    <Compile Include="Model\TrustAccountModel.cs" />
+    <Compile Include="Model\TrustAccountModelAssociations.cs" />
+    <Compile Include="Model\TrustAccountModelOverdraft.cs" />
+    <Compile Include="Model\TrustAccountModelStatus.cs" />
+    <Compile Include="Model\UserRolePrivilegeModel.cs" />
+    <Compile Include="Model\VoteRequest.cs" />
+    <Compile Include="Model\VoteResult.cs" />
+    <Compile Include="Model\VoteSummary.cs" />
+    <Compile Include="Model\WorkflowTaskCommentModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="docs\ActivityModel.md" />
+    <None Include="docs\ActivityModelActivityStatus.md" />
+    <None Include="docs\ActivityModelAssignedDepartment.md" />
+    <None Include="docs\ActivityModelAssignedUser.md" />
+    <None Include="docs\ActivityModelPriority.md" />
+    <None Include="docs\ActivityModelStatus.md" />
+    <None Include="docs\ActivityModelType.md" />
+    <None Include="docs\AddressModel.md" />
+    <None Include="docs\ApoCustomFormsMetadata.md" />
+    <None Include="docs\ApoCustomFormsMetadataFields.md" />
+    <None Include="docs\ApoCustomFormsMetadataFieldsLabel.md" />
+    <None Include="docs\ApoCustomFormsMetadataFieldsOptions.md" />
+    <None Include="docs\ASITableDrill.md" />
+    <None Include="docs\AssetMasterModel.md" />
+    <None Include="docs\AssetMasterModelComments.md" />
+    <None Include="docs\AssetMasterModelDescription.md" />
+    <None Include="docs\AssetMasterModelName.md" />
+    <None Include="docs\AssetMasterModelStatus.md" />
+    <None Include="docs\AssetMasterModelType.md" />
+    <None Include="docs\CapConditionModel2.md" />
+    <None Include="docs\CapIDModel.md" />
+    <None Include="docs\ChildDrill.md" />
+    <None Include="docs\CommentModel.md" />
+    <None Include="docs\CompactAddressModel.md" />
+    <None Include="docs\CompactAddressModelCountry.md" />
+    <None Include="docs\CompactAddressModelState.md" />
+    <None Include="docs\ConditionHistoryModel.md" />
+    <None Include="docs\ContactAddress.md" />
+    <None Include="docs\ContactTypeModel.md" />
+    <None Include="docs\CostingModel.md" />
+    <None Include="docs\CostingModelCostFactor.md" />
+    <None Include="docs\CostingModelStatus.md" />
+    <None Include="docs\CostingModelType.md" />
+    <None Include="docs\CostingModelUnitOfMeasure.md" />
+    <None Include="docs\CostingQuantityModel.md" />
+    <None Include="docs\CustomAttributeModel.md" />
+    <None Include="docs\CustomFormField.md" />
+    <None Include="docs\CustomFormFieldOptions.md" />
+    <None Include="docs\CustomFormMetadataModel.md" />
+    <None Include="docs\CustomFormSubgroupModel.md" />
+    <None Include="docs\DepartmentModel.md" />
+    <None Include="docs\DescribeRecordModel.md" />
+    <None Include="docs\DocumentModel.md" />
+    <None Include="docs\DocumentModelCategory.md" />
+    <None Include="docs\DocumentModelGroup.md" />
+    <None Include="docs\DocumentModelStatus.md" />
+    <None Include="docs\DocumentTypeModel.md" />
+    <None Include="docs\DocumentTypeModelGroup.md" />
+    <None Include="docs\ElementModel.md" />
+    <None Include="docs\EstimateFeeModel.md" />
+    <None Include="docs\FeeItemBaseModel.md" />
+    <None Include="docs\FeeItemBaseModel1.md" />
+    <None Include="docs\FeeItemBaseModel1Schedule.md" />
+    <None Include="docs\FeeItemBaseModel1Version.md" />
+    <None Include="docs\FeeItemBaseModelCode.md" />
+    <None Include="docs\FeeItemBaseModelPaymentPeriod.md" />
+    <None Include="docs\FeeItemBaseModelSchedule.md" />
+    <None Include="docs\FeeItemBaseModelVersion.md" />
+    <None Include="docs\FeeItemModel.md" />
+    <None Include="docs\FeeItemModel1.md" />
+    <None Include="docs\FeeItemModelCode.md" />
+    <None Include="docs\FeeItemModelDescription.md" />
+    <None Include="docs\FeeItemModelSchedule.md" />
+    <None Include="docs\FeeItemModelSubGroup.md" />
+    <None Include="docs\FeeItemModelUnit.md" />
+    <None Include="docs\FeeItemModelVersion.md" />
+    <None Include="docs\FieldModel.md" />
+    <None Include="docs\GISObjectModel.md" />
+    <None Include="docs\IdentifierModel.md" />
+    <None Include="docs\InspectionBeforeScheduledTime.md" />
+    <None Include="docs\InspectionContactModel.md" />
+    <None Include="docs\InspectionModel.md" />
+    <None Include="docs\InspectionModelStatus.md" />
+    <None Include="docs\InspectionRestrictionModel.md" />
+    <None Include="docs\InspectionTypeAssociationsModel.md" />
+    <None Include="docs\InspectionTypeAssociationsModelStandardCommentGroup.md" />
+    <None Include="docs\InspectionTypeModel.md" />
+    <None Include="docs\InspectionTypeModelGroupName.md" />
+    <None Include="docs\InspectionTypeSimpleModel.md" />
+    <None Include="docs\InvoiceModel.md" />
+    <None Include="docs\LicenseProfessionalModel.md" />
+    <None Include="docs\LicenseProfessionalModelLicenseType.md" />
+    <None Include="docs\LicenseProfessionalModelLicensingBoard.md" />
+    <None Include="docs\LicenseProfessionalModelSalutation.md" />
+    <None Include="docs\LicenseProfessionalModelState.md" />
+    <None Include="docs\NoticeConditionModel.md" />
+    <None Include="docs\OwnerAddressModel.md" />
+    <None Include="docs\ParcelModel1.md" />
+    <None Include="docs\PartTransactionModel.md" />
+    <None Include="docs\PartTransactionModelStatus.md" />
+    <None Include="docs\PartTransactionModelType.md" />
+    <None Include="docs\PartTransactionModelUnitMeasurement.md" />
+    <None Include="docs\PaymentModel.md" />
+    <None Include="docs\RecordAdditionalModel.md" />
+    <None Include="docs\RecordAdditionalModelConstructionType.md" />
+    <None Include="docs\RecordAddressCustomFormsModel.md" />
+    <None Include="docs\RecordAddressModel.md" />
+    <None Include="docs\RecordAddressModelAddressTypeFlag.md" />
+    <None Include="docs\RecordAddressModelCountry.md" />
+    <None Include="docs\RecordAddressModelDirection.md" />
+    <None Include="docs\RecordAddressModelHouseFractionEnd.md" />
+    <None Include="docs\RecordAddressModelHouseFractionStart.md" />
+    <None Include="docs\RecordAddressModelState.md" />
+    <None Include="docs\RecordAddressModelStatus.md" />
+    <None Include="docs\RecordAddressModelStreetSuffix.md" />
+    <None Include="docs\RecordAddressModelStreetSuffixDirection.md" />
+    <None Include="docs\RecordAddressModelType.md" />
+    <None Include="docs\RecordAddressModelUnitType.md" />
+    <None Include="docs\RecordAPOCustomFormsModel.md" />
+    <None Include="docs\RecordAPOCustomFormsModelConstructionType.md" />
+    <None Include="docs\RecordAPOCustomFormsModelPriority.md" />
+    <None Include="docs\RecordAPOCustomFormsModelReportedChannel.md" />
+    <None Include="docs\RecordAPOCustomFormsModelReportedType.md" />
+    <None Include="docs\RecordAPOCustomFormsModelSeverity.md" />
+    <None Include="docs\RecordAPOCustomFormsModelStatus.md" />
+    <None Include="docs\RecordAPOCustomFormsModelStatusReason.md" />
+    <None Include="docs\RecordCommentModel.md" />
+    <None Include="docs\RecordConditionModel.md" />
+    <None Include="docs\RecordConditionModelActionbyDepartment.md" />
+    <None Include="docs\RecordConditionModelActionbyUser.md" />
+    <None Include="docs\RecordConditionModelActiveStatus.md" />
+    <None Include="docs\RecordConditionModelAppliedbyDepartment.md" />
+    <None Include="docs\RecordConditionModelAppliedbyUser.md" />
+    <None Include="docs\RecordConditionModelGroup.md" />
+    <None Include="docs\RecordConditionModelInheritable.md" />
+    <None Include="docs\RecordConditionModelPriority.md" />
+    <None Include="docs\RecordConditionModelSeverity.md" />
+    <None Include="docs\RecordConditionModelStatus.md" />
+    <None Include="docs\RecordConditionModelType.md" />
+    <None Include="docs\RecordContactModel.md" />
+    <None Include="docs\RecordContactSimpleModel.md" />
+    <None Include="docs\RecordContactSimpleModelBirthCity.md" />
+    <None Include="docs\RecordContactSimpleModelBirthRegion.md" />
+    <None Include="docs\RecordContactSimpleModelBirthState.md" />
+    <None Include="docs\RecordContactSimpleModelDriverLicenseState.md" />
+    <None Include="docs\RecordContactSimpleModelGender.md" />
+    <None Include="docs\RecordContactSimpleModelPreferredChannel.md" />
+    <None Include="docs\RecordContactSimpleModelRace.md" />
+    <None Include="docs\RecordContactSimpleModelRelation.md" />
+    <None Include="docs\RecordContactSimpleModelSalutation.md" />
+    <None Include="docs\RecordContactSimpleModelStatus.md" />
+    <None Include="docs\RecordContactSimpleModelType.md" />
+    <None Include="docs\RecordExpirationModel.md" />
+    <None Include="docs\RecordExpirationModelExpirationStatus.md" />
+    <None Include="docs\RecordExtModel1.md" />
+    <None Include="docs\RecordIdModel.md" />
+    <None Include="docs\RecordIdSimpleModel.md" />
+    <None Include="docs\RecordInspectionTypeModel.md" />
+    <None Include="docs\RecordParcelModel.md" />
+    <None Include="docs\RecordParcelModelStatus.md" />
+    <None Include="docs\RecordParcelModelSubdivision.md" />
+    <None Include="docs\RecordRelatedModel.md" />
+    <None Include="docs\RecordsActivitiesApi.md" />
+    <None Include="docs\RecordsAddressesApi.md" />
+    <None Include="docs\RecordsAddressesCustomFormsApi.md" />
+    <None Include="docs\RecordsApi.md" />
+    <None Include="docs\RecordsAssetsApi.md" />
+    <None Include="docs\RecordsCommentsApi.md" />
+    <None Include="docs\RecordsConditionApprovalsApi.md" />
+    <None Include="docs\RecordsConditionsApi.md" />
+    <None Include="docs\RecordsContactsApi.md" />
+    <None Include="docs\RecordsContactsCustomFormsApi.md" />
+    <None Include="docs\RecordsContactsCustomTablesApi.md" />
+    <None Include="docs\RecordsCostsApi.md" />
+    <None Include="docs\RecordsCustomFormsApi.md" />
+    <None Include="docs\RecordsCustomTablesApi.md" />
+    <None Include="docs\RecordsDocumentsApi.md" />
+    <None Include="docs\RecordsFeesApi.md" />
+    <None Include="docs\RecordsInspectionsApi.md" />
+    <None Include="docs\RecordsInvoicesApi.md" />
+    <None Include="docs\RecordsOwnersApi.md" />
+    <None Include="docs\RecordsParcelsApi.md" />
+    <None Include="docs\RecordsPartTransactionsApi.md" />
+    <None Include="docs\RecordsPaymentsApi.md" />
+    <None Include="docs\RecordsProfessionalsApi.md" />
+    <None Include="docs\RecordsTrustAccountsApi.md" />
+    <None Include="docs\RecordsVotesApi.md" />
+    <None Include="docs\RecordsWorkflowsApi.md" />
+    <None Include="docs\RecordTypeModel.md" />
+    <None Include="docs\RecordTypeNoAliasModel.md" />
+    <None Include="docs\RefOwnerModel.md" />
+    <None Include="docs\RefOwnerModelStatus.md" />
+    <None Include="docs\RequestActivityAddModel.md" />
+    <None Include="docs\RequestActivityUpdateModel.md" />
+    <None Include="docs\RequestCreateRecordModel.md" />
+    <None Include="docs\RequestRecordAddressModel.md" />
+    <None Include="docs\RequestRecordConditionModel.md" />
+    <None Include="docs\RequestRecordModel.md" />
+    <None Include="docs\RequestSimpleRecordModel.md" />
+    <None Include="docs\RequestTaskItemModel.md" />
+    <None Include="docs\ResponseActivityModelArray.md" />
+    <None Include="docs\ResponseApoCustomFormsMetadata.md" />
+    <None Include="docs\ResponseAssetMasterModelArray.md" />
+    <None Include="docs\ResponseContactAddressArray.md" />
+    <None Include="docs\ResponseCostingModelArray.md" />
+    <None Include="docs\ResponseCustomAttributeModelArray.md" />
+    <None Include="docs\ResponseCustomFormMetadataModelArray.md" />
+    <None Include="docs\ResponseCustomFormSubgroupModelArray.md" />
+    <None Include="docs\ResponseDescribeRecordModel.md" />
+    <None Include="docs\ResponseDocumentModelArray.md" />
+    <None Include="docs\ResponseDocumentTypeModelArray.md" />
+    <None Include="docs\ResponseEstimateFeeModel.md" />
+    <None Include="docs\ResponseFeeItemModel1Array.md" />
+    <None Include="docs\ResponseIdentifierModelArray.md" />
+    <None Include="docs\ResponseInspectionModelArray.md" />
+    <None Include="docs\ResponseInvoiceModelArray.md" />
+    <None Include="docs\ResponseLicenseProfessionalModel.md" />
+    <None Include="docs\ResponseLicenseProfessionalModelArray.md" />
+    <None Include="docs\ResponsePartTransactionModelArray.md" />
+    <None Include="docs\ResponsePaymentModelArray.md" />
+    <None Include="docs\ResponseRecordAdditionalModelArray.md" />
+    <None Include="docs\ResponseRecordCommentModel.md" />
+    <None Include="docs\ResponseRecordCommentModelArray.md" />
+    <None Include="docs\ResponseRecordConditionModelArray.md" />
+    <None Include="docs\ResponseRecordContactSimpleModelArray.md" />
+    <None Include="docs\ResponseRecordExtModel1Array.md" />
+    <None Include="docs\ResponseRecordInspectionTypeModelArray.md" />
+    <None Include="docs\ResponseRecordModelArray.md" />
+    <None Include="docs\ResponseRecordParcelModelArray.md" />
+    <None Include="docs\ResponseRecordRelatedModelArray.md" />
+    <None Include="docs\ResponseRefOwnerModel.md" />
+    <None Include="docs\ResponseRefOwnerModelArray.md" />
+    <None Include="docs\ResponseResultModel.md" />
+    <None Include="docs\ResponseResultModelArray.md" />
+    <None Include="docs\ResponseSimpleRecordModel.md" />
+    <None Include="docs\ResponseSimpleRecordModelArray.md" />
+    <None Include="docs\ResponseTableModelArray.md" />
+    <None Include="docs\ResponseTaskItemActionModelArray.md" />
+    <None Include="docs\ResponseTaskItemModel.md" />
+    <None Include="docs\ResponseTaskItemModelArray.md" />
+    <None Include="docs\ResponseTrustAccountModelArray.md" />
+    <None Include="docs\ResponseVoteResult.md" />
+    <None Include="docs\ResponseVoteSummary.md" />
+    <None Include="docs\ResponseWorkflowTaskCommentModelArray.md" />
+    <None Include="docs\ResultModel.md" />
+    <None Include="docs\RGuideSheetGroupModel.md" />
+    <None Include="docs\RowModel.md" />
+    <None Include="docs\SimpleRecordModel.md" />
+    <None Include="docs\TableModel.md" />
+    <None Include="docs\TaskItemActionModel.md" />
+    <None Include="docs\TaskItemModel.md" />
+    <None Include="docs\TaskItemModelAssignedUser.md" />
+    <None Include="docs\TaskItemModelStatus.md" />
+    <None Include="docs\TrustAccountModel.md" />
+    <None Include="docs\TrustAccountModelAssociations.md" />
+    <None Include="docs\TrustAccountModelOverdraft.md" />
+    <None Include="docs\TrustAccountModelStatus.md" />
+    <None Include="docs\UserRolePrivilegeModel.md" />
+    <None Include="docs\VoteRequest.md" />
+    <None Include="docs\VoteResult.md" />
+    <None Include="docs\VoteSummary.md" />
+    <None Include="docs\WorkflowTaskCommentModel.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,51 @@
+﻿@using AION.BL
+
+@model List<AION.Manager.Models.ProjectAudit>
+
+
+<table class="table table-striped table-bordered table-hover" id="projects">
+    <thead>
+        <tr>
+            <th data-field="th0" class="th0" data-sortable="true">Action</th>
+            <th data-field="th01" class="th01" data-sortable="true">Date</th>
+            <th data-field="th02" class="th02" data-sortable="true">Time</th>
+            <th data-field="th03" class="th03" data-sortable="true">User</th>
+            <th data-field="th04" class="th04" data-sortable="true">Cycle Nbr</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{ foreach (AION.Manager.Models.ProjectAudit history in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            string auditrefstring = ((AuditActionEnum)history.AuditActionRefId).ToStringValue();
+                        }
+                        @auditrefstring @history.AuditActionDetailsTxt
+                    </td>
+                    <td>@history.AuditDt.ToShortDateString()</td>
+                    <td>@history.AuditDt.ToShortTimeString()</td>
+                    <td>
+                        @{
+                            string username = string.Empty;
+                            if (history.AuditUserId == "0")
+                            {
+                                username = "Anonymous User";
+                            }
+                            else
+                            {
+                                username = history.AuditUser.FirstName + " " + history.AuditUser.LastName;
+                            }
+                        }
+                        @username
+                    </td>
+                    <td>
+                        @history.CycleNbr
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

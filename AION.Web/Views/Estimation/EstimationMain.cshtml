@@ -1,0 +1,656 @@
+﻿@using System.Web.Mvc.Html
+@using AION.Web.Extensions
+@model AION.Web.Models.EstimationViewModel
+
+@{
+
+    ViewBag.Title = "Estimation";
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+
+    //for each permission referring to a button click
+    //   set a string for the cls to disabled and the button to disabled for that permission
+    //Email Pending Notes
+    //view facilitator workload summary
+    bool vwFaciSummary = Model.PermissionMapping.Vw_Fclttor_Wrkload;
+    //remove the class from the NA checkboxes so they don't have a click event when disabled
+    string bempcls = Model.PermissionMapping.Estimat_Trads && isenabled ? "estimationna" : "";
+    string firecls = Model.PermissionMapping.Estimat_Fire && isenabled ? "estimationna" : "";
+    string zonecls = Model.PermissionMapping.Estimat_Zoning && isenabled ? "estimationna" : "";
+    string bkflcls = Model.PermissionMapping.Estimat_Bkflow && isenabled ? "estimationna" : "";
+    string ehscls = Model.PermissionMapping.Estimat_EHS && isenabled ? "estimationna" : "";
+
+    bool isRtap = Model.Project.IsProjectRTAP;
+    string action = Model.Project.IsProjectPreliminary ? "/Estimation/UpdatePreliminaryEstimation" : "/Estimation/Update";
+}
+
+@section style
+{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+}
+
+@section scripts
+    {
+    <script src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+
+    <script src="/app-assets/js/scripts/custom/select-lists.js"></script>
+    <script src="/app-assets/js/scripts/custom/register-selected-item-changed-event.js"></script>
+
+    <!-- This works for Standard Notes on PreliminaryEstimation.cshtml and EstimationMain.cshtml -->
+    <script src="/app-assets/js/scripts/custom/standard-notes.js"></script>
+
+    <script src="/app-assets/js/scripts/navs/navs.js"></script>
+
+    @*datatables*@
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+
+    <script src="/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+    <script src="/app-assets/js/scripts/forms/checkbox-radio.js"></script>
+
+    <script src="~/app-assets/js/scripts/pages/estimation-main.js"></script>
+}
+
+
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+<form action="@action" id="EstimationForm" class="form form-horizontal" method="post">
+
+    @Html.Hidden("IsEstimationComplete", Model.IsEstimationComplete)
+    @Html.Hidden("IsProjectPreliminary", Model.Project.IsProjectPreliminary)
+    @Html.Hidden("IsViewOnly", Model.PermissionMapping.IsViewOnly)
+    @Html.Hidden("IsCeManager", Model.PermissionMapping.IsManager)
+    @Html.Hidden("IsAgencyEstimator", Model.PermissionMapping.IsAgencyEstimator)
+    @Html.Hidden("IsCeEstimator", Model.PermissionMapping.IsTradeEstimator)
+    @Html.Hidden("IsBEMPEstimator", Model.PermissionMapping.Estimat_Trads)
+    @Html.Hidden("IsZoneEstimator", Model.PermissionMapping.Estimat_Zoning)
+    @Html.Hidden("IsFireEstimator", Model.PermissionMapping.Estimat_Fire)
+    @Html.Hidden("IsBackflowEstimator", Model.PermissionMapping.Estimat_Bkflow)
+    @Html.Hidden("IsHealthEstimator", Model.PermissionMapping.Estimat_EHS)
+    @Html.Hidden("ActiveTab")
+    @Html.Hidden("IsSubmit", "true")
+    @Html.Hidden("SaveType", "1")
+    @Html.Hidden("PendingEmailType")
+
+    @Html.HiddenFor(m => m.IsAllNAChecked, new { @id = "hfIsAllNAChecked" })
+    @Html.HiddenFor(m => m.Project.AccelaProjectRefId)
+    @Html.HiddenFor(m => m.Project.ID)
+    @Html.HiddenFor(m => m.Project.AIONProjectStatus)
+    @Html.HiddenFor(m => m.Project.AIONProjectStatus.ID, @Model.Project.AIONProjectStatus.ID)
+    @Html.HiddenFor(m => m.LoggedInUser.ID, @Model.LoggedInUser.ID)
+    @Html.HiddenFor(m => m.LoggedInUserEmail, @Model.LoggedInUserEmail)
+    @Html.HiddenFor(m => m.Project.RecIdTxt, new { @id = "recidtxt" })
+
+    <div class="form-body">
+        <div class="form-group row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                        <div class="heading-elements"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h4 class="card-title">Project Summary</h4>
+                            <div class="error danger-alert"></div>
+                        </div>
+                        <div class="card-body">
+                            @Html.Partial("_ProjectSummary", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 projectcontent">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            @Html.Partial("_NavTabsTopline", Model)
+                            <div class="tab-content pt-md-5 px-md-3">
+                                <div class="tab-pane active" id="nav-bemp" role="tabpanel" aria-labelledby="nav-bemp-tab" aria-expanded="true">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Department</td>
+                                                        <td>Hours</td>
+                                                        <td class="text-center">N/A</td>
+                                                        <td class="text-center">Status</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>*</strong>Building:</td>
+                                                        <td>@Html.TextBoxFor(m => m.HoursBuilding, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursBuilding", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_Trads)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNABuilding, new { @class = bempcls }, Model.PermissionMapping.Estimat_Trads)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Building) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Building).DepartmentStatus))
+                                                                { 
+                                                                <span class="badge badge-info">
+                                                                    @Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Building).DepartmentStatus
+                                                                </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>*</strong>Electrical:</td>
+                                                        <td>@Html.TextBoxFor(m => m.HoursElectic, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursElectic", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_Trads)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNAElectric, new { @class = bempcls }, Model.PermissionMapping.Estimat_Trads)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Electrical) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Electrical).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Electrical).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>*</strong>Mechanical:</td>
+                                                        <td>@Html.TextBoxFor(m => m.HoursMech, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursMech", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_Trads)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNAMech, new { @class = bempcls }, Model.PermissionMapping.Estimat_Trads)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Mechanical) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Mechanical).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Mechanical).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>*</strong>Plumbing:</td>
+                                                        <td>@Html.TextBoxFor(m => m.HoursPlumb, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursPlumb", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_Trads)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNAPlumbing, new { @class = bempcls }, Model.PermissionMapping.Estimat_Trads)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Plumbing) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Plumbing).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Trades.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Plumbing).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row application-details">
+                                        <div class="col-12">
+                                            <a href="#bemp-application-details"><u>BEMP Application Details</u></a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="form-section"><i class="fa fa-thumb-tack"></i> Application Notes</h4>
+
+                                    <section id="bemp-application-notes">
+                                        @Html.Partial("_BEMPApplicationNotes", Model)
+                                    </section>
+
+                                    <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                    <section id="bemp-reviewers">
+                                        @if (Model != null)
+                                        {@Html.Partial("_BEMPReviewers", Model);
+                                    }
+                                    </section>
+
+                                    <h4 class="form-section application-details"><i class="fa fa-sticky-note"></i> Application Details</h4>
+
+                                    <section id="bemp-application-details" class="application-details">
+                                        @{ if (Model != null)
+                                            {
+                                                if (isRtap)
+                                                {
+                                                    @Html.Partial("_RTAPApplicationDetail", Model);
+                                                }
+                                                else
+                                                {
+                                                    @Html.Partial("_BEMPApplicationDetail", Model);
+
+                                                }
+                                            }
+                                        }
+                                    </section>
+                                </div>
+
+                                <div class="tab-pane" id="nav-zoning" role="tabpanel" aria-labelledby="nav-zoning-tab" aria-expanded="false">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Department</td>
+                                                        <td>Hours</td>
+                                                        <td class="text-center">N/A</td>
+                                                        <td class="text-center">Status</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>*</strong>Zoning:</td>
+                                                        <td> @Html.TextBoxFor(m => m.HoursZoning, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursZoning", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_Zoning)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNAZone, new { @class = zonecls }, Model.PermissionMapping.Estimat_Zoning)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Zoning) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Zoning).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Zoning).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row application-details">
+                                        <div class="col-12">
+                                            <a href="#zone-application-details"><u>Zoning Application Details</u></a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="form-section"><i class="fa fa-thumb-tack"></i> Application Notes</h4>
+
+                                    <section id="zone-application-notes">
+                                        @Html.Partial("_ZoningApplicationNotes", Model)
+                                    </section>
+
+                                    <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                    <section id="zone-reviewers">
+                                        @if (Model != null)
+                                        {@Html.Partial("_ZoningReviewers", Model);
+                                    }
+                                    </section>
+
+                                    <h4 class="form-section application-details"><i class="fa fa-sticky-note"></i> Application Details</h4>
+
+                                    <section id="zone-application-details" class="application-details">
+                                        @{ if (Model != null)
+                                            {
+                                                if (isRtap)
+                                                {
+                                                    @Html.Partial("_RTAPApplicationDetail", Model);
+                                                }
+                                                else
+                                                {
+                                                    @Html.Partial("_ZoningApplicationDetail", Model);
+
+                                                }
+                                            }
+                                        }
+                                    </section>
+                                </div>
+
+                                <div class="tab-pane" id="nav-fire" role="tabpanel" aria-labelledby="nav-fire-tab" aria-expanded="false">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Department</td>
+                                                        <td>Hours</td>
+                                                        <td class="text-center">N/A</td>
+                                                        <td class="text-center">Status</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>*</strong>Fire:</td>
+                                                        <td> @Html.TextBoxFor(m => m.HoursFire, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursFire", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_Fire)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNAFire, new { @class = firecls }, Model.PermissionMapping.Estimat_Fire)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Fire) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Fire).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Fire).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row application-details">
+                                        <div class="col-12">
+                                            <a href="#fire-application-details"><u>Fire Application Details</u></a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="form-section"><i class="fa fa-thumb-tack"></i> Application Notes</h4>
+
+                                    <section id="fire-application-notes">
+                                        @Html.Partial("_FireApplicationNotes", Model)
+                                    </section>
+
+                                    <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                    <section id="fire-reviewers">
+                                        @if (Model != null)
+                                        {@Html.Partial("_FireReviewers", Model);
+                                    }
+                                    </section>
+
+                                    <h4 class="form-section application-details"><i class="fa fa-sticky-note"></i> Application Details</h4>
+
+                                    <section id="fire-application-details" class="application-details">
+                                        @{ if (Model != null)
+                                            {
+                                                if (isRtap)
+                                                {
+                                                    @Html.Partial("_RTAPApplicationDetail", Model);
+                                                }
+                                                else
+                                                {
+                                                    @Html.Partial("_FireApplicationDetail", Model);
+
+                                                }
+                                            }
+                                        }
+                                    </section>
+                                </div>
+
+                                <div class="tab-pane" id="nav-backflow" role="tabpanel" aria-labelledby="nav-backflow-tab" aria-expanded="false">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Department</td>
+                                                        <td>Hours</td>
+                                                        <td class="text-center">N/A</td>
+                                                        <td class="text-center">Status</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>*</strong>BackFlow:</td>
+                                                        <td>@Html.TextBoxFor(m => m.HoursBackFlow, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursBackFlow", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_Bkflow)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNABackFlow, new { @class = bkflcls }, Model.PermissionMapping.Estimat_Bkflow)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Backflow) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Backflow).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Agencies.FirstOrDefault(x => x.DepartmentDivision == AION.BL.DepartmentDivisionEnum.Backflow).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row application-details">
+                                        <div class="col-12">
+                                            <a href="#backflow-application-details"><u>Backflow Application Details</u></a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="form-section"><i class="fa fa-thumb-tack"></i> Application Notes</h4>
+
+                                    <section id="backflow-application-notes">
+                                        @Html.Partial("_BackFlowApplicationNotes", Model)
+                                    </section>
+
+                                    <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                    <section id="backflow-reviewers">
+                                        @if (Model != null)
+                                        {@Html.Partial("_BackFlowReviewers", Model);
+                                    }
+                                    </section>
+
+                                    <h4 class="form-section application-details"><i class="fa fa-sticky-note"></i> Application Details</h4>
+
+                                    <section id="backflow-application-details" class="application-details">
+                                        @{ if (Model != null)
+                                            {
+                                                if (isRtap)
+                                                {
+                                                    @Html.Partial("_RTAPApplicationDetail", Model);
+                                                }
+                                                else
+                                                {
+                                                    @Html.Partial("_BackFlowApplicationDetail", Model);
+
+                                                }
+                                            }
+                                        }
+                                    </section>
+                                </div>
+
+                                <div class="tab-pane" id="nav-health" role="tabpanel" aria-labelledby="nav-health-tab" aria-expanded="false">
+                                    <div class="form-group row">
+
+                                        <div class="col-md-4">
+                                            <table class="table table-striped table-bordered zero-configuration dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Department</td>
+                                                        <td>Hours</td>
+                                                        <td class="text-center">N/A</td>
+                                                        <td class="text-center">Status</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>*</strong>Food Service:</td>
+                                                        <td>@Html.TextBoxFor(m => m.HoursFood, new { @class = "form-control border-cyan hrstextbox", @type = "number", @id = "txtHoursFood", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_EHS)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNAFood, new { @class = ehscls }, Model.PermissionMapping.Estimat_EHS)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Food) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Food).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Food).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>*</strong>Public Pool:</td>
+                                                        <td> @Html.TextBoxFor(m => m.HoursPool, new { @class = "form-control hrstextbox", @type = "number", @id = "txtHoursPool", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_EHS)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNAPool, new { @class = ehscls }, Model.PermissionMapping.Estimat_EHS)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Pool) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Pool).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Pool).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>*</strong>Facility/Lodging:</td>
+                                                        <td>@Html.TextBoxFor(m => m.HoursLodge, new { @class = "form-control hrstextbox", @type = "number", @id = "txtHoursLodge", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_EHS)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNAFacility, new { @class = ehscls }, Model.PermissionMapping.Estimat_EHS)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Facilities) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Facilities).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Facilities).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>*</strong>Commercial Day Care:</td>
+                                                        <td>@Html.TextBoxFor(m => m.HoursDayCare, new { @class = "form-control hrstextbox", @type = "number", @id = "txtHoursDayCare", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, Model.PermissionMapping.Estimat_EHS)</td>
+                                                        <td class="text-center">
+                                                            <div class="skin skin-square">
+                                                                @Html.CheckBoxFor(m => m.HrsNADayCare, new { @class = ehscls }, Model.PermissionMapping.Estimat_EHS)
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Day_Care) != null)
+                                                            {
+                                                                if (!string.IsNullOrWhiteSpace(Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Day_Care).DepartmentStatus))
+                                                                {
+                                                                    <span class="badge badge-info">
+                                                                        @Model.Project.Agencies.FirstOrDefault(x => x.DepartmentInfo == AION.BL.DepartmentNameEnums.EH_Day_Care).DepartmentStatus
+                                                                    </span>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row application-details">
+                                        <div class="col-12">
+                                            <a href="#ehs-application-details"><u>EHS Application Details</u></a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="form-section"><i class="fa fa-thumb-tack"></i> Application Notes</h4>
+
+                                    <section id="ehs-application-notes">
+                                        @Html.Partial("_EHSApplicationNotes", Model)
+                                    </section>
+
+                                    <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                    <section id="ehs-reviewers">
+                                        @if (Model != null)
+                                        {@Html.Partial("_EHSReviewers", Model);
+                                    }
+                                    </section>
+
+                                    <h4 class="form-section application-details"><i class="fa fa-sticky-note"></i> Application Details</h4>
+
+                                    <section id="ehs-application-details" class="application-details">
+                                        @{ if (Model != null)
+                                            {
+                                                if (isRtap)
+                                                {
+                                                    @Html.Partial("_RTAPApplicationDetail", Model);
+                                                }
+                                                else
+                                                {
+                                                    @Html.Partial("_EHSApplicationDetail", Model);
+
+                                                }
+                                            }
+                                        }
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.Project.IsProjectPreliminary)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <h4 class="form-section"><i class="fa fa-group"></i> Preliminary Application Detail</h4>
+                                    @Html.Partial("_PreliminaryApplicationDetail", Model)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @Html.Partial("_StandardNotesModal", Model)
+            @Html.Partial("_NotesModal", new AION.Web.Models.Shared.NotesViewModel { Project = Model.Project, NotesComments = Model.NotesComments })
+
+        </div>
+    </div>
+</form>
+
+
+

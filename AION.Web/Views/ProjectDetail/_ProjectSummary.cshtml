@@ -1,0 +1,83 @@
+﻿@model AION.Web.Models.ProjectDetailViewModel
+
+
+@{
+    bool isFIFOProject = Model.Project.IsFifo;
+}
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project # :</label>
+        <label>@Model.Project.AccelaProjectRefId</label>
+    </div>
+    <div class="col-md-4">
+        <!--<label class="text-bold-600">-->@*Project Status :*@<!--</label>-->
+        <label id="projectStatus">@Html.Partial("_ProjectStatusLabel", Model.Project.AIONProjectStatus.ProjectStatusEnum)</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Gate Date :</label>
+        <label id="projectStatus">@(Model.Project.GateDt == null ? string.Empty : ((DateTime)Model.Project.GateDt).ToShortDateString())</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Name :</label>
+        <label>@Model.Project.ProjectName</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Type :</label>
+        <label>@Model.Project.AccelaPropertyType.ToStringValue()</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Level :</label>
+        <label>@Model.Project.ProjectLvlTxt</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Address :</label>
+        <label>@Model.Project.ProjectAddress</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Building Code Version :</label>
+        <label>@Model.Project.DisplayOnlyInformation.BuildingCodeVersion</label>
+     </div>
+     @{ if (isFIFOProject)
+            {
+         <div class="col-md-4">
+             <label class="text-bold-600">FIFO Due Dt :</label>
+             <label> @(Model.Project.FifoDueAccelaDt == null ? string.Empty : ((DateTime)Model.Project.FifoDueAccelaDt).ToShortDateString())</label>
+         </div>
+            }
+        }
+</div>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <label class="text-bold-600">Team Score :</label>
+        <label>@Model.Project.TeamGradeTxt</label>
+    </div>
+
+    <div class="col-md-4">
+        <label class="text-bold-600">Facilitator :</label>
+        <label>
+            <span id="facilitatorPartial">
+                @{ Html.RenderAction("AssignedFacilitator", "ProjectDetail", new
+                    {
+                        projectId = Model.Project.ID,
+                        facilitatorId = Model.Project.AssignedFacilitator,
+                    });}
+            </span>
+        </label>
+    </div>
+    @{ if (Model.Project.IsProjectRTAP)
+        {
+            <div class="col-md-4">
+                <label class="text-bold-600">Original Project # :</label>
+                <label>@Model.Project.AccelaRTAPProjectRefId</label>
+            </div>
+        }
+    }
+</div>

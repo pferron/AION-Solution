@@ -1,0 +1,140 @@
+﻿@model AION.Web.Models.InternalMeetingsDashboardViewModel
+@using AION.Manager.Models;
+
+@{
+    ViewBag.Title = "Internal Meetings Dashboard";
+}
+
+@section style
+{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/fixedHeader.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/extensions/colReorder.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/custom/multiselect-dual.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/css/custom/dashboard.css">
+}
+
+@section scripts
+    {
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.fixedHeader.min.js"></script>
+    <script src="/app-assets/vendors/js/tables/datatable/dataTables.colReorder.min.js"></script>
+
+    <script src="~/app-assets/vendors/js/tables/datatable/moment.min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datetime-moment.js"></script>
+
+    <script src="/app-assets/js/scripts/pages/dashboard.js"></script>
+    <script src="/app-assets/js/scripts/pages/bulk-estimation.js"></script>
+    <script src="/app-assets/js/scripts/custom/dashboard-filter.js"></script>
+    <script src="/app-assets/js/scripts/custom/select-lists.js"></script>
+
+    @*multiselect-dual*@
+    <script src="/app-assets/vendors/js/multiselect/multiselect-dual.js"></script>
+    <script src="~/app-assets/js/scripts/custom/multiselect-dual.js"></script>
+}
+
+
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+
+@Html.Hidden("StatusMessage", Model.StatusMessage)
+@Html.Hidden("DashboardType", "scheduling")
+@Html.Hidden("ResetList", "th0,th1,th2,th3,th4,th5,th6,th7,th8,th9,th10,th11,th12")
+@Html.Hidden("SortableList", Html.Raw(Model.SortableList))
+
+<div class="row">
+    <div class="card col-md-12">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                @using (Html.BeginForm("SchedulingDashboard", "Scheduling", FormMethod.Post, new { @id = "SchedulingDashboard", @class = "form form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.SavedFilterList, new { @id = "SavedFilterList" })
+                    @Html.HiddenFor(m => m.LoggedInUserEmail, new { @id = "LoggedInUserEmail" })
+                    @Html.Partial("_DashboardFilterModal")
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card overflow" id="sectionSchedulingDashboard">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                <table class="table table-striped table-bordered table-hover" id="projects">
+                    <thead>
+                        <tr>
+                            <th data-field="th0" class="th0 text-nowrap text-center" data-sortable="true">Project #</th>
+                            <th data-field="th1" class="th1 text-nowrap text-center" data-sortable="true">Project Name</th>
+                            <th data-field="th2" class="th2 text-nowrap text-center" data-sortable="true">Project Type</th>
+                            <th data-field="th3" class="th3 text-center" data-sortable="true">RTAP</th>
+                            <th data-field="th4" class="th4 text-center" data-sortable="true">Status</th>
+                            <th data-field="th5" class="th5 text-nowrap text-center" data-sortable="true">Meeting Type</th>
+                            <th data-field="th6" class="th6 text-nowrap text-center" data-sortable="true">Meeting Date</th>
+                            <th data-field="th7" class="th7 text-center" data-sortable="true">Facilitator</th>
+                            <th data-field="th8" class="th8 text-nowrap text-center" data-sortable="true">Team Score</th>
+                            <th data-field="th9" class="th9 text-nowrap text-center" data-sortable="true">PM Name</th>
+                            <th data-field="th10" class="th10 text-nowrap text-center" data-sortable="true">PM Phone</th>
+                            <th data-field="th11" class="th11 text-nowrap text-center" data-sortable="true">PM Email</th>
+                            <th data-field="th12" class="th12 text-nowrap text-center" data-sortable="true">Building Code Version</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ foreach (InternalMeetings meeting in Model.MeetingList)
+                            {
+                                //project status is unknown - NA
+                                if (meeting.ProjectStatus != AION.BL.ProjectStatusEnum.NA)
+                                {
+                                    <tr>
+                                        <td class="text-center">
+                                            <a href="@Url.Action("ProjectDetail", "ProjectDetail", new { ProjectId = meeting.ProjectExternalRefID, RecIdTxt=meeting.RecIdTxt})">
+                                                @meeting.ProjectExternalRefID
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="@Url.Action("ProjectDetail", "ProjectDetail", new { ProjectId = meeting.ProjectExternalRefID, RecIdTxt=meeting.RecIdTxt})">
+                                                @meeting.ProjectName
+                                            </a>
+                                        </td>
+                                        <td class="text-center">@(meeting.ProjectType > 0 ? meeting.ProjectType.ToStringValue(): meeting.ProjectType.ToString())</td>
+                                        <td class="text-center">@(meeting.IsProjectRTAP? "Y":"N")</td>
+                                        <td class="text-center">@(meeting.MeetingStatus > 0 ? meeting.MeetingStatus.ToStringValue(): meeting.MeetingStatus.ToString())</td>
+                                        <td class="text-center">@(meeting.MeetingType > 0 ? meeting.MeetingType.ToStringValue(): meeting.MeetingType.ToString())</td>
+                                        <td class="text-center">@meeting.MeetingDate.ToShortDateString()</td>
+                                        <td class="text-center">@meeting.FacilitatorName</td>
+                                        <td class="text-center">@meeting.TeamGradeTxt</td>
+                                        <td class="text-center">@meeting.PMName</td>
+                                        <td class="text-center">@meeting.PMPhone</td>
+                                        <td class="text-center">@meeting.PMEmail</td>
+                                        <td class="text-center">@meeting.BuildingCodeVersion</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td class="text-center">@meeting.ProjectExternalRefID</td>
+                                        <td class="text-center">@meeting.ProjectName</td>
+                                        <td class="text-center">@(meeting.ProjectType > 0 ? meeting.ProjectType.ToStringValue(): meeting.ProjectType.ToString())</td>
+                                        <td class="text-center">@(meeting.IsProjectRTAP? "Y":"N")</td>
+                                        <td class="text-center">@(meeting.MeetingStatus > 0 ? meeting.MeetingStatus.ToStringValue(): meeting.MeetingStatus.ToString())</td>
+                                        <td class="text-center">@(meeting.MeetingType > 0 ? meeting.MeetingType.ToStringValue(): meeting.MeetingType.ToString())</td>
+                                        <td class="text-center">@meeting.MeetingDate.ToShortDateString()</td>
+                                        <td class="text-center">@meeting.FacilitatorName</td>
+                                        <td class="text-center">@meeting.TeamGradeTxt</td>
+                                        <td class="text-center">@meeting.PMName</td>
+                                        <td class="text-center">@meeting.PMPhone</td>
+                                        <td class="text-center">@meeting.PMEmail</td>
+                                        <td class="text-center">@meeting.BuildingCodeVersion</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

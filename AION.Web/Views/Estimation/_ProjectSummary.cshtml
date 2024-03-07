@@ -1,0 +1,57 @@
+﻿@using System.Web.Mvc.Html
+@using AION.Web.Extensions
+
+@model AION.Web.Models.EstimationViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project # :</label>
+        <label>@Model.Project.AccelaProjectRefId</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Status :</label>
+        <label>@Model.Project.AIONProjectStatus.ProjectStatusCode</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Name :</label>
+        <label>@Model.Project.ProjectName</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Type :</label>
+        <label>@Model.Project.AionPropertyType.ToStringValue()</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Project Address :</label>
+        <label>@Model.Project.ProjectAddress</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Building Code Version :</label>
+        <label>@Model.Project.DisplayOnlyInformation.BuildingCodeVersion</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Original Project # :</label>
+        <label>@(string.IsNullOrEmpty(Model.Project.AccelaRTAPProjectRefId) ? "" : Model.Project.AccelaRTAPProjectRefId)</label>
+    </div>
+    <div class="col-md-4">
+        <label class="text-bold-600">Team Score :</label>
+        <label>@Model.Project.TeamGradeTxt</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="text-bold-600">Assign Facilitator :</label>
+        <label>
+            @Html.DropDownListFor(m => m.AssignedFacilitator, Model.FacilitatorsListViewModel, new { @id = "asndfacilitator", @class = "form-select form-control border-cyan" }, Model.PermissionMapping.E_Fclttor)
+        </label>
+    </div>
+</div>

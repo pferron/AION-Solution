@@ -1,0 +1,103 @@
+﻿@using AION.Web.Helpers
+@using AION.Web.Models.Shared
+
+@model AION.Web.Models.EstimationViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Property Type:</h5>
+                </div>
+                <p>@Model.Project.ReviewTypRefDesc</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Type Of Work:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.TypeOfWork</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Change Of Use:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ChangeOfUse</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Overall:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkOverall</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Mechanical:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkMechanical</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Civil:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkCivil</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Day Care:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml", 
+                        new DetailsListViewModel
+                        {
+                            PermissionMapping = Model.PermissionMapping, 
+                            DetailsList = AccelaUIMappingHelper.DayCareDetails(Model.Project.DisplayOnlyInformation.DayCare)
+                        })
+                 </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Water/Sewer Details:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                        new DetailsListViewModel
+                        {
+                            PermissionMapping = Model.PermissionMapping,
+                            DetailsList = AccelaUIMappingHelper.WaterSewerDetails(Model.Project.DisplayOnlyInformation.WaterSewerDetails)
+                        })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Health Department Details:</h5>
+                </div>
+                <p>
+                    @Html.Partial("~/Views/Shared/ApplicationDetail/_DetailsList.cshtml",
+                        new DetailsListViewModel
+                        {
+                           PermissionMapping = Model.PermissionMapping,
+                           DetailsList = AccelaUIMappingHelper.HealthDeptDetails(Model.Project.DisplayOnlyInformation.HealthDeptDetails)
+                        })
+                </p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Electrical:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkElectrical</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="text-bold-600">Scope Of Work - Plumbing:</h5>
+                </div>
+                <p>@Model.Project.DisplayOnlyInformation.ScopeOfWorkPlumbing</p>
+            </a>
+        </div>
+    </div>
+</div>

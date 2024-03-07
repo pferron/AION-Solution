@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tst_EPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_project_current_status">
+          <Key>
+            <PropertyRef Name="id_project_current_stat" />
+          </Key>
+          <Property Name="id_project_current_stat" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_number" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_project_group" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="nme_project" Type="varchar" MaxLength="500" />
+          <Property Name="id_task" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="txt_performed_by" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="performed_on" Type="datetime" Nullable="false" />
+          <Property Name="id_client" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="id_project_manager" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="id_project_coordinator" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="assessment_cycle" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="id_project_state" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="plans_ready_on" Type="datetime" />
+          <Property Name="txt_review_type_code" Type="nvarchar" MaxLength="20" />
+          <Property Name="id_address" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="txt_phased_constr" Type="nvarchar" MaxLength="20" />
+          <Property Name="txt_first_phase" Type="char" MaxLength="1" />
+          <Property Name="orig_proj_number" Type="varchar" MaxLength="30" />
+          <Property Name="txt_prop_type_code" Type="nvarchar" MaxLength="20" />
+          <Property Name="txt_cde_summary_code" Type="nvarchar" MaxLength="20" />
+          <Property Name="prelim_proj_number" Type="varchar" MaxLength="30" />
+          <Property Name="prelim_review_done_flag" Type="nvarchar" MaxLength="1" />
+          <Property Name="project_constr_cost" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="review_start_date" Type="datetime" />
+          <Property Name="review_end_date" Type="datetime" />
+          <Property Name="review_cancel_by" Type="datetime" />
+          <Property Name="gate_open_date" Type="datetime" />
+          <Property Name="gate_close_date" Type="datetime" />
+          <Property Name="permit_fee" Type="money" />
+          <Property Name="review_cancel_fee" Type="money" />
+          <Property Name="review_total_hours" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="id_workflow_instance" Type="uniqueidentifier" />
+          <Property Name="txt_sustainable_design" Type="varchar" MaxLength="1" />
+          <Property Name="plans_review_fee" Type="money" />
+          <Property Name="id_tb_project_history" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="application_received_on" Type="datetime" />
+          <Property Name="txt_app_edit_comment" Type="varchar" MaxLength="8000" />
+          <Property Name="txt_pre_gate_comment" Type="varchar" MaxLength="8000" />
+          <Property Name="txt_address" Type="varchar" MaxLength="8000" />
+          <Property Name="pre_eng_metal_build" Type="varchar" MaxLength="128" />
+          <Property Name="txt_SOI" Type="varchar" MaxLength="1024" />
+          <Property Name="abandon_email_sent_on" Type="datetime" />
+          <Property Name="rehab_code_type" Type="varchar" MaxLength="500" />
+          <Property Name="media_type" Type="varchar" MaxLength="500" />
+          <Property Name="app_form_file" Type="varchar" MaxLength="500" />
+          <Property Name="schedule_cycle" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="txt_pool_project" Type="varchar" MaxLength="1" />
+          <Property Name="workflow_version" Type="varchar" MaxLength="50" />
+          <Property Name="app_form_xml" Type="xml" />
+          <Property Name="interactive_cycle" Type="int" />
+          <Property Name="intake_cycle" Type="int" />
+          <Property Name="parent_project_number" Type="varchar" MaxLength="30" />
+          <Property Name="sibling_order" Type="int" />
+          <Property Name="current_group_id" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="file_storage_path" Type="varchar" MaxLength="500" />
+          <Property Name="id_file_store" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="team_score_perc" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="team_score_indicator" Type="varchar" MaxLength="50" />
+          <Property Name="txt_paid_by" Type="varchar" MaxLength="50" />
+          <Property Name="package_submitted_flg" Type="char" MaxLength="1" />
+          <Property Name="nme_town" Type="varchar" MaxLength="100" />
+          <Property Name="plans_received_on" Type="datetime" />
+          <Property Name="prelim_minutes_required_flg" Type="char" MaxLength="1" />
+          <Property Name="has_loa_flg" Type="char" MaxLength="1" />
+          <Property Name="loa_bond_account_num" Type="varchar" MaxLength="100" />
+          <Property Name="migrated_from_project_number" Type="varchar" MaxLength="30" />
+          <Property Name="migrated_to_project_number" Type="varchar" MaxLength="30" />
+          <Property Name="task_pending_desc" Type="varchar" MaxLength="500" />
+          <Property Name="task_pending_flg" Type="char" MaxLength="1" />
+          <Property Name="force_package_resubmit_flg" Type="char" MaxLength="1" />
+          <Property Name="abort_fee_calc_review_hours" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="abort_fee_calc_rate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="app_form_version" Type="decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="shell_proj_number" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tb_users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nme_first" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="nme_last" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="txt_phone" Type="varchar" MaxLength="200" />
+          <Property Name="txt_fax" Type="varchar" MaxLength="200" />
+          <Property Name="txt_email" Type="varchar" MaxLength="500" />
+          <Property Name="id_user_type" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="txt_username" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="txt_password" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="txt_inserted_by" Type="varchar" MaxLength="500" />
+          <Property Name="inserted_on" Type="datetime" />
+          <Property Name="txt_updated_by" Type="varchar" MaxLength="500" />
+          <Property Name="updated_on" Type="datetime" />
+          <Property Name="nme_company" Type="varchar" MaxLength="500" />
+          <Property Name="txt_del_status" Type="char" MaxLength="1" />
+          <Property Name="txt_ad_username" Type="varchar" MaxLength="500" />
+          <Property Name="city_access_flg" Type="char" MaxLength="1" />
+          <Property Name="county_access_flg" Type="char" MaxLength="1" />
+          <Property Name="profile_data" Type="xml" />
+          <Property Name="id_jurisdiction" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="txt_address1" Type="varchar" MaxLength="500" />
+          <Property Name="txt_address2" Type="varchar" MaxLength="500" />
+          <Property Name="txt_city" Type="varchar" MaxLength="100" />
+          <Property Name="txt_state" Type="varchar" MaxLength="100" />
+          <Property Name="txt_zip" Type="varchar" MaxLength="100" />
+          <Property Name="txt_notes" Type="varchar" MaxLength="8000" />
+          <Property Name="posse_login_id" Type="varchar" MaxLength="50" />
+          <Property Name="meck_id" Type="varchar" MaxLength="50" />
+          <Property Name="meck_id_active_flg" Type="char" MaxLength="1" />
+          <Property Name="txt_phone_ext" Type="varchar" MaxLength="8" />
+        </EntityType>
+        <EntityContainer Name="tst_EPMModelStoreContainer">
+          <EntitySet Name="tb_project_current_status" EntityType="Self.tb_project_current_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_users" EntityType="Self.tb_users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tst_EPMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_project_current_status">
+          <Key>
+            <PropertyRef Name="id_project_current_stat" />
+          </Key>
+          <Property Name="id_project_current_stat" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_project_group" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="nme_project" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="id_task" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="txt_performed_by" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="performed_on" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_client" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id_project_manager" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id_project_coordinator" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="assessment_cycle" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id_project_state" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="plans_ready_on" Type="DateTime" Precision="3" />
+          <Property Name="txt_review_type_code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id_address" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="txt_phased_constr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="txt_first_phase" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="orig_proj_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="txt_prop_type_code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="txt_cde_summary_code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="prelim_proj_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="prelim_review_done_flag" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="project_constr_cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="review_start_date" Type="DateTime" Precision="3" />
+          <Property Name="review_end_date" Type="DateTime" Precision="3" />
+          <Property Name="review_cancel_by" Type="DateTime" Precision="3" />
+          <Property Name="gate_open_date" Type="DateTime" Precision="3" />
+          <Property Name="gate_close_date" Type="DateTime" Precision="3" />
+          <Property Name="permit_fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="review_cancel_fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="review_total_hours" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id_workflow_instance" Type="Guid" />
+          <Property Name="txt_sustainable_design" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="plans_review_fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="id_tb_project_history" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="application_received_on" Type="DateTime" Precision="3" />
+          <Property Name="txt_app_edit_comment" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="txt_pre_gate_comment" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="txt_address" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="pre_eng_metal_build" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="txt_SOI" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="abandon_email_sent_on" Type="DateTime" Precision="3" />
+          <Property Name="rehab_code_type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="media_type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="app_form_file" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="schedule_cycle" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="txt_pool_project" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="workflow_version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="app_form_xml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="interactive_cycle" Type="Int32" />
+          <Property Name="intake_cycle" Type="Int32" />
+          <Property Name="parent_project_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="sibling_order" Type="Int32" />
+          <Property Name="current_group_id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="file_storage_path" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="id_file_store" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="team_score_perc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="team_score_indicator" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="txt_paid_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="package_submitted_flg" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="nme_town" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="plans_received_on" Type="DateTime" Precision="3" />
+          <Property Name="prelim_minutes_required_flg" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="has_loa_flg" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="loa_bond_account_num" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="migrated_from_project_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="migrated_to_project_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="task_pending_desc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="task_pending_flg" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="force_package_resubmit_flg" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="abort_fee_calc_review_hours" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="abort_fee_calc_rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="app_form_version" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="shell_proj_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nme_first" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nme_last" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="txt_phone" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="txt_fax" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="txt_email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="id_user_type" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="txt_username" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="txt_password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="txt_inserted_by" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="inserted_on" Type="DateTime" Precision="3" />
+          <Property Name="txt_updated_by" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="updated_on" Type="DateTime" Precision="3" />
+          <Property Name="nme_company" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="txt_del_status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="txt_ad_username" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="city_access_flg" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="county_access_flg" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="profile_data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_jurisdiction" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="txt_address1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="txt_address2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="txt_city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="txt_state" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="txt_zip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="txt_notes" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="posse_login_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="meck_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="meck_id_active_flg" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="txt_phone_ext" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="EPMDbConnect" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_project_current_status" EntityType="Self.tb_project_current_status" />
+          <EntitySet Name="tb_users" EntityType="Self.tb_users" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tst_EPMModelStoreContainer" CdmEntityContainer="EPMDbConnect">
+          <EntitySetMapping Name="tb_project_current_status">
+            <EntityTypeMapping TypeName="tst_EPMModel.tb_project_current_status">
+              <MappingFragment StoreEntitySet="tb_project_current_status">
+                <ScalarProperty Name="id_project_current_stat" ColumnName="id_project_current_stat" />
+                <ScalarProperty Name="project_number" ColumnName="project_number" />
+                <ScalarProperty Name="id_project_group" ColumnName="id_project_group" />
+                <ScalarProperty Name="nme_project" ColumnName="nme_project" />
+                <ScalarProperty Name="id_task" ColumnName="id_task" />
+                <ScalarProperty Name="txt_performed_by" ColumnName="txt_performed_by" />
+                <ScalarProperty Name="performed_on" ColumnName="performed_on" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_project_manager" ColumnName="id_project_manager" />
+                <ScalarProperty Name="id_project_coordinator" ColumnName="id_project_coordinator" />
+                <ScalarProperty Name="assessment_cycle" ColumnName="assessment_cycle" />
+                <ScalarProperty Name="id_project_state" ColumnName="id_project_state" />
+                <ScalarProperty Name="plans_ready_on" ColumnName="plans_ready_on" />
+                <ScalarProperty Name="txt_review_type_code" ColumnName="txt_review_type_code" />
+                <ScalarProperty Name="id_address" ColumnName="id_address" />
+                <ScalarProperty Name="txt_phased_constr" ColumnName="txt_phased_constr" />
+                <ScalarProperty Name="txt_first_phase" ColumnName="txt_first_phase" />
+                <ScalarProperty Name="orig_proj_number" ColumnName="orig_proj_number" />
+                <ScalarProperty Name="txt_prop_type_code" ColumnName="txt_prop_type_code" />
+                <ScalarProperty Name="txt_cde_summary_code" ColumnName="txt_cde_summary_code" />
+                <ScalarProperty Name="prelim_proj_number" ColumnName="prelim_proj_number" />
+                <ScalarProperty Name="prelim_review_done_flag" ColumnName="prelim_review_done_flag" />
+                <ScalarProperty Name="project_constr_cost" ColumnName="project_constr_cost" />
+                <ScalarProperty Name="review_start_date" ColumnName="review_start_date" />
+                <ScalarProperty Name="review_end_date" ColumnName="review_end_date" />
+                <ScalarProperty Name="review_cancel_by" ColumnName="review_cancel_by" />
+                <ScalarProperty Name="gate_open_date" ColumnName="gate_open_date" />
+                <ScalarProperty Name="gate_close_date" ColumnName="gate_close_date" />
+                <ScalarProperty Name="permit_fee" ColumnName="permit_fee" />
+                <ScalarProperty Name="review_cancel_fee" ColumnName="review_cancel_fee" />
+                <ScalarProperty Name="review_total_hours" ColumnName="review_total_hours" />
+                <ScalarProperty Name="id_workflow_instance" ColumnName="id_workflow_instance" />
+                <ScalarProperty Name="txt_sustainable_design" ColumnName="txt_sustainable_design" />
+                <ScalarProperty Name="plans_review_fee" ColumnName="plans_review_fee" />
+                <ScalarProperty Name="id_tb_project_history" ColumnName="id_tb_project_history" />
+                <ScalarProperty Name="application_received_on" ColumnName="application_received_on" />
+                <ScalarProperty Name="txt_app_edit_comment" ColumnName="txt_app_edit_comment" />
+                <ScalarProperty Name="txt_pre_gate_comment" ColumnName="txt_pre_gate_comment" />
+                <ScalarProperty Name="txt_address" ColumnName="txt_address" />
+                <ScalarProperty Name="pre_eng_metal_build" ColumnName="pre_eng_metal_build" />
+                <ScalarProperty Name="txt_SOI" ColumnName="txt_SOI" />
+                <ScalarProperty Name="abandon_email_sent_on" ColumnName="abandon_email_sent_on" />
+                <ScalarProperty Name="rehab_code_type" ColumnName="rehab_code_type" />
+                <ScalarProperty Name="media_type" ColumnName="media_type" />
+                <ScalarProperty Name="app_form_file" ColumnName="app_form_file" />
+                <ScalarProperty Name="schedule_cycle" ColumnName="schedule_cycle" />
+                <ScalarProperty Name="txt_pool_project" ColumnName="txt_pool_project" />
+                <ScalarProperty Name="workflow_version" ColumnName="workflow_version" />
+                <ScalarProperty Name="app_form_xml" ColumnName="app_form_xml" />
+                <ScalarProperty Name="interactive_cycle" ColumnName="interactive_cycle" />
+                <ScalarProperty Name="intake_cycle" ColumnName="intake_cycle" />
+                <ScalarProperty Name="parent_project_number" ColumnName="parent_project_number" />
+                <ScalarProperty Name="sibling_order" ColumnName="sibling_order" />
+                <ScalarProperty Name="current_group_id" ColumnName="current_group_id" />
+                <ScalarProperty Name="file_storage_path" ColumnName="file_storage_path" />
+                <ScalarProperty Name="id_file_store" ColumnName="id_file_store" />
+                <ScalarProperty Name="team_score_perc" ColumnName="team_score_perc" />
+                <ScalarProperty Name="team_score_indicator" ColumnName="team_score_indicator" />
+                <ScalarProperty Name="txt_paid_by" ColumnName="txt_paid_by" />
+                <ScalarProperty Name="package_submitted_flg" ColumnName="package_submitted_flg" />
+                <ScalarProperty Name="nme_town" ColumnName="nme_town" />
+                <ScalarProperty Name="plans_received_on" ColumnName="plans_received_on" />
+                <ScalarProperty Name="prelim_minutes_required_flg" ColumnName="prelim_minutes_required_flg" />
+                <ScalarProperty Name="has_loa_flg" ColumnName="has_loa_flg" />
+                <ScalarProperty Name="loa_bond_account_num" ColumnName="loa_bond_account_num" />
+                <ScalarProperty Name="migrated_from_project_number" ColumnName="migrated_from_project_number" />
+                <ScalarProperty Name="migrated_to_project_number" ColumnName="migrated_to_project_number" />
+                <ScalarProperty Name="task_pending_desc" ColumnName="task_pending_desc" />
+                <ScalarProperty Name="task_pending_flg" ColumnName="task_pending_flg" />
+                <ScalarProperty Name="force_package_resubmit_flg" ColumnName="force_package_resubmit_flg" />
+                <ScalarProperty Name="abort_fee_calc_review_hours" ColumnName="abort_fee_calc_review_hours" />
+                <ScalarProperty Name="abort_fee_calc_rate" ColumnName="abort_fee_calc_rate" />
+                <ScalarProperty Name="app_form_version" ColumnName="app_form_version" />
+                <ScalarProperty Name="shell_proj_number" ColumnName="shell_proj_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_users">
+            <EntityTypeMapping TypeName="tst_EPMModel.tb_users">
+              <MappingFragment StoreEntitySet="tb_users">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="nme_first" ColumnName="nme_first" />
+                <ScalarProperty Name="nme_last" ColumnName="nme_last" />
+                <ScalarProperty Name="txt_phone" ColumnName="txt_phone" />
+                <ScalarProperty Name="txt_fax" ColumnName="txt_fax" />
+                <ScalarProperty Name="txt_email" ColumnName="txt_email" />
+                <ScalarProperty Name="id_user_type" ColumnName="id_user_type" />
+                <ScalarProperty Name="txt_username" ColumnName="txt_username" />
+                <ScalarProperty Name="txt_password" ColumnName="txt_password" />
+                <ScalarProperty Name="txt_inserted_by" ColumnName="txt_inserted_by" />
+                <ScalarProperty Name="inserted_on" ColumnName="inserted_on" />
+                <ScalarProperty Name="txt_updated_by" ColumnName="txt_updated_by" />
+                <ScalarProperty Name="updated_on" ColumnName="updated_on" />
+                <ScalarProperty Name="nme_company" ColumnName="nme_company" />
+                <ScalarProperty Name="txt_del_status" ColumnName="txt_del_status" />
+                <ScalarProperty Name="txt_ad_username" ColumnName="txt_ad_username" />
+                <ScalarProperty Name="city_access_flg" ColumnName="city_access_flg" />
+                <ScalarProperty Name="county_access_flg" ColumnName="county_access_flg" />
+                <ScalarProperty Name="profile_data" ColumnName="profile_data" />
+                <ScalarProperty Name="id_jurisdiction" ColumnName="id_jurisdiction" />
+                <ScalarProperty Name="txt_address1" ColumnName="txt_address1" />
+                <ScalarProperty Name="txt_address2" ColumnName="txt_address2" />
+                <ScalarProperty Name="txt_city" ColumnName="txt_city" />
+                <ScalarProperty Name="txt_state" ColumnName="txt_state" />
+                <ScalarProperty Name="txt_zip" ColumnName="txt_zip" />
+                <ScalarProperty Name="txt_notes" ColumnName="txt_notes" />
+                <ScalarProperty Name="posse_login_id" ColumnName="posse_login_id" />
+                <ScalarProperty Name="meck_id" ColumnName="meck_id" />
+                <ScalarProperty Name="meck_id_active_flg" ColumnName="meck_id_active_flg" />
+                <ScalarProperty Name="txt_phone_ext" ColumnName="txt_phone_ext" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

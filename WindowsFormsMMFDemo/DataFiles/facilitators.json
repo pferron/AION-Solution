@@ -1,0 +1,234 @@
+{
+  "result": [
+    {
+      "userID": 1,
+      "firstNm": "Facilitator01 fn",
+      "lastNm": "Facilitator01 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "facilitator1@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "facilitator1@accela.com",
+      "ADUserIDTxt": "facilitator1@accela.com",
+      "phoneNum": 1111111111,
+      "emailAddrTxt": "facilitator1@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [
+        {
+          "accelaDepartmentDivisionRef": "Zoning",
+          "accelaDepartmentRegionRef": "Huntersville"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Fire",
+          "accelaDepartmentRegionRef": "Huntersville"
+        }
+      ],
+      "tradesList": [
+        {
+          "accelaDepartmentDivisionRef": "Building"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Mechanical"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Plumbing"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Electrical"
+        }
+      ]
+    },
+    {
+      "userID": 2,
+      "firstNm": "Facilitator02 fn",
+      "lastNm": "Facilitator02 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "Facilitator2@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Facilitator02@accela.com",
+      "ADUserIDTxt": "Facilitator02@accela.com",
+      "phoneNum": 1111111112,
+      "emailAddrTxt": "Facilitator02@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": [
+        {
+          "accelaDepartmentDivisionRef": "Building"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Mechanical"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Plumbing"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Electrical"
+        }
+      ]
+    },
+    {
+      "userID": 3,
+      "firstNm": "Facilitator03 fn",
+      "lastNm": "Facilitator03 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "Facilitator3@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Facilitator3@accela.com",
+      "ADUserIDTxt": "Facilitator3@accela.com",
+      "phoneNum": 1111111113,
+      "emailAddrTxt": "Facilitator3@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [
+        {
+          "accelaDepartmentDivisionRef": "Zoning",
+          "accelaDepartmentRegionRef": "Huntersville"
+        },
+        {
+          "accelaDepartmentDivisionRef": "Fire",
+          "accelaDepartmentRegionRef": "Huntersville"
+        }
+      ],
+      "tradesList": []
+    },
+    {
+      "userID": 4,
+      "firstNm": "Facilitator04 fn",
+      "lastNm": "Facilitator04 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "F4@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Facilitator04@accela.com",
+      "ADUserIDTxt": "Facilitator04@accela.com",
+      "phoneNum": 1111111114,
+      "emailAddrTxt": "Facilitator04@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 5,
+      "firstNm": "Facilitator05 fn",
+      "lastNm": "Facilitator05 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "F5@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Facilitator05@accela.com",
+      "ADUserIDTxt": "Facilitator05@accela.com",
+      "phoneNum": 1111111115,
+      "emailAddrTxt": "Facilitator05@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 6,
+      "firstNm": "Facilitator06 fn",
+      "lastNm": "Facilitator06 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "F6@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Facilitator06@accela.com",
+      "ADUserIDTxt": "Facilitator06@accela.com",
+      "phoneNum": 1111111116,
+      "emailAddrTxt": "Facilitator06@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 7,
+      "firstNm": "Facilitator07 fn",
+      "lastNm": "Facilitator07 ln",
+      "externalSystemRefId": "2",
+      "srcSystemValueTxt": "F7@Accela.com",
+      "createdByWkrId": 1,
+      "createdDate": "2019-10-24 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2019-10-24 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "Facilitator07@accela.com",
+      "ADUserIDTxt": "Facilitator07@accela.com",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "Facilitator07@accela.com",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 8,
+      "firstNm": "System 2",
+      "lastNm": "Administrator 2",
+      "externalSystemRefId": "1",
+      "srcSystemValueTxt": "sys_admin_2@mecknc.gov",
+      "createdByWkrId": 1,
+      "createdDate": "2020-06-11 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2020-06-11 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "sys_admin_2@mecknc.gov",
+      "ADUserIDTxt": "sys_admin_2@mecknc.gov",
+      "phoneNum": 1111111117,
+      "emailAddrTxt": "sys_admin_2@mecknc.govm",
+      "notesTxt": "notes 2",
+      "agencyList": [],
+      "tradesList": []
+    },
+    {
+      "userID": 9,
+      "firstNm": "System 3",
+      "lastNm": "Administrator 3",
+      "externalSystemRefId": "1",
+      "srcSystemValueTxt": "sys_admin_3@mecknc.gov",
+      "createdByWkrId": 1,
+      "createdDate": "2020-06-11 00:00:00",
+      "updatedByWkrId": 1,
+      "updatedDate": "2020-06-11 00:00:00",
+      "assignedProjectCount": 0,
+      "assignedProjectHours": 0.0,
+      "externalAppUserNm": "sys_admin_2@mecknc.gov",
+      "ADUserIDTxt": "sys_admin_2@mecknc.gov",
+      "phoneNum": 1111111119,
+      "emailAddrTxt": "sys_admin_3@mecknc.govm",
+      "notesTxt": "notes 3",
+      "agencyList": [],
+      "tradesList": []
+    }
+  ],
+  "status": 200,
+  "page": {
+    "offset": 0,
+    "limit": 25,
+    "hasmore": false
+  }
+}

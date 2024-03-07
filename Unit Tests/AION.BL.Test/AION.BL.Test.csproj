@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D10E5A9C-A1C4-4BC6-94FF-39BDC2AD091C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AION.BL.Test</RootNamespace>
+    <AssemblyName>AION.BL.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccelaBusinessObjects\AccelaFifoDueDateBOTests.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaProjectOccupancyTypeBOTests.cs" />
+    <Compile Include="AccelaBusinessObjects\AccelaReReviewTaskBOTests.cs" />
+    <Compile Include="AccelaBusinessObjects\ProjectLevelCalculatorBOTests.cs" />
+    <Compile Include="Adapters\AppointmentAdapterTests.cs" />
+    <Compile Include="Adapters\CalcAvgEstimationFactorAdapterTests.cs" />
+    <Compile Include="Adapters\CalendarAppointmentAdapterTests.cs" />
+    <Compile Include="Adapters\CalendarEventAdapterTests.cs" />
+    <Compile Include="Adapters\CloseProjectAdapterTests.cs" />
+    <Compile Include="Adapters\DashboardAdapterTests.cs" />
+    <Compile Include="Adapters\ReportingAdapterTests.cs" />
+    <Compile Include="Adapters\EmailAdapterTests.cs" />
+    <Compile Include="Adapters\EstimationAccelaAdapterTests.cs" />
+    <Compile Include="Adapters\EstimationCRUDAdapterTests.cs" />
+    <Compile Include="Adapters\ExpressAdapterTests.cs" />
+    <Compile Include="Adapters\FifoAdapterTests.cs" />
+    <Compile Include="Adapters\FunctionAdapterTests.cs" />
+    <Compile Include="Adapters\HolidayConfigAdapterTests.cs" />
+    <Compile Include="Adapters\NPAAdapterTests.cs" />
+    <Compile Include="Adapters\OutlookAdapterTests.cs" />
+    <Compile Include="Adapters\ProjectEstimationAdapterTests.cs" />
+    <Compile Include="Adapters\PermissionAdapterTests.cs" />
+    <Compile Include="Adapters\SchedulerAdapterTests.cs" />
+    <Compile Include="Adapters\ScheduleCapacityAdapterTests.cs" />
+    <Compile Include="Adapters\PlanReviewAdapterTests.cs" />
+    <Compile Include="Adapters\AdminAdapterTests.cs" />
+    <Compile Include="Adapters\NoteAdapterTests.cs" />
+    <Compile Include="Adapters\SearchAdapterTests.cs" />
+    <Compile Include="Adapters\AccelaBOAdapterTests.cs" />
+    <Compile Include="Adapters\UserAdapterTests.cs" />
+    <Compile Include="BusinessObjects\CatalogItemModelBOTests.cs" />
+    <Compile Include="BusinessObjects\EmailMessageBOTests.cs" />
+    <Compile Include="BusinessObjects\UiSettingsModelBOTests.cs" />
+    <Compile Include="BusinessObjects\ProjectEstimationModelBOTests.cs" />
+    <Compile Include="BusinessObjects\ProjectModelBaseBOTests.cs" />
+    <Compile Include="BusinessObjects\SchedulingLeadTimeReportBOTests.cs" />
+    <Compile Include="BusinessObjects\SystemRoleModelBOTests.cs" />
+    <Compile Include="BusinessObjects\UserIdentityModelBOTests.cs" />
+    <Compile Include="Common\DateTimeHelperTests.cs" />
+    <Compile Include="DefaultEstimationHourModelBOTests.cs" />
+    <Compile Include="DepartmentAndDeptTypeTest.cs" />
+    <Compile Include="Engines\AccelaSyncEngineTests.cs" />
+    <Compile Include="Engines\ExpressProjectSchedulingEngineTests.cs" />
+    <Compile Include="Engines\FIFOOptimizationEngineTests.cs" />
+    <Compile Include="Engines\ProjectStatusEngineTests.cs" />
+    <Compile Include="Engines\PlanReviewProjectSchedulingEngineTests.cs" />
+    <Compile Include="Engines\FIFOSchedulingEngineTests.cs" />
+    <Compile Include="Engines\MessageTemplateEngineTests.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="Helpers\DateTimeHelperTests.cs" />
+    <Compile Include="Helpers\AccelaTaskHelperTests.cs" />
+    <Compile Include="Helpers\AccelaMappingHelperTests.cs" />
+    <Compile Include="Helpers\AuditCompareTests.cs" />
+    <Compile Include="Helpers\ProjectEstimationCreator.cs" />
+    <Compile Include="JsonReader.cs" />
+    <Compile Include="EmailControllerTests.cs" />
+    <Compile Include="MockRepositories\MockAutoEstimationRefBO.cs" />
+    <Compile Include="MockRepositories\MockAverageEstimationHoursFactorBO.cs" />
+    <Compile Include="MockRepositories\MockAccelaEngine.cs" />
+    <Compile Include="MockRepositories\MockEstimationCRUDAdapter.cs" />
+    <Compile Include="MockRepositories\MockLegacyProjectEstimationHoursRefBO.cs" />
+    <Compile Include="MockRepositories\MockProjectBO.cs" />
+    <Compile Include="MockRepositories\MockProjectBusinessRelationshipBO.cs" />
+    <Compile Include="MockRepositories\MockProjectCycleBO.cs" />
+    <Compile Include="Models\AppointmentEmailTests.cs" />
+    <Compile Include="Models\Base\PropertyTypeEnumsExtensionsTests.cs" />
+    <Compile Include="Models\GateDateProcessorTests.cs" />
+    <Compile Include="Models\ProjectCycleProcessorTests.cs" />
+    <Compile Include="Models\TableAuditLogModelBOTests.cs" />
+    <Compile Include="Models\PlanReviewerAvailableTimeBOTests.cs" />
+    <Compile Include="Models\TimeAllocationTypeRefModelBOTests.cs" />
+    <Compile Include="ProjectAutoEstimationTests.cs" />
+    <Compile Include="ProjectModelBaseTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EstimationAccelaAdapterTests.cs" />
+    <Compile Include="ProjectEstimation_GetDefaultValuesTest.cs" />
+    <Compile Include="EstimationCRUDAdapterTests.cs" />
+    <Compile Include="DepartmentModelBOTests.cs" />
+    <Compile Include="SystemRoleModelBOTests.cs" />
+    <Compile Include="ExternalSystemModelBOTests.cs" />
+    <Compile Include="NotesModelBOTests.cs" />
+    <Compile Include="BLLoggingTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="TestData\CEProject_SchedulePlanReview_AutoSchedule_data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\NPA_API_UpdateAttendees_TestData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\CEProject_SchedulePlanReview_TestTestData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\DefaultProjectEstimationValues.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AION.Base\AION.Base.csproj">
+      <Project>{B5D9E46E-1ED6-4D78-88D9-F5D96A2F3284}</Project>
+      <Name>AION.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AION.Manager\AION.Manager.csproj">
+      <Project>{c0280304-be9c-4b98-8c71-f2fbca008579}</Project>
+      <Name>AION.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Azure.KeyVault\Meck.Azure.KeyVault.csproj">
+      <Project>{BF8FC6CA-1611-40BF-B646-4A703A895F81}</Project>
+      <Name>Meck.Azure.KeyVault</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Assembly\Meck.Shared\Meck.Shared.csproj">
+      <Project>{d717203c-5c40-4328-8d90-270b56929061}</Project>
+      <Name>Meck.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.Accela.Engine\AION.Accela.Engine.csproj">
+      <Project>{A1629121-7125-4257-8574-F19D04EF1C48}</Project>
+      <Name>AION.Accela.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.AIONDB.Engine\AION.AIONDB.Engine.csproj">
+      <Project>{A2D6733B-5913-4177-B1DD-5BA875B52DBB}</Project>
+      <Name>AION.AIONDB.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.Email.Engine\AION.Email.Engine.csproj">
+      <Project>{C1282A29-EF40-4E2D-B1ED-D9FD77CD9198}</Project>
+      <Name>AION.Email.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.Estimator.Engine\AION.Estimator.Engine.csproj">
+      <Project>{A6345D62-9EAA-44FD-97CB-AB7EEEBE541A}</Project>
+      <Name>AION.Estimator.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engines\AION.Scheduler.Engine\AION.Scheduler.Engine.csproj">
+      <Project>{2593c32a-b26b-4f45-afce-7eeef55d7cc6}</Project>
+      <Name>AION.Scheduler.Engine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Core">
+      <Version>1.33.0</Version>
+    </PackageReference>
+    <PackageReference Include="Ical.Net">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Graph">
+      <Version>5.15.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
+      <Version>5.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect">
+      <Version>6.31.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Kiota.Abstractions">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Kiota.Http.HttpClientLibrary">
+      <Version>1.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Moq">
+      <Version>4.18.4</Version>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestAdapter">
+      <Version>3.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestFramework">
+      <Version>3.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="NodaTime">
+      <Version>3.1.9</Version>
+    </PackageReference>
+    <PackageReference Include="System.Diagnostics.DiagnosticSource">
+      <Version>7.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Memory.Data">
+      <Version>7.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reflection">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reflection.TypeExtensions">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime">
+      <Version>4.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.Serialization.Primitives">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Security.Cryptography.Algorithms">
+      <Version>4.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Security.Cryptography.X509Certificates">
+      <Version>4.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>7.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

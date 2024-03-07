@@ -1,0 +1,20 @@
+[
+  {
+    "TestMethod": "ProjectGetDefaultHoursWithJson",
+    "ExpectedResult": "1.0",
+    "PropertyType": "County_Shop_Drawings",
+    "DepartmentName": "19"
+  },
+  {
+    "TestMethod": "ProjectGetDefaultHoursWithJson",
+    "ExpectedResult": "1.0",
+    "PropertyType": "10",
+    "DepartmentName": "Fire_UMC"
+  },
+  {
+    "TestMethod": "ProjectGetDefaultHoursWithJson",
+    "ExpectedResult": "1.0",
+    "PropertyType": "County_Shop_Drawings",
+    "DepartmentName": "19"
+  }
+]

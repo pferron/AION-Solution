@@ -1,0 +1,1121 @@
+﻿@using System.Web.Mvc.Html
+@using AION.BL
+@using AION.Web.Extensions
+@using AION.Web.Models
+@using AION.Web.Models.Shared
+
+@model AION.Web.Models.SchedulePlanReviewViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Schedule FIFO Plan Review";
+
+
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+
+    bool hasManualPerm = Model.PermissionMapping.Schdul_Rview_Pln_Rview_Man;
+    bool isFIFOProject = Model.Project.IsFifo;
+    string disablepoolbtns = string.Empty;
+    string disablepoolbtncls = string.Empty;
+    if (!hasManualPerm) { disablepoolbtns = " disabled=\"disabled\""; disablepoolbtncls = " disabled"; }
+
+    //for hidden fields for javascript file
+    string strIsEstimationComplete = Model.IsEstimationComplete ? "true" : "false";
+    string strIsFIFOProject = isFIFOProject ? "true" : "false";
+    string strScheduled = Model.Project.AIONProjectStatus.ProjectStatusEnum == ProjectStatusEnum.Scheduled ? "true" : "false";
+    string strIsFutureCycle = Model.IsFutureCycle ? "true" : "false";
+    string strIsCycleComparison = Model.IsCycleComparison ? "true" : "false";
+    string strIsAdjustHours = Model.IsAdjustHours ? "true" : "false";
+    string strholidayslist = Model.Holidays;
+    string strBuildStartDate = Model.BuildStartDate.HasValue ? Model.BuildStartDate.ToString() : "";
+    string strBuildEndDate = Model.BuildEndDate.HasValue ? Model.BuildEndDate.ToString() : "";
+    string strElecStartDate = Model.ElectStartDate.HasValue ? Model.ElectStartDate.ToString() : "";
+    string strElectEndDate = Model.ElectEndDate.HasValue ? Model.ElectEndDate.ToString() : "";
+    string strMechaStartDate = Model.MechaStartDate.HasValue ? Model.MechaStartDate.ToString() : "";
+    string strMechaEndDate = Model.MechaEndDate.HasValue ? Model.MechaEndDate.ToString() : "";
+    string strPlumbStartDate = Model.PlumbStartDate.HasValue ? Model.PlumbStartDate.ToString() : "";
+    string strPlumbEndDate = Model.PlumbEndDate.HasValue ? Model.PlumbEndDate.ToString() : "";
+    string strBackfStartDate = Model.BackfStartDate.HasValue ? Model.BackfStartDate.ToString() : "";
+    string strBackfEndDate = Model.BackfEndDate.HasValue ? Model.BackfEndDate.ToString() : "";
+    string strFireStartDate = Model.FireStartDate.HasValue ? Model.FireStartDate.ToString() : "";
+    string strFireEndDate = Model.FireEndDate.HasValue ? Model.FireEndDate.ToString() : "";
+    string strZoneStartDate = Model.ZoneStartDate.HasValue ? Model.ZoneStartDate.ToString() : "";
+    string strZoneEndDate = Model.ZoneEndDate.HasValue ? Model.ZoneEndDate.ToString() : "";
+    string strPoolStartDate = Model.PoolStartDate.HasValue ? Model.PoolStartDate.ToString() : "";
+    string strPoolEndDate = Model.PoolEndDate.HasValue ? Model.PoolEndDate.ToString() : "";
+    string strFoodStartDate = Model.FoodStartDate.HasValue ? Model.FoodStartDate.ToString() : "";
+    string strFoodEndDate = Model.FoodEndDate.HasValue ? Model.FoodEndDate.ToString() : "";
+    string strFacilStartDate = Model.FacilStartDate.HasValue ? Model.FacilStartDate.ToString() : "";
+    string strFacilEndDate = Model.FacilEndDate.HasValue ? Model.FacilEndDate.ToString() : "";
+    string strDaycStartDate = Model.DaycStartDate.HasValue ? Model.DaycStartDate.ToString() : "";
+    string strDaycEndDate = Model.DaycEndDate.HasValue ? Model.DaycEndDate.ToString() : "";
+
+    //***** init pool txt *****************************************/
+
+    string strBuildPool = Model.BuildPool.HasValue && Model.BuildPool.Value == true ? "true" : "false";
+    string strElectPool = Model.ElectPool.HasValue && Model.ElectPool.Value == true ? "true" : "false";
+    string strMechaPool = Model.MechaPool.HasValue && Model.MechaPool.Value == true ? "true" : "false";
+    string strPlumbPool = Model.PlumbPool.HasValue && Model.PlumbPool.Value == true ? "true" : "false";
+    string strBackfPool = Model.BackfPool.HasValue && Model.BackfPool.Value == true ? "true" : "false";
+    string strZonePool = Model.ZonePool.HasValue && Model.ZonePool.Value == true ? "true" : "false";
+    string strFirePool = Model.FirePool.HasValue && Model.FirePool.Value == true ? "true" : "false";
+    string strFoodPool = Model.FoodPool.HasValue && Model.FoodPool.Value == true ? "true" : "false";
+    string strPoolPool = Model.PoolPool.HasValue && Model.PoolPool.Value == true ? "true" : "false";
+    string strFacilPool = Model.FacilPool.HasValue && Model.FacilPool.Value == true ? "true" : "false";
+    string strDaycPool = Model.DaycPool.HasValue && Model.DaycPool.Value == true ? "true" : "false";
+
+    //  only show the agencies they can estimate
+    string isagencyestimator = Model.PermissionMapping.IsAgencyEstimator ? "true" : "false";
+    string isceestimator = Model.PermissionMapping.IsTradeEstimator ? "true" : "false";
+    string isbempestimator = Model.PermissionMapping.IsBEMPAllowed ? "true" : "false";
+    string iszoneestimator = Model.PermissionMapping.IsZoneAllowed ? "true" : "false";
+    string isfireestimator = Model.PermissionMapping.IsFireAllowed ? "true" : "false";
+    string isbackflowestimator = Model.PermissionMapping.IsBackFlowAllowed ? "true" : "false";
+    string ishealthestimator = Model.PermissionMapping.IsHealthAllowed ? "true" : "false";
+
+    bool canScheduleFutureCycle = Model.CanScheduleFutureCycle;
+
+}
+@section style{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/ui/jquery-ui.min.css">
+
+    <style>
+        .multiselect-container {
+            width: 600px;
+            height: 250px;
+            overflow: scroll;
+        }
+
+        .projectcontent {
+            height: 600px;
+            overflow-y: scroll;
+            width: 100%;
+        }
+
+        .scrollcontent {
+            overflow-y: scroll;
+            width: 100%;
+        }
+
+    </style>
+}
+@section breadcrumbs {
+    @Html.Partial("_Breadcrumbs", Model)
+}
+@section scripts{
+    <script src="/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="/app-assets/vendors/js/extensions/sweetalert.min.js"></script>
+
+    <script src="/app-assets/js/scripts/custom/select-lists.js"></script>
+    <script src="/app-assets/js/scripts/custom/register-selected-item-changed-event.js"></script>
+
+    <script src="/app-assets/js/scripts/navs/navs.js"></script>
+    @*checkboxes*@
+    <script src="/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+    <script src="/app-assets/js/scripts/forms/checkbox-radio.js"></script>
+
+    <script src="/app-assets/js/scripts/custom/select-lists.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/schedule-fifo-plan-review.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/shared/schedule-review.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/shared/register-scheduling-events.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/shared/plan-review-validator.js"></script>
+
+    <script type="text/javascript" src="~/app-assets/js/scripts/custom/reviewer-capacity-search-modal.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/scripts/pages/scheduling/fifo-auto-schedule.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/scripts/custom/set-tabs-permissions.js"></script>
+
+}
+@using (Html.BeginForm("SaveFifoPlanReview", "Scheduling", FormMethod.Post, new { @id = "SchedulingForm" }))
+{
+    <div id="dialog-modal-confirmation" title="" class="" style="display:none">
+        <div class="confirmationmessage">
+
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="savingModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document" style="overflow-y: scroll; max-height:85%;  margin-top:400px; margin-bottom:50px;">
+            <div class="modal-content">
+
+                <h4 class="modal-title" id="notesModalLabel">Saving in progress....</h4>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="autoSchedulingModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document" style="overflow-y: scroll; max-height:85%;  margin-top:400px; margin-bottom:50px;">
+            <div class="modal-content">
+
+                <h4 class="modal-title" id="notesModalLabel">Auto Scheduling in progress....</h4>
+
+
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(m => m.IsCycleComparison, new { @id = "isCycleComparison" })
+    @Html.HiddenFor(m => m.IsAdjustHours, new { @id = "isadjusthours" })
+    @Html.HiddenFor(m => m.IsFutureCycle, new { @id = "isfuturecycle" })
+    @Html.HiddenFor(m => m.IsAllNAChecked, new { @id = "hfIsAllNAChecked" })
+    @Html.HiddenFor(m => m.Project.AccelaProjectRefId, Model.Project.AccelaProjectRefId)
+    @Html.HiddenFor(m => m.Project.AccelaProjectRefId, new { @id = "AccelaProjectRefId" })
+    @Html.HiddenFor(m => m.Project.AccelaPropertyType, Model.Project.AccelaPropertyType)
+    @Html.HiddenFor(m => m.Project.ID, new { @id = "ProjectId" })
+    @Html.HiddenFor(m => m.Project.AIONProjectStatus)
+    @Html.HiddenFor(m => m.Project.AIONProjectStatus.ID, @Model.Project.AIONProjectStatus.ID)
+
+    @Html.HiddenFor(m => m.LoggedInUser.ID, Model.LoggedInUser.ID)
+    @Html.HiddenFor(m => m.LoggedInUserEmail, new { @id = "LoggedInUserEmail" })
+    @Html.HiddenFor(m => m.PreliminaryMeetingApptID, Model.PreliminaryMeetingApptID)
+    @Html.HiddenFor(m => m.UpdateDate, Model.UpdateDate)
+    @Html.HiddenFor(m => m.FifoDueDt, Model.FifoDueDt)
+    @Html.HiddenFor(m => m.FifoScheduleId, Model.FifoScheduleId)
+    @Html.HiddenFor(m => m.IsReschedule, Model.IsReschedule)
+    @Html.HiddenFor(m => m.IsRescheduleOverwrite, Model.IsRescheduleOverwrite)
+    @Html.HiddenFor(m => m.GateDate)
+    @Html.HiddenFor(m => m.IsFutureCycle)
+    @Html.HiddenFor(m => m.IsGateAccepted)
+    @Html.HiddenFor(m => m.AssignedFacilitator)
+
+    @*Plan Review Schedule data that needs to be returned with the view model*@
+    @Html.HiddenFor(m => m.ApptResponseStatusEnum, Model.ApptResponseStatusEnum)
+
+    @Html.HiddenFor(m => m.BuildPlanReviewScheduleId, Model.BuildPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.ElectPlanReviewScheduleId, Model.ElectPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.MechaPlanReviewScheduleId, Model.MechaPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.PlumbPlanReviewScheduleId, Model.PlumbPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.FirePlanReviewScheduleId, Model.FirePlanReviewScheduleId)
+    @Html.HiddenFor(m => m.ZonePlanReviewScheduleId, Model.ZonePlanReviewScheduleId)
+    @Html.HiddenFor(m => m.BackfPlanReviewScheduleId, Model.BackfPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.PoolPlanReviewScheduleId, Model.PoolPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.FoodPlanReviewScheduleId, Model.FoodPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.FacilPlanReviewScheduleId, Model.FacilPlanReviewScheduleId)
+    @Html.HiddenFor(m => m.DaycPlanReviewScheduleId, Model.DaycPlanReviewScheduleId)
+
+    @Html.HiddenFor(m => m.BuildPRSUpdateDate, Model.BuildPRSUpdateDate)
+    @Html.HiddenFor(m => m.ElectPRSUpdateDate, Model.ElectPRSUpdateDate)
+    @Html.HiddenFor(m => m.MechaPRSUpdateDate, Model.MechaPRSUpdateDate)
+    @Html.HiddenFor(m => m.PlumbPRSUpdateDate, Model.PlumbPRSUpdateDate)
+    @Html.HiddenFor(m => m.FirePRSUpdateDate, Model.FirePRSUpdateDate)
+    @Html.HiddenFor(m => m.ZonePRSUpdateDate, Model.ZonePRSUpdateDate)
+    @Html.HiddenFor(m => m.BackfPRSUpdateDate, Model.BackfPRSUpdateDate)
+    @Html.HiddenFor(m => m.PoolPRSUpdateDate, Model.PoolPRSUpdateDate)
+    @Html.HiddenFor(m => m.FoodPRSUpdateDate, Model.FoodPRSUpdateDate)
+    @Html.HiddenFor(m => m.FacilPRSUpdateDate, Model.FacilPRSUpdateDate)
+    @Html.HiddenFor(m => m.DaycPRSUpdateDate, Model.DaycPRSUpdateDate)
+
+    @Html.HiddenFor(m => m.HoursBuildingFinal, new { @id = "hoursbuildingfinal" })
+    @Html.HiddenFor(m => m.HoursElecticFinal, new { @id = "hourselectricfinal" })
+    @Html.HiddenFor(m => m.HoursMechFinal, new { @id = "hoursmechfinal" })
+    @Html.HiddenFor(m => m.HoursPlumbFinal, new { @id = "hoursplumbfinal" })
+    @Html.HiddenFor(m => m.HoursFireFinal, new { @id = "hoursfirefinal" })
+    @Html.HiddenFor(m => m.HoursZoningFinal, new { @id = "hourszoningfinal" })
+    @Html.HiddenFor(m => m.HoursBackFlowFinal, new { @id = "hoursbackflowfinal" })
+    @Html.HiddenFor(m => m.HoursPoolFinal, new { @id = "hourspoolfinal" })
+    @Html.HiddenFor(m => m.HoursFoodFinal, new { @id = "hoursfoodfinal" })
+    @Html.HiddenFor(m => m.HoursLodgeFinal, new { @id = "hourslodgefinal" })
+    @Html.HiddenFor(m => m.HoursDayCareFinal, new { @id = "hoursdaycarefinal" })
+    @Html.HiddenFor(m => m.PropertyType, new { @id = "propertytype" })
+
+    @Html.HiddenFor(m => m.FireAgency)
+    @Html.HiddenFor(m => m.ZoneAgency)
+
+    @Html.HiddenFor(m => m.Project.RecIdTxt, new { @id = "recidtxt" })
+
+    @Html.HiddenFor(m => m.PreviousAssignedFacilitator, new { @id = "PreviousAssignedFacilitatorId" })
+    @Html.HiddenFor(m => m.Project.UpdatedDate, new { @id = "ProjectUpdatedDate" })
+
+    <input type="hidden" id="IsSubmit" name="IsSubmit" value="true" />
+    <input type="hidden" id="SaveType" name="SaveType" value="1" />
+    <input type="hidden" id="PendingEmailType" name="PendingEmailType" value="" />
+
+    @*Hidden for js file schedule-plan-review.js*@
+    @*//  only show the agencies they can estimate*@
+    <input type="hidden" id="hIsagencyestimator" value="@isagencyestimator" />
+    <input type="hidden" id="hIsceestimator" value="=@isceestimator" />
+    <input type="hidden" id="hIsbempestimator" value="=@isbempestimator" />
+    <input type="hidden" id="hIszoneestimator" value="=@iszoneestimator" />
+    <input type="hidden" id="hIsfireestimator" value="=@isfireestimator" />
+    <input type="hidden" id="hIsbackflowestimator" value="=@isbackflowestimator" />
+    <input type="hidden" id="hIshealthestimator" value="=@ishealthestimator" />
+    <input type="hidden" id="hIsestimationcomplete" value="@strIsEstimationComplete" />
+
+    <input type="hidden" id="hIsFIFOProject" value="@strIsFIFOProject" />
+    <input type="hidden" id="hScheduled" value="@strScheduled" />
+    <input type="hidden" id="hIsFutureCycle" value="@strIsFutureCycle" />
+    <input type="hidden" id="hIsCycleComparison" value="@strIsCycleComparison" />
+    <input type="hidden" id="hIsAdjustHours" value="@strIsAdjustHours" />
+    <input type="hidden" id="hHolidayslist" value="@strholidayslist" />
+    <input type="hidden" id="hBuildStartDate" value="@strBuildStartDate" />
+    <input type="hidden" id="hBuildEndDate" value="@strBuildEndDate" />
+    <input type="hidden" id="hElecStartDate" value="@strElecStartDate" />
+    <input type="hidden" id="hElectEndDate" value="@strElectEndDate" />
+    <input type="hidden" id="hMechaStartDate" value="@strMechaStartDate" />
+    <input type="hidden" id="hMechaEndDate" value="@strMechaEndDate" />
+    <input type="hidden" id="hPlumbStartDate" value="@strPlumbStartDate" />
+    <input type="hidden" id="hPlumbEndDate" value="@strPlumbEndDate" />
+    <input type="hidden" id="hBackfStartDate" value="@strBackfStartDate" />
+    <input type="hidden" id="hBackfEndDate" value="@strBackfEndDate" />
+    <input type="hidden" id="hFireStartDate" value="@strFireStartDate" />
+    <input type="hidden" id="hFireEndDate" value="@strFireEndDate" />
+    <input type="hidden" id="hZoneStartDate" value="@strZoneStartDate" />
+    <input type="hidden" id="hZoneEndDate" value="@strZoneEndDate" />
+    <input type="hidden" id="hPoolStartDate" value="@strPoolStartDate" />
+    <input type="hidden" id="hPoolEndDate" value="@strPoolEndDate" />
+    <input type="hidden" id="hFoodStartDate" value="@strFoodStartDate" />
+    <input type="hidden" id="hFoodEndDate" value="@strFoodEndDate" />
+    <input type="hidden" id="hFacilStartDate" value="@strFacilStartDate" />
+    <input type="hidden" id="hFacilEndDate" value="@strFacilEndDate" />
+    <input type="hidden" id="hDaycStartDate" value="@strDaycStartDate" />
+    <input type="hidden" id="hDaycEndDate" value="@strDaycEndDate" />
+    @Html.HiddenFor(model => model.PlansReadyOnDate, new { @id = "plansreadyondate" })
+    @Html.HiddenFor(m => m.Project.FifoDueDt, new { @id = "FifoDueDt" })
+    @Html.HiddenFor(m => m.Project.CreatedDate, new { @id = "CreatedDt" })
+    @Html.HiddenFor(m => m.Cycle, new { @id = "CycleNbr" })
+    @Html.HiddenFor(m => m.IsNewCycle)
+
+    @Html.Partial("_AutoScheduleAudit", Model)
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <div class="error alert alert-danger" id="statusmessage">@Model.StatusMessage</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <h4 class="card-title">Project Summary</h4>
+                    </div>
+                    <div class="card-body">
+                        @Html.Partial("_ProjectSummary", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sectionPlanReviewPartial">
+        <div id="sectionPlanReview">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div id="sadcontainer" style="display:none;">
+                                    <div class="col-md-1"><b>Schedule After Date</b></div>
+                                    <div class="d-flex flex-column ml-5">
+                                        @{
+                                            @Html.HiddenFor(m => m.ScheduleAfterDate, new { @id = "scheduleafterdate" })
+                                            string scheduleafterdate = string.Empty;
+                                            if (Model.ScheduleAfterDate.HasValue)
+                                            {
+                                                scheduleafterdate = Model.ScheduleAfterDate.Value.ToShortDateString();
+                                            }
+                                            <div class="input-group">
+                                                @Html.TextBox("disabledafterdate", scheduleafterdate, new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <span class="fa fa-calendar-o"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="d-flex flex-column ml-5">
+                                        <img src="@Url.Content("~/Images/DTPicker.png")" style="padding-bottom: 5px;" width="30" height="30" alt="IMAGES" />
+                                    </div>
+                                </div>
+                                @Html.Partial("_NavTabsTopline", Model)
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane active" id="nav-bemp" role="tabpanel" aria-labelledby="nav-bemp-tab">
+                                        <div class="ml-2 mt-2 card-body">
+                                            <div class="row">
+                                                <div class="col-1">*Building:</div>
+                                                <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerBuilding, Model.AssignPlanReviewersListBuild, new { @id = "DrpDnScheduleBuild", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                <div class="col-4">
+                                                    <div class="form-group row buildstartendsel">
+                                                        @{
+                                                            @Html.TextBox("fifotxt", "FIFO", new { @id = "buildfifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                            @Html.HiddenFor(m => m.BuildStartDate, new { @id = "buildstartdatesel" })
+                                                            @Html.HiddenFor(m => m.BuildEndDate, new { @id = "buildenddatesel" })
+                                                        }
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.HiddenFor(m => m.BuildPool, new { @id = "buildpool" })
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-1">*Electrical:</div>
+                                                <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerElectrical, Model.AssignPlanReviewersListElectric, new { @id = "DrpDnScheduleElectric", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                <div class="col-4">
+                                                    <div class="form-group row electstartendsel">
+                                                        @{
+                                                            @Html.TextBox("fifotxt", "FIFO", new { @id = "electfifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                            @Html.HiddenFor(m => m.ElectStartDate, new { @id = "electstartdatesel" })
+                                                            @Html.HiddenFor(m => m.ElectEndDate, new { @id = "electenddatesel" })
+                                                        }
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.HiddenFor(m => m.ElectPool, new { @id = "electpool" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-1">*Mechanical:</div>
+                                                <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerMechanical, Model.AssignPlanReviewersListMech, new { @id = "DrpDnScheduleMech", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                <div class="col-4">
+                                                    <div class="form-group row mechastartendsel">
+                                                        @{
+                                                            @Html.TextBox("fifotxt", "FIFO", new { @id = "mechafifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                            @Html.HiddenFor(m => m.MechaStartDate, new { @id = "mechastartdatesel" })
+                                                            @Html.HiddenFor(m => m.MechaEndDate, new { @id = "mechaenddatesel" })
+                                                        }
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.HiddenFor(m => m.MechaPool, new { @id = "mechapool" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-1">*Plumbing:</div>
+                                                <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerPlumbing, Model.AssignPlanReviewersListPlumb, new { @id = "DrpDnSchedulePlumb", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                <div class="col-4">
+                                                    <div class="form-group row plumbstartendsel">
+                                                        @{
+                                                            @Html.TextBox("fifotxt", "FIFO", new { @id = "plumbfifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                            @Html.HiddenFor(m => m.PlumbStartDate, new { @id = "plumbstartdatesel" })
+                                                            @Html.HiddenFor(m => m.PlumbEndDate, new { @id = "plumbenddatesel" })
+                                                        }
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.HiddenFor(m => m.PlumbPool, new { @id = "plumbpool" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (Model.IsCycleComparison)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-2" style="max-width: 180px;"></div>
+                                                    Verify Scheduled vs Plan Reviewer entered hours
+                                                </div>
+                                            }
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Estimated
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Assigned
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Building Hours:
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    @Html.HiddenFor(m => m.ProposedBuilding, new { @id = "hoursproposedbuilding" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNABuilding)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursBuilding)
+                                                            @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursBuilding, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursBuilding", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 form-group">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNABuilding)
+                                                        {
+                                                            @Html.TextBox("nabuildingtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursBuilding, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursBuildingAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Electrical Hours:
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    @Html.HiddenFor(m => m.ProposedElectric, new { @id = "hoursproposedelectric" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAElectric)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursElectic)
+                                                            @Html.TextBox("naelectrictxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursElectic, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursElectic", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 form-group">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAElectric)
+                                                        {
+                                                            @Html.TextBox("naelectrictxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursElectric, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursElecticAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Mechanical Hours:
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    @Html.HiddenFor(m => m.ProposedMech, new { @id = "hoursproposedmech" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAMech)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursMech)
+                                                            @Html.TextBox("namechtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursMech, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursMech", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 form-group">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAMech)
+                                                        {
+                                                            @Html.TextBox("namechtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursMech, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursMechAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Plumbing Hours:
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    @Html.HiddenFor(m => m.ProposedPlumb, new { @id = "hoursproposedplumb" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAPlumbing)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursPlumb)
+                                                            @Html.TextBox("naplumbtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursPlumb, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursPlumb", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 form-group">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAPlumbing)
+                                                        {
+                                                            @Html.TextBox("naplumbtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursPlumb, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursPlumbAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="bemp-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_BEMPReviewers", new SchedulePreliminaryMeetingViewModel
+                            {
+                                Project = Model.Project,
+                                FacilitatorList = Model.FacilitatorList,
+                                AllReviewers = Model.AllReviewers,
+                                AssignPlanReviewersListBuild = Model.AssignPlanReviewersListBuild,
+                                AssignPlanReviewersListElectric = Model.AssignPlanReviewersListElectric,
+                                AssignPlanReviewersListMech = Model.AssignPlanReviewersListMech,
+                                AssignPlanReviewersListPlumb = Model.AssignPlanReviewersListPlumb,
+                                ExcludedPlanReviewersBuild = Model.ExcludedPlanReviewersBuild,
+                                ExcludedPlanReviewersElectric = Model.ExcludedPlanReviewersElectric,
+                                ExcludedPlanReviewersMech = Model.ExcludedPlanReviewersMech,
+                                ExcludedPlanReviewersPlumb = Model.ExcludedPlanReviewersPlumb,
+                                LoggedInUser = Model.LoggedInUser,
+                                PermissionMapping = Model.PermissionMapping
+                            });
+                                        }
+                                        </section>
+                                    </div>
+                                    <div class="tab-pane" id="nav-zoning" role="tabpanel" aria-labelledby="nav-zoning-tab">
+                                        <div class="ml-2 mt-2 card-body">
+                                            <div class="row">
+                                                <div class="col-1">*Zone:</div>
+                                                <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerZone, Model.AssignPlanReviewersListZone, new { @id = "DrpDnScheduleZone", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                <div class="col-4">
+                                                    <div class="form-group row zonestartendsel">
+                                                        @{
+                                                            @Html.TextBox("fifotxt", "FIFO", new { @id = "zonefifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                            @Html.HiddenFor(m => m.ZoneStartDate, new { @id = "zonestartdatesel" })
+                                                            @Html.HiddenFor(m => m.ZoneEndDate, new { @id = "zoneenddatesel" })
+                                                        }
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.HiddenFor(m => m.ZonePool, new { @id = "zonepool" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (Model.IsCycleComparison)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-2" style="max-width: 180px;"></div>
+                                                    Verify Scheduled vs Plan Reviewer entered hours
+                                                </div>
+                                            }
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Estimated
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Assigned
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Zoning Hours:
+                                                </div>
+                                                <div class="col-1">
+                                                    @Html.HiddenFor(m => m.ProposedZoning, new { @id = "hoursproposedzoning" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAZone)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursZoning)
+                                                            @Html.TextBox("nazoningtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursZoning, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursZoning", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAZone)
+                                                        {
+                                                            @Html.TextBox("nazoningtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursZoning, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursZoningAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="zone-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_ZoningReviewers", new SchedulePreliminaryMeetingViewModel
+                            {
+                                Project = Model.Project,
+                                AllReviewers = Model.AllReviewers,
+                                AssignPlanReviewersListZone = Model.AssignPlanReviewersListZone,
+                                ExcludedPlanReviewersZone = Model.ExcludedPlanReviewersZone,
+                                LoggedInUser = Model.LoggedInUser,
+                                PermissionMapping = Model.PermissionMapping
+
+                            });
+                                        }
+                                        </section>
+
+                                    </div>
+                                    <div class="tab-pane" id="nav-fire" role="tabpanel" aria-labelledby="nav-fire-tab">
+                                        <div class="ml-2 mt-2 card-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col-1">*Fire:</div>
+                                                        <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerFire, Model.AssignPlanReviewersListFire, new { @id = "DrpDnScheduleFire", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                        <div class="col-4">
+                                                            <div class="form-group row firestartendsel">
+                                                                @{
+                                                                    @Html.TextBox("fifotxt", "FIFO", new { @id = "firefifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                                    @Html.HiddenFor(m => m.FireStartDate, new { @id = "firestartdatesel" })
+                                                                    @Html.HiddenFor(m => m.FireEndDate, new { @id = "fireenddatesel" })
+                                                                }
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                @Html.HiddenFor(m => m.FirePool, new { @id = "firepool" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (Model.IsCycleComparison)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-2" style="max-width: 180px;"></div>
+                                                    Verify Scheduled vs Plan Reviewer entered hours
+                                                </div>
+                                            }
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Estimated
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Assigned
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Fire Hours:
+                                                </div>
+                                                <div class="col-1">
+                                                    @Html.HiddenFor(m => m.ProposedFire, new { @id = "hoursproposedfire" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAFire)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursFire)
+                                                            @Html.TextBox("nafiretxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursFire, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursFire", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAFire)
+                                                        {
+                                                            @Html.TextBox("nafiretxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursFire, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursFireAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="fire-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_FireReviewers", new SchedulePreliminaryMeetingViewModel
+                            {
+                                Project = Model.Project,
+                                AllReviewers = Model.AllReviewers,
+                                AssignPlanReviewersListFire = Model.AssignPlanReviewersListFire,
+                                ExcludedPlanReviewersFire = Model.ExcludedPlanReviewersFire,
+                                LoggedInUser = Model.LoggedInUser,
+                                PermissionMapping = Model.PermissionMapping
+
+                            });
+                                        }
+                                        </section>
+
+                                    </div>
+                                    <div class="tab-pane" id="nav-backflow" role="tabpanel" aria-labelledby="nav-backflow-tab">
+                                        <div class="ml-2 mt-2 card-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col-1">*BackFlow:</div>
+                                                        <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerBackFlow, Model.AssignPlanReviewersListBackFlow, new { @id = "DrpDnScheduleBackFlow", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                        <div class="col-4">
+                                                            <div class="form-group row backfstartendsel">
+                                                                @{
+                                                                    @Html.TextBox("fifotxt", "FIFO", new { @id = "backffifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                                    @Html.HiddenFor(m => m.BackfStartDate, new { @id = "backfstartdatesel" })
+                                                                    @Html.HiddenFor(m => m.BackfEndDate, new { @id = "backfenddatesel" })
+                                                                }
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                @Html.HiddenFor(m => m.BackfPool, new { @id = "backfpool" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (Model.IsCycleComparison)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-2" style="max-width: 180px;"></div>
+                                                    Verify Scheduled vs Plan Reviewer entered hours
+                                                </div>
+                                            }
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Estimated
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Assigned
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    BackFlow Hours:
+                                                </div>
+                                                <div class="col-1">
+                                                    @Html.HiddenFor(m => m.ProposedBackFlow, new { @id = "hoursproposedbackflow" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNABackFlow)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursBackFlow)
+                                                            @Html.TextBox("nabackflowtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursBackFlow, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursBackFlow", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNABackFlow)
+                                                        {
+                                                            @Html.TextBox("nabackflowtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursBackflow, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursBackflowAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="backflow-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_BackflowReviewers", new SchedulePreliminaryMeetingViewModel
+                            {
+                                Project = Model.Project,
+                                AllReviewers = Model.AllReviewers,
+                                AssignPlanReviewersListBackFlow = Model.AssignPlanReviewersListBackFlow,
+                                ExcludedPlanReviewersBackFlow = Model.ExcludedPlanReviewersBackFlow,
+                                LoggedInUser = Model.LoggedInUser,
+                                PermissionMapping = Model.PermissionMapping
+
+                            });
+                                        }
+                                        </section>
+
+                                    </div>
+                                    <div class="tab-pane" id="nav-health" role="tabpanel" aria-labelledby="nav-health-tab">
+                                        <div class="ml-2 mt-2 card-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col-1">*Food Service:</div>
+                                                        <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerFood, Model.AssignPlanReviewersListFood, new { @id = "DrpDnScheduleFood", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                        <div class="col-4">
+                                                            <div class="form-group row foodstartendsel">
+                                                                @{
+                                                                    @Html.TextBox("fifotxt", "FIFO", new { @id = "foodfifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                                    @Html.HiddenFor(m => m.FoodStartDate, new { @id = "foodstartdatesel" })
+                                                                    @Html.HiddenFor(m => m.FoodEndDate, new { @id = "foodenddatesel" })
+                                                                }
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                @Html.HiddenFor(m => m.FoodPool, new { @id = "foodpool" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-1">*Public Pool:</div>
+                                                        <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerPool, Model.AssignPlanReviewersListPool, new { @id = "DrpDnSchedulePool", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                        <div class="col-4">
+                                                            <div class="form-group row poolstartendsel">
+                                                                @{
+                                                                    @Html.TextBox("fifotxt", "FIFO", new { @id = "poolfifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                                    @Html.HiddenFor(m => m.PoolStartDate, new { @id = "poolstartdatesel" })
+                                                                    @Html.HiddenFor(m => m.PoolEndDate, new { @id = "poolenddatesel" })
+                                                                }
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                @Html.HiddenFor(m => m.PoolPool, new { @id = "poolpool" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-1">*Facility/Lodging:</div>
+                                                        <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerFacilities, Model.AssignPlanReviewersListLodge, new { @id = "DrpDnPScheduleLodge", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                        <div class="col-4">
+                                                            <div class="form-group row facilstartendsel">
+                                                                @{
+                                                                    @Html.TextBox("fifotxt", "FIFO", new { @id = "facilfifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                                    @Html.HiddenFor(m => m.FacilStartDate, new { @id = "facilstartdatesel" })
+                                                                    @Html.HiddenFor(m => m.FacilEndDate, new { @id = "facilenddatesel" })
+                                                                }
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                @Html.HiddenFor(m => m.FacilPool, new { @id = "facilpool" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-1">*Day Care:</div>
+                                                        <div class="col-3">@Html.DropDownListFor(m => m.ScheduledReviewerDayCare, Model.AssignPlanReviewersListDayCare, new { @id = "DrpDnScheduleDayCare", @class = "form-select form-control border-cyan scheduledreviewer fifo" }, hasManualPerm)</div>
+                                                        <div class="col-4">
+                                                            <div class="form-group row daycstartendsel">
+                                                                @{
+                                                                    @Html.TextBox("fifotxt", "FIFO", new { @id = "daycfifotxt", @readonly = "readonly", @class = "form-control border-cyan" })
+
+                                                                    @Html.HiddenFor(m => m.DaycStartDate, new { @id = "daycstartdatesel" })
+                                                                    @Html.HiddenFor(m => m.DaycEndDate, new { @id = "daycenddatesel" })
+                                                                }
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                @Html.HiddenFor(m => m.DaycPool, new { @id = "daycpool" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            @if (Model.IsCycleComparison)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-2" style="max-width: 180px;"></div>
+                                                    Verify Scheduled vs Plan Reviewer entered hours
+                                                </div>
+                                            }
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Estimated
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    Assigned
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Food Service Hours:
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    @Html.HiddenFor(m => m.ProposedFood, new { @id = "hoursproposedfood" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAFood)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursFood)
+                                                            @Html.TextBox("nafoodtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursFood, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursFood", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 form-group">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAFood)
+                                                        {
+                                                            @Html.TextBox("nafoodtxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursFood, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursFoodAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Public Pool Hours:
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    @Html.HiddenFor(m => m.ProposedPool, new { @id = "hoursproposedpool" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAPool)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursPool)
+                                                            @Html.TextBox("napooltxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursPool, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursPool", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 form-group">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAPool)
+                                                        {
+                                                            @Html.TextBox("napooltxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursPool, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursPoolAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Facility/Lodging Hours:
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    @Html.HiddenFor(m => m.ProposedLodge, new { @id = "hoursproposedlodge" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAFacility)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursLodge)
+                                                            @Html.TextBox("nalodgetxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursLodge, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursLodge", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 form-group">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNAFacility)
+                                                        {
+                                                            @Html.TextBox("nalodgetxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursLodge, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursLodgeAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-2" style="max-width: 180px;">
+                                                    Commercial Day Care Hours:
+                                                </div>
+                                                <div class="col-1 form-group">
+                                                    @Html.HiddenFor(m => m.ProposedDayCare, new { @id = "hoursproposeddaycare" })
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNADayCare)
+                                                        {
+                                                            @Html.HiddenFor(m => m.HoursDayCare)
+                                                            @Html.TextBox("nadaycaretxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.HoursDayCare, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursDayCare", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 form-group">
+                                                    <div style="max-width: 75px;">
+                                                        @if (Model.HrsNADayCare)
+                                                        {
+                                                            @Html.TextBox("nadaycaretxt", "NA", new { @disabled = "disabled", @readonly = "readonly", @class = "form-control border-cyan" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBoxFor(m => m.AssignedHoursDayCare, new { @class = "form-control border-cyan", @type = "number", @id = "txtHoursDayCareAssigned", @name = "appt", @min = "0.50", @max = "9999.00", @step = ".5" }, false)
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="form-section"><i class="fa fa-group"></i> Reviewers</h4>
+
+                                        <section id="ehs-reviewers">
+                                            @if (Model != null)
+                                            {@Html.Partial("_EHSReviewers", new SchedulePreliminaryMeetingViewModel
+                                                {
+                                                    Project = Model.Project,
+                                                    AllReviewers = Model.AllReviewers,
+                                                    AssignPlanReviewersListDayCare = Model.AssignPlanReviewersListDayCare,
+                                                    AssignPlanReviewersListFood = Model.AssignPlanReviewersListFood,
+                                                    AssignPlanReviewersListLodge = Model.AssignPlanReviewersListLodge,
+                                                    AssignPlanReviewersListPool = Model.AssignPlanReviewersListPool,
+                                                    ExcludedPlanReviewersDayCare = Model.ExcludedPlanReviewersDayCare,
+                                                    ExcludedPlanReviewersFood = Model.ExcludedPlanReviewersFood,
+                                                    ExcludedPlanReviewersLodge = Model.ExcludedPlanReviewersLodge,
+                                                    ExcludedPlanReviewersPool = Model.ExcludedPlanReviewersPool,
+                                                    LoggedInUser = Model.LoggedInUser,
+                                                    PermissionMapping = Model.PermissionMapping
+
+                                                });
+                                        }
+                                        </section>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sectionInternalNotes">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="InternalNotes"> Internal Notes:</label>
+                        </div>
+                        @Html.TextAreaFor(m => m.InternalNotes, new { @class = "form-control h-25" }, true)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("_NotesModal", new NotesViewModel
+{
+    LoggedInUser = Model.LoggedInUser,
+    LoggedInUserEmail = Model.LoggedInUserEmail,
+    NotesComments = Model.NotesComments,
+    Project = Model.Project
+})
+
+}

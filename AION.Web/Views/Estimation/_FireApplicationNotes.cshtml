@@ -1,0 +1,64 @@
+﻿@using System.Web.Mvc.Html
+@using AION.Web.Extensions
+@model AION.Web.Models.EstimationViewModel
+
+@{
+    bool isenabled = !Model.IsReadOnly;
+    string disabledcls = Model.DisabledCls;
+    string disablebtn = Model.DisabledHtml;
+    string readonlytxt = Model.ReadonlyHtml;
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="pndngreasonFire">Pending:</label>
+            <div class="input-group">
+                @Html.DropDownListFor(m => m.FireApplicationNotes.PendingReason, Model.PendingReasonList, new { @id = "pndngreasonFire", @class = "form-select form-control border-cyan" }, Model.PermissionMapping.Estimat_Fire)
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="pndngreasonFire">Pending Notes:</label>
+            <div class="input-group">
+                @Html.TextAreaFor(m => m.FireApplicationNotes.PendingNotesComments, new { @id = "FirePendingNotes", @class = "form-control border-cyan" }, Model.PermissionMapping.Estimat_Fire)
+            </div>
+            <div class="input-group pt-3">
+                <button type="submit" onclick="SendPendingEmail(8)" class="btn btn-poppy setviewonly @disabledcls" @disablebtn>
+                    Email Pending Notes
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>
+                Customer/Gate Notes:
+                @if (Model.PermissionMapping.Estimat_Fire)
+                {
+                    <a href="#" class="openstandnotes @disabledcls" data-gatenoteid="FireGateNotes" data-toggle="modal" data-target="#standard-notes-modal">Select Standard Notes</a>
+                }
+                else
+                {
+                    <a href="#" class="disabled" data-gatenoteid="FireGateNotes">Select Standard Notes</a>
+                }
+            </label>
+            <div class="input-group">
+                @Html.TextAreaFor(m => m.FireApplicationNotes.PendingGateNotesComments, new { id = "FireGateNotes", @class = "form-control border-cyan" }, Model.PermissionMapping.Estimat_Fire)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>
+                Internal Notes:
+            </label>
+            <div class="input-group">
+                @Html.TextAreaFor(m => m.FireApplicationNotes.InternalNotesComments, new { @id = "FireInternalNotes", @class = "form-control border-cyan" }, Model.PermissionMapping.Estimat_Fire)
+            </div>
+        </div>
+    </div>
+</div>

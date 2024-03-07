@@ -1,0 +1,100 @@
+﻿@model AION.Web.Models.FacilitatorWorkloadSummaryViewModel
+@section style{
+    <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/ui/jquery-ui.min.css">
+}
+@section scripts{
+    <script src="/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script>
+        $(function () {
+            $('.main-menu').hide();
+            $('#navfooter').hide();
+            $('#facilitatorworkloadlist').DataTable();
+        });
+    </script>
+}
+
+<form class="form form-horizontal" method="post" action="@Url.Action("FacilitatorWorkloadSummary","Estimation")">
+    <div class="form-body">
+        <div class="form-group row">
+            @Html.HiddenFor(m => m.LoggedInUserEmail, @Model.LoggedInUserEmail)
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header">Facilitator Workload</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label> Start Date:</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(x => x.StartDate, new
+                                            {
+                                                @class = "datepicker start-date form-control border-cyan",
+                                                id = "datepicker1",
+                                                @type = "datetime",
+                                                style = "min-width: 140px;",
+                                                @Value = Model.StartDate.ToString("MM/dd/yyyy")
+                                            })
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <span class="fa fa-calendar-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>End Date:</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(x => x.EndDate, new
+                                            {
+                                                @class = "datepicker end-date form-control border-cyan",
+                                                id = "datepicker2",
+                                                @type = "datetime",
+                                                style = "min-width: 140px;",
+                                                @Value = Model.EndDate.ToString("MM/dd/yyyy")
+                                            })
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <span class="fa fa-calendar-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" name="btnWorkloadSubmit" class="btn btn-poppy">Submit</button>
+                            </div>
+
+                            <div class="row pt-2">
+                                <table class="table table-striped table-bordered table-hover dataTable" id="facilitatorworkloadlist">
+                                    <thead>
+                                        <tr>
+                                            <th data-sortable="true"><b>Facilitator Name</b></th>
+                                            <th data-sortable="true"><b>Number of projects assigned</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var facilitatorWorkloadSummary in Model.FacilitatorWorkloadSummary)
+                                        {
+                                            <tr>
+                                                <td>@facilitatorWorkloadSummary.FirstName @facilitatorWorkloadSummary.LastName</td>
+                                                <td>@facilitatorWorkloadSummary.AssignedProjectsHours</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
